@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Logging\TravelPortLogger;
 use App\Services\TravelPortService;
 use Illuminate\Support\Facades\App;
-use FilippoToso\Travelport\Travelport;
 use FilippoToso\Travelport\Endpoints;
 use Illuminate\Support\ServiceProvider;
+use App\Services\Travelport;
 
 class TravelPortServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,7 @@ class TravelPortServiceProvider extends ServiceProvider
                 config('services.travel_port.target_branch'),
                 Endpoints::REGION_EMEA,
                 config('app.env') === 'production' ? true : false,
-                null
+                new TravelPortLogger()
             )]);
         });
     }

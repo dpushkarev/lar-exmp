@@ -5,7 +5,7 @@ namespace App\Services;
 
 use App\Dto\TravelPortSearchDto;
 use App\Exceptions\TravelPortException;
-use FilippoToso\Travelport\Travelport;
+use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
 
 /**
@@ -30,7 +30,7 @@ class TravelPortService
     public function __construct(Travelport $travelPort)
     {
         $this->travelPort = $travelPort;
-        $this->traceId =  sha1('my-unique-token');
+        $this->traceId = sha1('my-unique-token');
     }
 
     /**
@@ -99,24 +99,24 @@ class TravelPortService
         $searchModifiers = (new Air\AirSearchModifiers())
             ->setPreferredProviders($this->getPreferredProviders());
 
-        if(isset($parameters['direct'])) {
+        if (isset($parameters['direct'])) {
             $searchModifiers->setFlightType(
-                (new Air\FlightType())->setNonStopDirects((bool) $parameters['direct'])
+                (new Air\FlightType())->setNonStopDirects((bool)$parameters['direct'])
             );
         }
 
-        if(isset($parameters['serviceClass'])) {
+        if (isset($parameters['serviceClass'])) {
             $searchModifiers->setPreferredCabins(
                 (new Air\PreferredCabins())->setCabinClass(new Air\CabinClass($parameters['serviceClass']))
             );
         }
 
-        if(isset($parameters['airlines'])) {
+        if (isset($parameters['airlines'])) {
             foreach ($parameters['airlines'] as $airline) {
                 $carriers[] = new Air\Carrier($airline);
             }
 
-            if(!empty($carriers)) {
+            if (!empty($carriers)) {
                 $searchModifiers->setPreferredCarriers(
                     new Air\PreferredCarriers($carriers)
                 );
@@ -178,31 +178,22 @@ class TravelPortService
             }
 
             if (isset($segment['departureDate'])) {
+                $time = Carbon::createFromFormat('Y-m-d\Th:i:s', $segment['departureDate']);
                 $searchAirLeg->setSearchDepTime([
-                    (new Air\typeFlexibleTimeSpec)->setPreferredTime($segment['departureDate']),
+                    (new Air\typeFlexibleTimeSpec)->setPreferredTime($time->toDateString()),
                 ]);
             }
 
             if (isset($segment['arrivalDate'])) {
+                $time = Carbon::createFromFormat('Y-m-d\Th:i:s', $segment['departureDate']);
                 $searchAirLeg->setSearchArvTime([
-                    (new Air\typeFlexibleTimeSpec)->setPreferredTime($segment['arrivalDate']),
+                    (new Air\typeFlexibleTimeSpec)->setPreferredTime($time),
                 ]);
             }
 
             $searchAirLegs[] = $searchAirLeg;
         }
-
         return $searchAirLegs;
-    }
-
-    /**
-     * @param $code
-     * @return Air\typePassengerType
-     */
-    protected function searchPassenger($code)
-    {
-        return (new Air\SearchPassenger)
-            ->setCode($code);
     }
 
 }

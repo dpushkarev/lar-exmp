@@ -22,11 +22,22 @@ class TravelPort extends BaseController
     {
         try{
             $result = TP::LowFareSearchReq($request->getTravelPortSearchDto());
-            foreach ($result->getAirSegmentList()->getAirSegment() as $item) {
-                $response[] = [
-                    'FlightNumber' => $item->getFlightNumber(),
-                    'Equipment' => $item->getEquipment(),
+            foreach ($result->getAirSegmentList()->getAirSegment() as $airSegment) {
+                $data = [
+                    'FlightNumber' => $airSegment->getFlightNumber(),
                 ];
+
+                foreach ($airSegment->getFlightDetailsRef() as $flightDetailRef) {
+                    foreach ($result->getFlightDetailsList()->getFlightDetails() as $flightDetail) {
+                       if($flightDetailRef->getKey() === $flightDetail->getKey()) {
+                           $data['FlightDetails'][] = [
+                               'Equipment' => $flightDetail->getEquipment(),
+                               'OriginTerminal' => $flightDetail->getOriginTerminal()
+                           ];
+                       }
+                    }
+                }
+                $response[] = $data;
             }
 
             return response()->json($response ?? '');
