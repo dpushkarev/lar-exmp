@@ -32,6 +32,8 @@ class Travelport extends \FilippoToso\Travelport\Travelport
                 $this->logger->log('response', $service, $request, $service->__getLastResponse());
                 return $result;
             } catch (Exception $travelportException) {
+                $this->logger->log('er1', $service, $request, $service->__getLastRequest());
+                $this->logger->log('er2', $service, $request, $service->__getLastResponse());
                 throw $travelportException;
             }
         }
