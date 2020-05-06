@@ -7,6 +7,7 @@ use App\Http\Requests\TravelPortSearchRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Routing\Controller as BaseController;
 use App\Facades\TP;
+use App\Http\Resources\TravelPort as TravelPortResource;
 
 /**
  * Class TravelPort
@@ -16,31 +17,13 @@ class TravelPort extends BaseController
 {
     /**
      * @param TravelPortSearchRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return TravelPortResource
      */
     public function search(TravelPortSearchRequest $request)
     {
         try{
             $result = TP::LowFareSearchReq($request->getTravelPortSearchDto());
-            foreach ($result->getAirSegmentList()->getAirSegment() as $airSegment) {
-                $data = [
-                    'FlightNumber' => $airSegment->getFlightNumber(),
-                ];
-
-                foreach ($airSegment->getFlightDetailsRef() as $flightDetailRef) {
-                    foreach ($result->getFlightDetailsList()->getFlightDetails() as $flightDetail) {
-                       if($flightDetailRef->getKey() === $flightDetail->getKey()) {
-                           $data['FlightDetails'][] = [
-                               'Equipment' => $flightDetail->getEquipment(),
-                               'OriginTerminal' => $flightDetail->getOriginTerminal()
-                           ];
-                       }
-                    }
-                }
-                $response[] = $data;
-            }
-
-            return response()->json($response ?? '');
+            return new TravelPortResource($result);
         } catch (TravelPortException $exception) {
             throw new HttpResponseException(response()->json($exception->getMessage(), 422));
         }
