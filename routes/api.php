@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/flights/search/request', 'TravelPort@search');
 
+Route::get('/guide/autocomplete/iata/{q}/dep', 'NemoWidget@autocomplete')->where('q', '.*');
+Route::get('/guide/autocomplete/iata/{q}/arr', 'NemoWidget@autocomplete')->where('q', '.*');
+
+

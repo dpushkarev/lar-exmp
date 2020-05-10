@@ -15,26 +15,14 @@ class AirportsTableSeeder extends Seeder
         $airportsJson = file_get_contents(storage_path('seeder_data/airports.json'));
         $airportsJson = json_decode($airportsJson, true);
 
-        $originNames = [];
-
-        foreach ($airports as $airport) {
-            $explodedLine = explode('","', $airport);
-            if(null === $this->cleanString($explodedLine[1])) {
-                $originNames[$this->cleanString($explodedLine[0])] = $this->cleanString($explodedLine[2]);
-            }
-        }
-
         foreach ($airports as $airport) {
             $explodedLine = explode('","', $airport);
 
             DB::table('airports')->updateOrInsert([
                 'code' => $this->cleanString($explodedLine[0]),
-                'name' => $this->cleanString($explodedLine[2])
             ], [
                 'code' => $this->cleanString($explodedLine[0]),
-                'synonym' => $this->cleanString($explodedLine[1]),
                 'name' => $this->cleanString($explodedLine[2]),
-                'origin_name' => in_array($this->cleanString($explodedLine[1]), ['S']) ? $originNames[$this->cleanString($explodedLine[0])] : null,
                 'country_code' => $this->cleanString($explodedLine[3]),
                 'state_code' => $this->cleanString($explodedLine[4]),
                 'metro_code' => $this->cleanString($explodedLine[5]),
@@ -43,6 +31,25 @@ class AirportsTableSeeder extends Seeder
                 'host_service' => $this->cleanString($explodedLine[8]),
                 'latitude' => $airportsJson[$this->cleanString($explodedLine[0])]['lat'] ?? null,
                 'longitude' => $airportsJson[$this->cleanString($explodedLine[0])]['lng'] ?? null
+            ]);
+        }
+
+        $airPortIds = DB::table('airports')->select(['id', 'code'])->get();
+        $airPortIds = $airPortIds->pluck('id', 'code');
+
+        foreach ($airports as $airport) {
+            $explodedLine = explode('","', $airport);
+
+            $airportId = $airPortIds->get($this->cleanString($explodedLine[0]));
+
+            DB::table('vocabulary_names')->updateOrInsert([
+                'nameable_id' => $airportId,
+                'nameable_type' => \App\Models\Airport::class
+            ], [
+                'synonym' => $this->cleanString($explodedLine[1]),
+                'name' => $this->cleanString($explodedLine[2]),
+                'nameable_id' => $airportId,
+                'nameable_type' => \App\Models\Airport::class
             ]);
         }
     }

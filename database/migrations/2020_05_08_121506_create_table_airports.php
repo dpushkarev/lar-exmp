@@ -18,9 +18,7 @@ class CreateTableAirports extends Migration
         Schema::create($this->table, function (Blueprint $table) {
             $table->increments('id')->comment('Id of airport');
             $table->char('code', 5)->comment('Code of city');
-            $table->enum('synonym', ['S', 'C'])->nullable()->comment('Synonym record');
-            $table->string('name', 40)->comment('Name of airport');
-            $table->string('origin_name', 40)->nullable()->comment('Filled if it is synonym');
+            $table->string('name', 40)->nullable()->comment('Name of airport');
             $table->char('country_code', 2)->comment('Code of country');
             $table->char('state_code', 2)->nullable()->comment('State or province of airport');
             $table->char('metro_code', 3)->nullable()->comment('Metro code of airport');
@@ -34,8 +32,8 @@ class CreateTableAirports extends Migration
             $table->foreign('city_code', 'fk__airports__cities')->references('code')->on('cities')->onUpdate('RESTRICT')->onDelete('CASCADE');
             $table->foreign('country_code', 'fk__airports__countries')->references('code')->on('countries')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
-            $table->unique(['code', 'name'], 'idx__unique__code__name');
-            $table->index(['name', 'type'], 'idx__name__type');
+            $table->unique(['code'], 'idx__unique__code');
+            $table->index(['type'], 'idx__name__type');
         });
     }
 
