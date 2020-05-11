@@ -17,13 +17,13 @@ class NemoWidgetAirport extends JsonResource
     {
         return [
             "IATA" => $this->resource->code,
-            "cityId" => $this->resource->city_id,
+            "cityId" => $this->resource->city->id,
             "isAggregation" => false,
             "airportRating" => null,
             "baseType" => "airport",
             "properName" => null,
             "properNameEn" => null,
-            "name" => $this->resource->name,
+            "name" => __($this->resource->name),
             "nameEn" => $this->resource->name,
             "countryCode" => $this->resource->country_code,
         ];

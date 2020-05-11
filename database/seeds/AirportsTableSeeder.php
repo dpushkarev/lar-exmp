@@ -18,6 +18,10 @@ class AirportsTableSeeder extends Seeder
         foreach ($airports as $airport) {
             $explodedLine = explode('","', $airport);
 
+            if((int) $this->cleanString($explodedLine[7]) > 3) {
+                continue;
+            }
+
             DB::table('airports')->updateOrInsert([
                 'code' => $this->cleanString($explodedLine[0]),
             ], [
@@ -41,6 +45,10 @@ class AirportsTableSeeder extends Seeder
             $explodedLine = explode('","', $airport);
 
             $airportId = $airPortIds->get($this->cleanString($explodedLine[0]));
+
+            if(null === $airportId) {
+                continue;
+            }
 
             DB::table('vocabulary_names')->updateOrInsert([
                 'nameable_id' => $airportId,

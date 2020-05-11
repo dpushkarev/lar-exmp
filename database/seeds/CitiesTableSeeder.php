@@ -44,11 +44,11 @@ class CitiesTableSeeder extends Seeder
         foreach ($cities as $city) {
             $explodedLine = explode('","', $city);
 
-            if (null === $this->cleanString($explodedLine[6])) {
+            $cityId = $cityIds->get($this->cleanString($explodedLine[0]));
+
+            if(null === $cityId) {
                 continue;
             }
-
-            $cityId = $cityIds->get($this->cleanString($explodedLine[0]));
 
             DB::table('vocabulary_names')->updateOrInsert([
                 'nameable_id' => $cityId,

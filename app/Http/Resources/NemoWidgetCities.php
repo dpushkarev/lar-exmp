@@ -16,7 +16,7 @@ class NemoWidgetCities extends JsonResource
         return [
             $this->resource->code => [
                 "IATA" => $this->resource->code,
-                "name" => $this->resource->name,
+                "name" => __($this->resource->name),
                 "nameEn" => $this->resource->name,
                 "countryCode" => $this->resource->country_code,
                 "id" => $this->resource->id,

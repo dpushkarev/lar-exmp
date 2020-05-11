@@ -16,7 +16,7 @@ class NemoWidgetCountries extends JsonResource
         return [
             $this->resource->code => [
                 "code" => $this->resource->code,
-                "name" => $this->resource->name,
+                "name" => __($this->resource->name),
                 "nameEn" => $this->resource->name,
             ]
         ];

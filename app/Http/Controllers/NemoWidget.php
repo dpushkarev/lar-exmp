@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\NemoWidgetGuide;
-use App\Models\Airport;
-use App\Models\City;
-use App\Models\VocabularyName;
+use App\Services\NemoWidgetService;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
@@ -14,16 +12,16 @@ use Illuminate\Routing\Controller as BaseController;
  */
 class NemoWidget extends BaseController
 {
-    public function autocomplete($q)
+    /**
+     * @param NemoWidgetService $service
+     * @param $q
+     * @param null $iataCode
+     * @return NemoWidgetGuide
+     */
+    public function autocomplete(NemoWidgetService $service, $q, $iataCode = null)
     {
-        $result = VocabularyName::where('name', 'like', $q . '%')->with(['nameable.city.airports', 'nameable.country'])->get();
+        $result = $service->autocomplete($q);
 
-        $resultGroup = $result->groupBy('nameable_type');
-
-        if ($resultGroup->get(Airport::class)) {
-            return new NemoWidgetGuide($resultGroup->get(Airport::class));
-        }
-
-        return new NemoWidgetGuide($resultGroup->get(City::class));
+        return new NemoWidgetGuide($result);
     }
 }

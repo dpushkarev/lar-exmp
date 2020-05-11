@@ -20,7 +20,7 @@ class NemoWidgetGuide extends JsonResource
         $airports = collect();
         $iata = collect();
 
-        if(null !== $this->resource) {
+        if (null !== $this->resource) {
             foreach ($this->resource as $item) {
                 $countries = $countries->merge(new NemoWidgetCountries($item->nameable->country));
                 $cities = $cities->merge(new NemoWidgetCities($item->nameable->city));
@@ -29,8 +29,6 @@ class NemoWidgetGuide extends JsonResource
 
             $iata = NemoWidgetAutocomplete::collection($this->resource);
         }
-
-
 
         return [
             'guide' => [
@@ -47,5 +45,10 @@ class NemoWidgetGuide extends JsonResource
             ],
             'system' => new NemoWidgetSystem(1)
         ];
+    }
+
+    public function withResponse($request, $response)
+    {
+        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 }
