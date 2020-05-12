@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\App;
 
 class NemoWidgetSystem extends JsonResource
 {
@@ -26,12 +26,12 @@ class NemoWidgetSystem extends JsonResource
                     "status" => "guest",
                     "isB2B" => false,
                     "settings" => [
-                        "currentLanguage" => "en",
-                        "currentCurrency" => "RUB",
-                        "agencyCurrency" => "RUB",
-                        "agencyCountry" => "RU",
-                        "googleMapsApiKey" => "AIzaSyB-8D4iRGP1qgLShbdbqIYm-3spSP-bA_w",
-                        "googleMapsClientId" => "",
+                        "currentLanguage" => App::getLocale(),
+                        "currentCurrency" => null,
+                        "agencyCurrency" => null,
+                        "agencyCountry" => null,
+                        "googleMapsApiKey" => null,
+                        "googleMapsClientId" => null,
                         "showFullFlightsResults" => "false"
                     ]
                 ]

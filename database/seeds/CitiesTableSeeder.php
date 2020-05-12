@@ -12,16 +12,20 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         $cities = file(storage_path('seeder_data/RCTY.TXT'), FILE_IGNORE_NEW_LINES);
+        $citiesCount = 0;
+        $citiesSynCount = 0;
+        $cityWithoutArCount = 0;
 
         foreach ($cities as $city) {
             $explodedLine = explode('","', $city);
 
             if (null === $this->cleanString($explodedLine[6])) {
+                $cityWithoutArCount++;
                 continue;
             }
 
             if (null === $this->cleanString($explodedLine[1])) {
-                DB::table('cities')->updateOrInsert([
+                $citiesCount += DB::table('cities')->updateOrInsert([
                     'code' => $this->cleanString($explodedLine[0]),
                 ], [
                     'code' => $this->cleanString($explodedLine[0]),
@@ -35,31 +39,16 @@ class CitiesTableSeeder extends Seeder
                     'created_at' => \Carbon\Carbon::now(),
                     'updated_at' => \Carbon\Carbon::now()
                 ]);
-            }
-        }
 
-        $cityIds = DB::table('cities')->select(['id', 'code'])->get();
-        $cityIds = $cityIds->pluck('id', 'code');
-
-        foreach ($cities as $city) {
-            $explodedLine = explode('","', $city);
-
-            $cityId = $cityIds->get($this->cleanString($explodedLine[0]));
-
-            if(null === $cityId) {
                 continue;
             }
 
-            DB::table('vocabulary_names')->updateOrInsert([
-                'nameable_id' => $cityId,
-                'nameable_type' => \App\Models\City::class
-            ], [
-                'synonym' => $this->cleanString($explodedLine[1]),
-                'name' => $this->cleanString($explodedLine[2]),
-                'nameable_id' => $cityId,
-                'nameable_type' => \App\Models\City::class
-            ]);
+            $citiesSynCount++;
         }
+
+        $this->command->getOutput()->writeln("<comment>Insert/Update: {$citiesCount} cities</comment>");
+        $this->command->getOutput()->writeln("<comment>Missed: {$citiesSynCount} synonyms</comment>");
+        $this->command->getOutput()->writeln("<comment>Missed: {$cityWithoutArCount} cities without airports</comment>");
 
     }
 

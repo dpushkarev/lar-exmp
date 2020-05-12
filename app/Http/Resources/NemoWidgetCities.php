@@ -20,7 +20,7 @@ class NemoWidgetCities extends JsonResource
                 "nameEn" => $this->resource->name,
                 "countryCode" => $this->resource->country_code,
                 "id" => $this->resource->id,
-                'airports' => $this->resource->associated_airports
+                'airports' => NemoWidgetAirportIata::collection($this->resource->airports)
             ]
         ];
     }

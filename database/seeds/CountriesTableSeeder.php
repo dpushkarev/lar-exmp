@@ -12,11 +12,12 @@ class CountriesTableSeeder extends Seeder
     public function run()
     {
         $countries = file(storage_path('seeder_data/RCNT.TXT'), FILE_IGNORE_NEW_LINES);
+        $countryCount = 0;
 
         foreach ($countries as $country) {
             $explodedLine = explode('","', $country);
 
-            DB::table('countries')->updateOrInsert([
+            $countryCount += DB::table('countries')->updateOrInsert([
                 'code' => $this->cleanString($explodedLine[0])
             ], [
                 'code' => $this->cleanString($explodedLine[0]),
@@ -29,6 +30,7 @@ class CountriesTableSeeder extends Seeder
             ]);
         }
 
+        $this->command->getOutput()->writeln("<comment>Insert/Update: {$countryCount} countries</comment>");
     }
 
     public function cleanString($string)
