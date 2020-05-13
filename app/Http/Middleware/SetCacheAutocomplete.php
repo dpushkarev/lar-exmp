@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Services\NemoWidgetService;
 use Closure;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
@@ -18,10 +19,15 @@ class SetCacheAutocomplete
      */
     public function handle($request, Closure $next)
     {
+        /**
+         * @var $response Response
+         */
         $response = $next($request);
 
-        $key = NemoWidgetService::getAutocompleteCacheKey($request->q, App::getLocale());
-        Cache::put($key, $response->getContent());
+        if(null === $response->exception) {
+            $key = NemoWidgetService::getAutocompleteCacheKey($request->q, App::getLocale());
+            Cache::put($key, $response->getContent());
+        }
 
         return $response;
     }
