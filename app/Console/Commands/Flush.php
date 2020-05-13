@@ -37,7 +37,6 @@ class Flush extends Command
      */
     public function handle()
     {
-        shell_exec('cd /da/src');
         $commands = ['clear-compiled', 'cache:clear', 'view:clear', 'config:clear', 'route:clear'];
         foreach ($commands as $command) {
             $command = "php artisan {$command}";
