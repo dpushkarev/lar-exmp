@@ -22,7 +22,7 @@ class VocabularyName extends Model
     {
         return VocabularyName::where('name', 'like', $q . '%')
             ->with(['nameable.city.airports', 'nameable.country'])
-            ->limit(10)
+            ->limit(15)
             ->get();
     }
 
