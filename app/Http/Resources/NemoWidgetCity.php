@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetCities extends JsonResource
+class NemoWidgetCity extends JsonResource
 {
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetAirportsList extends JsonResource
+class NemoWidgetAirportList extends JsonResource
 {
     /**
      * @param \Illuminate\Http\Request $request

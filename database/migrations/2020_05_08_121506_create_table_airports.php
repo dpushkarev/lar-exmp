@@ -18,7 +18,7 @@ class CreateTableAirports extends Migration
         Schema::create($this->table, function (Blueprint $table) {
             $table->increments('id')->comment('Id of airport');
             $table->char('code', 5)->comment('Code of city');
-            $table->string('name', 40)->nullable()->comment('Name of airport');
+            $table->string('name', 40)->comment('Name of airport');
             $table->char('country_code', 2)->comment('Code of country');
             $table->char('state_code', 2)->nullable()->comment('State or province of airport');
             $table->char('metro_code', 3)->nullable()->comment('Metro code of airport');

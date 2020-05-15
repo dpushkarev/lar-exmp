@@ -1,3 +1,6 @@
 GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
 
 ###
+GET http://127.0.0.1:8081/api/guide/airlines/all
+
+###

@@ -4,6 +4,7 @@
 namespace App\Models;
 
 
+use App\Models\Traits\CacheTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -12,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Country extends Model
 {
+    protected static $cacheTags = ['countries'];
+    protected static $cacheMinutes = 0;
+
+    use CacheTrait;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -27,5 +32,13 @@ class Country extends Model
     public function airports()
     {
         return $this->hasMany(Airport::class, 'country_code', 'code');
+    }
+
+    /**
+     * @return Country[]|\Illuminate\Database\Eloquent\Collection
+     */
+    static public function getAll()
+    {
+        return static::orderBy('name', 'asc')->get();
     }
 }

@@ -25,6 +25,7 @@ class CreateTableCountries extends Migration
             $table->timestamps();
 
             $table->unique('code', 'idx__unique__code');
+            $table->index('name', 'idx__name');
         });
 
     }

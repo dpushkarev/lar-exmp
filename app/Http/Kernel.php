@@ -3,8 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\ApiLocale;
-use App\Http\Middleware\CheckCacheAutocomplete;
-use App\Http\Middleware\SetCacheAutocomplete;
+use App\Http\Middleware\NemoWidgetCache;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -66,8 +65,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'check.cache.autocomplete' => CheckCacheAutocomplete::class,
-        'set.cache.autocomplete' => SetCacheAutocomplete::class,
-        'api.locale' =>  ApiLocale::class
+        'api.locale' =>  ApiLocale::class,
+        'nemo.widget.cache' => NemoWidgetCache::class
     ];
 }

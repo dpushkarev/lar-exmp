@@ -1,12 +1,14 @@
 <?php
 namespace App\Models\Traits;
 
+use App\Models\Airline;
 use App\Models\VocabularyName;
 use Illuminate\Support\Facades\Cache;
 
 /**
  * Trait CacheTrait
  * @uses VocabularyName
+ * @uses Airline
  * @package App\Models\Traits
  */
 trait CacheTrait

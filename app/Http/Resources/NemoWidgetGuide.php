@@ -22,9 +22,9 @@ class NemoWidgetGuide extends JsonResource
 
         if (null !== $this->resource) {
             foreach ($this->resource as $item) {
-                $countries = $countries->merge(new NemoWidgetCountries($item->nameable->country));
-                $cities = $cities->merge(new NemoWidgetCities($item->nameable->city));
-                $airports = $airports->merge(new NemoWidgetAirportsList($item->nameable->city->airports));
+                $countries = $countries->merge(new NemoWidgetCountry($item->nameable->country));
+                $cities = $cities->merge(new NemoWidgetCity($item->nameable->city));
+                $airports = $airports->merge(new NemoWidgetAirportList($item->nameable->city->airports));
             }
 
             $iata = NemoWidgetAutocomplete::collection($this->resource);

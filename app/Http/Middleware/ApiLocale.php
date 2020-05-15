@@ -17,7 +17,7 @@ class ApiLocale
      */
     public function handle($request, Closure $next)
     {
-        $locale =  $request->get('apilang');
+        $locale =  $request->get('apilang', $request->get('user_language_get_change'));
         if (!$locale || !Config::get('resources.locale.' . $locale)) {
             $locale = Config::get('app.locale');
         }
