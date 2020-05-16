@@ -23,7 +23,7 @@ class NemoWidgetGuide extends JsonResource
         if (null !== $this->resource) {
             foreach ($this->resource as $item) {
                 $countries = $countries->merge(new NemoWidgetCountry($item->nameable->country));
-                $cities = $cities->push($item->nameable->city->id, new NemoWidgetCity($item->nameable->city));
+                $cities[$item->nameable->city->id] = new NemoWidgetCity($item->nameable->city);
                 $airports = $airports->merge(new NemoWidgetAirportList($item->nameable->city->airports));
             }
 
