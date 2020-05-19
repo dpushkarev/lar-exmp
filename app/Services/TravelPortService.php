@@ -7,6 +7,7 @@ use App\Dto\TravelPortSearchDto;
 use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
+use Libs\FilippoToso\Travelport;
 
 /**
  * Class TravelPortService
@@ -90,7 +91,7 @@ class TravelPortService
      */
     protected function getPreferredProviders()
     {
-        return  (new Air\PreferredProviders())
+        return (new Air\PreferredProviders())
             ->setProvider($this->getProvider(static::GALILEO_PROVIDER_ID));
     }
 
@@ -155,26 +156,30 @@ class TravelPortService
             $searchAirLeg = new Air\SearchAirLeg;
 
             if (isset($segment['departure'])) {
-                if($segment['departure']['isCity']) {
-                    $locationClass = Air\City::class;
+                if ($segment['departure']['isCity']) {
+                    $searchAirLeg->setSearchOrigin([
+                        (new Air\typeSearchLocation)->setCityOrAirport((new Air\CityOrAirport())->setCode($segment['departure']['IATA'])),
+                    ]);
                 } else {
-                    $locationClass = Air\Airport::class;
+                    $searchAirLeg->setSearchOrigin([
+                        (new Air\typeSearchLocation)->setAirport((new Air\Airport())->setCode($segment['departure']['IATA'])),
+                    ]);
                 }
 
-                $searchAirLeg->setSearchOrigin([
-                    (new Air\typeSearchLocation)->setAirport((new $locationClass)->setCode($segment['departure']['IATA'])),
-                ]);
+
             }
 
             if (isset($segment['arrival'])) {
-                if($segment['arrival']['isCity']) {
-                    $locationClass = Air\City::class;
+                if ($segment['arrival']['isCity']) {
+                    $searchAirLeg->setSearchDestination([
+                        (new Air\typeSearchLocation)->setCityOrAirport((new Air\CityOrAirport())->setCode($segment['arrival']['IATA'])),
+                    ]);
                 } else {
-                    $locationClass = Air\Airport::class;
+                    $searchAirLeg->setSearchDestination([
+                        (new Air\typeSearchLocation)->setAirport((new Air\Airport())->setCode($segment['arrival']['IATA'])),
+                    ]);
                 }
-                $searchAirLeg->setSearchDestination([
-                    (new Air\typeSearchLocation)->setAirport((new $locationClass)->setCode($segment['arrival']['IATA'])),
-                ]);
+
             }
 
             if (isset($segment['departureDate'])) {

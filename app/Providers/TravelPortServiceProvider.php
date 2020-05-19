@@ -7,7 +7,7 @@ use App\Services\TravelPortService;
 use Illuminate\Support\Facades\App;
 use FilippoToso\Travelport\Endpoints;
 use Illuminate\Support\ServiceProvider;
-use App\Services\Travelport;
+use Libs\FilippoToso\Travelport;
 
 class TravelPortServiceProvider extends ServiceProvider
 {
