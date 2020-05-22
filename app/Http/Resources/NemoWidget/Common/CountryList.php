@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget\Common;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetCountryList extends JsonResource
+class CountryList extends JsonResource
 {
 
     /**
@@ -15,7 +15,7 @@ class NemoWidgetCountryList extends JsonResource
     {
         $countryList = collect();
         foreach ($this->resource as $country) {
-            $countryList = $countryList->merge(new NemoWidgetCountry($country));
+            $countryList = $countryList->merge(new Country($country));
         }
 
         return $countryList;

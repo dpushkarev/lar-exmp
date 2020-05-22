@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget\Common;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetCity extends JsonResource
+class Country extends JsonResource
 {
 
     /**
@@ -14,13 +14,11 @@ class NemoWidgetCity extends JsonResource
     public function toArray($request)
     {
         return [
-                "IATA" => $this->resource->code,
+            $this->resource->code => [
+                "code" => $this->resource->code,
                 "name" => __($this->resource->name),
                 "nameEn" => $this->resource->name,
-                "countryCode" => $this->resource->country_code,
-                "id" => $this->resource->id,
-                'airports' => NemoWidgetAirportIata::collection($this->resource->airports)
+            ]
         ];
     }
-
 }

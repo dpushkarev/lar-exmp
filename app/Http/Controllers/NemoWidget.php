@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\NemoWidgetAirlinesAll;
-use App\Http\Resources\NemoWidgetGuide;
+use App\Http\Resources\NemoWidget\AirlinesAll;
+use App\Http\Resources\NemoWidget\Autocomplete;
 use App\Services\NemoWidgetService;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -13,17 +13,18 @@ use Illuminate\Routing\Controller as BaseController;
  */
 class NemoWidget extends BaseController
 {
+
     /**
      * @param NemoWidgetService $service
      * @param $q
      * @param null $iataCode
-     * @return NemoWidgetGuide
+     * @return Autocomplete
      */
     public function autocomplete(NemoWidgetService $service, $q, $iataCode = null)
     {
         $result = $service->autocomplete($q);
 
-        return new NemoWidgetGuide($result);
+        return new Autocomplete($result);
     }
 
     public function airlinesAll(NemoWidgetService $service)
@@ -33,6 +34,6 @@ class NemoWidget extends BaseController
 
         $result = collect(['countries' => $countries, 'airlines' => $airlines]);
 
-        return new NemoWidgetAirlinesAll($result);
+        return new AirlinesAll($result);
     }
 }

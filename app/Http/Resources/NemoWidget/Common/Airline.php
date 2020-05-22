@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget\Common;
 
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetAirline extends JsonResource
+class Airline extends JsonResource
 {
     public function toArray($request)
     {

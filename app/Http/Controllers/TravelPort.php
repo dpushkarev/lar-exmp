@@ -7,7 +7,7 @@ use App\Http\Requests\TravelPortSearchRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Routing\Controller as BaseController;
 use App\Facades\TP;
-use App\Http\Resources\TravelPort as TravelPortResource;
+use App\Http\Resources\NemoWidget\TravelPort as TravelPortResource;
 
 /**
  * Class TravelPort

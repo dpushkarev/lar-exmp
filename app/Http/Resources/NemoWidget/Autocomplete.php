@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget;
 
+use App\Http\Resources\NemoWidget\Common\AirportList;
+use App\Http\Resources\NemoWidget\Common\City;
+use App\Http\Resources\NemoWidget\Common\Country;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\NemoWidget\Common\Autocomplete as AutocompleteCommon;
 
-class NemoWidgetGuide extends JsonResource
+class Autocomplete extends JsonResource
 {
 
     public static $wrap;
@@ -22,12 +26,12 @@ class NemoWidgetGuide extends JsonResource
 
         if (null !== $this->resource) {
             foreach ($this->resource as $item) {
-                $countries = $countries->merge(new NemoWidgetCountry($item->nameable->country));
-                $cities[$item->nameable->city->id] = new NemoWidgetCity($item->nameable->city);
-                $airports = $airports->merge(new NemoWidgetAirportList($item->nameable->city->airports));
+                $countries = $countries->merge(new Country($item->nameable->country));
+                $cities[$item->nameable->city->id] = new City($item->nameable->city);
+                $airports = $airports->merge(new AirportList($item->nameable->city->airports));
             }
 
-            $iata = NemoWidgetAutocomplete::collection($this->resource);
+            $iata = AutocompleteCommon::collection($this->resource);
         }
 
         return [
@@ -43,7 +47,7 @@ class NemoWidgetGuide extends JsonResource
                     'airports' => $airports
                 ]),
             ],
-            'system' => new NemoWidgetSystem(1)
+            'system' => new System([])
         ];
     }
 

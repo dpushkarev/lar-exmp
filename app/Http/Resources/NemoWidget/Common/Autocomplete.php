@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget\Common;
 
 use App\Models\City;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetAutocomplete extends JsonResource
+class Autocomplete extends JsonResource
 {
 
     /**

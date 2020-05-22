@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget\Common;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * Class NemoWidgetAirport
  * @package App\Http\Resources
  */
-class NemoWidgetAirport extends JsonResource
+class Airport extends JsonResource
 {
 
     /**

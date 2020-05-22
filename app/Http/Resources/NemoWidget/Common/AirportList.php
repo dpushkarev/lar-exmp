@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\NemoWidget\Common;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NemoWidgetAirportList extends JsonResource
+class AirportList extends JsonResource
 {
     /**
      * @param \Illuminate\Http\Request $request
@@ -14,7 +14,7 @@ class NemoWidgetAirportList extends JsonResource
     {
         $airportList = collect();
         foreach ($this->resource as $airport) {
-            $airportList->put($airport->code, new NemoWidgetAirport($airport));
+            $airportList->put($airport->code, new Airport($airport));
         }
 
         return $airportList;

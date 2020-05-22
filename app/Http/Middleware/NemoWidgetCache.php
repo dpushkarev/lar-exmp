@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Resources\NemoWidgetSystem;
+use App\Http\Resources\NemoWidget\System;
 use App\Services\NemoWidgetService;
 use Closure;
 use Illuminate\Support\Facades\Cache;
@@ -37,7 +37,7 @@ class NemoWidgetCache
 
         if(null !== $cache) {
             $cache = json_decode($cache, true);
-            $cache['system'] = (new NemoWidgetSystem([]))->toArray($request);
+            $cache['system'] = (new System([]))->toArray($request);
 
             return response()->json($cache)->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         }
