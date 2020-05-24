@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ApiException;
 use App\Http\Requests\FlightsSearchRequest;
 use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
+use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Services\NemoWidgetService;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
@@ -45,5 +47,22 @@ class NemoWidget extends BaseController
         $service->flightsSearchRequest($dto);
 
         return new FlightsSearchRequestResource($dto);
+    }
+
+    /**
+     * @param int $id
+     * @param NemoWidgetService $service
+     * @return FlightsSearchResults
+     * @throws ApiException
+     * @throws \App\Exceptions\TravelPortException
+     */
+    public function flightsSearchResult(int $id,  NemoWidgetService $service)
+    {
+        try {
+            $results = $service->flightsSearchResult($id);
+            return new FlightsSearchResults($results);
+        } catch (ApiException $exception) {
+            throw $exception;
+        }
     }
 }

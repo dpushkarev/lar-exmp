@@ -6,6 +6,9 @@ use App\Http\Resources\NemoWidget\Common\AirportList;
 use App\Http\Resources\NemoWidget\Common\City;
 use App\Http\Resources\NemoWidget\Common\Country;
 use App\Http\Resources\NemoWidget\Common\Flights;
+use App\Http\Resources\NemoWidget\Common\FormData;
+use App\Http\Resources\NemoWidget\Common\Request;
+use App\Http\Resources\NemoWidget\Common\Results;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\City as CityModel;
 use App\Models\Airport as AirportModel;
@@ -46,7 +49,13 @@ class FlightsSearchRequest extends JsonResource
         }
 
         return [
-            'flights' => new Flights($this->resource),
+            'flights' => [
+                'search' => [
+                    'formData' => new FormData($this->resource),
+                    'request' => new Request($this->resource),
+                    'results' => new Results(collect(['request' => $this->resource]))
+                ]
+            ],
             'guide' => [
                 'airports' => new AirportList($airports),
                 'cities' => $cities,

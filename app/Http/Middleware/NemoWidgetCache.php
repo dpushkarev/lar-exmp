@@ -30,6 +30,9 @@ class NemoWidgetCache
             case 'airlinesAll';
                 $cacheKey = NemoWidgetService::getCacheKey($routeName, App::getLocale());
                 break;
+            case 'flights.search.results';
+                $cacheKey = NemoWidgetService::getCacheKey($routeName, (int)$request->id, App::getLocale());
+                break;
             case 'flights.search.get.request';
             case 'flights.search.get.formData';
                 $cacheKey = NemoWidgetService::getCacheKey('flights.search.request', (int)$request->id, App::getLocale());

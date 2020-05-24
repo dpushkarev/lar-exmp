@@ -15,16 +15,18 @@ class FlightsSearchRequestDto implements \JsonSerializable
     private $requestId;
 
     /**
-     * TravelPortSearchDto constructor.
+     * FlightsSearchRequestDto constructor.
      * @param $segments
      * @param $passengers
      * @param null $parameters
+     * @param null $requestId
      */
-    public function __construct($segments, $passengers, $parameters = null)
+    public function __construct($segments, $passengers, $parameters = null, $requestId = null)
     {
         $this->segments = $segments;
         $this->passengers = $passengers;
         $this->parameters = $parameters;
+        $this->requestId = $requestId;
     }
 
     /**

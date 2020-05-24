@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Exceptions\ApiException;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,15 +26,15 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
         Route::get('/guide/autocomplete/iata/{q}/arr/{iataCode}', 'NemoWidget@autocomplete')->where('iataCode', '[A-Z]{3}');
     });
 
-    Route::get('/flights/search/formData/{id}', function(){
-        return response()->json(['message' => 'Not Found.'], 404);
+    Route::get('/flights/search/formData/{id}', function($id){
+        throw ApiException::getInstanceInvalidId($id);
     })->where('id', '\d+')->name('flights.search.get.formData');
 
-    Route::get('/flights/search/request/{id}', function(){
-        return response()->json(['message' => 'Not Found.'], 404);
+    Route::get('/flights/search/request/{id}', function($id){
+        throw ApiException::getInstanceInvalidId($id);
     })->where('id', '\d+')->name('flights.search.get.request');
 
-    Route::get('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '[0-9]')->name('flights.search.results');
+    Route::get('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name('flights.search.results');
 
 
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name('airlinesAll');
@@ -96,6 +98,10 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
            }
         }';
     });
+
+    Route::any('{some}', function () {
+        throw new NotFoundHttpException('Api not found');
+    })->where('some', '.*');
 });
 
 

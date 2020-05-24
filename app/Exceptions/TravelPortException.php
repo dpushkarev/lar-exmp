@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 class TravelPortException extends \Exception
 {
-    const ERROR_API_ERROR = 1000;
+    const DEFAULT_ERROR = 1000;
 
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class TravelPortException extends \Exception
      */
     public static function getInstance($message, $code = null): TravelPortException
     {
-        return new self('TravelPort error: ' . $message, $code ?? self::ERROR_API_ERROR);
+        return new self('TravelPort error: ' . $message, $code ?? self::DEFAULT_ERROR);
     }
 
 }

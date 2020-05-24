@@ -3,7 +3,7 @@
 
 namespace App\Services;
 
-use App\Dto\TravelPortSearchDto;
+use App\Dto\FlightsSearchRequestDto;
 use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
@@ -35,11 +35,12 @@ class TravelPortService
     }
 
     /**
-     * @param TravelPortSearchDto $dto
+     * @param FlightsSearchRequestDto $dto
      * @return mixed
      * @throws TravelPortException
+     * @throws \App\Exceptions\ApiException
      */
-    public function LowFareSearchReq(TravelPortSearchDto $dto)
+    public function LowFareSearchReq(FlightsSearchRequestDto $dto)
     {
         try {
             $request = $this->getLowFareSearchRequest($dto);
@@ -49,7 +50,7 @@ class TravelPortService
         }
     }
 
-    public function LowFareSearchAsyncReq(TravelPortSearchDto $dto)
+    public function LowFareSearchAsyncReq(FlightsSearchRequestDto $dto)
     {
         try {
             $request = $this->getLowFareSearchAsyncRequest($dto);
@@ -68,10 +69,10 @@ class TravelPortService
     }
 
     /**
-     * @param TravelPortSearchDto $dto
+     * @param FlightsSearchRequestDto $dto
      * @return mixed
      */
-    protected function getLowFareSearchRequest(TravelPortSearchDto $dto)
+    protected function getLowFareSearchRequest(FlightsSearchRequestDto $dto)
     {
         $searchAirLegs = $this->getSearchAirLeg($dto->getSegments(), $dto->getParameters());
         $searchPassengers = $this->getSearchPassengers($dto->getPassengers());
@@ -87,7 +88,7 @@ class TravelPortService
 
     }
 
-    protected function getLowFareSearchAsyncRequest(TravelPortSearchDto $dto)
+    protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)
     {
         $searchAirLegs = $this->getSearchAirLeg($dto->getSegments(), $dto->getParameters());
         $billingPointOfSaleInfo = $this->getBillingPointOfSaleInfo();
