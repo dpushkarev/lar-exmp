@@ -34,7 +34,7 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
         throw ApiException::getInstanceInvalidId($id);
     })->where('id', '\d+')->name('flights.search.get.request');
 
-    Route::get('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name('flights.search.results');
+    Route::post('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name('flights.search.results');
 
 
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name('airlinesAll');

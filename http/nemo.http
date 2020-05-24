@@ -7,7 +7,7 @@ GET http://127.0.0.1:8081/api/guide/airlines/all
 GET http://127.0.0.1:8081/api/flights/search/request/7
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/results/7
+POST http://127.0.0.1:8081/api/flights/search/results/6
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
