@@ -5,13 +5,10 @@ namespace App\Http\Resources\NemoWidget;
 use App\Http\Resources\NemoWidget\Common\AirportList;
 use App\Http\Resources\NemoWidget\Common\City;
 use App\Http\Resources\NemoWidget\Common\Country;
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\NemoWidget\Common\Autocomplete as AutocompleteCommon;
 
-class Autocomplete extends JsonResource
+class Autocomplete extends AbstractResource
 {
-
-    public static $wrap;
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -47,13 +44,7 @@ class Autocomplete extends JsonResource
                     'airports' => $airports
                 ]),
             ],
-            'system' => new System([])
         ];
-    }
-
-    public function withResponse($request, $response)
-    {
-        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
     }
 
 }

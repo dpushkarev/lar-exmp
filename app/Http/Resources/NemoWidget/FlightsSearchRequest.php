@@ -9,14 +9,11 @@ use App\Http\Resources\NemoWidget\Common\Flights;
 use App\Http\Resources\NemoWidget\Common\FormData;
 use App\Http\Resources\NemoWidget\Common\Request;
 use App\Http\Resources\NemoWidget\Common\Results;
-use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\City as CityModel;
 use App\Models\Airport as AirportModel;
 
-class FlightsSearchRequest extends JsonResource
+class FlightsSearchRequest extends AbstractResource
 {
-
-    public static $wrap;
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -61,12 +58,12 @@ class FlightsSearchRequest extends JsonResource
                 'cities' => $cities,
                 'countries' => $countries
             ],
-            'system' => new System([])
         ];
     }
+
     public function withResponse($request, $response)
     {
-        $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+        parent::withResponse($request, $response);
         $response->requestId = $this->resource->getRequestId();
     }
 

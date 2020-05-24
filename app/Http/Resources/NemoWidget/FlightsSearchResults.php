@@ -14,10 +14,8 @@ use App\Models\Airline;
 use App\Models\Airport;
 use FilippoToso\Travelport\Air\LowFareSearchAsynchRsp;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-
-class FlightsSearchResults extends JsonResource
+class FlightsSearchResults extends AbstractResource
 {
     /**
      * @param \Illuminate\Http\Request $request
@@ -89,7 +87,6 @@ class FlightsSearchResults extends JsonResource
                 'cities' => $cities,
                 'countries' => $countries
             ],
-            'system' => new System([])
         ];
     }
 }
