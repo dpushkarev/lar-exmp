@@ -49,6 +49,16 @@ class TravelPortService
         }
     }
 
+    public function LowFareSearchAsyncReq(TravelPortSearchDto $dto)
+    {
+        try {
+            $request = $this->getLowFareSearchAsyncRequest($dto);
+            return  $this->travelPort->execute($request);
+        } catch (\SoapFault $e) {
+            throw TravelPortException::getInstance($e->getMessage());
+        }
+    }
+
     /**
      * @return Air\BillingPointOfSaleInfo
      */
@@ -72,6 +82,22 @@ class TravelPortService
             ->setBillingPointOfSaleInfo($billingPointOfSaleInfo)
             ->setAirSearchModifiers($searchModifiers)
             ->setSearchAirLeg($searchAirLegs)
+            ->setSearchPassenger($searchPassengers)
+            ->setTraceId($this->traceId);
+
+    }
+
+    protected function getLowFareSearchAsyncRequest(TravelPortSearchDto $dto)
+    {
+        $searchAirLegs = $this->getSearchAirLeg($dto->getSegments(), $dto->getParameters());
+        $billingPointOfSaleInfo = $this->getBillingPointOfSaleInfo();
+        $searchModifiers = $this->getSearchModifiers($dto->getParameters());
+        $searchPassengers = $this->getSearchPassengers($dto->getPassengers());
+
+        return (new Air\LowFareSearchAsynchReq())
+            ->setSearchAirLeg($searchAirLegs)
+            ->setBillingPointOfSaleInfo($billingPointOfSaleInfo)
+            ->setAirSearchModifiers($searchModifiers)
             ->setSearchPassenger($searchPassengers)
             ->setTraceId($this->traceId);
 

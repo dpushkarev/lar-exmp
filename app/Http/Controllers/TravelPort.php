@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\TravelPortException;
-use App\Http\Requests\TravelPortSearchRequest;
+use App\Http\Requests\FlightsSearchRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Routing\Controller as BaseController;
 use App\Facades\TP;
@@ -19,10 +19,10 @@ class TravelPort extends BaseController
      * @param TravelPortSearchRequest $request
      * @return TravelPortResource
      */
-    public function search(TravelPortSearchRequest $request)
+    public function search(FlightsSearchRequest $request)
     {
         try{
-            $result = TP::LowFareSearchReq($request->getTravelPortSearchDto());
+            $result = TP::LowFareSearchReq($request->getFlightsSearchRequestDto());
             return new TravelPortResource($result);
         } catch (TravelPortException $exception) {
             throw new HttpResponseException(response()->json($exception->getMessage(), 422));

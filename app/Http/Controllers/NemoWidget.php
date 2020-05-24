@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FlightsSearchRequest;
 use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
 use App\Services\NemoWidgetService;
 use Illuminate\Routing\Controller as BaseController;
+use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
 
 /**
  * Class NemoWidget
@@ -35,5 +37,13 @@ class NemoWidget extends BaseController
         $result = collect(['countries' => $countries, 'airlines' => $airlines]);
 
         return new AirlinesAll($result);
+    }
+
+    public function flightsSearchRequest(FlightsSearchRequest $request, NemoWidgetService $service)
+    {
+        $dto = $request->getFlightsSearchRequestDto();
+        $service->flightsSearchRequest($dto);
+
+        return new FlightsSearchRequestResource($dto);
     }
 }

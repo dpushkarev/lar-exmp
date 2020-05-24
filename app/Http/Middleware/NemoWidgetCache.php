@@ -8,14 +8,15 @@ use Closure;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Response;
 
 class NemoWidgetCache
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -29,13 +30,17 @@ class NemoWidgetCache
             case 'airlinesAll';
                 $cacheKey = NemoWidgetService::getCacheKey($routeName, App::getLocale());
                 break;
+            case 'flights.search.get.request';
+            case 'flights.search.get.formData';
+                $cacheKey = NemoWidgetService::getCacheKey('flights.search.request', (int)$request->id, App::getLocale());
+                break;
             default:
                 $cacheKey = null;
         }
 
         $cache = Cache::get($cacheKey, null);
 
-        if(null !== $cache) {
+        if (null !== $cache) {
             $cache = json_decode($cache, true);
             $cache['system'] = (new System([]))->toArray($request);
 
@@ -44,7 +49,7 @@ class NemoWidgetCache
 
         $response = $next($request);
 
-        if(null !== $cacheKey && null === $response->exception) {
+        if (null !== $cacheKey && $response->getStatusCode() === Response::HTTP_OK) {
             Cache::put($cacheKey, $response->getContent());
         }
 

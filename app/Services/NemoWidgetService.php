@@ -4,9 +4,11 @@
 namespace App\Services;
 
 
+use App\Dto\FlightsSearchRequestDto;
 use App\Models\Airline;
 use App\Models\Country;
 use App\Models\VocabularyName;
+use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
 
 class NemoWidgetService
 {
@@ -50,4 +52,14 @@ class NemoWidgetService
 
         return $name . '_' . $hash;
     }
+
+    public function flightsSearchRequest(FlightsSearchRequestDto $dto)
+    {
+        $fsrModel = FlightsSearchRequestModel::forceCreate([
+            'data' => $dto
+        ]);
+
+        $dto->setRequestId($fsrModel->id);
+    }
+
 }

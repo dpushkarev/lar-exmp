@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/flights/search/request', 'TravelPort@search');
+//Route::post('/flights/search/request', 'TravelPort@search');
+Route::middleware(['nemo.widget.request.cache'])->post('/flights/search/request', 'NemoWidget@flightsSearchRequest')->name('flights.search.request');
 
 Route::middleware(['nemo.widget.cache'])->group(function () {
     Route::name('autocomplete')->group(function () {
@@ -22,6 +23,18 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
         Route::get('/guide/autocomplete/iata/{q}/arr', 'NemoWidget@autocomplete')->where('q', '.*');
         Route::get('/guide/autocomplete/iata/{q}/arr/{iataCode}', 'NemoWidget@autocomplete')->where('iataCode', '[A-Z]{3}');
     });
+
+    Route::get('/flights/search/formData/{id}', function(){
+        return response()->json(['message' => 'Not Found.'], 404);
+    })->where('id', '\d+')->name('flights.search.get.formData');
+
+    Route::get('/flights/search/request/{id}', function(){
+        return response()->json(['message' => 'Not Found.'], 404);
+    })->where('id', '\d+')->name('flights.search.get.request');
+
+    Route::get('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '[0-9]')->name('flights.search.results');
+
+
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name('airlinesAll');
     Route::get('/guide/airports/nearest', function () {
         return '{

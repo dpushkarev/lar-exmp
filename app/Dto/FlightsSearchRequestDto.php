@@ -4,14 +4,15 @@
 namespace App\Dto;
 
 /**
- * Class TravelPortSearchDto
+ * Class FlightsSearchRequestDto
  * @package App\Dto
  */
-class TravelPortSearchDto
+class FlightsSearchRequestDto implements \JsonSerializable
 {
     private $segments;
     private $passengers;
     private $parameters;
+    private $requestId;
 
     /**
      * TravelPortSearchDto constructor.
@@ -48,5 +49,24 @@ class TravelPortSearchDto
     public function getParameters(): ?array
     {
         return $this->parameters;
+    }
+
+    public function getRequestId(): ?int
+    {
+        return $this->requestId;
+    }
+
+    public function setRequestId(int $request_id): void
+    {
+        $this->requestId = $request_id;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'segments' => $this->segments,
+            'passengers' => $this->passengers,
+            'parameters' => $this->parameters,
+        ];
     }
 }

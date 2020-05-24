@@ -3,7 +3,7 @@
 
 namespace App\Http\Requests;
 
-use App\Dto\TravelPortSearchDto;
+use App\Dto\FlightsSearchRequestDto;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -12,7 +12,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
  * Class TravelPortSearchRequest
  * @package App\Http\Requests
  */
-class TravelPortSearchRequest extends FormRequest
+class FlightsSearchRequest extends FormRequest
 {
     private $postRequest;
 
@@ -69,11 +69,11 @@ class TravelPortSearchRequest extends FormRequest
     }
 
     /**
-     * @return TravelPortSearchDto
+     * @return FlightsSearchRequestDto
      */
-    public function getTravelPortSearchDto()
+    public function getFlightsSearchRequestDto()
     {
-        return new TravelPortSearchDto(
+        return new FlightsSearchRequestDto(
             $this->postRequest['segments'],
             $this->postRequest['passengers'],
             $this->postRequest['parameters'] ?? null
