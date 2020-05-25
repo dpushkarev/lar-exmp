@@ -2,16 +2,24 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Middleware\Traits\ResponseCache;
 use App\Http\Resources\NemoWidget\System;
-use App\Services\NemoWidgetService;
 use Closure;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Response;
 
 class NemoWidgetCache
 {
+
+    const AUTOCOMPLETE_ROUTE_NAME = 'autocomplete';
+    const AIRLINES_ALL_ROUTE_NAME = 'airlines.all';
+    const FLIGHTS_SEARCH_POST_REQUEST = 'flights.search.post.request';
+    const FLIGHTS_SEARCH_GET_REQUEST = 'flights.search.get.request';
+    const FLIGHTS_SEARCH_GET_FORM_DATA = 'flights.search.get.formData';
+    const FLIGHTS_SEARCH_POST_RESULTS = 'flights.search.post.results';
+    const FLIGHTS_SEARCH_GET_RESULTS = 'flights.search.get.results';
+
+    use ResponseCache;
     /**
      * Handle an incoming request.
      *
@@ -22,26 +30,12 @@ class NemoWidgetCache
     public function handle($request, Closure $next)
     {
         $routeName = Route::getCurrentRoute()->getName();
+        list($getMethod, $setMethod) = $this->getMethods($routeName);
+        $cache = null;
 
-        switch ($routeName) {
-            case 'autocomplete';
-                $cacheKey = NemoWidgetService::getCacheKey($routeName, $request->q, App::getLocale());
-                break;
-            case 'airlinesAll';
-                $cacheKey = NemoWidgetService::getCacheKey($routeName, App::getLocale());
-                break;
-            case 'flights.search.results';
-                $cacheKey = NemoWidgetService::getCacheKey($routeName, (int)$request->id, App::getLocale());
-                break;
-            case 'flights.search.get.request';
-            case 'flights.search.get.formData';
-                $cacheKey = NemoWidgetService::getCacheKey('flights.search.request', (int)$request->id, App::getLocale());
-                break;
-            default:
-                $cacheKey = null;
+        if(method_exists($this, $getMethod)) {
+            $cache = $this->{$getMethod}($request);
         }
-
-        $cache = Cache::get($cacheKey, null);
 
         if (null !== $cache) {
             $cache = json_decode($cache, true);
@@ -52,8 +46,8 @@ class NemoWidgetCache
 
         $response = $next($request);
 
-        if (null !== $cacheKey && $response->getStatusCode() === Response::HTTP_OK) {
-            Cache::put($cacheKey, $response->getContent());
+        if(method_exists($this, $setMethod) && $response->getStatusCode() === Response::HTTP_OK) {
+            $this->{$setMethod}($request, $response);
         }
 
         return $response;

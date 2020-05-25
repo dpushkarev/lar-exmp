@@ -5,7 +5,6 @@ namespace App\Http;
 use App\Http\Middleware\ApiLocale;
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\NemoWidgetCache;
-use App\Http\Middleware\NemoWidgetRequestCache;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -70,7 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'api.locale' =>  ApiLocale::class,
         'nemo.widget.cache' => NemoWidgetCache::class,
-        'nemo.widget.request.cache' => NemoWidgetRequestCache::class,
         'cors' => Cors::class
     ];
 }

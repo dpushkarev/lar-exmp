@@ -1,8 +1,9 @@
 <?php
 
+use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Exceptions\ApiException;
+use App\Http\Middleware\NemoWidgetCache;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,28 +17,33 @@ use App\Exceptions\ApiException;
 */
 
 //Route::post('/flights/search/request', 'TravelPort@search');
-Route::middleware(['nemo.widget.request.cache'])->post('/flights/search/request', 'NemoWidget@flightsSearchRequest')->name('flights.search.request');
 
 Route::middleware(['nemo.widget.cache'])->group(function () {
-    Route::name('autocomplete')->group(function () {
+    Route::name(NemoWidgetCache::AUTOCOMPLETE_ROUTE_NAME)->group(function () {
         Route::get('/guide/autocomplete/iata/{q}/dep', 'NemoWidget@autocomplete')->where('q', '.*');
         Route::get('/guide/autocomplete/iata/{q}/dep/{iataCode}', 'NemoWidget@autocomplete')->where('iataCode', '[A-Z]{3}');
         Route::get('/guide/autocomplete/iata/{q}/arr', 'NemoWidget@autocomplete')->where('q', '.*');
+        Route::get('/guide/autocomplete/iata/{q}', 'NemoWidget@autocomplete')->where('q', '.*');
         Route::get('/guide/autocomplete/iata/{q}/arr/{iataCode}', 'NemoWidget@autocomplete')->where('iataCode', '[A-Z]{3}');
     });
 
-    Route::get('/flights/search/formData/{id}', function($id){
-        throw ApiException::getInstanceInvalidId($id);
-    })->where('id', '\d+')->name('flights.search.get.formData');
-
+    Route::post('/flights/search/request', 'NemoWidget@flightsSearchRequest')->name(NemoWidgetCache::FLIGHTS_SEARCH_POST_REQUEST);
     Route::get('/flights/search/request/{id}', function($id){
         throw ApiException::getInstanceInvalidId($id);
-    })->where('id', '\d+')->name('flights.search.get.request');
+    })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_REQUEST);
 
-    Route::post('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name('flights.search.results');
+    Route::get('/flights/search/formData/{id}', function($id){
+        throw ApiException::getInstanceInvalidId($id);
+    })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA);
 
 
-    Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name('airlinesAll');
+    Route::post('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS);
+    Route::get('/flights/search/results/{id}', function($id){
+        throw ApiException::getInstanceInvalidId($id);
+    })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS);
+
+
+    Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL_ROUTE_NAME);
     Route::get('/guide/airports/nearest', function () {
         return '{
            "guide":{

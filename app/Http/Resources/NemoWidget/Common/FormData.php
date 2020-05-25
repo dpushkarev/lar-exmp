@@ -4,6 +4,7 @@
 namespace App\Http\Resources\NemoWidget\Common;
 
 
+use App\Http\Middleware\NemoWidgetCache;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\URL;
 
@@ -68,7 +69,7 @@ class FormData extends JsonResource
                 ]
             ],
             "id" => $this->resource->getRequestId(),
-            "uri" =>  URL::route('flights.search.get.formData', ['id' => $this->resource->getRequestId()], false)
+            "uri" =>  URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA, ['id' => $this->resource->getRequestId()], false)
         ];
     }
 }

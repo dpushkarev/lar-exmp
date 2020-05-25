@@ -47,18 +47,6 @@ class NemoWidgetService
     }
 
     /**
-     * @param $name
-     * @param mixed ...$params
-     * @return string
-     */
-    static public function getCacheKey($name, ...$params): string
-    {
-        $hash = md5(serialize($params));
-
-        return $name . '_' . $hash;
-    }
-
-    /**
      * @param FlightsSearchRequestDto $dto
      */
     public function flightsSearchRequest(FlightsSearchRequestDto $dto)
