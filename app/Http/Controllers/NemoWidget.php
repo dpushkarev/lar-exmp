@@ -10,6 +10,7 @@ use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Services\NemoWidgetService;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class NemoWidget
@@ -59,7 +60,9 @@ class NemoWidget extends BaseController
     public function flightsSearchResult(int $id,  NemoWidgetService $service)
     {
         try {
-            $results = $service->flightsSearchResult($id);
+            $results = Cache::rememberForever('result', function () use($service, $id){
+                return $service->flightsSearchResult($id);
+            });
             return new FlightsSearchResults($results);
         } catch (ApiException $exception) {
             throw $exception;
