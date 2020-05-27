@@ -12,6 +12,8 @@ use App\Http\Resources\NemoWidget\Common\ResultData;
 use App\Http\Resources\NemoWidget\Common\Results;
 use App\Models\Airline;
 use App\Models\Airport;
+use FilippoToso\Travelport\Air\FlightDetails;
+use FilippoToso\Travelport\Air\FlightDetailsRef;
 use FilippoToso\Travelport\Air\LowFareSearchAsynchRsp;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 
@@ -32,15 +34,33 @@ class FlightsSearchResults extends AbstractResource
         $cities = collect();
         $airports = collect();
         $airLines = collect();
-        $response = collect();
+        $groupsData = collect();
+        $airSegmentCollection = collect();
 
-        foreach ($results->getAirSegmentList()->getAirSegment() as $airSegment) {
-            $origin = $airSegment->getOrigin();
+        foreach ($results->getAirSegmentList()->getAirSegment() as $key => $airSegment) {$origin = $airSegment->getOrigin();
             $destination = $airSegment->getDestination();
             $carrier = $airSegment->getCarrier();
-            $airSegmentData = [
-                'FlightNumber' => $airSegment->getFlightNumber(),
+            $airSegmentKey = sprintf('S%d', $key + 1);
+
+            $airSegmentData[$airSegmentKey] = [
+                'aircraftType' => $airSegment->getEquipment(),
+                'arrAirp' => $destination,
+                'arrDateTime' => $airSegment->getArrivalTime(),
+                'depAirp' => $origin,
+                'depDateTime' => $airSegment->getDepartureTime(),
+                'eTicket' => $airSegment->getETicketability(),
+                'flightNumber' => $airSegment->getFlightNumber(),
+                'flightTime' => $airSegment->getFlightTime(),
+                'id' => $airSegmentKey,
+                'isCharter' => false,
+                'isLowCost' => false,
+                'marketingCompany' => null,
+                'number' => 0,
+                'operatingCompany' => $carrier,
+                'routeNumber' => 0,
+                'stopPoints' => null
             ];
+
 
             if(!$airports->has($origin)) {
                 $airports->put($origin, Airport::whereCode($origin)->first());
@@ -54,18 +74,22 @@ class FlightsSearchResults extends AbstractResource
                 $airLines->put($carrier, Airline::whereCode($carrier)->first());
             }
 
+            /** @var  $flightDetail  FlightDetails */
+            /** @var  $flightDetailRef  FlightDetailsRef */
             foreach ($airSegment->getFlightDetailsRef() as $flightDetailRef) {
                 foreach ($results->getFlightDetailsList()->getFlightDetails() as $flightDetail) {
                     if($flightDetailRef->getKey() === $flightDetail->getKey()) {
-                        $airSegmentData['FlightDetails'][] = [
-                            'Equipment' => $flightDetail->getEquipment(),
-                            'OriginTerminal' => $flightDetail->getOriginTerminal()
-                        ];
+                        $airSegmentData[$airSegmentKey]['arrTerminal'] = $flightDetail->getDestinationTerminal();
+                        $airSegmentData[$airSegmentKey]['depTerminal'] = $flightDetail->getOriginTerminal();
                     }
                 }
             }
-            $response->push($airSegmentData);
+
+            $airSegmentCollection = $airSegmentCollection->merge($airSegmentData);
         }
+
+        $groupsData->put('segments', $airSegmentCollection);
+        $response = collect(['groupsData' => $groupsData]);
 
         foreach ($airports as $airport) {
             $countries = $countries->merge(new Country($airport->country));
