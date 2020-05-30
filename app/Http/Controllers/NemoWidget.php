@@ -57,10 +57,12 @@ class NemoWidget extends BaseController
      * @throws ApiException
      * @throws \App\Exceptions\TravelPortException
      */
-    public function flightsSearchResult(int $id,  NemoWidgetService $service)
+    public function flightsSearchResult(int $id, NemoWidgetService $service)
     {
         try {
-            $results = $service->flightsSearchResult($id);
+            $results = Cache::rememberForever('result'. $id, function () use ($service, $id) {
+                return $service->flightsSearchResult($id);
+            });
             return new FlightsSearchResults($results);
         } catch (ApiException $exception) {
             throw $exception;
