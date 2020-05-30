@@ -12,6 +12,7 @@ use App\Http\Resources\NemoWidget\Common\ResultData;
 use App\Http\Resources\NemoWidget\Common\Results;
 use App\Models\Airline;
 use App\Models\Airport;
+use App\Services\TravelPortService;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\BookingInfo;
@@ -114,11 +115,22 @@ class FlightsSearchResults extends AbstractResource
                 ],
                 'avlSeatsMin' => '?',
                 'flightPrice' => [
-                    'amount' => substr($airPricePoint->getTotalPrice(), 3),
-                    'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
+                    'amount' => '?',
+                    'currency' => '?',
                 ],
                 'id' => $airPricePointKey,
                 'originalCurrency' => $results->getCurrencyType(),
+                'priceWithoutPromocode' => '?',
+                'privateFareInd' => '?',
+                'refundable' => '?',
+                'service' => TravelPortService::GALILEO_PROVIDER_ID,
+                'tariffsLink' => '?',
+                'totalPrice' => [
+                    'amount' => substr($airPricePoint->getTotalPrice(), 3),
+                    'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
+                ],
+                'validatingCompany' => '?',
+                'warnings' => []
             ];
 
             $segmentInfo = [];
