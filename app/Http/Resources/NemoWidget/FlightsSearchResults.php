@@ -118,7 +118,7 @@ class FlightsSearchResults extends AbstractResource
                 ],
                 'avlSeatsMin' => '?',
                 'flightPrice' => [
-                    'amount' => substr($airPricePoint->getTotalPrice(), 3),
+                    'amount' => (float) substr($airPricePoint->getTotalPrice(), 3),
                     'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
                 ],
                 'id' => $airPricePointKey,
