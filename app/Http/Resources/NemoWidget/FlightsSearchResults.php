@@ -108,57 +108,71 @@ class FlightsSearchResults extends AbstractResource
         /** @var $airPricePoint AirPricePoint */
         foreach ($results->getAirPricePointList()->getAirPricePoint() as $key => $airPricePoint) {
             $airPricePointKey = sprintf('P%d', $key + 1);
+            $agencyChargeAmount = 100.5;
+            $agencyChargeCurrency = $results->getCurrencyType();
+
             $airPricePointData = [
                 'agencyCharge' => [
-                    'amount' => 0,
-                    'currency' => $results->getCurrencyType()
+                    'amount' => $agencyChargeAmount,
+                    'currency' => $agencyChargeCurrency
                 ],
                 'avlSeatsMin' => '?',
                 'flightPrice' => [
-                    'amount' => '?',
-                    'currency' => '?',
+                    'amount' => substr($airPricePoint->getTotalPrice(), 3),
+                    'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
                 ],
                 'id' => $airPricePointKey,
                 'originalCurrency' => $results->getCurrencyType(),
                 'priceWithoutPromocode' => '?',
                 'privateFareInd' => '?',
                 'refundable' => '?',
-                'service' => TravelPortService::GALILEO_PROVIDER_ID,
+                'service' => TravelPortService::APPLICATION,
                 'tariffsLink' => '?',
                 'totalPrice' => [
-                    'amount' => substr($airPricePoint->getTotalPrice(), 3),
+                    'amount' => substr($airPricePoint->getTotalPrice(), 3) + $agencyChargeAmount,
                     'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
                 ],
                 'validatingCompany' => '?',
                 'warnings' => []
             ];
 
-            $segmentInfo = [];
-            $fareInfoKeys = [];
+            $passengerFares = [];
+
             /** @var  $airPricingInfo AirPricingInfo */
             foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
-                $passengerFares = [];
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
                 $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
 
-                /** @var  $passengerType PassengerType */
-                foreach ($airPricingInfo->getPassengerType() as $passengerType) {
-                    continue;
-                }
+                $passengerFares['baseFare'] = [
+                    'amount' => substr($airPricingInfo->getBasePrice(), 3),
+                    'currency' => substr($airPricingInfo->getBasePrice(), 0, 3),
+                ];
 
-                /** @var  $fateInfoRef FareInfoRef */
-                foreach ($airPricingInfo->getFareInfoRef() as $fateInfoRef) {
-                    /** @var  $fareInfo FareInfo */
-                    foreach ($results->getFareInfoList()->getFareInfo() as $fareInfo) {
-                        if ($fareInfo->getKey() === $fateInfoRef->getKey()) {
-                            $passengerFares['baseFare']['amount'] = substr($fareInfo->getAmount(), 3);
-                            $passengerFares['baseFare']['currency'] = substr($results->getCurrencyType(), 0, 3);
-                        }
-                    }
-                }
+                $passengerFares['equivFare'] = [
+                    'amount' => substr($airPricingInfo->getEquivalentBasePrice(), 3),
+                    'currency' => substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
+                ];
 
-                $passengerFares['equivFare']['amount'] = substr($airPricingInfo->getEquivalentBasePrice(), 3);
-                $passengerFares['equivFare']['currency'] = substr($airPricingInfo->getEquivalentBasePrice(), 0, 3);
+                $passengerFares['equivFare'] = [
+                    'amount' => substr($airPricingInfo->getEquivalentBasePrice(), 3),
+                    'currency' => substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
+                ];
+
+                $passengerFares['totalFare'] = [
+                    'amount' => substr($airPricingInfo->getTotalPrice(), 3),
+                    'currency' => substr($airPricingInfo->getTotalPrice(), 0, 3),
+                ];
+
+//                /** @var  $fateInfoRef FareInfoRef */
+//                foreach ($airPricingInfo->getFareInfoRef() as $fateInfoRef) {
+//                    /** @var  $fareInfo FareInfo */
+//                    foreach ($results->getFareInfoList()->getFareInfo() as $fareInfo) {
+//                        if ($fareInfo->getKey() === $fateInfoRef->getKey()) {
+//                            $passengerFares['baseFare']['amount'] = substr($fareInfo->getAmount(), 3);
+//                            $passengerFares['baseFare']['currency'] = substr($results->getCurrencyType(), 0, 3);
+//                        }
+//                    }
+//                }
 
                 /** @var  $typeTaxInfo typeTaxInfo */
                 $passengerFares['taxes'] = [];
@@ -180,38 +194,15 @@ class FlightsSearchResults extends AbstractResource
                     foreach ($flightOption->getOption() as $option) {
                         /** @var  $bookingInfo BookingInfo */
                         foreach ($option->getBookingInfo() as $bookingInfo) {
-                            $passengerFares['tariffs'][] = [
-                                "code" => $bookingInfo->getBookingCode(),
-                                "features" => [],
-                                "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef()),
+                            $airPricePointData['segmentInfo'][] = [
+                                "segNum" => '?',
                                 "routeNumber" => '?',
-                                "serviceClass" => $bookingInfo->getCabinClass()
+                                "bookingClass" => $bookingInfo->getBookingCode(),
+                                "serviceClass" => $bookingInfo->getCabinClass(),
+                                "avlSeats" => $bookingInfo->getBookingCount(),
+                                "freeBaggage" => ['?'],
+                                "minBaggage" => ['?']
                             ];
-                            $fareSegmentKey = md5($bookingInfo->getFareInfoRef().$bookingInfo->getSegmentRef());
-                            if (!isset($fareInfoKeys[$fareSegmentKey])) {
-                                /** @var  $fateInfoRef FareInfoRef */
-                                foreach ($results->getFareInfoList()->getFareInfo() as $fareInfo) {
-                                    if ($fareInfo->getKey() === $bookingInfo->getFareInfoRef()) {
-                                        $segmentInfo[] = [
-                                            "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef()),
-                                            "routeNumber" => '?',
-                                            "bookingClass" => "?",
-                                            "serviceClass" => $bookingInfo->getCabinClass(),
-                                            "avlSeats" => $bookingInfo->getBookingCount(),
-                                            "freeBaggage" => [
-                                                [
-                                                    "passtype" => $fareInfo->getPassengerTypeCode(),
-                                                    "value" => $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue(),
-                                                    "measurement" =>  $fareInfo->getBaggageAllowance()->getMaxWeight()->getUnit()
-                                                ]
-                                            ],
-                                            "minBaggage" => ['?']
-                                        ];
-                                        $fareInfoKeys[$fareSegmentKey] = $fareSegmentKey;
-                                        break;
-                                    }
-                                }
-                            }
                         }
                     }
                 }
@@ -219,9 +210,7 @@ class FlightsSearchResults extends AbstractResource
                 $airPricePointData['passengerFares'][] = $passengerFares;
             }
 
-            $airPricePointData['segmentInfo'] = $segmentInfo;
             $airPriceCollection->put($airPricePointKey, $airPricePointData);
-
         }
 
         $groupsData->put('segments', $airSegmentCollection);
