@@ -2,10 +2,12 @@
 
 namespace App\Http\Resources\NemoWidget;
 
+use App\Http\Resources\NemoWidget\Common\Airport;
 use App\Http\Resources\NemoWidget\Common\AirportList;
 use App\Http\Resources\NemoWidget\Common\City;
 use App\Http\Resources\NemoWidget\Common\Country;
 use App\Http\Resources\NemoWidget\Common\Autocomplete as AutocompleteCommon;
+use App\Models\City as CityModel;
 
 class Autocomplete extends AbstractResource
 {
@@ -25,7 +27,11 @@ class Autocomplete extends AbstractResource
             foreach ($this->resource as $item) {
                 $countries = $countries->merge(new Country($item->nameable->country));
                 $cities[$item->nameable->city->id] = new City($item->nameable->city);
-                $airports = $airports->merge(new AirportList($item->nameable));
+                $airports = $airports->merge(new AirportList($item->nameable->city->airports));
+
+                if($item->nameable instanceof CityModel) {
+                    $airports->put($item->nameable->code, new Airport($item->nameable));
+                }
             }
 
             $iata = AutocompleteCommon::collection($this->resource);
