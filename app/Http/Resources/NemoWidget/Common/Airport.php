@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\NemoWidget\Common;
 
+use App\Models\City;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -20,7 +21,7 @@ class Airport extends JsonResource
         return [
             "IATA" => $this->resource->code,
             "cityId" => $this->resource->city->id,
-            "isAggregation" => false,
+            "isAggregation" => (bool) ($this->resource instanceof City),
             "airportRating" => null,
             "baseType" => "airport",
             "properName" => null,

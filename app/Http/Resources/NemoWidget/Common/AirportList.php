@@ -19,18 +19,7 @@ class AirportList extends JsonResource
         }
 
         if($this->resource instanceof City) {
-            $airportList->put($this->resource->code, [
-                "IATA" => $this->resource->code,
-                "cityId" => $this->resource->id,
-                "isAggregation" => true,
-                "airportRating" => null,
-                "baseType" => "airport",
-                "properName" => null,
-                "properNameEn" => null,
-                "name" => __($this->resource->name),
-                "nameEn" => $this->resource->name,
-                "countryCode" => $this->resource->country_code,
-            ]);
+            $airportList->put($this->resource->code, new Airport($this->resource));
         }
 
         return $airportList;
