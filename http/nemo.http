@@ -4,10 +4,13 @@ GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
 GET http://127.0.0.1:8081/api/guide/airlines/all
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/request/24
+GET http://127.0.0.1:8081/api/flights/search/request/27
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/results/27
+
+###
+GET http://127.0.0.1:8081/api/flights/search/results/27
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
