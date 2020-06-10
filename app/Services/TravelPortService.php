@@ -23,6 +23,7 @@ class TravelPortService
 
     private $travelPort;
     private $traceId;
+    private $transactionId;
 
     /**
      * TravelPortService constructor.
@@ -35,6 +36,40 @@ class TravelPortService
     }
 
     /**
+     * @param string $id
+     */
+    protected function setTransactionId(string $id)
+    {
+        $this->transactionId = $id;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTransactionId(): ?string
+    {
+        return $this->transactionId;
+    }
+
+    /**
+     * @param $request
+     * @return mixed
+     * @throws TravelPortException
+     * @throws \App\Exceptions\ApiException
+     */
+    protected function execute($request)
+    {
+        try {
+            $result =  $this->travelPort->execute($request);
+            $this->setTransactionId($result->getTransactionId());
+        } catch (\SoapFault $e) {
+            throw TravelPortException::getInstance($e->getMessage());
+        }
+
+        return $result;
+    }
+
+    /**
      * @param FlightsSearchRequestDto $dto
      * @return mixed
      * @throws TravelPortException
@@ -42,19 +77,15 @@ class TravelPortService
      */
     public function LowFareSearchReq(FlightsSearchRequestDto $dto)
     {
-        try {
-            $request = $this->getLowFareSearchRequest($dto);
-            return $this->travelPort->execute($request);
-        } catch (\SoapFault $e) {
-            throw TravelPortException::getInstance($e->getMessage());
-        }
+        $request = $this->getLowFareSearchRequest($dto);
+        return $this->execute($request);
     }
 
     public function LowFareSearchAsyncReq(FlightsSearchRequestDto $dto)
     {
         try {
             $request = $this->getLowFareSearchAsyncRequest($dto);
-            return  $this->travelPort->execute($request);
+            return $this->travelPort->execute($request);
         } catch (\SoapFault $e) {
             throw TravelPortException::getInstance($e->getMessage());
         }
