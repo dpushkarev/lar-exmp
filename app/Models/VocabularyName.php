@@ -23,7 +23,8 @@ class VocabularyName extends Model
         return VocabularyName::where('name', 'like', $q . '%')
             ->with(['nameable.city.airports', 'nameable.country'])
             ->limit(15)
-            ->get();
+            ->distinct(['nameable_id', 'nameable_type'])
+            ->get(['nameable_id', 'nameable_type']);
     }
 
     public function nameable()

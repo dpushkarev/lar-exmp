@@ -10,6 +10,7 @@ use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\FlightsSearchResult;
 use App\Services\TravelPortService;
+use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\BookingInfo;
@@ -51,9 +52,9 @@ class TravelPortAdapter
             $airSegmentData = [
                 'aircraftType' => $airSegment->getEquipment(),
                 'arrAirp' => $destination,
-                'arrDateTime' => $airSegment->getArrivalTime(),
+                'arrDateTime' => Carbon::parse($airSegment->getArrivalTime())->format('Y-m-d\Th:i:s'),
                 'depAirp' => $origin,
-                'depDateTime' => $airSegment->getDepartureTime(),
+                'depDateTime' => Carbon::parse($airSegment->getDepartureTime())->format('Y-m-d\Th:i:s'),
                 'eTicket' => $airSegment->getETicketability(),
                 'flightNumber' => $airSegment->getFlightNumber(),
                 'flightTime' => $airSegment->getFlightTime(),

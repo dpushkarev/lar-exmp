@@ -13,16 +13,18 @@ class FlightGroups extends JsonResource
     {
         return [
             'flights' => [
-                'canProcessFareFamilies' => '?',
-                'createOrderLink' => "?",
-                'expectedNumberOfTickets' => '?',
-                'id' => $this->resource->id,
-                'key' => '?',
-                'nemo2id' => "?",
-                'price' => $this->resource->price,
-                'rating' => '?',
-                'service' => TravelPortService::APPLICATION,
-                'travelPolicies' => [],
+                [
+                    'canProcessFareFamilies' => '?',
+                    'createOrderLink' => "?",
+                    'expectedNumberOfTickets' => '?',
+                    'id' => $this->resource->id,
+                    'key' => '?',
+                    'nemo2id' => "?",
+                    'price' => $this->resource->price,
+                    'rating' => '?',
+                    'service' => TravelPortService::APPLICATION,
+                    'travelPolicies' => [],
+                ]
             ],
             'segments' => $this->resource->segments
         ];
