@@ -25,7 +25,7 @@ class Autocomplete extends AbstractResource
             foreach ($this->resource as $item) {
                 $countries = $countries->merge(new Country($item->nameable->country));
                 $cities[$item->nameable->city->id] = new City($item->nameable->city);
-                $airports = $airports->merge(new AirportList($item->nameable->city->airports));
+                $airports = $airports->merge(new AirportList($item->nameable));
             }
 
             $iata = AutocompleteCommon::collection($this->resource);
