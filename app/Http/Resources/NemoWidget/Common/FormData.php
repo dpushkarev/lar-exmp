@@ -69,7 +69,7 @@ class FormData extends JsonResource
                 ]
             ],
             "id" => $this->resource->getRequestId(),
-            "uri" =>  URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA, ['id' => $this->resource->getRequestId()], false)
+            "url" =>  URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA, ['id' => $this->resource->getRequestId()], false)
         ];
     }
 }
