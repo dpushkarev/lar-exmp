@@ -2,19 +2,28 @@
 
 namespace Tests\Unit;
 
+use App\Facades\TP;
 use Tests\TestCase;
 
 class FlightsSearchTest extends TestCase
 {
+    const TRANSACTION_ID = 'C8B3F5700A07647789A75EC6238CACE3';
+
     public function setUp(): void
     {
         parent::setUp();
         $this->useTable('flights_search_requests');
+        $this->useTable('flights_search_results');
+
+        TP::shouldReceive('LowFareSearchReq')
+            ->once()
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/LowFareSearchRsp.txt')));
+
     }
 
-    public function testRequest()
+    public function testFlightsSearch()
     {
-        $body = '{"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}';
+        $body = file_get_contents(__DIR__ . '/files/LowFareSearchReq.txt');
 
         $search = $this->json('POST', '/api/flights/search/request', [
             'request' => $body
@@ -38,6 +47,37 @@ class FlightsSearchTest extends TestCase
             ->assertStatus(200);
 
         $this->json('GET', $search['formData']['url'])
+            ->assertStatus(200);
+
+        $this->json('POST', $search['results']['url'])
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'flights' => [
+                    'search' => [
+                        'formData', 'request', 'results'
+                    ],
+                ],
+                'guide' => [
+                    'airports', 'cities', 'countries'
+                ]
+            ], null)
+            ->assertJsonCount(2, 'flights.search.results.flightGroups')
+            ->assertJsonCount(2, 'flights.search.results.flightGroups.0.segments')
+            ->assertJsonCount(2, 'flights.search.results.flightGroups.1.segments')
+            ->assertJsonCount(3, 'flights.search.results.groupsData.segments')
+            ->assertJsonCount(2, 'flights.search.results.groupsData.prices')
+            ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P1.passengerFares')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', 41739)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount', 41839.5)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P2.flightPrice.amount', 58371)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P2.totalPrice.amount', 58471.5)
+            ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P2.passengerFares');
+
+        $this->assertDatabaseHas('flights_search_requests', ['id' => $search['request']['id'], 'transaction_id' => static::TRANSACTION_ID]);
+        $this->assertDatabaseHas('flights_search_results', ['transaction_id' => static::TRANSACTION_ID, 'price' => 'P1', 'segments' => '["S1","S2"]']);
+        $this->assertDatabaseHas('flights_search_results', ['transaction_id' => static::TRANSACTION_ID, 'price' => 'P2', 'segments' => '["S3","S2"]']);
+
+        $this->json('GET', $search['results']['url'])
             ->assertStatus(200);
     }
 }
