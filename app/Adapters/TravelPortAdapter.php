@@ -24,9 +24,9 @@ use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\Air\typeTaxInfo;
 use Illuminate\Support\Collection;
 
-class TravelPortAdapter
+class TravelPortAdapter extends NemoWidgetAbstractAdapter
 {
-    public function LowFareSearch(LowFareSearchRsp $searchRsp): Collection
+    public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp): Collection
     {
         /** @var  $airSegment typeBaseAirSegment */
         /** @var  $results LowFareSearchAsynchRsp */

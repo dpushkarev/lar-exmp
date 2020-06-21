@@ -21,42 +21,18 @@ class FlightsSearchRequest extends AbstractResource
      */
     public function toArray($request)
     {
-        $countries = collect();
-        $cities = collect();
-        $airports = collect();
-
-        foreach ($this->resource->getSegments() as $segment) {
-            $departure = $segment['departure'] ?? null;
-            $iataCodeArr = $segment['arrival'] ?? null;
-
-            if (!is_null($departure) && !$airports->has($departure['IATA'])) {
-                $model = $departure['isCity'] ? CityModel::class : AirportModel::class;
-                $airports->put($departure['IATA'], $model::whereCode($departure['IATA'])->first());
-            }
-
-            if (!is_null($iataCodeArr) && !$airports->has($iataCodeArr['IATA'])) {
-                $model = $iataCodeArr['isCity'] ? CityModel::class : AirportModel::class;
-                $airports->put($iataCodeArr['IATA'], $model::whereCode($iataCodeArr['IATA'])->with(['city', 'country'])->first());
-            }
-        }
-
-        foreach ($airports as $airport) {
-            $countries = $countries->merge(new Country($airport->country));
-            $cities[$airport->city->id] = new City($airport->city);
-        }
-
         return [
             'flights' => [
                 'search' => [
-                    'formData' => new FormData($this->resource),
-                    'request' => new Request($this->resource),
-                    'results' => new Results(collect(['request' => $this->resource]))
+                    'formData' => new FormData($this->resource->get('request')->id),
+                    'request' => new Request($this->resource->get('request')),
+                    'results' => new Results(collect(['request_id' => $this->resource->get('request')->id]))
                 ]
             ],
             'guide' => [
-                'airports' => new AirportList($airports),
-                'cities' => $cities,
-                'countries' => $countries
+                'airports' => new AirportList($this->resource->get('airports')),
+                'cities' => $this->resource->get('cities'),
+                'countries' => $this->resource->get('countries')
             ],
         ];
     }
@@ -64,7 +40,7 @@ class FlightsSearchRequest extends AbstractResource
     public function withResponse($request, $response)
     {
         parent::withResponse($request, $response);
-        $response->requestId = $this->resource->getRequestId();
+        $response->requestId = $this->resource->get('request')->id;
     }
 
 }

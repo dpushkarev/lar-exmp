@@ -2,6 +2,7 @@
 
 namespace Libs\FilippoToso;
 
+use App\Exceptions\TravelPortException;
 use Exception;
 use FilippoToso\Travelport\Endpoints;
 use FilippoToso\Travelport\Exceptions\InvalidRegionException;
@@ -15,7 +16,7 @@ class Travelport extends \FilippoToso\Travelport\Travelport
     /**
      * @param $request
      * @return mixed
-     * @throws Exception
+     * @throws TravelPortException
      */
     public function execute($request)
     {
@@ -30,13 +31,20 @@ class Travelport extends \FilippoToso\Travelport\Travelport
             try {
                 $result = $service->__soapCall('service', [$request]);
                 $this->logger->setTransactionId($result->getTransactionId());
+                return $result;
+            } catch (\SoapFault $soapException) {
+                try {
+                    $errorInfo = $this->parseFaultResponse($service->__getLastResponse());
+                    $this->logger->setTransactionId($errorInfo['TransactionId']);
+                    throw TravelPortException::getInstance($errorInfo['Description'], $errorInfo['Code'], $errorInfo['TransactionId']);
+                } catch (TravelPortException $travelPortException) {
+                    throw $travelPortException;
+                } catch (Exception $exception) {
+                    throw TravelPortException::getInstance($soapException->getMessage(), $soapException->getCode());
+                }
+            } finally {
                 $this->logger->log('request', $service, $request, $service->__getLastRequest());
                 $this->logger->log('response', $service, $request, $service->__getLastResponse());
-                return $result;
-            } catch (Exception $travelportException) {
-                $this->logger->log('er1', $service, $request, $service->__getLastRequest());
-                $this->logger->log('er2', $service, $request, $service->__getLastResponse());
-                throw $travelportException;
             }
         }
 
@@ -78,6 +86,14 @@ class Travelport extends \FilippoToso\Travelport\Travelport
         }
 
         return false;
+    }
+
+    protected function parseFaultResponse(string $response)
+    {
+        $clean_xml = str_ireplace(['SOAP-ENV:', 'SOAP:', 'common_v49_0:'], '', $response);
+        $xml = simplexml_load_string($clean_xml);
+
+        return (array) $xml->Body->Fault->detail->ErrorInfo;
     }
 
 }

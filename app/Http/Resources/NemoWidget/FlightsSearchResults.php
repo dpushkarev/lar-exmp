@@ -20,14 +20,16 @@ class FlightsSearchResults extends AbstractResource
         return [
             'flights' => [
                 'search' => [
-                    'formData' => new FormData($this->resource->get('request')),
+                    'formData' => new FormData($this->resource->get('request')->id),
                     'request' => new Request($this->resource->get('request')),
-                    'results' => new Results($this->resource->get('results')->put('request', $this->resource->get('request'))),
+                    'results' => new Results(collect(['results' => $this->resource->get('results'), 'request_id' => $this->resource->get('request')->id])),
                     'resultData' => new ResultData([])
                 ]
             ],
             'guide' => [
-                'airlines' => new AirlineList($this->resource->get('airlines')),
+                $this->mergeWhen($this->resource->has('airlines'), [
+                    'airlines' => new AirlineList($this->resource->get('airlines')),
+                ]),
                 'airports' => new AirportList($this->resource->get('airports')),
                 'cities' => $this->resource->get('cities'),
                 'countries' => $this->resource->get('countries')

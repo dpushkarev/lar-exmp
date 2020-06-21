@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ApiException;
+use App\Exceptions\TravelPortException;
 use App\Http\Requests\FlightsSearchRequest;
 use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
@@ -10,7 +11,7 @@ use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Services\NemoWidgetService;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
-use Illuminate\Support\Facades\Cache;
+use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
 
 /**
  * Class NemoWidget
@@ -45,9 +46,9 @@ class NemoWidget extends BaseController
     public function flightsSearchRequest(FlightsSearchRequest $request, NemoWidgetService $service)
     {
         $dto = $request->getFlightsSearchRequestDto();
-        $service->flightsSearchRequest($dto);
+        $flightsSearchRequestAdapt = $service->flightsSearchRequest($dto);
 
-        return new FlightsSearchRequestResource($dto);
+        return new FlightsSearchRequestResource($flightsSearchRequestAdapt);
     }
 
     /**
@@ -55,15 +56,17 @@ class NemoWidget extends BaseController
      * @param NemoWidgetService $service
      * @return FlightsSearchResults
      * @throws ApiException
-     * @throws \App\Exceptions\TravelPortException
+     * @throws TravelPortException
      */
     public function flightsSearchResult(int $id, NemoWidgetService $service)
     {
-        try {
-            $results = $service->flightsSearchResult($id);
-            return new FlightsSearchResults($results);
-        } catch (ApiException $exception) {
-            throw $exception;
+        $FlightsSearchRequestModel = FlightsSearchRequestModel::find($id);
+
+        if(null === $FlightsSearchRequestModel) {
+            throw ApiException::getInstanceInvalidId($id);
         }
+        $flightsSearchResults = $service->flightsSearchResult($FlightsSearchRequestModel);
+
+        return new FlightsSearchResults($flightsSearchResults);
     }
 }

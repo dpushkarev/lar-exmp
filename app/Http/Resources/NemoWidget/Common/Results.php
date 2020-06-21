@@ -14,18 +14,20 @@ class Results extends JsonResource
     public function toArray($request)
     {
         /** @var  $results Collection */
-        $flightGroups = $this->resource->has('flightGroups') ? $this->resource->get('flightGroups') : collect();
-        $groupsData = $this->resource->has('groupsData') ? $this->resource->get('groupsData') : collect();
+
+        $results = collect([]);
+        if($this->resource->has('results')) {
+            $results = $this->resource->get('results');
+        }
 
         return [
-            'id' => $this->resource->get('request')->getRequestId(),
-            'url' => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS, ['id' => $this->resource->get('request')->getRequestId()], false),
-            $this->mergeWhen($flightGroups->isNotEmpty(), [
-                'flightGroups' => FlightGroups::collection($flightGroups),
+            'id' => $this->resource->get('request_id'),
+            'url' => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS, ['id' => $this->resource->get('request_id')], false),
+            $this->mergeWhen($results->isNotEmpty(), [
+                'flightGroups' => FlightGroups::collection($results->get('flightGroups', [])),
+                'groupsData' => $results->get('groupsData', []),
+                'info' => $results->get('info', [])
             ]),
-            $this->mergeWhen($groupsData->isNotEmpty(), [
-                'groupsData' => $groupsData,
-            ])
         ];
 
     }

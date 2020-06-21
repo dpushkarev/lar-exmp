@@ -36,9 +36,19 @@ class FlightsSearchTest extends TestCase
                     ],
                 ],
                 'guide' => [
-                    'airports', 'cities', 'countries'
-                ]
+                    'airports' => [
+                        'BEG', 'FCO'
+                    ],
+                    'cities',
+                    'countries' => [
+                        'RS', 'IT'
+                    ]
+                ],
+                'system'
             ], null)
+            ->assertJsonCount(2, 'flights.search.request.segments')
+            ->assertJsonCount(2, 'flights.search.request.passengers')
+            ->assertJsonCount(2, 'guide.cities')
             ->decodeResponseJson('flights.search');
 
         $this->assertDatabaseHas('flights_search_requests', ['id' => $search['request']['id']]);
@@ -54,13 +64,23 @@ class FlightsSearchTest extends TestCase
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [
-                        'formData', 'request', 'results'
+                        'formData', 'request', 'results', 'resultData'
                     ],
                 ],
                 'guide' => [
-                    'airports', 'cities', 'countries'
-                ]
+                    'airports' => [
+                        'BEG', 'FCO'
+                    ],
+                    'cities',
+                    'countries' => [
+                        'RS', 'IT'
+                    ]
+                ],
+                'system'
             ], null)
+            ->assertJsonCount(2, 'flights.search.request.segments')
+            ->assertJsonCount(2, 'flights.search.request.passengers')
+            ->assertJsonCount(2, 'guide.cities')
             ->assertJsonCount(2, 'flights.search.results.flightGroups')
             ->assertJsonCount(2, 'flights.search.results.flightGroups.0.segments')
             ->assertJsonCount(2, 'flights.search.results.flightGroups.1.segments')

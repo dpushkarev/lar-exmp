@@ -4,9 +4,9 @@
 namespace App\Services;
 
 
+use App\Adapters\ModelAdapter;
 use App\Adapters\TravelPortAdapter;
 use App\Dto\FlightsSearchRequestDto;
-use App\Exceptions\ApiException;
 use App\Exceptions\TravelPortException;
 use App\Facades\TP;
 use App\Models\Airline;
@@ -14,15 +14,18 @@ use App\Models\Country;
 use App\Models\FlightsSearchRequest;
 use App\Models\VocabularyName;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class NemoWidgetService
 {
     protected $travelPortAdapter;
+    protected $modelAdapter;
 
-    public function __construct(TravelPortAdapter $travelPortAdapter)
+    public function __construct(TravelPortAdapter $travelPortAdapter, ModelAdapter $modelAdapter)
     {
         $this->travelPortAdapter = $travelPortAdapter;
+        $this->modelAdapter = $modelAdapter;
     }
 
     public function autocomplete($q, $iataCode = null)
@@ -56,52 +59,53 @@ class NemoWidgetService
 
     /**
      * @param FlightsSearchRequestDto $dto
+     * @return Collection
      */
-    public function flightsSearchRequest(FlightsSearchRequestDto $dto)
+    public function flightsSearchRequest(FlightsSearchRequestDto $dto): Collection
     {
         $fsrModel = FlightsSearchRequestModel::forceCreate([
             'data' => $dto
         ]);
 
-        $dto->setRequestId($fsrModel->id);
+        return $this->modelAdapter->flightsSearchRequestAdapt($fsrModel);
     }
 
     /**
-     * @param int $id
-     * @return \Illuminate\Support\Collection|mixed
-     * @throws ApiException
+     * @param FlightsSearchRequestModel $request
+     * @return \Illuminate\Support\Collection
      * @throws TravelPortException
      */
-    public function flightsSearchResult(int $id)
+    public function flightsSearchResult(FlightsSearchRequest $request)
     {
-        $request = FlightsSearchRequest::find($id);
-
-        if(null === $request) {
-            throw ApiException::getInstanceInvalidId($id);
-        }
-
         $requestDto = new FlightsSearchRequestDto(
             $request->data['segments'],
             $request->data['passengers'],
-            $request->data['parameters'],
-            $id
+            $request->data['parameters']
         );
 
         try{
-            $lowFareSearchRsp = Cache::rememberForever('result'. $id, function () use ($requestDto, $id) {
+            $lowFareSearchRsp = Cache::rememberForever('result'. $request->id, function () use ($requestDto) {
                 return TP::LowFareSearchReq($requestDto);
             });
 
-            $response = $this->travelPortAdapter->LowFareSearch($lowFareSearchRsp);
-            $response->put('request', $requestDto);
+            $LowFareSearchAdapt = $this->travelPortAdapter->LowFareSearchAdapt($lowFareSearchRsp);
+            $LowFareSearchAdapt->put('request', $request);
 
             $request->transaction_id = $lowFareSearchRsp->getTransactionId();
+
+            return $LowFareSearchAdapt;
+        } catch (TravelPortException $travelPortException) {
+            $request->transaction_id = $travelPortException->getTransactionId();
+            $flightsSearchRequestAdapt = $this->modelAdapter->flightsSearchRequestAdapt($request);
+            $flightsSearchRequestAdapt->put('results', collect([
+                'info' => collect([
+                    'errorCode' => $travelPortException->getCode(),
+                    'errorMessageEng' => $travelPortException->getMessage()
+                ])
+            ]));
+            return $flightsSearchRequestAdapt;
+        } finally{
             $request->save();
-
-            return $response;
-
-        } catch (TravelPortException $exception) {
-            throw ApiException::getInstance($exception->getMessage());
         }
     }
 

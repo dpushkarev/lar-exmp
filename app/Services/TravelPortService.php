@@ -7,6 +7,7 @@ use App\Dto\FlightsSearchRequestDto;
 use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
+use FilippoToso\Travelport\Air\AirLegModifiers;
 use Libs\FilippoToso\Travelport;
 
 /**
@@ -23,7 +24,6 @@ class TravelPortService
 
     private $travelPort;
     private $traceId;
-    private $transactionId;
 
     /**
      * TravelPortService constructor.
@@ -36,34 +36,16 @@ class TravelPortService
     }
 
     /**
-     * @param string $id
-     */
-    protected function setTransactionId(string $id)
-    {
-        $this->transactionId = $id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTransactionId(): ?string
-    {
-        return $this->transactionId;
-    }
-
-    /**
      * @param $request
      * @return mixed
      * @throws TravelPortException
-     * @throws \App\Exceptions\ApiException
      */
     protected function execute($request)
     {
         try {
             $result =  $this->travelPort->execute($request);
-            $this->setTransactionId($result->getTransactionId());
-        } catch (\SoapFault $e) {
-            throw TravelPortException::getInstance($e->getMessage());
+        } catch (TravelPortException $travelPortException) {
+            throw $travelPortException;
         }
 
         return $result;
@@ -73,7 +55,6 @@ class TravelPortService
      * @param FlightsSearchRequestDto $dto
      * @return mixed
      * @throws TravelPortException
-     * @throws \App\Exceptions\ApiException
      */
     public function LowFareSearchReq(FlightsSearchRequestDto $dto)
     {
@@ -109,14 +90,23 @@ class TravelPortService
         $searchPassengers = $this->getSearchPassengers($dto->getPassengers());
         $searchModifiers = $this->getSearchModifiers($dto->getParameters());
         $billingPointOfSaleInfo = $this->getBillingPointOfSaleInfo();
+        $airPricingModifiers = $this->getAirPricingModifiers();
 
         return (new Air\LowFareSearchReq())
+            ->setReturnUpsellFare(true)
             ->setBillingPointOfSaleInfo($billingPointOfSaleInfo)
             ->setAirSearchModifiers($searchModifiers)
             ->setSearchAirLeg($searchAirLegs)
             ->setSearchPassenger($searchPassengers)
+            ->setAirPricingModifiers($airPricingModifiers)
             ->setTraceId($this->traceId);
 
+    }
+
+    protected function getAirPricingModifiers()
+    {
+        return (new Air\AirPricingModifiers())
+            ->setFaresIndicator(Air\typeFaresIndicator::AllFares);
     }
 
     protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)
@@ -253,6 +243,8 @@ class TravelPortService
                     (new Air\typeFlexibleTimeSpec)->setPreferredTime($time),
                 ]);
             }
+
+            $searchAirLeg->setAirLegModifiers((new AirLegModifiers)->setAllowDirectAccess(true));
 
             $searchAirLegs[] = $searchAirLeg;
         }
