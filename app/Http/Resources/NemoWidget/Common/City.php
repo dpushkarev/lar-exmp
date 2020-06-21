@@ -14,12 +14,12 @@ class City extends JsonResource
     public function toArray($request)
     {
         return [
-                "IATA" => $this->resource->code,
-                "name" => __($this->resource->name),
-                "nameEn" => $this->resource->name,
-                "countryCode" => $this->resource->country_code,
-                "id" => $this->resource->id,
-                'airports' => AirportIata::collection($this->resource->airports)
+            "IATA" => $this->resource->code,
+            "name" => __($this->resource->name),
+            "nameEn" => $this->resource->name,
+            "countryCode" => $this->resource->country_code,
+            "id" => $this->resource->id,
+            'airports' => AirportIata::collection($this->resource->airports)
         ];
     }
 

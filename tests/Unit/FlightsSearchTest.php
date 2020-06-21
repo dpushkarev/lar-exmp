@@ -14,6 +14,7 @@ class FlightsSearchTest extends TestCase
         parent::setUp();
         $this->useTable('flights_search_requests');
         $this->useTable('flights_search_results');
+        $this->useTableWithData('aircrafts');
 
         TP::shouldReceive('LowFareSearchReq')
             ->once()
@@ -74,13 +75,18 @@ class FlightsSearchTest extends TestCase
                     'cities',
                     'countries' => [
                         'RS', 'IT'
-                    ]
+                    ],
+                    'aircrafts'
                 ],
                 'system'
             ], null)
             ->assertJsonCount(2, 'flights.search.request.segments')
             ->assertJsonCount(2, 'flights.search.request.passengers')
             ->assertJsonCount(2, 'guide.cities')
+            ->assertJsonCount(2, 'guide.airports')
+            ->assertJsonCount(2, 'guide.cities')
+            ->assertJsonCount(2, 'guide.countries')
+            ->assertJsonCount(2, 'guide.aircrafts')
             ->assertJsonCount(2, 'flights.search.results.flightGroups')
             ->assertJsonCount(2, 'flights.search.results.flightGroups.0.segments')
             ->assertJsonCount(2, 'flights.search.results.flightGroups.1.segments')

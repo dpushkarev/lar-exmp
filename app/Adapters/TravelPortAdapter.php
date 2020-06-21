@@ -6,6 +6,7 @@ namespace App\Adapters;
 
 use App\Http\Resources\NemoWidget\Common\City;
 use App\Http\Resources\NemoWidget\Common\Country;
+use App\Models\Aircraft;
 use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\FlightsSearchResult;
@@ -29,12 +30,13 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
     public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp): Collection
     {
         /** @var  $airSegment typeBaseAirSegment */
-        /** @var  $results LowFareSearchAsynchRsp */
+        /** @var  $results LowFareSearchRsp */
 
         $countries = collect();
         $cities = collect();
         $airports = collect();
         $airLines = collect();
+        $aircrafts = collect();
         $groupsData = collect();
         $airSegmentCollection = collect();
         $airPriceCollection = collect();
@@ -46,11 +48,12 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             $origin = $airSegment->getOrigin();
             $destination = $airSegment->getDestination();
             $carrier = $airSegment->getCarrier();
+            $aircraftType = $airSegment->getEquipment();
             $airSegmentKey = sprintf('S%d', $key + 1);
             $airSegmentMap->put($airSegment->getKey(), $airSegmentKey);
 
             $airSegmentData = [
-                'aircraftType' => $airSegment->getEquipment(),
+                'aircraftType' => $aircraftType,
                 'arrAirp' => $destination,
                 'arrDateTime' => Carbon::parse($airSegment->getArrivalTime())->format('Y-m-d\Th:i:s'),
                 'depAirp' => $origin,
@@ -79,6 +82,10 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
 
             if (!$airLines->has($carrier)) {
                 $airLines->put($carrier, Airline::whereCode($carrier)->first());
+            }
+
+            if (!$aircrafts->has($aircraftType)) {
+                $aircrafts->put($aircraftType, Aircraft::whereCode($aircraftType)->first());
             }
 
             /** @var  $flightDetail  FlightDetails */
@@ -233,6 +240,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
         return collect([
             'airlines' => $airLines,
             'airports' => $airports,
+            'aircrafts' => $aircrafts,
             'cities' => $cities,
             'countries' => $countries,
             'results' => $results

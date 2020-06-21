@@ -1,300 +1,300 @@
-GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-22T103543.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-05-22T103534.200.json
+<> 2020-06-21T055628.200.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/flights/search/results/66
 
-<> 2020-05-22T103528.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-05-22T103422.500.html
+<> 2020-06-21T055545.200.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-12-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-12-25T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-05-22T103227.500.html
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-05-22T103220.200.json
+<> 2020-06-21T055538.200.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/flights/search/results/65
 
-<> 2020-05-22T103156.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-05-22T103131.200.json
+<> 2020-06-21T055504.200.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-10-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-10-25T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-05-22T103048.500.html
-
-###
-
-GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
-
-<> 2020-05-22T103020.200.json
+<> 2020-06-21T055450.200.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-22T101751.500.html
-
-###
-
-GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
-
-<> 2020-05-22T101645.200.json
+<> 2020-06-21T053523.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/autocomplete/iata/b/dep/DME/?apilang=rs
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-22T101419.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-22T101350.200.json
+<> 2020-06-21T050135.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-22T101217.500.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-22T101128.200.json
+<> 2020-06-21T045701.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-20T083203.500.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-20T082406.500.html
+<> 2020-06-21T045432.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-20T082045.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-20T082028.200.html
+<> 2020-06-21T045418.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-20T081943.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-20T081641.200.json
+<> 2020-06-21T045058.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-19T102652.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"LJU","isCity":false},"departureDate":"2020-10-22T00:00:00"},{"departure":{"IATA":"LON","isCity":true},"arrival":{"IATA":"FRA","isCity":false},"departureDate":"2021-01-14T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T102336.422.json
+<> 2020-06-21T042700.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/64
 
-<> 2020-05-19T102316.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T102216.200.json
+<> 2020-06-21T042633.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-10-10T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-10-13T00:00:00"}],"passengers":[{"type":"ADT","count":1},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-05-19T101931.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T101848.200.json
+<> 2020-06-21T042616.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/53
 
-<> 2020-05-19T085117.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T085045.422.json
+<> 2020-06-21T042521.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/52
 
-<> 2020-05-19T085032.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T085021.200.html
+<> 2020-06-21T042514.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/51
 
-<> 2020-05-19T084928.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T084858.200.html
+<> 2020-06-21T042456.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/51
 
-<> 2020-05-19T084839.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T084741.200.html
+<> 2020-06-21T042407.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/51
 
-<> 2020-05-19T084620.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T084548.200.html
+<> 2020-06-21T042329.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/63
 
-<> 2020-05-19T084529.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T084439.200.html
+<> 2020-06-21T041029.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-10-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-10-25T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-05-19T084324.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T084236.422.json
+<> 2020-06-21T040209.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/62
 
-<> 2020-05-19T084109.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T084054.200.json
+<> 2020-06-21T020127.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-05-19T084036.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T083845.200.json
+<> 2020-06-21T020110.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/45
 
-<> 2020-05-19T075205.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
-
-<> 2020-05-19T075158.200.json
+<> 2020-06-21T015818.500.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/50
 
-<> 2020-05-19T074828.500.html
+<> 2020-06-21T015539.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":true,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/46
 
-<> 2020-05-19T073356.200.json
+<> 2020-06-21T015531.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/45
+
+<> 2020-06-21T015524.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/61
+
+<> 2020-06-21T015428.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/61
+
+<> 2020-06-21T014922.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T014838.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T014736.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T014640.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T014625.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T014311.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T012643.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T012028.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T123825.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T123710.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T123111.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-06-21T123011.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T081107.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T081051.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T081041.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T081002.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T080915.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T080650.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T080627.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T080549.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T080532.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/51
+
+<> 2020-06-20T080500.422.json
 
 ###
 
