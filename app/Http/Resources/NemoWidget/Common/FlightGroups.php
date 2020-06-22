@@ -14,14 +14,13 @@ class FlightGroups extends JsonResource
         return [
             'flights' => [
                 [
-                    'canProcessFareFamilies' => '?',
-                    'createOrderLink' => "?",
-                    'expectedNumberOfTickets' => '?',
+                    'canProcessFareFamilies' => false,
+                    'createOrderLink' => "/checkout/",
+                    'expectedNumberOfTickets' => false,
                     'id' => $this->resource->id,
-                    'key' => '?',
-                    'nemo2id' => "?",
+                    'nemo2id' => $this->resource->id,
                     'price' => $this->resource->price,
-                    'rating' => '?',
+                    'rating' => mt_rand(900000, 1000000) / 100000,
                     'service' => TravelPortService::APPLICATION,
                     'travelPolicies' => [],
                 ]

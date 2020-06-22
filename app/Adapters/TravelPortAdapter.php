@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\BookingInfo;
+use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\FlightDetails;
 use FilippoToso\Travelport\Air\FlightDetailsRef;
 use FilippoToso\Travelport\Air\FlightOption;
@@ -43,6 +44,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
         $airSegmentMap = collect();
         $flightGroupsCollection = collect();
         $flightGroups = collect();
+        $fareInfoMap = collect();
 
         foreach ($searchRsp->getAirSegmentList()->getAirSegment() as $key => $airSegment) {
             $origin = $airSegment->getOrigin();
@@ -50,7 +52,10 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             $carrier = $airSegment->getCarrier();
             $aircraftType = $airSegment->getEquipment();
             $airSegmentKey = sprintf('S%d', $key + 1);
-            $airSegmentMap->put($airSegment->getKey(), $airSegmentKey);
+            $airSegmentMap->put($airSegment->getKey(), collect([
+                'segmentKey' => $airSegmentKey,
+                'segment' => $airSegment,
+            ]));
 
             $airSegmentData = [
                 'aircraftType' => $aircraftType,
@@ -58,16 +63,16 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                 'arrDateTime' => Carbon::parse($airSegment->getArrivalTime())->format('Y-m-d\Th:i:s'),
                 'depAirp' => $origin,
                 'depDateTime' => Carbon::parse($airSegment->getDepartureTime())->format('Y-m-d\Th:i:s'),
-                'eTicket' => $airSegment->getETicketability(),
+                'eTicket' => $airSegment->getETicketability() === 'Yes' ? true : false,
                 'flightNumber' => $airSegment->getFlightNumber(),
                 'flightTime' => $airSegment->getFlightTime(),
                 'id' => $airSegmentKey,
                 'isCharter' => false,
                 'isLowCost' => false,
-                'marketingCompany' => null,
-                'number' => 0,
-                'operatingCompany' => $carrier,
-                'routeNumber' => 0,
+                'marketingCompany' => $carrier,
+                'number' => '?',
+                'operatingCompany' => (null !== $airSegment->getCodeshareInfo()) ? $airSegment->getCodeshareInfo()->getOperatingCarrier() : null,
+                'routeNumber' => $airSegment->getGroup(),
                 'stopPoints' => null
             ];
 
@@ -102,9 +107,15 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             $airSegmentCollection->put($airSegmentKey, $airSegmentData);
         }
 
+        /** @var  $fareInfo FareInfo */
+        foreach ($searchRsp->getFareInfoList()->getFareInfo() as $fareInfo) {
+            $fareInfoMap->put($fareInfo->getKey(), $fareInfo);
+        }
+
         /** @var $airPricePoint AirPricePoint */
         foreach ($searchRsp->getAirPricePointList()->getAirPricePoint() as $key => $airPricePoint) {
             $segmentsGroup = [];
+            $segmentFareMap = [];
             $airPricePointKey = sprintf('P%d', $key + 1);
             $agencyChargeAmount = 100.5;
             $agencyChargeCurrency = $searchRsp->getCurrencyType();
@@ -114,15 +125,14 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                     'amount' => $agencyChargeAmount,
                     'currency' => $agencyChargeCurrency
                 ],
-                'avlSeatsMin' => '?',
                 'flightPrice' => [
                     'amount' => (float)substr($airPricePoint->getTotalPrice(), 3),
                     'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
                 ],
                 'id' => $airPricePointKey,
                 'originalCurrency' => $searchRsp->getCurrencyType(),
-                'priceWithoutPromocode' => '?',
-                'privateFareInd' => '?',
+                'priceWithoutPromocode' => null,
+                'privateFareInd' => false,
                 'refundable' => '?',
                 'service' => TravelPortService::APPLICATION,
                 'tariffsLink' => '?',
@@ -182,24 +192,46 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                         $optionKey = (string)$option->getKey();
                         /** @var  $bookingInfo BookingInfo */
                         foreach ($option->getBookingInfo() as $bookingInfo) {
+                            $segmentFareHash = md5($bookingInfo->getFareInfoRef() . $bookingInfo->getSegmentRef());
                             if (!isset($airPricePointData['passengerFares'])) {
-                                $segmentsGroup[$legRefKey][$optionKey][] = $airSegmentMap->get($bookingInfo->getSegmentRef());
+                                $segmentsGroup[$legRefKey][$optionKey][] = $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey');
                             }
-                            $airPricePointData['segmentInfo'][] = [
-                                "segNum" => '?',
-                                "routeNumber" => '?',
-                                "bookingClass" => $bookingInfo->getBookingCode(),
-                                "serviceClass" => $bookingInfo->getCabinClass(),
-                                "avlSeats" => $bookingInfo->getBookingCount(),
-                                "freeBaggage" => ['?'],
-                                "minBaggage" => ['?']
-                            ];
+                            if (!isset($segmentFareMap[$segmentFareHash])) {
+                                $airPricePointData['segmentInfo'][] = [
+                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey'),
+                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
+                                    "bookingClass" => $bookingInfo->getBookingCode(),
+                                    "serviceClass" => $bookingInfo->getCabinClass(),
+                                    "avlSeats" => $bookingInfo->getBookingCount(),
+                                    "freeBaggage" => $bookingInfo->getFareInfoRef(),
+                                    "minBaggage" => []
+                                ];
+
+                                $segmentFareMap[$segmentFareHash] = $segmentFareHash;
+                            }
                         }
                     }
                 }
 
                 $airPricePointData['passengerFares'][] = $passengerFares;
             }
+
+            $avlSeatsMin = [];
+            foreach ($airPricePointData['segmentInfo'] as &$segmentInfo) {
+                $avlSeatsMin[] = $segmentInfo['avlSeats'];
+                $fareInfoRef = $segmentInfo['freeBaggage'];
+                $segmentInfo['freeBaggage'] = [];
+                $fareInfo = $fareInfoMap->get($fareInfoRef);
+                foreach ($airPricePointData['passengerFares'] as $passengerFare) {
+                    $segmentInfo['freeBaggage'][] = [
+                        'passtype' => $passengerFare['type'],
+                        'value' => ($fareInfo->getPassengerTypeCode() === $passengerFare['type']) ? $fareInfo->getBaggageAllowance()->getNumberOfPieces() : null,
+                        "measurement" => "pc",
+                    ];
+                }
+            }
+
+            $airPricePointData['avlSeatsMin'] = min($avlSeatsMin);
 
             $airPriceCollection->put($airPricePointKey, $airPricePointData);
             $groups = collect();
@@ -212,7 +244,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
         }
 
         foreach ($flightGroupsCollection as $p => $groups) {
-            foreach ($groups as  $key => $group) {
+            foreach ($groups as $key => $group) {
                 $segmentsCollection = collect();
                 foreach ($group as $segments) {
                     $segmentsCollection = $segmentsCollection->merge($segments);
