@@ -19,17 +19,19 @@ class AirlinesTableSeeder extends Seeder
 
         foreach ($airlines as $airline) {
             $explodedLine = explode('","', $airline);
-            $width = null;
-            $height = null;
+            $logo = null;
+            $rating = null;
             $country = null;
-            $filename = null;
+            $monochromeLogo = null;
+            $colors = null;
             $jsonItem = $airlinesJson[$this->cleanString($explodedLine[0])] ?? null;
 
             if(null !== $jsonItem) {
-                $filename = $jsonItem['logo']['file'] ?? null;
-                $width = $jsonItem['logo']['width'] ?? null;
-                $height = $jsonItem['logo']['height'] ?? null;
-                $country = $jsonItem['country'] ?? null;
+                $logo = $jsonItem['logo'] ?? null;
+                $rating = $jsonItem['rating'] ?? null;
+                $monochromeLogo = $jsonItem['monochromeLogo'] ?? null;
+                $country = $jsonItem['countryCode'] ?? null;
+                $colors = $jsonItem['colors'] ?? null;
             }
 
             $airlinesCount += DB::table('airlines')->updateOrInsert([
@@ -41,9 +43,12 @@ class AirlinesTableSeeder extends Seeder
                 'country_code' => $country,
                 'participation' => $this->cleanString($explodedLine[3]),
                 'vendor_type' => $this->cleanString($explodedLine[4]),
-                'logo' => Storage::disk('public')->has($filename) ? $filename : null,
-                'width' => $width,
-                'height' => $height
+                'logo' => json_encode($logo),
+                'rating' => $rating,
+                'monochromeLogo' => json_encode($monochromeLogo),
+                'colors' => json_encode($colors),
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
             ]);
 
             continue;

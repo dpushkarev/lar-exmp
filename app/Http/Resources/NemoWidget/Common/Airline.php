@@ -16,21 +16,11 @@ class Airline extends JsonResource
                 "name" => __($this->resource->name),
                 "nameEn" => $this->resource->name,
                 "nameFallback" => $this->resource->short_name,
-                "rating" => null,
+                "rating" => $this->resource->rating,
                 "countryCode" => $this->resource->country_code,
-                $this->mergeWhen($this->resource->logo, [
-                    'logo' => [
-                        'image' => $this->resource->logo,
-                        'icon' => $this->resource->logo,
-                        'width' => $this->resource->width,
-                        'height' => $this->resource->height,
-                    ]
-                ]),
-                'monochromeLogo' => null,
-                'colors' => [
-                    'companyColor' => null,
-                    'companyColorAdditional' => null
-                ]
+                'logo' => $this->resource->logo,
+                'monochromeLogo' => $this->resource->monochromeLogo,
+                'colors' => $this->resource->colors
             ]
         ];
     }

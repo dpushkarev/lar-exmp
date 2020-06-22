@@ -18,6 +18,12 @@ class Airline extends Model
     protected static $cacheTags = ['airLines'];
     protected static $cacheMinutes = 0;
 
+    protected $casts = [
+        'logo' => 'json',
+        'colors' => 'json',
+        'monochromeLogo' => 'json'
+    ];
+
     use CacheTrait;
 
     /**
