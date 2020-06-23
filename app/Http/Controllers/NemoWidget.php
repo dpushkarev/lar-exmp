@@ -7,11 +7,16 @@ use App\Exceptions\TravelPortException;
 use App\Http\Requests\FlightsSearchRequest;
 use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
+use App\Http\Resources\NemoWidget\ErrorSearchId;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
+use App\Models\Error;
 use App\Services\NemoWidgetService;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class NemoWidget
@@ -20,6 +25,7 @@ use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
 class NemoWidget extends BaseController
 {
 
+    use ValidatesRequests;
     /**
      * @param NemoWidgetService $service
      * @param $q
@@ -54,8 +60,7 @@ class NemoWidget extends BaseController
     /**
      * @param int $id
      * @param NemoWidgetService $service
-     * @return FlightsSearchResults
-     * @throws ApiException
+     * @return ErrorSearchId|FlightsSearchResults
      * @throws TravelPortException
      */
     public function flightsSearchResult(int $id, NemoWidgetService $service)
@@ -63,10 +68,30 @@ class NemoWidget extends BaseController
         $FlightsSearchRequestModel = FlightsSearchRequestModel::find($id);
 
         if(null === $FlightsSearchRequestModel) {
-            throw ApiException::getInstanceInvalidId($id);
+            return new ErrorSearchId(null);
         }
         $flightsSearchResults = $service->flightsSearchResult($FlightsSearchRequestModel);
 
         return new FlightsSearchResults($flightsSearchResults);
     }
+
+    public function ErrorLog(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'searchId' => 'required',
+                'error' => 'required|array',
+            ]);
+        } catch (ValidationException $validationException) {
+            throw ApiException::getInstance($validationException->getMessage(), $validationException->getCode());
+        }
+
+        Error::forceCreate([
+            'searchId' => $request->get('searchId'),
+            'error' => $request->get('error'),
+        ]);
+
+        return response('', 201);
+    }
+
 }

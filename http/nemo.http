@@ -7,7 +7,7 @@ GET http://127.0.0.1:8081/api/guide/airlines/all
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/71
+POST http://127.0.0.1:8081/api/flights/search/results/712
 
 ###
 GET http://127.0.0.1:8081/api/flights/search/results/700
@@ -17,10 +17,14 @@ POST http://127.0.0.1:8081/api/flights/search/request?
  request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 ###
 
-POST https://www.sjstorage.com/process-payment?
- token=fjrfyMfuI3iH4vRoMNk3ZHwMFO6BABpDudR4bUgd&datos_form=first_name%3DDENIS%2BPUSHKAREV%26email%3Dspaulding2213%2540gmail.com%26payment_for%3Dtest%26Total%3D1%26Card%3D5536913779369780%26expMonth%3D06%26expYear%3D23%26cvv%3D322
-###
-
 // Example 1: {"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-05-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 // Example 2: {"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 // Example 3: {"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"LJU","isCity":false},"departureDate":"2020-10-22T00:00:00"},{"departure":{"IATA":"LON","isCity":true},"arrival":{"IATA":"FRA","isCity":false},"departureDate":"2021-01-14T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2},{"type":"INF","count":1},{"type":"INS","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Business","flightNumbers":null,"airlines":["JU"],"delayed":true}}
+
+POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
+ searchId=2332&
+ error[name]=TypeError&
+ error[stack][0][line]=96&
+ error[stack][2][path]: https://v2.ekarte.rs/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp
+
+###

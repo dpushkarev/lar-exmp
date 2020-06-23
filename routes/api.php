@@ -44,6 +44,9 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
 
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL_ROUTE_NAME);
+
+    Route::post('/system/logger/error', 'NemoWidget@ErrorLog');
+
     Route::get('/guide/airports/nearest', function () {
         return '{
            "guide":{
