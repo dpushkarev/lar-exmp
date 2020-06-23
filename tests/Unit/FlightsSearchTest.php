@@ -208,4 +208,12 @@ class FlightsSearchTest extends TestCase
         $this->json('GET', $search['results']['url'])
             ->assertStatus(200);
     }
+
+    public function testFlightsSearchInvalidSearchId()
+    {
+        $this->json('GET', '/api/flights/search/results/700')
+            ->assertStatus(200)
+            ->assertJsonPath('flights.search.results.info.errorCode', 410)
+            ->assertJsonPath('flights.search.results.info.errorMessageEng', 'Invalid SearchId');
+    }
 }

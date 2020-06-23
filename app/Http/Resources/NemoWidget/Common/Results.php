@@ -21,8 +21,10 @@ class Results extends JsonResource
         }
 
         return [
-            'id' => $this->resource->get('request_id'),
-            'url' => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS, ['id' => $this->resource->get('request_id')], false),
+            $this->mergeWhen(($this->resource->has('request_id')), [
+                'id' => $this->resource->get('request_id'),
+                'url' => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS, ['id' => $this->resource->get('request_id', 0)], false),
+            ]),
             $this->mergeWhen($results->isNotEmpty(), [
                 'flightGroups' => FlightGroups::collection($results->get('flightGroups', [])),
                 'groupsData' => $results->get('groupsData', []),

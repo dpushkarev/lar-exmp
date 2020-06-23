@@ -1,9 +1,9 @@
 <?php
 
-use App\Exceptions\ApiException;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Http\Middleware\NemoWidgetCache;
+use App\Http\Resources\NemoWidget\ErrorSearchId;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,17 +29,17 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
     Route::post('/flights/search/request', 'NemoWidget@flightsSearchRequest')->name(NemoWidgetCache::FLIGHTS_SEARCH_POST_REQUEST);
     Route::get('/flights/search/request/{id}', function($id){
-        throw ApiException::getInstanceInvalidId($id);
+        return new ErrorSearchId(null);
     })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_REQUEST);
 
     Route::get('/flights/search/formData/{id}', function($id){
-        throw ApiException::getInstanceInvalidId($id);
+        return new ErrorSearchId(null);
     })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA);
 
 
     Route::post('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS);
-    Route::get('/flights/search/results/{id}', function($id){
-        throw ApiException::getInstanceInvalidId($id);
+    Route::get('/flights/search/results/{id}', function(){
+        return new ErrorSearchId(null);
     })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS);
 
 

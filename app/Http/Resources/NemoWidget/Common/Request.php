@@ -13,11 +13,13 @@ class Request extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->resource->id,
-            'segments' => $this->resource->data['segments'],
-            'passengers' => $this->resource->data['passengers'],
-            'parameters' => $this->resource->data['parameters'],
-            'url' => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_REQUEST, ['id' => $this->resource->id], false)
+            $this->mergeWhen($this->resource, [
+                'id' => $this->resource->id ?? 0,
+                'url' => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_REQUEST, ['id' => $this->resource->id ?? 0], false),
+            ]),
+            'segments' => $this->resource->data['segments'] ?? null,
+            'passengers' => $this->resource->data['passengers'] ?? null,
+            'parameters' => $this->resource->data['parameters'] ?? null,
         ];
 
     }

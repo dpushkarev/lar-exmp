@@ -106,7 +106,9 @@ class TravelPortService
     protected function getAirPricingModifiers()
     {
         return (new Air\AirPricingModifiers())
-            ->setFaresIndicator(Air\typeFaresIndicator::AllFares);
+            ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
+            ->setReturnFareAttributes(true)
+            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(true));
     }
 
     protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)

@@ -60,9 +60,9 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             $airSegmentData = [
                 'aircraftType' => $aircraftType,
                 'arrAirp' => $destination,
-                'arrDateTime' => Carbon::parse($airSegment->getArrivalTime())->format('Y-m-d\Th:i:s'),
+                'arrDateTime' => Carbon::parse($airSegment->getArrivalTime())->format('Y-m-d\TH:i:s'),
                 'depAirp' => $origin,
-                'depDateTime' => Carbon::parse($airSegment->getDepartureTime())->format('Y-m-d\Th:i:s'),
+                'depDateTime' => Carbon::parse($airSegment->getDepartureTime())->format('Y-m-d\TH:i:s'),
                 'eTicket' => $airSegment->getETicketability() === 'Yes' ? true : false,
                 'flightNumber' => $airSegment->getFlightNumber(),
                 'flightTime' => $airSegment->getFlightTime(),

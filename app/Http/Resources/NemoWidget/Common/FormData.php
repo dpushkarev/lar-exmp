@@ -68,8 +68,10 @@ class FormData extends JsonResource
                     ]
                 ]
             ],
-            "id" => $this->resource,
-            "url" =>  URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA, ['id' => $this->resource], false)
+            $this->mergeWhen($this->resource, [
+                "id" => $this->resource,
+                "url" => URL::route(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA, ['id' => $this->resource ?: 0], false)
+            ])
         ];
     }
 }
