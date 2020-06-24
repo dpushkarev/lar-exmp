@@ -84,9 +84,11 @@ class NemoWidgetService
         );
 
         try{
-            $lowFareSearchRsp = Cache::rememberForever('result'. $request->id, function () use ($requestDto) {
-                return TP::LowFareSearchReq($requestDto);
-            });
+//            $lowFareSearchRsp = Cache::rememberForever('result'. $request->id, function () use ($requestDto) {
+//                return TP::LowFareSearchReq($requestDto);
+//            });
+
+            $lowFareSearchRsp = TP::LowFareSearchReq($requestDto);
 
             $LowFareSearchAdapt = $this->travelPortAdapter->LowFareSearchAdapt($lowFareSearchRsp);
             $LowFareSearchAdapt->put('request', $request);
