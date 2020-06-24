@@ -21,7 +21,7 @@ class CreateAircrafts extends Migration
             $table->string('short_name', 35)->comment('Name of aircraft');
             $table->timestamps();
 
-            $table->index('idx__code', 'code');
+            $table->index('code', 'idx__code');
         });
     }
 
