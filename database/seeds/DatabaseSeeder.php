@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
              CitiesTableSeeder::class,
              AirportsTableSeeder::class,
              VocabularyTableSeeder::class,
-             AirlinesTableSeeder::class
+             AirlinesTableSeeder::class,
+             AircraftsTableSeeder::class,
          ]);
     }
 }
