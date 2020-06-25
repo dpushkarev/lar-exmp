@@ -90,6 +90,9 @@ class NemoWidgetService
 
             $lowFareSearchRsp = TP::LowFareSearchReq($requestDto);
 
+//            print_r('<pre>');
+//            print_r($lowFareSearchRsp);die;
+
             $LowFareSearchAdapt = $this->travelPortAdapter->LowFareSearchAdapt($lowFareSearchRsp);
             $LowFareSearchAdapt->put('request', $request);
 

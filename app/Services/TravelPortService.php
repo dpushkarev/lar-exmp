@@ -108,7 +108,7 @@ class TravelPortService
         return (new Air\AirPricingModifiers())
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
             ->setReturnFareAttributes(true)
-            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(true));
+            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
     }
 
     protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)

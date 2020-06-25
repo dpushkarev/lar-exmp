@@ -19,7 +19,6 @@ use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\FlightDetails;
 use FilippoToso\Travelport\Air\FlightDetailsRef;
 use FilippoToso\Travelport\Air\FlightOption;
-use FilippoToso\Travelport\Air\LowFareSearchAsynchRsp;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use FilippoToso\Travelport\Air\Option;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
@@ -28,6 +27,43 @@ use Illuminate\Support\Collection;
 
 class TravelPortAdapter extends NemoWidgetAbstractAdapter
 {
+    protected $FareAttributes = [
+        1 => [
+            'code' => 'baggage',
+            'feature' => 'baggage',
+        ],
+        2 => [
+            'code' => 'carry_on',
+            'feature' => 'baggage',
+        ],
+        3 => [
+            'code' => 'exchangeable',
+            'feature' => 'refunds',
+        ],
+        4 => [
+            'code' => 'refundable',
+            'feature' => 'refunds',
+        ],
+        5 => [
+            'code' => 'vip_service',
+            'feature' => 'misc',
+        ],
+        6 => [
+            'code' => 'vip_service',
+            'feature' => 'misc',
+        ],
+        7 => [
+            'code' => 'vip_service',
+            'feature' => 'misc',
+        ],
+    ];
+
+    protected $indicators = [
+        'I' => 'Included in the fare',
+        'A' => 'Available for a charge',
+        'N' => 'Not offered',
+    ];
+
     public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp): Collection
     {
         /** @var  $airSegment typeBaseAirSegment */
@@ -183,7 +219,6 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                     }
                 }
 
-                $passengerFares['tariffs'] = ['?'];
                 /** @var  $flightOption FlightOption */
                 foreach ($airPricingInfo->getFlightOptionsList()->getFlightOption() as $flightOption) {
                     $legRefKey = (string)$flightOption->getLegRef();
@@ -205,6 +240,30 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                                     "avlSeats" => $bookingInfo->getBookingCount(),
                                     "freeBaggage" => $bookingInfo->getFareInfoRef(),
                                     "minBaggage" => []
+                                ];
+
+                                $features = [];
+                                if($getFareAttributes = $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareAttributes()) {
+                                    $getFareAttributesSplit = explode('|', $getFareAttributes);
+
+                                    foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
+                                        list($priority, $indicator) = explode(',', $getFareAttributeSplit);
+
+                                        $features[$this->FareAttributes[$priority]['code']][] = [
+                                            'code' => $this->FareAttributes[$priority]['code'],
+                                            'description' => ['?'],
+                                            'markAsImportant' => '?',
+                                            'needToPay' => $this->indicators[$indicator],
+                                            'priority' => $priority
+                                        ];
+                                    }
+                                }
+
+                                $passengerFares['tariffs'][] = [
+                                    "code" => $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareBasis(),
+                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey'),
+                                    "features" => $features,
+                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
                                 ];
 
                                 $segmentFareMap[$segmentFareHash] = $segmentFareHash;
