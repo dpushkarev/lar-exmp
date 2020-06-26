@@ -91,6 +91,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             $airSegmentMap->put($airSegment->getKey(), collect([
                 'segmentKey' => $airSegmentKey,
                 'segment' => $airSegment,
+                'key' => $key
             ]));
 
             $airSegmentData = [
@@ -155,12 +156,9 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             $airPricePointKey = sprintf('P%d', $key + 1);
             $agencyChargeAmount = 100.5;
             $agencyChargeCurrency = $searchRsp->getCurrencyType();
+            $countOfPassengers = 0;
 
             $airPricePointData = [
-                'agencyCharge' => [
-                    'amount' => $agencyChargeAmount,
-                    'currency' => $agencyChargeCurrency
-                ],
                 'flightPrice' => [
                     'amount' => (float)substr($airPricePoint->getTotalPrice(), 3),
                     'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
@@ -172,10 +170,6 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                 'refundable' => '?',
                 'service' => TravelPortService::APPLICATION,
                 'tariffsLink' => '?',
-                'totalPrice' => [
-                    'amount' => substr($airPricePoint->getTotalPrice(), 3) + $agencyChargeAmount,
-                    'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
-                ],
                 'validatingCompany' => '?',
                 'warnings' => []
             ];
@@ -185,6 +179,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
             foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
                 $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
+                $countOfPassengers += $passengerFares['count'];
 
                 $passengerFares['baseFare'] = [
                     'amount' => substr($airPricingInfo->getBasePrice(), 3),
@@ -233,7 +228,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                             }
                             if (!isset($segmentFareMap[$segmentFareHash])) {
                                 $airPricePointData['segmentInfo'][] = [
-                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey'),
+                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
                                     "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
                                     "bookingClass" => $bookingInfo->getBookingCode(),
                                     "serviceClass" => $bookingInfo->getCabinClass(),
@@ -261,7 +256,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
 
                                 $passengerFares['tariffs'][] = [
                                     "code" => $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareBasis(),
-                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey'),
+                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
                                     "features" => $features,
                                     "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
                                 ];
@@ -274,6 +269,17 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
 
                 $airPricePointData['passengerFares'][] = $passengerFares;
             }
+
+            $agencyChargeAll = $agencyChargeAmount * $countOfPassengers;
+            $airPricePointData['agencyCharge'] = [
+                'amount' => $agencyChargeAll,
+                'currency' => $agencyChargeCurrency
+            ];
+
+            $airPricePointData['totalPrice'] = [
+                'amount' => substr($airPricePoint->getTotalPrice(), 3) + $agencyChargeAll,
+                'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
+            ];
 
             $avlSeatsMin = [];
             foreach ($airPricePointData['segmentInfo'] as &$segmentInfo) {

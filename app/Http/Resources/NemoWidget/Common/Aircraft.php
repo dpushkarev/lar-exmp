@@ -12,19 +12,19 @@ class Aircraft extends JsonResource
     {
         return [
             'id' => $this->resource->id,
-            'capacity' => '?',
-            'cruiseSpeed' => '?',
-            'distanceType' => '?',
-            'fuselageType' => '?',
-            'image' => '?',
-            'isHomeAirctaft' => '?',
-            'isTurbineAirctaft' => '?',
-            'manufacture' => '?',
-            'map_image' => '?',
+            'capacity' => null,
+            'cruiseSpeed' => null,
+            'distanceType' => null,
+            'fuselageType' => null,
+            'image' => null,
+            'isHomeAirctaft' => false,
+            'isTurbineAirctaft' => false,
+            'manufacture' => '-',
+            'map_image' => null,
             "code" => $this->resource->code,
             "name" => __($this->resource->name),
             "nameEn" => $this->resource->name,
-            'originCountries' => '?'
+            'originCountries' => null
         ];
     }
 }
