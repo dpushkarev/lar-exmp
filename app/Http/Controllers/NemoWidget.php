@@ -7,8 +7,10 @@ use App\Exceptions\TravelPortException;
 use App\Http\Requests\FlightsSearchRequest;
 use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
+use App\Http\Resources\NemoWidget\ErrorLog;
 use App\Http\Resources\NemoWidget\ErrorSearchId;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
+use App\Http\Resources\NemoWidget\History;
 use App\Models\Error;
 use App\Services\NemoWidgetService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -91,7 +93,12 @@ class NemoWidget extends BaseController
             'error' => $request->get('error'),
         ]);
 
-        return response('', 201);
+        return new ErrorLog("f9ed00a9");
+    }
+
+    public function history()
+    {
+        return new History(null);
     }
 
 }

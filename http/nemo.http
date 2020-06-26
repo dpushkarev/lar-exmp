@@ -28,3 +28,6 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
  error[stack][2][path]: https://v2.ekarte.rs/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp
 
 ###
+GET http://127.0.0.1:8081/api/flights/search/history
+
+###
