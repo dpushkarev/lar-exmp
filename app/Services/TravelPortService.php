@@ -8,6 +8,7 @@ use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
 use FilippoToso\Travelport\Air\AirLegModifiers;
+use FilippoToso\Travelport\Air\FareFamilyDisplay;
 use Libs\FilippoToso\Travelport;
 
 /**
@@ -108,7 +109,8 @@ class TravelPortService
         return (new Air\AirPricingModifiers())
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
             ->setReturnFareAttributes(true)
-            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
+            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false))
+            ->setBrandModifiers((new Air\BrandModifiers())->setFareFamilyDisplay((new FareFamilyDisplay())->setModifierType('FareFamily')));
     }
 
     protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)
