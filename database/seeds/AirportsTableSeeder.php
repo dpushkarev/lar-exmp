@@ -21,7 +21,7 @@ class AirportsTableSeeder extends Seeder
         foreach ($airports as $airport) {
             $explodedLine = explode('","', $airport);
 
-            if ((int)$this->cleanString($explodedLine[7]) > 3) {
+            if (in_array((int)$this->cleanString($explodedLine[7]), [4,5,6,7,8])) {
                 $otherCount++;
                 continue;
             }
