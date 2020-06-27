@@ -12,6 +12,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Airport extends Model
 {
+    const AUTOCOMPLETE_TYPES = [1,2,9];
+
+    /**
+     * @param $builder
+     * @return mixed
+     */
+    public function scopeAutocompleteType($builder)
+    {
+        return $builder->whereIn('type', static::AUTOCOMPLETE_TYPES);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */

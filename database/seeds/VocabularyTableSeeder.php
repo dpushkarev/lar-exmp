@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Airport;
 
 class VocabularyTableSeeder extends Seeder
 {
@@ -22,13 +23,17 @@ class VocabularyTableSeeder extends Seeder
         $citiesLang = 0;
         $citiesLangMissed = 0;
 
-        $airPortIds = DB::table('airports')->select(['id', 'code'])->get();
+        /** use filter because only type 1,2,9 can be used in autocomplete */
+        $airPortIds = Airport::select(['id', 'code'])->autocompleteType()->get();
         $airPortIds = $airPortIds->pluck('id', 'code');
         $airportsVocCount = 0;
         $airportsMissed = 0;
 
         if ($cityIds->isNotEmpty() && $airPortIds->isNotEmpty()) {
             DB::table('vocabulary_names')->delete();
+        } else {
+            $this->command->getOutput()->writeln("<error>Cities or Airports is empty</error>");
+            return;
         }
 
         foreach ($cities as $city) {

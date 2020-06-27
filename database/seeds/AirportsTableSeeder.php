@@ -16,15 +16,9 @@ class AirportsTableSeeder extends Seeder
         $airportsJson = json_decode($airportsJson, true);
         $airportsCount = 0;
         $airportsSynCount = 0;
-        $otherCount = 0;
 
         foreach ($airports as $airport) {
             $explodedLine = explode('","', $airport);
-
-            if (in_array((int)$this->cleanString($explodedLine[7]), [4,5,6,7,8])) {
-                $otherCount++;
-                continue;
-            }
 
             if (null === $this->cleanString($explodedLine[1])) {
                 $airportsCount += DB::table('airports')->updateOrInsert([
@@ -49,7 +43,6 @@ class AirportsTableSeeder extends Seeder
 
         $this->command->getOutput()->writeln("<comment>Insert/Update: {$airportsCount} airports</comment>");
         $this->command->getOutput()->writeln("<comment>Missed: {$airportsSynCount} synonyms</comment>");
-        $this->command->getOutput()->writeln("<comment>Missed: {$otherCount} others</comment>");
 
     }
 
