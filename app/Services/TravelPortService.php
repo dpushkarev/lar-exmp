@@ -109,8 +109,8 @@ class TravelPortService
         return (new Air\AirPricingModifiers())
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
             ->setReturnFareAttributes(true)
-            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false))
-            ->setBrandModifiers((new Air\BrandModifiers())->setFareFamilyDisplay((new FareFamilyDisplay())->setModifierType('FareFamily')));
+            ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
+//            ->setBrandModifiers((new Air\BrandModifiers())->setFareFamilyDisplay((new FareFamilyDisplay())->setModifierType('FareFamily')));
     }
 
     protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)
