@@ -4,31 +4,59 @@
 namespace App\Adapters;
 
 
+use Illuminate\Support\Collection;
+
 class XmlAdapter extends NemoWidgetAbstractAdapter
 {
     public function parseFaultResponse(string $response)
     {
-        $clean_xml = str_ireplace(['SOAP-ENV:', 'SOAP:', 'common_v49_0:'], '', $response);
-        $xml = simplexml_load_string($clean_xml);
+        $simpleObject = new \SimpleXMLElement($response);
+        $simpleObject->registerXPathNamespace('soap', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $simpleObject->registerXPathNamespace('common_v49_0', 'http://www.travelport.com/schema/common_v49_0');
 
-        return collect((array)$xml->Body->Fault->detail->ErrorInfo);
+        return collect([
+            'TransactionId' => current($simpleObject->xpath('//common_v49_0:TransactionId')[0]),
+            'Description' => current($simpleObject->xpath('//common_v49_0:Description')[0]),
+            'Code' => current($simpleObject->xpath('//common_v49_0:Code')[0]),
+        ]);
     }
 
-    public function getSegments($xml, array $segments)
+    /**
+     * @param $xml
+     * @return Collection
+     */
+    public function getSegments($xml): Collection
     {
-        $airSegments = collect();
         $simpleObject = new \SimpleXMLElement($xml);
         $simpleObject->registerXPathNamespace('soap', 'http://schemas.xmlsoap.org/soap/envelope/');
         $simpleObject->registerXPathNamespace('air', 'http://www.travelport.com/schema/air_v49_0');
-        $allAirSegments = $simpleObject->xpath('//air:AirSegment');
+        $airSegments = $simpleObject->xpath('//air:AirSegment');
 
-        foreach ($segments as $segment) {
-            $segmentNumber = (int) filter_var($segment, FILTER_SANITIZE_NUMBER_INT) - 1;
-           if(isset($allAirSegments[$segmentNumber])) {
-               $airSegments->add($allAirSegments[$segmentNumber]);
-           }
+        return collect($airSegments);
+    }
+
+    public function getBookingsByPriceNum($xml, string $price): Collection
+    {
+        $bookings = collect();
+        $priceNum = (int)filter_var($price, FILTER_SANITIZE_NUMBER_INT) - 1;
+
+        $simpleObject = new \SimpleXMLElement($xml);
+        $simpleObject->registerXPathNamespace('soap', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $simpleObject->registerXPathNamespace('air', 'http://www.travelport.com/schema/air_v49_0');
+        $airPricePoint = $simpleObject->xpath('//air:AirPricePoint')[$priceNum];
+        $airPricingInfo = $airPricePoint->children('air', true)->AirPricingInfo[0];
+
+        foreach ($airPricingInfo->FlightOptionsList as $FlightOptions) {
+            foreach ($FlightOptions as $FlightOption) {
+                foreach ($FlightOption->Option as $option) {
+                    foreach ($option->BookingInfo as $bookingInfo) {
+                        $bookings->add($bookingInfo->attributes());
+                    }
+                }
+            }
         }
 
-        return $airSegments;
+        return $bookings;
     }
+
 }

@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Adapters\ModelAdapter;
 use App\Adapters\ftObjectAdapter;
 use App\Adapters\XmlAdapter;
+use App\Dto\AirPriceRequestDto;
 use App\Dto\FlightsSearchRequestDto;
 use App\Exceptions\NemoWidgetServiceException;
 use App\Exceptions\TravelPortException;
@@ -129,13 +130,44 @@ class NemoWidgetService
      */
     public function getFlightInfo(FlightsSearchResult $resultModel)
     {
-        $log = TravelPortLogger::getLog(LowFareSearchRsp::class, $resultModel->transaction_id);
+        $log = TravelPortLogger::getLog(LowFareSearchRsp::class, $resultModel->request->transaction_id);
 
         if(null === $log) {
             throw NemoWidgetServiceException::getInstance('Log of result was not found');
         }
 
-        $airSegments = $this->xmlAdapter->getSegments($log, $resultModel->segments);
+        $allAirSegments = $this->xmlAdapter->getSegments($log);
+
+        $airSegments = collect();
+        $airSegmentKeys = collect();
+        foreach ($resultModel->segments as $segmentNumber) {
+            $segmentNumber = (int) filter_var($segmentNumber, FILTER_SANITIZE_NUMBER_INT) - 1;
+            $airSegment = $allAirSegments[$segmentNumber] ?? null;
+
+            if(null !== $airSegment) {
+                $airSegments->add($airSegment);
+                $airSegmentKeys->put(getXmlAttribute($airSegment, 'Key'), 1);
+            }
+        }
+
+        $allBookings = $this->xmlAdapter->getBookingsByPriceNum($log, $resultModel->price);
+
+        $bookings = collect();
+        foreach ($allBookings as $booking) {
+            if($airSegmentKeys->has(getXmlAttribute($booking, 'SegmentRef'))) {
+                $bookings->add($booking);
+            }
+        }
+
+        $airPriceRequestDto = new AirPriceRequestDto(
+            $airSegments,
+            $resultModel->request->data['passengers'],
+            $bookings
+        );
+
+        echo "<pre>";
+        print_r($airPriceRequestDto);
+        die;
     }
 
 

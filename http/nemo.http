@@ -7,14 +7,14 @@ GET http://127.0.0.1:8081/api/guide/airlines/all
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/75
+POST http://127.0.0.1:8081/api/flights/search/results/2
 
 ###
 GET http://127.0.0.1:8081/api/flights/search/results/700
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
- request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+ request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"TIV","isCity":false},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 ###
 
 // Example 1: {"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-05-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
@@ -31,6 +31,6 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
 GET http://127.0.0.1:8081/api/flights/search/history
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/532
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/16
 
 ###

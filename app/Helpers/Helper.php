@@ -20,5 +20,13 @@ if (!function_exists('getClassName')) {
     }
 }
 
+if (!function_exists('getXmlAttribute')) {
+    function getXmlAttribute($object, $attribute)
+    {
+        if (isset($object[$attribute]))
+            return (string)$object[$attribute];
+    }
+}
+
 
 

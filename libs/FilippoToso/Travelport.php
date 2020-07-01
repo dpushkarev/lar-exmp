@@ -2,7 +2,7 @@
 
 namespace Libs\FilippoToso;
 
-use App\Adapters\XmlToCollectionAdapter;
+use App\Adapters\XmlAdapter;
 use App\Exceptions\TravelPortException;
 use Exception;
 use FilippoToso\Travelport\Endpoints;
@@ -29,7 +29,6 @@ class Travelport extends \FilippoToso\Travelport\Travelport
         $service = $this->getService($request);
         $requestClass = get_class($request);
         if ($this->logger) {
-
             try {
                 $result = $service->__soapCall('service', [$request]);
                 $this->logger->setTransactionId($result->getTransactionId());
@@ -38,7 +37,7 @@ class Travelport extends \FilippoToso\Travelport\Travelport
             } catch (\SoapFault $soapException) {
                 try {
                     /** @var  $errorInfo Collection*/
-                    $errorInfo = app()->make(XmlToCollectionAdapter::class)->parseFaultResponse($service->__getLastResponse());
+                    $errorInfo = app()->make(XmlAdapter::class)->parseFaultResponse($service->__getLastResponse());
                     $this->logger->setTransactionId($errorInfo->get('TransactionId'));
                     throw TravelPortException::getInstance($errorInfo->get('Description'), $errorInfo->get('Code'), $errorInfo->get('TransactionId'));
                 } catch (TravelPortException $travelPortException) {

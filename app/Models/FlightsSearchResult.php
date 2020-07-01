@@ -14,4 +14,9 @@ class FlightsSearchResult extends Model
         'segments' => 'array'
     ];
 
+    public function request()
+    {
+        return $this->belongsTo(FlightsSearchRequest::class, 'request_id', 'id');
+    }
+
 }

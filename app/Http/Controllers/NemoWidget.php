@@ -101,6 +101,7 @@ class NemoWidget extends BaseController
      * @param $resultId
      * @param NemoWidgetService $service
      * @return ErrorLog
+     * @throws \App\Exceptions\NemoWidgetServiceException
      */
     public function FlightInfo($resultId, NemoWidgetService $service)
     {
