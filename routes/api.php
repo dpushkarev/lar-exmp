@@ -45,11 +45,14 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL_ROUTE_NAME);
 
-    Route::post('/system/logger/error', 'NemoWidget@ErrorLog');
-    Route::get('/flights/search/history', 'NemoWidget@history');
+});
 
-    Route::get('/guide/airports/nearest', function () {
-        return '{
+Route::post('/system/logger/error', 'NemoWidget@ErrorLog');
+Route::get('/flights/search/history', 'NemoWidget@history');
+Route::get('/flights/search/flightInfo/{id}', 'NemoWidget@flightInfo')->where('id', '\d+');
+
+Route::get('/guide/airports/nearest', function () {
+    return '{
            "guide":{
               "countries":{
                  "RS":{
@@ -107,12 +110,11 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
               }
            }
         }';
-    });
-
-    Route::any('{some}', function () {
-        throw new NotFoundHttpException('Api not found');
-    })->where('some', '.*');
 });
+
+Route::any('{some}', function () {
+    throw new NotFoundHttpException('Api not found');
+})->where('some', '.*');
 
 
 

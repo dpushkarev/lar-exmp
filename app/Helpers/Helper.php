@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('human_file_size')) {
+if (!function_exists('cartesianArray')) {
     function cartesianArray($array)
     {
         if ($array) {
@@ -12,3 +12,13 @@ if (!function_exists('human_file_size')) {
             yield[];
     }
 }
+
+if (!function_exists('getClassName')) {
+    function getClassName($className)
+    {
+        return (new \ReflectionClass($className))->getShortName();
+    }
+}
+
+
+

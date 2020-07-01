@@ -12,6 +12,7 @@ use App\Http\Resources\NemoWidget\ErrorSearchId;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Http\Resources\NemoWidget\History;
 use App\Models\Error;
+use App\Models\FlightsSearchResult;
 use App\Services\NemoWidgetService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -94,6 +95,24 @@ class NemoWidget extends BaseController
         ]);
 
         return new ErrorLog("f9ed00a9");
+    }
+
+    /**
+     * @param $resultId
+     * @param NemoWidgetService $service
+     * @return ErrorLog
+     */
+    public function FlightInfo($resultId, NemoWidgetService $service)
+    {
+        $result = FlightsSearchResult::find($resultId);
+
+        if(null === $result) {
+            return new ErrorLog("f9ed00a9");
+        }
+
+        $service->getFlightInfo($result);
+
+        die;
     }
 
     public function history()

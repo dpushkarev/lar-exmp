@@ -21,7 +21,7 @@ class ApiException extends \Exception
     /**
      * @param $message
      * @param null $code
-     * @return TravelPortException
+     * @return ApiException
      */
     public static function getInstance($message, $code = null): self
     {

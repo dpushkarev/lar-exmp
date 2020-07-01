@@ -13,4 +13,5 @@ class FlightsSearchResult extends Model
     protected $casts = [
         'segments' => 'array'
     ];
+
 }

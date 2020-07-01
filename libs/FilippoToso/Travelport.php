@@ -2,10 +2,12 @@
 
 namespace Libs\FilippoToso;
 
+use App\Adapters\XmlToCollectionAdapter;
 use App\Exceptions\TravelPortException;
 use Exception;
 use FilippoToso\Travelport\Endpoints;
 use FilippoToso\Travelport\Exceptions\InvalidRegionException;
+use Illuminate\Support\Collection;
 
 /**
  * Class Travelport
@@ -25,26 +27,30 @@ class Travelport extends \FilippoToso\Travelport\Travelport
         }
 
         $service = $this->getService($request);
-
+        $requestClass = get_class($request);
         if ($this->logger) {
 
             try {
                 $result = $service->__soapCall('service', [$request]);
                 $this->logger->setTransactionId($result->getTransactionId());
+                $responseClass = get_class($result);
                 return $result;
             } catch (\SoapFault $soapException) {
                 try {
-                    $errorInfo = $this->parseFaultResponse($service->__getLastResponse());
-                    $this->logger->setTransactionId($errorInfo['TransactionId']);
-                    throw TravelPortException::getInstance($errorInfo['Description'], $errorInfo['Code'], $errorInfo['TransactionId']);
+                    /** @var  $errorInfo Collection*/
+                    $errorInfo = app()->make(XmlToCollectionAdapter::class)->parseFaultResponse($service->__getLastResponse());
+                    $this->logger->setTransactionId($errorInfo->get('TransactionId'));
+                    throw TravelPortException::getInstance($errorInfo->get('Description'), $errorInfo->get('Code'), $errorInfo->get('TransactionId'));
                 } catch (TravelPortException $travelPortException) {
                     throw $travelPortException;
                 } catch (Exception $exception) {
                     throw TravelPortException::getInstance($soapException->getMessage(), $soapException->getCode());
+                } finally {
+                    $responseClass = str_replace('Req', 'Rsp', $requestClass);
                 }
             } finally {
-                $this->logger->log('request', $service, $request, $service->__getLastRequest());
-                $this->logger->log('response', $service, $request, $service->__getLastResponse());
+                $this->logger->log($requestClass, $service, $request, $service->__getLastRequest());
+                $this->logger->log($responseClass, $service, $request, $service->__getLastResponse());
             }
         }
 
@@ -86,14 +92,6 @@ class Travelport extends \FilippoToso\Travelport\Travelport
         }
 
         return false;
-    }
-
-    protected function parseFaultResponse(string $response)
-    {
-        $clean_xml = str_ireplace(['SOAP-ENV:', 'SOAP:', 'common_v49_0:'], '', $response);
-        $xml = simplexml_load_string($clean_xml);
-
-        return (array) $xml->Body->Fault->detail->ErrorInfo;
     }
 
 }

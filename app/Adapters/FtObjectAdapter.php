@@ -25,7 +25,7 @@ use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\Air\typeTaxInfo;
 use Illuminate\Support\Collection;
 
-class TravelPortAdapter extends NemoWidgetAbstractAdapter
+class FtObjectAdapter extends NemoWidgetAbstractAdapter
 {
     protected $FareAttributes = [
         1 => [
@@ -64,7 +64,12 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
         'N' => 'Not offered',
     ];
 
-    public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp): Collection
+    /**
+     * @param LowFareSearchRsp $searchRsp
+     * @param int $requesId
+     * @return Collection
+     */
+    public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp, int $requesId): Collection
     {
         /** @var  $airSegment typeBaseAirSegment */
         /** @var  $results LowFareSearchRsp */
@@ -316,7 +321,7 @@ class TravelPortAdapter extends NemoWidgetAbstractAdapter
                 }
 
                 $flightsSearchResult = FlightsSearchResult::forceCreate([
-                    'transaction_id' => $searchRsp->getTransactionId(),
+                    'request_id' => $requesId,
                     'price' => $p,
                     'segments' => $segmentsCollection->toArray(),
                 ]);

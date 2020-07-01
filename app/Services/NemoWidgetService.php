@@ -5,27 +5,37 @@ namespace App\Services;
 
 
 use App\Adapters\ModelAdapter;
-use App\Adapters\TravelPortAdapter;
+use App\Adapters\ftObjectAdapter;
+use App\Adapters\XmlAdapter;
 use App\Dto\FlightsSearchRequestDto;
+use App\Exceptions\NemoWidgetServiceException;
 use App\Exceptions\TravelPortException;
 use App\Facades\TP;
+use App\Logging\TravelPortLogger;
 use App\Models\Airline;
 use App\Models\Country;
 use App\Models\FlightsSearchRequest;
+use App\Models\FlightsSearchResult;
 use App\Models\VocabularyName;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 class NemoWidgetService
 {
-    protected $travelPortAdapter;
+    protected $ftObjectAdapter;
     protected $modelAdapter;
+    protected $xmlAdapter;
 
-    public function __construct(TravelPortAdapter $travelPortAdapter, ModelAdapter $modelAdapter)
+    public function __construct(
+        FtObjectAdapter $ftObjectAdapter,
+        ModelAdapter $modelAdapter,
+        XmlAdapter $xmlAdapter
+    )
     {
-        $this->travelPortAdapter = $travelPortAdapter;
+        $this->ftObjectAdapter = $ftObjectAdapter;
         $this->modelAdapter = $modelAdapter;
+        $this->xmlAdapter = $xmlAdapter;
     }
 
     public function autocomplete($q, $iataCode = null)
@@ -72,8 +82,7 @@ class NemoWidgetService
 
     /**
      * @param FlightsSearchRequestModel $request
-     * @return \Illuminate\Support\Collection
-     * @throws TravelPortException
+     * @return Collection
      */
     public function flightsSearchResult(FlightsSearchRequest $request)
     {
@@ -93,7 +102,7 @@ class NemoWidgetService
 //            print_r('<pre>');
 //            print_r($lowFareSearchRsp);die;
 
-            $LowFareSearchAdapt = $this->travelPortAdapter->LowFareSearchAdapt($lowFareSearchRsp);
+            $LowFareSearchAdapt = $this->ftObjectAdapter->LowFareSearchAdapt($lowFareSearchRsp, $request->id);
             $LowFareSearchAdapt->put('request', $request);
 
             $request->transaction_id = $lowFareSearchRsp->getTransactionId();
@@ -113,5 +122,21 @@ class NemoWidgetService
             $request->save();
         }
     }
+
+    /**
+     * @param FlightsSearchResult $resultModel
+     * @throws NemoWidgetServiceException
+     */
+    public function getFlightInfo(FlightsSearchResult $resultModel)
+    {
+        $log = TravelPortLogger::getLog(LowFareSearchRsp::class, $resultModel->transaction_id);
+
+        if(null === $log) {
+            throw NemoWidgetServiceException::getInstance('Log of result was not found');
+        }
+
+        $airSegments = $this->xmlAdapter->getSegments($log, $resultModel->segments);
+    }
+
 
 }
