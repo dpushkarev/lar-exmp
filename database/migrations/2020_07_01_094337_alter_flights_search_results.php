@@ -19,7 +19,7 @@ class AlterFlightsSearchResults extends Migration
         Schema::table($this->table, function (Blueprint $table) {
             $table->bigIncrements('id')->change();
             $table->dropColumn('transaction_id');
-            $table->integer('request_id')->comment('Id of request')->after('id');
+            $table->integer('flight_search_request_id')->comment('Id of flight_search_request')->after('id');
         });
     }
 
@@ -32,7 +32,7 @@ class AlterFlightsSearchResults extends Migration
     {
         Schema::table($this->table, function (Blueprint $table) {
             $table->increments('id')->change();
-            $table->dropColumn('request_id');
+            $table->dropColumn('flight_search_request_id');
             $table->string('transaction_id')->nullable()->default(null)->comment('TransactionId of FT')->after('id');
         });
     }

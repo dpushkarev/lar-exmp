@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Dto\AirPriceRequestDto;
 use App\Dto\FlightsSearchRequestDto;
 use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
@@ -44,7 +45,7 @@ class TravelPortService
     protected function execute($request)
     {
         try {
-            $result =  $this->travelPort->execute($request);
+            $result = $this->travelPort->execute($request);
         } catch (TravelPortException $travelPortException) {
             throw $travelPortException;
         }
@@ -63,14 +64,29 @@ class TravelPortService
         return $this->execute($request);
     }
 
-    public function LowFareSearchAsyncReq(FlightsSearchRequestDto $dto)
+    public function AirPriceReq(AirPriceRequestDto $dto)
     {
-        try {
-            $request = $this->getLowFareSearchAsyncRequest($dto);
-            return $this->travelPort->execute($request);
-        } catch (\SoapFault $e) {
-            throw TravelPortException::getInstance($e->getMessage());
-        }
+        $request = $this->getAirPriceRequest($dto);
+        return $this->execute($request);
+    }
+
+    protected function getAirPriceRequest(AirPriceRequestDto $dto)
+    {
+        /** @var  $airPriceRequest Air\AirPriceReq */
+        $airPriceRequest = app()->make(Air\AirPriceReq::class);
+
+        $billingPointOfSaleInfo = $this->getBillingPointOfSaleInfo();
+        $airItinerary = $this->getAirSegments($dto->getSegments());
+        $airPricingModifiers = $this->getAirPricingModifiers();
+        $searchPassengers = $this->getSearchPassengers($dto->getPassengers());
+        $aiePricingCommand = $this->getAirPricingCommand($dto->getBookings());
+
+        return $airPriceRequest
+            ->setAirItinerary($airItinerary)
+            ->setBillingPointOfSaleInfo($billingPointOfSaleInfo)
+            ->setAirPricingModifiers($airPricingModifiers)
+            ->setSearchPassenger($searchPassengers)
+            ->setAirPricingCommand($aiePricingCommand);
     }
 
     /**
@@ -79,6 +95,48 @@ class TravelPortService
     protected function getBillingPointOfSaleInfo()
     {
         return (new Air\BillingPointOfSaleInfo(static::APPLICATION));
+    }
+
+    protected function getAirPricingCommand($bookings)
+    {
+        $airSegmentPricingModifiers = [];
+        foreach ($bookings as $booking) {
+            $airSegmentPricingModifiers[] = (new Air\AirSegmentPricingModifiers())
+                ->setAirSegmentRef(getXmlAttribute($booking, 'SegmentRef'))
+                ->setPermittedBookingCodes((new Air\PermittedBookingCodes())
+                    ->setBookingCode(getXmlAttribute($booking, 'BookingCode')));
+        }
+
+        return (new Air\AirPricingCommand())->setAirPricingModifiers($airSegmentPricingModifiers);
+    }
+
+    protected function getAirSegments($segments)
+    {
+        $airSegments = [];
+        foreach ($segments as $segment) {
+            $airSegments[] = (new Air\typeBaseAirSegment())
+                ->setKey(getXmlAttribute($segment, 'Key'))
+                ->setGroup(getXmlAttribute($segment, 'Group'))
+                ->setCarrier(getXmlAttribute($segment, 'Carrier'))
+                ->setFlightNumber(getXmlAttribute($segment, 'FlightNumber'))
+                ->setOrigin(getXmlAttribute($segment, 'Origin'))
+                ->setDestination(getXmlAttribute($segment, 'Destination'))
+                ->setDepartureTime(getXmlAttribute($segment, 'DepartureTime'))
+                ->setArrivalTime(getXmlAttribute($segment, 'ArrivalTime'))
+                ->setFlightTime(getXmlAttribute($segment, 'FlightTime'))
+                ->setDistance(getXmlAttribute($segment, 'Distance'))
+                ->setETicketability(getXmlAttribute($segment, 'ETicketability'))
+                ->setEquipment(getXmlAttribute($segment, 'Equipment'))
+                ->setChangeOfPlane(getXmlAttribute($segment, 'ChangeOfPlane'))
+                ->setParticipantLevel(getXmlAttribute($segment, 'ParticipantLevel'))
+                ->setPolledAvailabilityOption(getXmlAttribute($segment, 'PolledAvailabilityOption'))
+                ->setOptionalServicesIndicator(getXmlAttribute($segment, 'OptionalServicesIndicator'))
+                ->setAvailabilitySource(getXmlAttribute($segment, 'AvailabilitySource'))
+                ->setAvailabilityDisplayType(getXmlAttribute($segment, 'AvailabilityDisplayType'))
+                ->setProviderCode(static::GALILEO_PROVIDER_ID);
+        }
+
+        return (new Air\AirItinerary())->setAirSegment($airSegments);
     }
 
     /**
@@ -110,7 +168,6 @@ class TravelPortService
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
             ->setReturnFareAttributes(true)
             ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
-//            ->setBrandModifiers((new Air\BrandModifiers())->setFareFamilyDisplay((new FareFamilyDisplay())->setModifierType('FareFamily')));
     }
 
     protected function getLowFareSearchAsyncRequest(FlightsSearchRequestDto $dto)
@@ -190,7 +247,9 @@ class TravelPortService
         foreach ($passengers as $passenger) {
             for ($i = 0; $i < $passenger['count']; $i++) {
                 $searchPassengers[] = (new Air\SearchPassenger)
-                    ->setCode(static::PASSENGERS_MAP[$passenger['type']] ?? $passenger['type']);
+                    ->setCode(static::PASSENGERS_MAP[$passenger['type']] ?? $passenger['type'])
+                    ->setBookingTravelerRef(base64_encode(rand(10000000, 20000000)))
+                    ->setKey(base64_encode(rand(10000000, 20000000)));
             }
         }
 

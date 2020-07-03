@@ -16,7 +16,7 @@ class FlightsSearchResult extends Model
 
     public function request()
     {
-        return $this->belongsTo(FlightsSearchRequest::class, 'request_id', 'id');
+        return $this->belongsTo(FlightsSearchRequest::class, 'flight_search_request_id', 'id');
     }
 
 }

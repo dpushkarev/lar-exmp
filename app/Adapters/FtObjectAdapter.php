@@ -13,6 +13,7 @@ use App\Models\FlightsSearchResult;
 use App\Services\TravelPortService;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPricePoint;
+use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\BookingInfo;
 use FilippoToso\Travelport\Air\FareInfo;
@@ -66,14 +67,13 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
     /**
      * @param LowFareSearchRsp $searchRsp
-     * @param int $requesId
+     * @param int $requestId
      * @return Collection
      */
-    public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp, int $requesId): Collection
+    public function LowFareSearchAdapt(LowFareSearchRsp $searchRsp, int $requestId): Collection
     {
         /** @var  $airSegment typeBaseAirSegment */
         /** @var  $results LowFareSearchRsp */
-
         $countries = collect();
         $cities = collect();
         $airports = collect();
@@ -321,7 +321,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 }
 
                 $flightsSearchResult = FlightsSearchResult::forceCreate([
-                    'request_id' => $requesId,
+                    'flight_search_request_id' => $requestId,
                     'price' => $p,
                     'segments' => $segmentsCollection->toArray(),
                 ]);
@@ -347,6 +347,12 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'countries' => $countries,
             'results' => $results
         ]);
+    }
+
+    public function AirPriceAdapt(AirPriceRsp $response)
+    {
+        print_r("<pre>");
+        print_r($response);die;
     }
 }
 

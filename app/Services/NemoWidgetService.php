@@ -165,8 +165,12 @@ class NemoWidgetService
             $bookings
         );
 
+        $airPriceRsp = TP::AirPriceReq($airPriceRequestDto);
+
+        $airPriceRspAdapt = $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp);
+
         echo "<pre>";
-        print_r($airPriceRequestDto);
+        print_r($airPriceReq);
         die;
     }
 
