@@ -9,7 +9,7 @@ use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
 use FilippoToso\Travelport\Air\AirLegModifiers;
-use FilippoToso\Travelport\Air\FareFamilyDisplay;
+use FilippoToso\Travelport\Air\typeFareRuleType;
 use Libs\FilippoToso\Travelport;
 
 /**
@@ -82,6 +82,7 @@ class TravelPortService
         $aiePricingCommand = $this->getAirPricingCommand($dto->getBookings());
 
         return $airPriceRequest
+            ->setFareRuleType(typeFareRuleType::long)
             ->setAirItinerary($airItinerary)
             ->setBillingPointOfSaleInfo($billingPointOfSaleInfo)
             ->setAirPricingModifiers($airPricingModifiers)
@@ -103,11 +104,12 @@ class TravelPortService
         foreach ($bookings as $booking) {
             $airSegmentPricingModifiers[] = (new Air\AirSegmentPricingModifiers())
                 ->setAirSegmentRef(getXmlAttribute($booking, 'SegmentRef'))
-                ->setPermittedBookingCodes((new Air\PermittedBookingCodes())
-                    ->setBookingCode(getXmlAttribute($booking, 'BookingCode')));
+                ->setPermittedBookingCodes(
+                        new Air\PermittedBookingCodes(new Air\BookingCode(getXmlAttribute($booking, 'BookingCode')))
+                );
         }
 
-        return (new Air\AirPricingCommand())->setAirPricingModifiers($airSegmentPricingModifiers);
+        return (new Air\AirPricingCommand())->setAirSegmentPricingModifiers($airSegmentPricingModifiers);
     }
 
     protected function getAirSegments($segments)
@@ -165,6 +167,7 @@ class TravelPortService
     protected function getAirPricingModifiers()
     {
         return (new Air\AirPricingModifiers())
+            ->setInventoryRequestType(Air\typeInventoryRequest::DirectAccess)
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
             ->setReturnFareAttributes(true)
             ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
