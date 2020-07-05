@@ -5,7 +5,7 @@ namespace App\Services;
 
 
 use App\Adapters\ModelAdapter;
-use App\Adapters\ftObjectAdapter;
+use App\Adapters\FtObjectAdapter;
 use App\Adapters\XmlAdapter;
 use App\Dto\AirPriceRequestDto;
 use App\Dto\FlightsSearchRequestDto;
@@ -15,12 +15,15 @@ use App\Facades\TP;
 use App\Logging\TravelPortLogger;
 use App\Models\Airline;
 use App\Models\Country;
+use App\Models\FlightsSearchFlightInfo;
 use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
 use App\Models\VocabularyName;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\URL;
 
 class NemoWidgetService
 {
@@ -93,7 +96,7 @@ class NemoWidgetService
             $request->data['parameters']
         );
 
-        try{
+        try {
 //            $lowFareSearchRsp = Cache::rememberForever('result'. $request->id, function () use ($requestDto) {
 //                return TP::LowFareSearchReq($requestDto);
 //            });
@@ -119,20 +122,21 @@ class NemoWidgetService
                 ])
             ]));
             return $flightsSearchRequestAdapt;
-        } finally{
+        } finally {
             $request->save();
         }
     }
 
     /**
      * @param FlightsSearchResult $resultModel
+     * @return Collection
      * @throws NemoWidgetServiceException
      */
     public function getFlightInfo(FlightsSearchResult $resultModel)
     {
         $log = TravelPortLogger::getLog(LowFareSearchRsp::class, $resultModel->request->transaction_id);
 
-        if(null === $log) {
+        if (null === $log) {
             throw NemoWidgetServiceException::getInstance('Log of result was not found');
         }
 
@@ -141,20 +145,23 @@ class NemoWidgetService
         $airSegments = collect();
         $airSegmentKeys = collect();
         foreach ($resultModel->segments as $segmentNumber) {
-            $segmentNumber = (int) filter_var($segmentNumber, FILTER_SANITIZE_NUMBER_INT) - 1;
+            $segmentNumber = (int)filter_var($segmentNumber, FILTER_SANITIZE_NUMBER_INT) - 1;
             $airSegment = $allAirSegments[$segmentNumber] ?? null;
 
-            if(null !== $airSegment) {
+            if (null !== $airSegment) {
                 $airSegments->add($airSegment);
                 $airSegmentKeys->put(getXmlAttribute($airSegment, 'Key'), 1);
             }
         }
 
+        $airPricePoint = $this->xmlAdapter->getAirPriceByNum($log, $resultModel->price);
+        $oldTotalPrice = getXmlAttribute($airPricePoint, 'TotalPrice');
+
         $allBookings = $this->xmlAdapter->getBookingsByPriceNum($log, $resultModel->price);
 
         $bookings = collect();
         foreach ($allBookings as $booking) {
-            if($airSegmentKeys->has(getXmlAttribute($booking, 'SegmentRef'))) {
+            if ($airSegmentKeys->has(getXmlAttribute($booking, 'SegmentRef'))) {
                 $bookings->add($booking);
             }
         }
@@ -165,13 +172,17 @@ class NemoWidgetService
             $bookings
         );
 
+        /** @var  $airPriceRsp AirPriceRsp */
         $airPriceRsp = TP::AirPriceReq($airPriceRequestDto);
+        $order = FlightsSearchFlightInfo::forceCreate([
+            'transaction_id' => $airPriceRsp->getTransactionId(),
+            'flight_search_result_id' => $resultModel->id
+        ]);
 
-        $airPriceRspAdapt = $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp);
+        $aiePriceRsp =  $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
+        $aiePriceRsp->put('createOrderLink', URL::route('order', ['id' => $order->id ], false));
 
-        echo "<pre>";
-        print_r($airPriceReq);
-        die;
+        return $aiePriceRsp;
     }
 
 

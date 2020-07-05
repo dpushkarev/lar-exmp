@@ -7,10 +7,10 @@ GET http://127.0.0.1:8081/api/guide/airlines/all
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/3
+POST http://127.0.0.1:8081/api/flights/search/results/4
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/results/2
+GET http://127.0.0.1:8081/api/flights/search/results/4
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
@@ -31,6 +31,6 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
 GET http://127.0.0.1:8081/api/flights/search/history
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/16
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/35
 
 ###

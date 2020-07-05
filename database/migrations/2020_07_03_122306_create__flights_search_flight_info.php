@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFlightsSearchFlightInfo extends Migration
 {
-    public $table = 'flights_search_flight_info';
+    public $table = 'flights_search_flight_infos';
 
     /**
      * Run the migrations.

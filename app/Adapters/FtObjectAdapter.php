@@ -13,8 +13,10 @@ use App\Models\FlightsSearchResult;
 use App\Services\TravelPortService;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPricePoint;
+use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
+use FilippoToso\Travelport\Air\AirPricingSolution;
 use FilippoToso\Travelport\Air\BookingInfo;
 use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\FlightDetails;
@@ -349,10 +351,40 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         ]);
     }
 
-    public function AirPriceAdapt(AirPriceRsp $response)
+    public function AirPriceAdapt(AirPriceRsp $response, $oldTotalPrice)
     {
-        print_r("<pre>");
-        print_r($response);die;
+        $newTotalPrice = null;
+        /** @var  $airPricingResult AirPriceResult */
+        foreach ($response->getAirPriceResult() as $keyApr => $airPricingResult) {
+            /** @var  $airPricingSolution AirPricingSolution */
+            foreach ($airPricingResult->getAirPricingSolution() as $keyAps => $airPricingSolution) {
+                if ($keyApr === 0 && $keyAps === 0) {
+                    $newTotalPrice = $airPricingSolution->getTotalPrice();
+                }
+
+                if ($airPricingSolution->getTotalPrice() === $oldTotalPrice) {
+                    $newTotalPrice = $airPricingSolution->getTotalPrice();
+                    break 2;
+                }
+            }
+        }
+
+        return collect([
+            "priceStatus" => [
+                "changed" => (bool) ($oldTotalPrice !== $newTotalPrice),
+                "oldValue" => [
+                    'amount' => substr($oldTotalPrice, 3),
+                    'currency' => substr($oldTotalPrice, 0, 3)
+                ],
+                "newValue" => [
+                    'amount' => substr($newTotalPrice, 3),
+                    'currency' => substr($newTotalPrice, 0, 3)
+                ]
+            ],
+            "hasAltFlights" => '?', // ?
+            "tariffRules" => ['?'], //?
+            "isAvail" => '?', // ?
+        ]);
     }
 }
 

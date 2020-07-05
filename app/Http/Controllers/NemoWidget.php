@@ -9,6 +9,7 @@ use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
 use App\Http\Resources\NemoWidget\ErrorLog;
 use App\Http\Resources\NemoWidget\ErrorSearchId;
+use App\Http\Resources\NemoWidget\FlightsSearchFlightInfo;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Http\Resources\NemoWidget\History;
 use App\Models\Error;
@@ -100,7 +101,7 @@ class NemoWidget extends BaseController
     /**
      * @param $resultId
      * @param NemoWidgetService $service
-     * @return ErrorLog
+     * @return ErrorLog|FlightsSearchFlightInfo
      * @throws \App\Exceptions\NemoWidgetServiceException
      */
     public function FlightInfo($resultId, NemoWidgetService $service)
@@ -111,9 +112,14 @@ class NemoWidget extends BaseController
             return new ErrorLog("f9ed00a9");
         }
 
-        $service->getFlightInfo($result);
+        $flightInfo = $service->getFlightInfo($result);
 
-        die;
+        return new FlightsSearchFlightInfo($flightInfo);
+    }
+
+    public function order($id)
+    {
+        dd('what did you expect to see here?');
     }
 
     public function history()

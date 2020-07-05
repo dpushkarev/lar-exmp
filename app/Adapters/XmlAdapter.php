@@ -59,4 +59,14 @@ class XmlAdapter extends NemoWidgetAbstractAdapter
         return $bookings;
     }
 
+    public function getAirPriceByNum($xml, string $price)
+    {
+        $priceNum = (int)filter_var($price, FILTER_SANITIZE_NUMBER_INT) - 1;
+
+        $simpleObject = new \SimpleXMLElement($xml);
+        $simpleObject->registerXPathNamespace('soap', 'http://schemas.xmlsoap.org/soap/envelope/');
+        $simpleObject->registerXPathNamespace('air', 'http://www.travelport.com/schema/air_v49_0');
+        return $simpleObject->xpath('//air:AirPricePoint')[$priceNum];
+    }
+
 }
