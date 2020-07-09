@@ -30,9 +30,9 @@ class FlightsSearchTest extends TestCase
 
         TP::shouldReceive('LowFareSearchReq')
             ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/LowFareSearchRsp.txt')));
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.object')));
 
-        $body = file_get_contents(__DIR__ . '/files/LowFareSearchReq.txt');
+        $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req.json');
 
         $search = $this->json('POST', '/api/flights/search/request', [
             'request' => $body
@@ -123,9 +123,9 @@ class FlightsSearchTest extends TestCase
 
         TP::shouldReceive('LowFareSearchReq')
             ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/LowFareSearchRsp2.txt')));
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp-2.object')));
 
-        $body = file_get_contents(__DIR__ . '/files/LowFareSearchReq2.txt');
+        $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req-2.json');
 
         $search = $this->json('POST', '/api/flights/search/request', [
             'request' => $body
