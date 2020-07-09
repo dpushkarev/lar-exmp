@@ -3,7 +3,10 @@
 namespace Tests\Unit;
 
 use App\Facades\TP;
+use App\Logging\TravelPortLogger;
+use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
+use Faker\Factory;
 use Tests\TestCase;
 
 class FlightsSearchTest extends TestCase
@@ -15,6 +18,7 @@ class FlightsSearchTest extends TestCase
         parent::setUp();
         $this->useTable('flights_search_requests');
         $this->useTable('flights_search_results');
+        $this->useTable('flights_search_flight_infos');
         $this->useTableWithData('aircrafts');
 
     }
@@ -112,7 +116,7 @@ class FlightsSearchTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testFlightsSearchConnecting ()
+    public function testFlightsSearchConnecting()
     {
         $transaction_id = 'D7B751950A076478474E55721925C6F6';
         $countOfPassenger = 3;
@@ -219,5 +223,30 @@ class FlightsSearchTest extends TestCase
             ->assertStatus(200)
             ->assertJsonPath('flights.search.results.info.errorCode', 410)
             ->assertJsonPath('flights.search.results.info.errorMessageEng', 'Invalid SearchId');
+    }
+
+    public function testFlightsSearchFlightInfo()
+    {
+        $request = \factory(FlightsSearchRequest::class, 1)->create([
+            'data' => json_decode(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-req.json'))
+        ])->first();
+        $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id])->first();
+
+        TP::shouldReceive('AirPriceReq')
+            ->once()
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightInfo/AirPriceRsp.txt')));
+
+
+        $this->json('GET', '/api/flights/search/flightInfo/' . $request->id)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.changed', false)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 93405)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.currency', 'RSD')
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 93405)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
+            ->assertStatus(200);
+
+        $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '306D9E840A07643C9582D8AB2D77F282']);
+
+
     }
 }

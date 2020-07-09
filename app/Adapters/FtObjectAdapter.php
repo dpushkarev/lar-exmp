@@ -373,11 +373,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             "priceStatus" => [
                 "changed" => (bool) ($oldTotalPrice !== $newTotalPrice),
                 "oldValue" => [
-                    'amount' => substr($oldTotalPrice, 3),
+                    'amount' => (int) substr($oldTotalPrice, 3),
                     'currency' => substr($oldTotalPrice, 0, 3)
                 ],
                 "newValue" => [
-                    'amount' => substr($newTotalPrice, 3),
+                    'amount' => (int) substr($newTotalPrice, 3),
                     'currency' => substr($newTotalPrice, 0, 3)
                 ]
             ],

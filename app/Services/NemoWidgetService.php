@@ -144,6 +144,7 @@ class NemoWidgetService
 
         $airSegments = collect();
         $airSegmentKeys = collect();
+
         foreach ($resultModel->segments as $segmentNumber) {
             $segmentNumber = (int)filter_var($segmentNumber, FILTER_SANITIZE_NUMBER_INT) - 1;
             $airSegment = $allAirSegments[$segmentNumber] ?? null;

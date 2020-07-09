@@ -1,0 +1,1121 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP:Body>
+        <air:LowFareSearchRsp TraceId="1833e8a802eab0dd3a998a50a1ad19af1ad197d6"
+                              TransactionId="157C73BC0A07643BD15C9497E003D989" ResponseTime="1602" DistanceUnits="MI"
+                              CurrencyType="RSD" xmlns:air="http://www.travelport.com/schema/air_v49_0">
+            <air:FlightDetailsList>
+                <air:FlightDetails Key="WflFQM7Q2BKAlySdAAAAAA==" Origin="BEG" Destination="FCO"
+                                   DepartureTime="2020-09-15T07:00:00.000+02:00"
+                                   ArrivalTime="2020-09-15T08:30:00.000+02:00" FlightTime="90" TravelTime="90"
+                                   Equipment="319" OriginTerminal="2" DestinationTerminal="3"/>
+                <air:FlightDetails Key="WflFQM7Q2BKAnySdAAAAAA==" Origin="FCO" Destination="BEG"
+                                   DepartureTime="2020-09-25T20:50:00.000+02:00"
+                                   ArrivalTime="2020-09-25T22:25:00.000+02:00" FlightTime="95" TravelTime="95"
+                                   Equipment="319" OriginTerminal="3" DestinationTerminal="2"/>
+                <air:FlightDetails Key="WflFQM7Q2BKApySdAAAAAA==" Origin="FCO" Destination="BEG"
+                                   DepartureTime="2020-09-25T09:15:00.000+02:00"
+                                   ArrivalTime="2020-09-25T10:50:00.000+02:00" FlightTime="95" TravelTime="95"
+                                   Equipment="320" OriginTerminal="1" DestinationTerminal="2"/>
+                <air:FlightDetails Key="WflFQM7Q2BKArySdAAAAAA==" Origin="BEG" Destination="FCO"
+                                   DepartureTime="2020-09-15T18:35:00.000+02:00"
+                                   ArrivalTime="2020-09-15T20:15:00.000+02:00" FlightTime="100" TravelTime="100"
+                                   Equipment="320" OriginTerminal="2" DestinationTerminal="3"/>
+            </air:FlightDetailsList>
+            <air:AirSegmentList>
+                <air:AirSegment Key="WflFQM7Q2BKAkySdAAAAAA==" Group="0" Carrier="JU" FlightNumber="530" Origin="BEG"
+                                Destination="FCO" DepartureTime="2020-09-15T07:00:00.000+02:00"
+                                ArrivalTime="2020-09-15T08:30:00.000+02:00" FlightTime="90" Distance="448"
+                                ETicketability="Yes" Equipment="319" ChangeOfPlane="false"
+                                ParticipantLevel="Secure Sell" LinkAvailability="true"
+                                PolledAvailabilityOption="Cached status used. Polled avail exists"
+                                OptionalServicesIndicator="false" AvailabilitySource="P"
+                                AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="WflFQM7Q2BKAlySdAAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="WflFQM7Q2BKAmySdAAAAAA==" Group="1" Carrier="JU" FlightNumber="535" Origin="FCO"
+                                Destination="BEG" DepartureTime="2020-09-25T20:50:00.000+02:00"
+                                ArrivalTime="2020-09-25T22:25:00.000+02:00" FlightTime="95" Distance="448"
+                                ETicketability="Yes" Equipment="319" ChangeOfPlane="false"
+                                ParticipantLevel="Secure Sell" LinkAvailability="true"
+                                PolledAvailabilityOption="Cached status used. Polled avail exists"
+                                OptionalServicesIndicator="false" AvailabilitySource="P"
+                                AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="WflFQM7Q2BKAnySdAAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="WflFQM7Q2BKAoySdAAAAAA==" Group="1" Carrier="JU" FlightNumber="7258" Origin="FCO"
+                                Destination="BEG" DepartureTime="2020-09-25T09:15:00.000+02:00"
+                                ArrivalTime="2020-09-25T10:50:00.000+02:00" FlightTime="95" Distance="448"
+                                ETicketability="Yes" Equipment="320" ChangeOfPlane="false"
+                                ParticipantLevel="Secure Sell" LinkAvailability="true"
+                                PolledAvailabilityOption="Cached status used. Polled avail exists"
+                                OptionalServicesIndicator="false" AvailabilitySource="P"
+                                AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="AZ" OperatingFlightNumber="592">ALITALIA SOCIET AEREA IT
+                    </air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="WflFQM7Q2BKApySdAAAAAA=="/>
+                </air:AirSegment>
+                <air:AirSegment Key="WflFQM7Q2BKAqySdAAAAAA==" Group="0" Carrier="JU" FlightNumber="7259" Origin="BEG"
+                                Destination="FCO" DepartureTime="2020-09-15T18:35:00.000+02:00"
+                                ArrivalTime="2020-09-15T20:15:00.000+02:00" FlightTime="100" Distance="448"
+                                ETicketability="Yes" Equipment="320" ChangeOfPlane="false"
+                                ParticipantLevel="Secure Sell" LinkAvailability="true"
+                                PolledAvailabilityOption="Cached status used. Polled avail exists"
+                                OptionalServicesIndicator="false" AvailabilitySource="P"
+                                AvailabilityDisplayType="Fare Shop/Optimal Shop">
+                    <air:CodeshareInfo OperatingCarrier="AZ" OperatingFlightNumber="597">ALITALIA SOCIET AEREA IT
+                    </air:CodeshareInfo>
+                    <air:AirAvailInfo ProviderCode="1G"/>
+                    <air:FlightDetailsRef Key="WflFQM7Q2BKArySdAAAAAA=="/>
+                </air:AirSegment>
+            </air:AirSegmentList>
+            <air:FareInfoList>
+                <air:FareInfo Key="WflFQM7Q2BKAsySdAAAAAA==" FareBasis="ENB03RRS" PassengerTypeCode="ADT" Origin="BEG"
+                              Destination="FCO" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-15"
+                              Amount="RSD1239" NegotiatedFare="false" NotValidBefore="2020-09-15"
+                              NotValidAfter="2020-09-15">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>0</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAsySdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNTkEOwjAMe8zke9JSVbuVZQXEoUiDHXrh/8/ADUMiVWLHbpOWUoIEkSyx/MeE93Tf0XYDGgLzYg+o5hnKpkNEE2pbJG7bEz5jptL89APVL1qySMCaLHytEehel3qlJz55IMZmDMoX+JF6I23n9VWNK+VELR2WZPCjH1p/K0Y=
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAk2SdAAAAAA==" BrandID="267814" UpSellBrandID="267813" BrandTier="0001">
+                        <air:UpsellBrand FareBasis="ECS03RRS" FareInfoRef="WflFQM7Q2BKAszSdAAAAAA=="/>
+                    </air:Brand>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKA+ySdAAAAAA==" FareBasis="ENB03RRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD1238" NegotiatedFare="false" NotValidBefore="2020-09-25"
+                              NotValidAfter="2020-09-25">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>0</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKA+ySdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNjjEOwzAIRQ8T/R3jIiubG+Im6kCltBmy9P7HKKapVCT7f3gYXGtlYqJCuf7HgPdw32G7Agb2M7UFKZUxkgNESdBsorxtT8SMkcWRBf5qikYVzS6YRTnQYR7nfdOHM4rJXdE3o1t/gZ9pq1u7zq+mvpIuXpMTUYF/9ANbuitT
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAm2SdAAAAAA==" BrandID="267814" UpSellBrandID="267813" BrandTier="0001">
+                        <air:UpsellBrand FareBasis="ECS03RRS" FareInfoRef="WflFQM7Q2BKA8zSdAAAAAA=="/>
+                    </air:Brand>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKA3ySdAAAAAA==" FareBasis="ECSRRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD4659" NegotiatedFare="false" NotValidBefore="2020-09-20">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKA3ySdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNjksOwjAMRA9Tzd5xGkXsAiZQdRGkhi664f7HYOoWCUvOTPL8SSlFRUWyxPIfAz7DvKKtBjQo81afGMeY/bJBJCRU68vS4RMumgiaw0ODl1mySIHFqo62xjjPh73IxOdSA/a92C078DN1om3X+7uadVbzLZ1IMvjNLw4GKvs=
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAo2SdAAAAAA==" BrandID="267813" UpSellBrandID="267812" BrandTier="0002">
+                        <air:UpsellBrand FareBasis="UFXRRS" FareInfoRef="WflFQM7Q2BKA3zSdAAAAAA=="/>
+                    </air:Brand>
+                    <air:FareAttributes>2,N|3,N|4,N|5,N|7,N</air:FareAttributes>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKANzSdAAAAAA==" FareBasis="ECSRRS" PassengerTypeCode="ADT" Origin="BEG"
+                              Destination="FCO" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-15"
+                              Amount="RSD4659" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKANzSdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNTkEOwyAMe0zle4AitBtbxlb1wKSyHrjs/8+YSTtpQcFOHExyzl68SJKQ/2PCZ1p31F2BCs986AvzHBIciw4RF1G0bVuDOVxYVzv9RGdjGjUQoKH4QxqBbvetPKmJ+RIdxr8YlC/wI2Uhrdf7u6g2TrMXT0kSuOYXDLkq7g==
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAq2SdAAAAAA==" BrandID="267813" UpSellBrandID="267812" BrandTier="0002">
+                        <air:UpsellBrand FareBasis="UFXRRS" FareInfoRef="WflFQM7Q2BKAL0SdAAAAAA=="/>
+                    </air:Brand>
+                    <air:FareAttributes>2,N|3,N|4,N|5,N|7,N</air:FareAttributes>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKAdzSdAAAAAA==" FareBasis="ENB03RRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD1239" NegotiatedFare="false" NotValidBefore="2020-09-25"
+                              NotValidAfter="2020-09-25">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>0</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAdzSdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNjjEOwzAIRQ8T/R3jIiubG+Im6kCltBmy9P7HKKapVCT7f3gYXGtlYqJCuf7HgPdw32G7Agb2M7UFKZUxkgNESdBsorxtT8SMkcWRBf5qikYVzS6YRTnQYR7nfdOHM4rJXdE3o1t/gZ9pq1u7zq+mvpIuXpMTUYF/9ANbuitT
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAs2SdAAAAAA==" BrandID="267814" UpSellBrandID="267813" BrandTier="0001">
+                        <air:UpsellBrand FareBasis="ECS03RRS" FareInfoRef="WflFQM7Q2BKAb0SdAAAAAA=="/>
+                    </air:Brand>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKAYzSdAAAAAA==" FareBasis="ECSRRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD4660" NegotiatedFare="false" NotValidBefore="2020-09-20">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAYzSdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNjksOwjAMRA9Tzd5xGkXsAiZQdRGkhi664f7HYOoWCUvOTPL8SSlFRUWyxPIfAz7DvKKtBjQo81afGMeY/bJBJCRU68vS4RMumgiaw0ODl1mySIHFqo62xjjPh73IxOdSA/a92C078DN1om3X+7uadVbzLZ1IMvjNLw4GKvs=
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAu2SdAAAAAA==" BrandID="267813" UpSellBrandID="267812" BrandTier="0002">
+                        <air:UpsellBrand FareBasis="UFXRRS" FareInfoRef="WflFQM7Q2BKAW0SdAAAAAA=="/>
+                    </air:Brand>
+                    <air:FareAttributes>2,N|3,N|4,N|5,N|7,N</air:FareAttributes>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKAszSdAAAAAA==" FareBasis="ECS03RRS" PassengerTypeCode="ADT" Origin="BEG"
+                              Destination="FCO" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-15"
+                              Amount="RSD3597" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAszSdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNTkEOwjAMe8zke9qsm7gVQmHiUKSNHXrh/8/ADUMiVWLHbpPmnKNEkVk0/8eA9/DYUXcDKiLzZk/oGCcENg0iIaHYJrquG3zGiUr10w4MftGSKQGmJX6tHmheL+VOT3wyMaBvRqd8gR8pC2k9X1/FuFJGaumwZAY/+gFbSytL
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAw2SdAAAAAA==" BrandID="267813" UpSellBrandFound="false"
+                               BrandTier="0002"/>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKA8zSdAAAAAA==" FareBasis="ECS03RRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD3599" NegotiatedFare="false" NotValidBefore="2020-09-20">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKA8zSdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNjrEOwjAMRD+mut2xm1ZsAROoGILU0qEL//8ZXE2RsJTc2c+xU0pRUZFRrPxHh3f3WNFWBxqU51LvsF6HSDaIpIzqi9g8L4gZJ81ELfBXUzR6dqPArWqgrTGO++ZPMonJ1IR9M3bLF/iZOtG28/VVnSulZy0fSEbwox9chitY
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKAy2SdAAAAAA==" BrandID="267813" UpSellBrandFound="false"
+                               BrandTier="0002"/>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKA3zSdAAAAAA==" FareBasis="UFXRRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD11973" NegotiatedFare="false" NotValidBefore="2020-09-20">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKA3zSdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNTssOwjAM+5jJdzddV3ErZC2IQ5EGk7YL//8ZpGVIRErsxHmllIRCRvr0bwPew31FXRWoEPNLvsJRxPdsB+kC1rItyxN9xUmCCbWLX3S9TYN6A+iUY5f2anbEoo+2yflxMqRDO4xGbQI/km9G63l+ZS0bOVotHBIj7M8PPsIrRg==
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKA02SdAAAAAA==" BrandID="267812" UpSellBrandFound="false"
+                               BrandTier="0003"/>
+                    <air:FareAttributes>2,N|3,N|4,N|5,N|7,N</air:FareAttributes>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKAL0SdAAAAAA==" FareBasis="UFXRRS" PassengerTypeCode="ADT" Origin="BEG"
+                              Destination="FCO" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-15"
+                              Amount="RSD11913" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAL0SdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNTkkOwjAMfEw1d9tpGnELuAmIQ5AKkZoL/38GTigStuwZ744xCglRIBf/ZcJ7uleUqkCBmGV9gEnEgS1qIGKPmvdte2KsOFlchrYDebSpV2cAXVL4lrqgDX9J176J3bwYEqMfRqc2gR9JN6PlvL6S5p1otpw/ShRgf34APX8rOQ==
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKA22SdAAAAAA==" BrandID="267812" UpSellBrandFound="false"
+                               BrandTier="0003"/>
+                    <air:FareAttributes>2,N|3,N|4,N|5,N|7,N</air:FareAttributes>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKAb0SdAAAAAA==" FareBasis="ECS03RRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD3657" NegotiatedFare="false" NotValidBefore="2020-09-20">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAb0SdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNjrEOwjAMRD+mut2xm1ZsAROoGILU0qEL//8ZXE2RsJTc2c+xU0pRUZFRrPxHh3f3WNFWBxqU51LvsF6HSDaIpIzqi9g8L4gZJ81ELfBXUzR6dqPArWqgrTGO++ZPMonJ1IR9M3bLF/iZOtG28/VVnSulZy0fSEbwox9chitY
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKA42SdAAAAAA==" BrandID="267813" UpSellBrandFound="false"
+                               BrandTier="0002"/>
+                </air:FareInfo>
+                <air:FareInfo Key="WflFQM7Q2BKAW0SdAAAAAA==" FareBasis="UFXRRS" PassengerTypeCode="ADT" Origin="FCO"
+                              Destination="BEG" EffectiveDate="2020-07-03T18:22:00.000+02:00" DepartureDate="2020-09-25"
+                              Amount="RSD11914" NegotiatedFare="false">
+                    <air:BaggageAllowance>
+                        <air:NumberOfPieces>1</air:NumberOfPieces>
+                        <air:MaxWeight/>
+                    </air:BaggageAllowance>
+                    <air:FareRuleKey FareInfoRef="WflFQM7Q2BKAW0SdAAAAAA==" ProviderCode="1G">
+                        gws-eJxNTssOwjAM+5jJdzddV3ErZC2IQ5EGk7YL//8ZpGVIRErsxHmllIRCRvr0bwPew31FXRWoEPNLvsJRxPdsB+kC1rItyxN9xUmCCbWLX3S9TYN6A+iUY5f2anbEoo+2yflxMqRDO4xGbQI/km9G63l+ZS0bOVotHBIj7M8PPsIrRg==
+                    </air:FareRuleKey>
+                    <air:Brand Key="WflFQM7Q2BKA62SdAAAAAA==" BrandID="267812" UpSellBrandFound="false"
+                               BrandTier="0003"/>
+                    <air:FareAttributes>2,N|3,N|4,N|5,N|7,N</air:FareAttributes>
+                </air:FareInfo>
+            </air:FareInfoList>
+            <air:RouteList>
+                <air:Route Key="WflFQM7Q2BKAq0SdAAAAAA==">
+                    <air:Leg Key="WflFQM7Q2BKA6ySdAAAAAA==" Group="0" Origin="BEG" Destination="ROM"/>
+                    <air:Leg Key="WflFQM7Q2BKA9ySdAAAAAA==" Group="1" Origin="ROM" Destination="BEG"/>
+                </air:Route>
+            </air:RouteList>
+            <air:AirPricePointList>
+                <air:AirPricePoint Key="WflFQM7Q2BKAr0SdAAAAAA==" TotalPrice="RSD54126" BasePrice="EUR63.00"
+                                   ApproximateTotalPrice="RSD54126" ApproximateBasePrice="RSD7431"
+                                   EquivalentBasePrice="RSD7431" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAs0SdAAAAAA==" TotalPrice="RSD18042" BasePrice="EUR21.00"
+                                        ApproximateTotalPrice="RSD18042" ApproximateBasePrice="RSD2477"
+                                        EquivalentBasePrice="RSD2477" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAsySdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA+ySdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAt0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAu0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAv0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAw0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAx0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAy0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAz0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKA00SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKA10SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 11.79ENB03RRS JU BEG 11.80ENB03RRS NUC23.59END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKA20SdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAsySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKA40SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA+ySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKA/ySdAAAAAA==" TotalPrice="RSD18042" BasePrice="EUR21.00"
+                                        ApproximateTotalPrice="RSD18042" ApproximateBasePrice="RSD2477"
+                                        EquivalentBasePrice="RSD2477" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAsySdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA+ySdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAAzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKABzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKACzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKADzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAEzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAFzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAGzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAHzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAIzSdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 11.79ENB03RRS JU BEG 11.80ENB03RRS NUC23.59END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAJzSdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAsySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKALzSdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA+ySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKA60SdAAAAAA==" TotalPrice="RSD64389" BasePrice="EUR150.00"
+                                   ApproximateTotalPrice="RSD64389" ApproximateBasePrice="RSD17694"
+                                   EquivalentBasePrice="RSD17694" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKA70SdAAAAAA==" TotalPrice="RSD21463" BasePrice="EUR50.00"
+                                        ApproximateTotalPrice="RSD21463" ApproximateBasePrice="RSD5898"
+                                        EquivalentBasePrice="RSD5898" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAsySdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA3ySdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKA80SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKA90SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKA-0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKA/0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAA1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAB1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAC1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAD1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAE1SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 11.79ENB03RRS JU BEG 44.38ECSRRS NUC56.17END ROE0.89013</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAF1SdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAsySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAH1SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA3ySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAtySdAAAAAA==" TotalPrice="RSD21463" BasePrice="EUR50.00"
+                                        ApproximateTotalPrice="RSD21463" ApproximateBasePrice="RSD5898"
+                                        EquivalentBasePrice="RSD5898" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAsySdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA3ySdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAuySdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAvySdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAwySdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAxySdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAyySdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAzySdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKA0ySdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKA1ySdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKA2ySdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 11.79ENB03RRS JU BEG 44.38ECSRRS NUC56.17END ROE0.89013</air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKA4ySdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAsySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKA7ySdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA3ySdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKAJ1SdAAAAAA==" TotalPrice="RSD64389" BasePrice="EUR150.00"
+                                   ApproximateTotalPrice="RSD64389" ApproximateBasePrice="RSD17694"
+                                   EquivalentBasePrice="RSD17694" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAK1SdAAAAAA==" TotalPrice="RSD21463" BasePrice="EUR50.00"
+                                        ApproximateTotalPrice="RSD21463" ApproximateBasePrice="RSD5898"
+                                        EquivalentBasePrice="RSD5898" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKANzSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAdzSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAL1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAM1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAN1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAO1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAP1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAQ1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAR1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAS1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAT1SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 44.37ECSRRS JU BEG 11.80ENB03RRS NUC56.17END ROE0.89013</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAU1SdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKANzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAW1SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAdzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAezSdAAAAAA==" TotalPrice="RSD21463" BasePrice="EUR50.00"
+                                        ApproximateTotalPrice="RSD21463" ApproximateBasePrice="RSD5898"
+                                        EquivalentBasePrice="RSD5898" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKANzSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAdzSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAfzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAgzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAhzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAizSdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAjzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAkzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAlzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAmzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAnzSdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 44.37ECSRRS JU BEG 11.80ENB03RRS NUC56.17END ROE0.89013</air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAozSdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKANzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAqzSdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAdzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKAY1SdAAAAAA==" TotalPrice="RSD74652" BasePrice="EUR237.00"
+                                   ApproximateTotalPrice="RSD74652" ApproximateBasePrice="RSD27957"
+                                   EquivalentBasePrice="RSD27957" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAZ1SdAAAAAA==" TotalPrice="RSD24884" BasePrice="EUR79.00"
+                                        ApproximateTotalPrice="RSD24884" ApproximateBasePrice="RSD9319"
+                                        EquivalentBasePrice="RSD9319" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKANzSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAYzSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAa1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAb1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAc1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAd1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAe1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAf1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAg1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAh1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAi1SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 44.37ECSRRS JU BEG 44.38ECSRRS NUC88.75END ROE0.89013</air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAj1SdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKANzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAl1SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAYzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAOzSdAAAAAA==" TotalPrice="RSD24884" BasePrice="EUR79.00"
+                                        ApproximateTotalPrice="RSD24884" ApproximateBasePrice="RSD9319"
+                                        EquivalentBasePrice="RSD9319" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        ETicketability="Yes" PlatingCarrier="JU" ProviderCode="1G"
+                                        Cat35Indicator="false">
+                        <air:FareInfoRef Key="WflFQM7Q2BKANzSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAYzSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAPzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAQzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKARzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKASzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKATzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAUzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAVzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAWzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAXzSdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 44.37ECSRRS JU BEG 44.38ECSRRS NUC88.75END ROE0.89013</air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAZzSdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKANzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAbzSdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAYzSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKAn1SdAAAAAA==" TotalPrice="RSD68283" BasePrice="EUR183.00"
+                                   ApproximateTotalPrice="RSD68283" ApproximateBasePrice="RSD21588"
+                                   EquivalentBasePrice="RSD21588" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAo1SdAAAAAA==" TotalPrice="RSD22761" BasePrice="EUR61.00"
+                                        ApproximateTotalPrice="RSD22761" ApproximateBasePrice="RSD7196"
+                                        EquivalentBasePrice="RSD7196" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAszSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA8zSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAp1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAq1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAr1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAs1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAt1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAu1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAv1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAw1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAx1SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 34.26ECS03RRS JU BEG 34.26ECS03RRS NUC68.52END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAy1SdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAszSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKA01SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA8zSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKA9zSdAAAAAA==" TotalPrice="RSD22761" BasePrice="EUR61.00"
+                                        ApproximateTotalPrice="RSD22761" ApproximateBasePrice="RSD7196"
+                                        EquivalentBasePrice="RSD7196" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAszSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA8zSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKA-zSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKA/zSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAA0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAB0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAC0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAD0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAE0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAF0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAG0SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 34.26ECS03RRS JU BEG 34.26ECS03RRS NUC68.52END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAH0SdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAszSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAJ0SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA8zSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKA21SdAAAAAA==" TotalPrice="RSD93405" BasePrice="EUR396.00"
+                                   ApproximateTotalPrice="RSD93405" ApproximateBasePrice="RSD46710"
+                                   EquivalentBasePrice="RSD46710" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKA31SdAAAAAA==" TotalPrice="RSD31135" BasePrice="EUR132.00"
+                                        ApproximateTotalPrice="RSD31135" ApproximateBasePrice="RSD15570"
+                                        EquivalentBasePrice="RSD15570" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAszSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA3zSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKA41SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKA51SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKA61SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKA71SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKA81SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKA91SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKA-1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKA/1SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAA2SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 34.26ECS03RRS JU BEG Q11.23 102.23UFXRRS NUC147.72END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAB2SdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAszSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAD2SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA3zSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAtzSdAAAAAA==" TotalPrice="RSD31135" BasePrice="EUR132.00"
+                                        ApproximateTotalPrice="RSD31135" ApproximateBasePrice="RSD15570"
+                                        EquivalentBasePrice="RSD15570" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAszSdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKA3zSdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAuzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAvzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAwzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAxzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAyzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAzzSdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKA0zSdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKA1zSdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKA2zSdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM 34.26ECS03RRS JU BEG Q11.23 102.23UFXRRS NUC147.72END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKA4zSdAAAAAA==" TravelTime="P0DT1H30M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAszSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAkySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKA6zSdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKA3zSdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKAF2SdAAAAAA==" TotalPrice="RSD93405" BasePrice="EUR396.00"
+                                   ApproximateTotalPrice="RSD93405" ApproximateBasePrice="RSD46710"
+                                   EquivalentBasePrice="RSD46710" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAG2SdAAAAAA==" TotalPrice="RSD31135" BasePrice="EUR132.00"
+                                        ApproximateTotalPrice="RSD31135" ApproximateBasePrice="RSD15570"
+                                        EquivalentBasePrice="RSD15570" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAL0SdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAb0SdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAH2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAI2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAJ2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAK2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAL2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAM2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAN2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAO2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAP2SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM Q11.23 102.23UFXRRS JU BEG 34.26ECS03RRS NUC147.72END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAQ2SdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAL0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAS2SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAb0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAc0SdAAAAAA==" TotalPrice="RSD31135" BasePrice="EUR132.00"
+                                        ApproximateTotalPrice="RSD31135" ApproximateBasePrice="RSD15570"
+                                        EquivalentBasePrice="RSD15570" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAL0SdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAb0SdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAd0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAe0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAf0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAg0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAh0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAi0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAj0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAk0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAl0SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM Q11.23 102.23UFXRRS JU BEG 34.26ECS03RRS NUC147.72END ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>100.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAm0SdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAL0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAo0SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="E" BookingCount="7" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAb0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAmySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+                <air:AirPricePoint Key="WflFQM7Q2BKAU2SdAAAAAA==" TotalPrice="RSD118176" BasePrice="EUR606.00"
+                                   ApproximateTotalPrice="RSD118176" ApproximateBasePrice="RSD71481"
+                                   EquivalentBasePrice="RSD71481" Taxes="RSD46695" ApproximateTaxes="RSD46695"
+                                   CompleteItinerary="true">
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAV2SdAAAAAA==" TotalPrice="RSD39392" BasePrice="EUR202.00"
+                                        ApproximateTotalPrice="RSD39392" ApproximateBasePrice="RSD23827"
+                                        EquivalentBasePrice="RSD23827" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        Refundable="true" PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAL0SdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAW0SdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAW2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAX2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAY2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAZ2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAa2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAb2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAc2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAd2SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAe2SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM Q11.23 102.23UFXRRS JU BEG Q11.23 102.23UFXRRS NUC226.92END
+                            ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="ADT"/>
+                        <air:PassengerType Code="ADT"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAf2SdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAL0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAh2SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAW0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                    <air:AirPricingInfo Key="WflFQM7Q2BKAM0SdAAAAAA==" TotalPrice="RSD39392" BasePrice="EUR202.00"
+                                        ApproximateTotalPrice="RSD39392" ApproximateBasePrice="RSD23827"
+                                        EquivalentBasePrice="RSD23827" Taxes="RSD15565"
+                                        LatestTicketingTime="2020-09-15T23:59:00.000+05:30" PricingMethod="Guaranteed"
+                                        Refundable="true" PlatingCarrier="JU" ProviderCode="1G">
+                        <air:FareInfoRef Key="WflFQM7Q2BKAL0SdAAAAAA=="/>
+                        <air:FareInfoRef Key="WflFQM7Q2BKAW0SdAAAAAA=="/>
+                        <air:TaxInfo Category="LG" Amount="RSD529" Key="WflFQM7Q2BKAN0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RF" Amount="RSD116" Key="WflFQM7Q2BKAO0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="RS" Amount="RSD1999" Key="WflFQM7Q2BKAP0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="EX" Amount="RSD286" Key="WflFQM7Q2BKAQ0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="HB" Amount="RSD885" Key="WflFQM7Q2BKAR0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="IT" Amount="RSD3236" Key="WflFQM7Q2BKAS0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="MJ" Amount="RSD117" Key="WflFQM7Q2BKAT0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="VT" Amount="RSD375" Key="WflFQM7Q2BKAU0SdAAAAAAAA"/>
+                        <air:TaxInfo Category="YQ" Amount="RSD8022" Key="WflFQM7Q2BKAV0SdAAAAAAAA"/>
+                        <air:FareCalc>BEG JU ROM Q11.23 102.23UFXRRS JU BEG Q11.23 102.23UFXRRS NUC226.92END
+                            ROE0.89013
+                        </air:FareCalc>
+                        <air:PassengerType Code="CNN"/>
+                        <air:ChangePenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:ChangePenalty>
+                        <air:CancelPenalty PenaltyApplies="Anytime">
+                            <air:Percentage>0.00</air:Percentage>
+                        </air:CancelPenalty>
+                        <air:FlightOptionsList>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA6ySdAAAAAA==" Destination="ROM" Origin="BEG">
+                                <air:Option Key="WflFQM7Q2BKAX0SdAAAAAA==" TravelTime="P0DT1H40M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAL0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAqySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                            <air:FlightOption LegRef="WflFQM7Q2BKA9ySdAAAAAA==" Destination="BEG" Origin="ROM">
+                                <air:Option Key="WflFQM7Q2BKAZ0SdAAAAAA==" TravelTime="P0DT1H35M0S">
+                                    <air:BookingInfo BookingCode="U" BookingCount="4" CabinClass="Economy"
+                                                     FareInfoRef="WflFQM7Q2BKAW0SdAAAAAA=="
+                                                     SegmentRef="WflFQM7Q2BKAoySdAAAAAA=="/>
+                                </air:Option>
+                            </air:FlightOption>
+                        </air:FlightOptionsList>
+                    </air:AirPricingInfo>
+                </air:AirPricePoint>
+            </air:AirPricePointList>
+            <air:BrandList>
+                <air:Brand Key="WflFQM7Q2BKA82SdAAAAAA==" BrandID="267814" Name="ECONOMY LIGHT" Carrier="JU">
+                    <air:Title Type="External" LanguageCode="EN">Economy Light</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">EcoLight</air:Title>
+                    <air:Text Type="ATPCO" LanguageCode="EN">//0MQ/OFFERED FOR FREE/CARRY8KG 18LB UPTO
+                        45LI115LCM////HAND BAGGAGE/ONE ITEM/UP TO 8 KG////ONE PERSONAL ITEM/UP TO 4 KG////0GO/OFFERED
+                        FOR A CHARGE/UPTO50LB 23KG AND62LI158LCM////0FM/NOT OFFERED/ UPTO70LB 32KG AND62LI
+                        158LCM////0B5/OFFERED FOR A CHARGE/ PRE RESERVED SEATASSIGNMENT////0BX/ OFFERED FOR A
+                        CHARGE/LOUNGE ACCESS////03P/OFFERED FOR A CHARGE/ PRIORITY CHECK IN////0LF/OFFERED FOR A CHARGE/
+                        PRIORITY BAGGAGETAGGING////0G6/OFFERED FOR A CHARGE/ PRIORITY BOARDING////0BW/OFFERED FOR A
+                        CHARGE/ APT CHECK IN FEE////0BJ/NOT OFFERED/APT UPGRADE NO LOUNGE////059/NOT OFFERED/ CHANGEABLE
+                        TICKET////056/NOT OFFERED/ REFUNDABLE TICKET////0CL/AVAILABLE ON A319/320/330
+                        EQT/WI-FLY////REFRESHMENT/OFFERED FOR FREE////MILES/NOT ENTITLED////MEAL/OFFERED FOR A CHARGE//
+                    </air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Your Economy Light fare includes:
+
+                        - NO CHECKED BAG.
+                        - Carry on one bag max 8kg.
+                        - Rebooking or cancellation not permitted.
+
+
+                        If the flight will be operated by another airline then the onboard product or service might be
+                        different.
+                    </air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Your Economy Light fare includes:
+
+                        - NO CHECKED BAG.
+                        - Carry on one bag max 8kg.
+                        - Rebooking or cancellation not permitted.
+
+
+                        If the flight will be operated by another airline then the onboard product or service might be
+                        different.
+                    </air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">The fare to suit those travelling light</air:Text>
+                    <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">
+                        https://cdn.travelport.com/airserbia/JU_general_medium_88794.jpg
+                    </air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="1200" ImageHeight="800">
+                        https://cdn.travelport.com/airserbia/JU_general_large_55756.jpg
+                    </air:ImageLocation>
+                </air:Brand>
+                <air:Brand Key="WflFQM7Q2BKA+2SdAAAAAA==" BrandID="267813" Name="ECONOMY STANDARD" Carrier="JU">
+                    <air:Title Type="External" LanguageCode="EN">Economy Standard</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">EcoStd</air:Title>
+                    <air:Text Type="ATPCO" LanguageCode="EN">//0MQ/OFFERED FOR FREE/CARRY8KG 18LB UPTO
+                        45LI115LCM////HAND BAGGAGE/ONE ITEM/UP TO 8 KG////ONE PERSONAL ITEM/UP TO 4 KG////0GO/OFFERED
+                        FOR A FREE/UPTO50LB 23KG AND62LI158LCM////0FM/NOT OFFERED/ UPTO70LB 32KG AND62LI
+                        158LCM////0B5/OFFERED FOR A CHARGE/ PRE RESERVED SEATASSIGNMENT////0BX/ OFFERED FOR A
+                        CHARGE/LOUNGE ACCESS////03P/OFFERED FOR A CHARGE/ PRIORITY CHECK IN////0LF/OFFERED FOR A CHARGE/
+                        PRIORITY BAGGAGETAGGING////0G6/OFFERED FOR A CHARGE/ PRIORITY BOARDING////0BW/OFFERED FOR A
+                        CHARGE/ APT CHECK IN FEE////0BJ/OFFERED FOR A CHARGE/APT UPGRADE NO LOUNGE////059/NOT OFFERED/
+                        CHANGEABLE TICKET////056/OFFERED FOR A CHARGE/ REFUNDABLE TICKET////0CL/AVAILABLE ON
+                        A319/320/330 EQT/WI-FLY////MILES/50 PERCENTAGE////REFRESHMENT/OFFERED FOR FREE////MEAL/OFFERED
+                        FOR A CHARGE//
+                    </air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Your Economy Standard fare includes:
+
+                        - Check in one bag max 23kg.
+                        - Carry on one bag max 8kg.
+                        - Check in available at the airport.
+                        - Rebooking against an additional fee.
+                        - Refunds not permitted.
+                        - Earn miles.
+
+
+                        If the flight will be operated by another airline then the onboard product or service might be
+                        different.
+                    </air:Text>
+                    <air:Text Type="Upsell" LanguageCode="EN">Upgrade to Economy Standard which includes a checked bag
+                    </air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Your Economy Standard fare includes:
+
+                        - Check in one bag max 23kg.
+                        - Carry on one bag max 8kg.
+                        - Check in available at the airport.
+                        - Rebooking against an additional fee.
+                        - Refunds not permitted.
+                        - Earn miles.
+
+
+                        If the flight will be operated by another airline then the onboard product or service might be
+                        different.
+                    </air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">Includes a checked bag</air:Text>
+                    <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">
+                        https://cdn.travelport.com/airserbia/JU_general_medium_88795.jpg
+                    </air:ImageLocation>
+                    <air:ImageLocation Type="Consumer" ImageWidth="1400" ImageHeight="800">
+                        https://cdn.travelport.com/airserbia/JU_general_large_88419.JPG
+                    </air:ImageLocation>
+                </air:Brand>
+                <air:Brand Key="WflFQM7Q2BKAA3SdAAAAAA==" BrandID="267812" Name="ECONOMY COMFORT" Carrier="JU">
+                    <air:Title Type="External" LanguageCode="EN">Economy Comfort</air:Title>
+                    <air:Title Type="Short" LanguageCode="EN">EcoComfort</air:Title>
+                    <air:Text Type="ATPCO" LanguageCode="EN">//0MQ/OFFERED FOR FREE/CARRY8KG 18LB UPTO
+                        45LI115LCM////HAND BAGGAGE/ONE ITEM/UP TO 8 KG////ONE PERSONAL ITEM/UP TO 4 KG////0GO/OFFERED
+                        FOR FREE/UPTO50LB 23KG AND62LI158LCM////0FM/NOT OFFERED/ UPTO70LB 32KG AND62LI
+                        158LCM////0B5/OFFERED FOR A CHARGE/ PRE RESERVED SEATASSIGNMENT////0BX/ OFFERED FOR A
+                        CHARGE/LOUNGE ACCESS////03P/OFFERED FOR A CHARGE/ PRIORITY CHECK IN////0LF/OFFERED FOR A CHARGE/
+                        PRIORITY BAGGAGETAGGING////0G6/OFFERED FOR FREE/ PRIORITY BOARDING////0BW/OFFERED FOR FREE/ APT
+                        CHECK IN FEE////0BJ/OFFERED FOR A CHARGE/APT UPGRADE NO LOUNGE////059/OFFERED FOR FREE/
+                        CHANGEABLE TICKET////056/OFFERED FOR FREE/ REFUNDABLE TICKET////0CL/AVAILABLE ON A319/320/330
+                        EQT/WI-FLY////MILES/100 PERCENTAGE////REFRESHMENT/OFFERED FOR FREE////MEAL/OFFERED FOR A
+                        CHARGE//
+                    </air:Text>
+                    <air:Text Type="MarketingConsumer" LanguageCode="EN">Your Economy Comfort fare includes:
+
+                        - Check in one bag max 23kg.
+                        - Carry on one bag max 8kg.
+                        - Check in free of charge at the airport.
+                        - Rebook or cancel free of charge.
+
+
+                        If the flight will be operated by another airline then the onboard product or service might be
+                        different.
+                    </air:Text>
+                    <air:Text Type="Upsell" LanguageCode="EN">Upgrade to Economy Comfort which includes check baggage,
+                        check in at the airport and a range of other ancillary services
+                    </air:Text>
+                    <air:Text Type="MarketingAgent" LanguageCode="EN">Your Economy Comfort fare includes:
+
+                        - Check in one bag max 23kg.
+                        - Carry on one bag max 8kg.
+                        - Check in free of charge at the airport.
+                        - Rebook or cancel free of charge.
+
+
+                        If the flight will be operated by another airline then the onboard product or service might be
+                        different.
+                    </air:Text>
+                    <air:Text Type="Strapline" LanguageCode="EN">The fare with extras added</air:Text>
+                    <air:ImageLocation Type="Consumer" ImageWidth="1200" ImageHeight="800">
+                        https://cdn.travelport.com/airserbia/JU_general_large_55756.jpg
+                    </air:ImageLocation>
+                    <air:ImageLocation Type="Agent" ImageWidth="150" ImageHeight="150">
+                        https://cdn.travelport.com/airserbia/JU_general_medium_88793.jpg
+                    </air:ImageLocation>
+                </air:Brand>
+            </air:BrandList>
+        </air:LowFareSearchRsp>
+    </SOAP:Body>
+</SOAP:Envelope>
