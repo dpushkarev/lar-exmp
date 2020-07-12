@@ -62,6 +62,14 @@ class FlightsSearchRequest extends FormRequest
                     return;
                 }
 
+                $request['parameters']['searchType'] = [
+                    1 => 'ON',
+                    2 => 'RT',
+                ][count($request['segments'])] ?? 'MC';
+
+                $request['parameters']['flightNumbers'] = [];
+                $request['parameters']['priceRefundType'] = null;
+
                 $this->postRequest = $request;
             }
         });

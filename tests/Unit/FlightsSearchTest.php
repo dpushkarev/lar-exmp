@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class FlightsSearchTest extends TestCase
 {
-    protected $agencyChargeAmount = 100.5;
+    protected $agencyChargeAmount = 495;
 
     public function setUp(): void
     {

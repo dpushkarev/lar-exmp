@@ -15,15 +15,15 @@ class ResultData extends JsonResource
                 "postFiltersSort" => [
                     "flightID",
                     "freeBaggage",
+                    "transfersCount",
+                    "transfersDuration",
+                    "carrier",
+                    "price",
                     "timeEnRoute",
                     "departureAirport",
                     "arrivalAirport",
                     "departureTime",
                     "arrivalTime",
-                    "transfersCount",
-                    "price",
-                    "carrier",
-                    "transfersDuration",
                     "travelPolicies"
                 ],
                 "showPostFilterHint" => false

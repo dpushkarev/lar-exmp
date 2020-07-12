@@ -218,7 +218,7 @@ class TravelPortService
             );
         }
 
-        if (isset($parameters['serviceClass'])) {
+        if (isset($parameters['serviceClass']) && $parameters['serviceClass'] !== 'All') {
             $searchModifiers->setPreferredCabins(
                 (new Air\PreferredCabins())->setCabinClass(new Air\CabinClass($parameters['serviceClass']))
             );

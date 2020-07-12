@@ -161,7 +161,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $segmentsGroup = [];
             $segmentFareMap = [];
             $airPricePointKey = sprintf('P%d', $key + 1);
-            $agencyChargeAmount = 100.5;
+            $agencyChargeAmount = 495;
             $agencyChargeCurrency = $searchRsp->getCurrencyType();
             $countOfPassengers = 0;
 
@@ -174,7 +174,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'originalCurrency' => $searchRsp->getCurrencyType(),
                 'priceWithoutPromocode' => null,
                 'privateFareInd' => false,
-                'refundable' => '?',
                 'service' => TravelPortService::APPLICATION,
                 'tariffsLink' => '?',
                 'validatingCompany' => '?',
@@ -184,6 +183,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $passengerFares = [];
             /** @var  $airPricingInfo AirPricingInfo */
             foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
+                $airPricePointData['refundable'] = $airPricingInfo->getRefundable();
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
                 $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
                 $countOfPassengers += $passengerFares['count'];
