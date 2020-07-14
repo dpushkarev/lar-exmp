@@ -18,6 +18,9 @@ class TravelPortLogger implements BaseTravelPortLogger
         AirPriceRsp::class => 'AP-rsp',
     ];
 
+    const XML_TYPE = 'xml';
+    const OBJECT_TYPE = 'obj';
+
     const DIR = '/logs/tp';
 
     private $transactionId;
@@ -30,18 +33,18 @@ class TravelPortLogger implements BaseTravelPortLogger
      */
     public function log($class, $service, $request, $content)
     {
-        $fileName = static::getPath() . '/' . static::getFileLogName($class, $this->transactionId);
+        $fileName = static::getPath(static::XML_TYPE) . '/' . static::getFileLogName($class, $this->transactionId, static::XML_TYPE);
         file_put_contents($fileName, $content);
     }
 
-    static protected function getPath()
+    protected static function getPath($type)
     {
-        return storage_path() . static::DIR;
+        return storage_path() . static::DIR . '/' . $type;
     }
 
-    protected static function getFileLogName($class, $transactionId)
+    protected static function getFileLogName($class, $transactionId, $type)
     {
-        return sprintf("%s-%s.xml", static::ALIASES[$class] ?? getClassName($class), $transactionId);
+        return sprintf("%s-%s.%s", static::ALIASES[$class] ?? getClassName($class), $transactionId, $type);
     }
 
     public function setTransactionId($transactionId): void
@@ -52,13 +55,20 @@ class TravelPortLogger implements BaseTravelPortLogger
     /**
      * @param $class
      * @param $transactionId
+     * @param $type
      * @return false|string|null
      */
-    public static function getLog($class, $transactionId)
+    public function getLog($class, $transactionId, $type)
     {
-        $fileName = static::getPath() . '/' . static::getFileLogName($class, $transactionId);
+        $fileName = static::getPath($type) . '/' . static::getFileLogName($class, $transactionId, $type);
 
         return file_exists($fileName) ? file_get_contents($fileName) : null;
+    }
+
+    public function saveSerializedObject($class, $content)
+    {
+        $fileName = static::getPath(static::OBJECT_TYPE) . '/' . static::getFileLogName($class, $this->transactionId, static::OBJECT_TYPE);
+        file_put_contents($fileName, $content);
     }
 
 }

@@ -101,11 +101,12 @@ class TravelPortService
     protected function getAirPricingCommand($bookings)
     {
         $airSegmentPricingModifiers = [];
+        /** @var Air\BookingInfo $booking */
         foreach ($bookings as $booking) {
             $airSegmentPricingModifiers[] = (new Air\AirSegmentPricingModifiers())
-                ->setAirSegmentRef(getXmlAttribute($booking, 'SegmentRef'))
+                ->setAirSegmentRef($booking->getSegmentRef())
                 ->setPermittedBookingCodes(
-                        new Air\PermittedBookingCodes(new Air\BookingCode(getXmlAttribute($booking, 'BookingCode')))
+                        new Air\PermittedBookingCodes(new Air\BookingCode($booking->getBookingCode()))
                 );
         }
 
@@ -115,27 +116,32 @@ class TravelPortService
     protected function getAirSegments($segments)
     {
         $airSegments = [];
+        /** @var Air\typeBaseAirSegment $segment */
         foreach ($segments as $segment) {
-            $airSegments[] = (new Air\typeBaseAirSegment())
-                ->setKey(getXmlAttribute($segment, 'Key'))
-                ->setGroup(getXmlAttribute($segment, 'Group'))
-                ->setCarrier(getXmlAttribute($segment, 'Carrier'))
-                ->setFlightNumber(getXmlAttribute($segment, 'FlightNumber'))
-                ->setOrigin(getXmlAttribute($segment, 'Origin'))
-                ->setDestination(getXmlAttribute($segment, 'Destination'))
-                ->setDepartureTime(getXmlAttribute($segment, 'DepartureTime'))
-                ->setArrivalTime(getXmlAttribute($segment, 'ArrivalTime'))
-                ->setFlightTime(getXmlAttribute($segment, 'FlightTime'))
-                ->setDistance(getXmlAttribute($segment, 'Distance'))
-                ->setETicketability(getXmlAttribute($segment, 'ETicketability'))
-                ->setEquipment(getXmlAttribute($segment, 'Equipment'))
-                ->setChangeOfPlane(getXmlAttribute($segment, 'ChangeOfPlane'))
-                ->setParticipantLevel(getXmlAttribute($segment, 'ParticipantLevel'))
-                ->setPolledAvailabilityOption(getXmlAttribute($segment, 'PolledAvailabilityOption'))
-                ->setOptionalServicesIndicator(getXmlAttribute($segment, 'OptionalServicesIndicator'))
-                ->setAvailabilitySource(getXmlAttribute($segment, 'AvailabilitySource'))
-                ->setAvailabilityDisplayType(getXmlAttribute($segment, 'AvailabilityDisplayType'))
+            $airSegments[] = $segment
+                ->setAirAvailInfo(null)
+                ->setFlightDetailsRef(null)
                 ->setProviderCode(static::GALILEO_PROVIDER_ID);
+//            $airSegments[] = (new Air\typeBaseAirSegment())
+//                ->setKey($segment->getKey())
+//                ->setGroup($segment->getGroup())
+//                ->setCarrier($segment->getCarrier())
+//                ->setFlightNumber($segment->getFlightNumber())
+//                ->setOrigin($segment->getOrigin())
+//                ->setDestination($segment->getDestination())
+//                ->setDepartureTime($segment->getDepartureTime())
+//                ->setArrivalTime($segment->getArrivalTime())
+//                ->setFlightTime($segment->getFlightTime())
+//                ->setDistance($segment->getDistance())
+//                ->setETicketability($segment->getETicketability())
+//                ->setEquipment($segment->getEquipment())
+//                ->setChangeOfPlane($segment->getChangeOfPlane())
+//                ->setParticipantLevel($segment->getParticipantLevel())
+//                ->setPolledAvailabilityOption($segment->getPolledAvailabilityOption())
+//                ->setOptionalServicesIndicator($segment->getOptionalServicesIndicator())
+//                ->setAvailabilitySource($segment->getAvailabilitySource())
+//                ->setAvailabilityDisplayType($segment->getAvailabilityDisplayType())
+//                ->setProviderCode(static::GALILEO_PROVIDER_ID);
         }
 
         return (new Air\AirItinerary())->setAirSegment($airSegments);

@@ -4,6 +4,7 @@ namespace Libs\FilippoToso;
 
 use App\Adapters\XmlAdapter;
 use App\Exceptions\TravelPortException;
+use App\Logging\TravelPortLogger;
 use Exception;
 use FilippoToso\Travelport\Endpoints;
 use FilippoToso\Travelport\Exceptions\InvalidRegionException;
@@ -33,6 +34,7 @@ class Travelport extends \FilippoToso\Travelport\Travelport
                 $result = $service->__soapCall('service', [$request]);
                 $this->logger->setTransactionId($result->getTransactionId());
                 $responseClass = get_class($result);
+                $this->logger->saveSerializedObject($responseClass, serialize($result));
                 return $result;
             } catch (\SoapFault $soapException) {
                 try {

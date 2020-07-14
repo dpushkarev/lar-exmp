@@ -35,7 +35,7 @@ class TravelPortServiceProvider extends ServiceProvider
                 config('services.travel_port.target_branch'),
                 Endpoints::REGION_EMEA,
                 config('app.env') === 'production' ? true : false,
-                new TravelPortLogger()
+                resolve(\FilippoToso\Travelport\TravelportLogger::class)
             )]);
         });
     }

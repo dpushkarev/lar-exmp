@@ -51,6 +51,8 @@ Route::post('/system/logger/error', 'NemoWidget@ErrorLog');
 Route::get('/flights/search/history', 'NemoWidget@history');
 Route::get('/flights/search/flightInfo/{id}', 'NemoWidget@flightInfo')->where('id', '\d+');
 
+Route::get('/checkout/{id}', 'Checkout@getData')->where('id', '\d+')->name('checkout');
+
 Route::get('/guide/airports/nearest', function () {
     return '{
            "guide":{

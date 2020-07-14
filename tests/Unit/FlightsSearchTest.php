@@ -30,7 +30,7 @@ class FlightsSearchTest extends TestCase
 
         TP::shouldReceive('LowFareSearchReq')
             ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.object')));
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.obj')));
 
         $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req.json');
 
@@ -123,7 +123,7 @@ class FlightsSearchTest extends TestCase
 
         TP::shouldReceive('LowFareSearchReq')
             ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp-2.object')));
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp-2.obj')));
 
         $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req-2.json');
 
@@ -224,7 +224,7 @@ class FlightsSearchTest extends TestCase
 
         TP::shouldReceive('LowFareSearchReq')
             ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp-3.object')));
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp-3.obj')));
 
         $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req-3.json');
 
@@ -297,7 +297,7 @@ class FlightsSearchTest extends TestCase
                                             0 => [
                                                 'tariffs' => [
                                                     0 => [
-                                                        'code', 'segNum' , 'features' => [
+                                                        'code', 'segNum', 'features' => [
                                                             'carry_on', 'exchangeable', 'refundable', 'vip_service'
                                                         ]
                                                     ]
@@ -337,22 +337,27 @@ class FlightsSearchTest extends TestCase
         $request = \factory(FlightsSearchRequest::class, 1)->create([
             'data' => json_decode(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-req.json'))
         ])->first();
+
         $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id])->first();
 
         TP::shouldReceive('AirPriceReq')
             ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightInfo/AirPriceRsp.txt')));
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightInfo/AP-rsp.obj')));
 
+        $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
+            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-rsp.obj'))->once();
+        });
 
         $this->json('GET', '/api/flights/search/flightInfo/' . $request->id)
+            ->assertStatus(200)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.changed', false)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 93405)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 572999)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.currency', 'RSD')
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 93405)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
-            ->assertStatus(200);
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 572999)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD');
 
-        $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '306D9E840A07643C9582D8AB2D77F282']);
+
+        $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '4DD22E310A076478E8B1D2309D8229A7']);
 
 
     }

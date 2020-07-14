@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(FlightsSearchResult::class, function (Faker $faker, $params) {
     return [
         'flight_search_request_id' => $params['flight_search_request_id'],
-        'price' => 'P7',
-        'segments' => ["S4","S2"]
+        'price' => 'P4',
+        'segments' => ["S11","S12","S10","S8"]
     ];
 });
