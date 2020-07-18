@@ -464,7 +464,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $aircrafts->put($aircraftType, Aircraft::whereCode($aircraftType)->first());
             }
 
-            $airSegmentCollection->put($airSegmentKey, $airSegmentData);
+//            $airSegmentCollection->put($airSegmentKey, $airSegmentData);
+            $airSegmentCollection->add($airSegmentData);
         }
 
         /** @var AirPriceResult $airPriceResult */
@@ -881,8 +882,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $airPriceResultCollection->add($airPriceResultData);
         }
 
-        $groupsData->put('segments', $airPriceResultCollection);
-        $groupsData->put('prices', $airSegmentCollection);
+        $groupsData->put('segments', $airSegmentCollection);
+        $groupsData->put('prices', $airPriceResultCollection);
         $results = collect(['groupsData' => $groupsData]);
 
         foreach ($airports as $airport) {
