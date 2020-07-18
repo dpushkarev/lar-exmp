@@ -856,7 +856,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 if($airSolution->getHostToken()) {
                     /** @var HostToken $hostToken */
                     foreach ($airSolution->getHostToken() as $hostToken) {
-                        $airSolutionData['hotelToken'][] = [
+                        $airSolutionData['hostToken'][] = [
                             'key' => $hostToken->getKey(),
                             'textNode' => $hostToken->get_(),
                         ];
