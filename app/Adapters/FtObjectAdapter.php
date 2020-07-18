@@ -85,6 +85,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     ];
 
     protected $agencyChargeAmount = 495;
+    protected $agencyChargeCurrency = 'RSD';
 
     /**
      * @param LowFareSearchRsp $searchRsp
@@ -179,7 +180,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $segmentsGroup = [];
             $segmentFareMap = [];
             $airPricePointKey = sprintf('P%d', $key + 1);
-            $agencyChargeCurrency = $searchRsp->getCurrencyType();
             $countOfPassengers = 0;
 
             $airPricePointData = [
@@ -295,6 +295,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             }
 
             $agencyChargeAll = $this->agencyChargeAmount * $countOfPassengers;
+
+            $airPricePointData['agencyCharge'] = [
+                'amount' => $agencyChargeAll,
+                'currency' => $this->agencyChargeCurrency
+            ];
 
             $airPricePointData['totalPrice'] = [
                 'amount' => substr($airPricePoint->getTotalPrice(), 3) + $agencyChargeAll,
@@ -464,8 +469,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $aircrafts->put($aircraftType, Aircraft::whereCode($aircraftType)->first());
             }
 
-//            $airSegmentCollection->put($airSegmentKey, $airSegmentData);
-            $airSegmentCollection->add($airSegmentData);
+            $airSegmentCollection->put($airSegmentKey, $airSegmentData);
         }
 
         /** @var AirPriceResult $airPriceResult */
@@ -828,6 +832,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     $airSolutionData['airPricingInfo'][] = $airPricingInfoData;
                 }
                 $agencyChargeAll = $this->agencyChargeAmount * $countOfPassengers;
+
+                $airSolutionData['agencyCharge'] = [
+                    'amount' => $agencyChargeAll,
+                    'currency' => $this->agencyChargeCurrency
+                ];
 
                 $airSolutionData['totalPrice'] = [
                     'amount' => substr($airSolution->getTotalPrice(), 3) + $agencyChargeAll,

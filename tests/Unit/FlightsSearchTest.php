@@ -12,6 +12,7 @@ use Tests\TestCase;
 class FlightsSearchTest extends TestCase
 {
     protected $agencyChargeAmount = 495;
+    protected $agencyChargeCurrency = 'RSD';
 
     public function setUp(): void
     {
@@ -100,6 +101,8 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(3, 'flights.search.results.groupsData.segments')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P1.passengerFares')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.amount', $this->agencyChargeAmount * $countOfPassenger)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.currency', $this->agencyChargeCurrency)
             ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', 41739)
             ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount', 41739 + $this->agencyChargeAmount * $countOfPassenger)
             ->assertJsonPath('flights.search.results.groupsData.prices.P2.flightPrice.amount', 58371)
