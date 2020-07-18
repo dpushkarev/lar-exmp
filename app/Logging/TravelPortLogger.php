@@ -3,6 +3,7 @@
 
 namespace App\Logging;
 
+use App\Exceptions\TravelPortLoggerException;
 use FilippoToso\Travelport\Air\AirPriceReq;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\LowFareSearchReq;
@@ -56,13 +57,18 @@ class TravelPortLogger implements BaseTravelPortLogger
      * @param $class
      * @param $transactionId
      * @param $type
-     * @return false|string|null
+     * @return false|string
+     * @throws TravelPortLoggerException
      */
     public function getLog($class, $transactionId, $type)
     {
         $fileName = static::getPath($type) . '/' . static::getFileLogName($class, $transactionId, $type);
 
-        return file_exists($fileName) ? file_get_contents($fileName) : null;
+        if(!file_exists($fileName)) {
+            throw TravelPortLoggerException::getNonexistentFile();
+        }
+
+        return file_get_contents($fileName);
     }
 
     public function saveSerializedObject($class, $content)
