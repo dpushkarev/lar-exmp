@@ -357,7 +357,8 @@ class FlightsSearchTest extends TestCase
             ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 572999)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.currency', 'RSD')
             ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 572999)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD');
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
+            ->assertJsonPath('flights.search.flightInfo.createOrderLink', '/checkout?id=1');
 
 
         $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '4DD22E310A076478E8B1D2309D8229A7']);

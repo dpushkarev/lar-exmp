@@ -201,7 +201,7 @@ class NemoWidgetService
         ]);
 
         $aiePriceRsp =  $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
-        $aiePriceRsp->put('createOrderLink', URL::route('order', ['id' => $order->id ], false));
+        $aiePriceRsp->put('createOrderLink', sprintf('/checkout?id=%d', $order->id));
 
         return $aiePriceRsp;
     }
