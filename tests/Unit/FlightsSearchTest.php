@@ -2,17 +2,16 @@
 
 namespace Tests\Unit;
 
+use App\Adapters\FtObjectAdapter;
 use App\Facades\TP;
-use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
-use Faker\Factory;
 use Tests\TestCase;
 
 class FlightsSearchTest extends TestCase
 {
-    protected $agencyChargeAmount = 495;
-    protected $agencyChargeCurrency = 'RSD';
+    protected $agencyChargeAmount = FtObjectAdapter::AGENCY_CHARGE_AMOUNT;
+    protected $agencyChargeCurrency = FtObjectAdapter::AGENCY_CHARGE_CURRENCY;
 
     public function setUp(): void
     {
@@ -335,34 +334,4 @@ class FlightsSearchTest extends TestCase
             ->assertJsonPath('flights.search.results.info.errorMessageEng', 'Invalid SearchId');
     }
 
-    public function testFlightsSearchFlightInfo()
-    {
-        $request = \factory(FlightsSearchRequest::class, 1)->create([
-            'data' => json_decode(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-req.json'))
-        ])->first();
-
-        $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id])->first();
-
-        TP::shouldReceive('AirPriceReq')
-            ->once()
-            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightInfo/AP-rsp.obj')));
-
-        $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
-            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-rsp.obj'))->once();
-        });
-
-        $this->json('GET', '/api/flights/search/flightInfo/' . $request->id)
-            ->assertStatus(200)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.changed', false)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 572999)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.currency', 'RSD')
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 572999)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
-            ->assertJsonPath('flights.search.flightInfo.createOrderLink', '/checkout?id=1');
-
-
-        $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '4DD22E310A076478E8B1D2309D8229A7']);
-
-
-    }
 }
