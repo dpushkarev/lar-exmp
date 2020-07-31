@@ -37,6 +37,15 @@ class ApiException extends \Exception
         return new self('Invalid id: ' . $id, self::ERROR_INVALID_ID);
     }
 
+    /**
+     * @param $massage
+     * @return ApiException
+     */
+    public static function getInstanceValidate($massage)
+    {
+        return new self('Validation error: ' . $massage);
+    }
+
     public function getResponseArray()
     {
         return [

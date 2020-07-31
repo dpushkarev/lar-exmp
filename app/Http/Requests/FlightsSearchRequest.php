@@ -4,9 +4,9 @@
 namespace App\Http\Requests;
 
 use App\Dto\FlightsSearchRequestDto;
+use App\Exceptions\ApiException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 /**
  * Class TravelPortSearchRequest
@@ -37,10 +37,11 @@ class FlightsSearchRequest extends FormRequest
 
     /**
      * @param Validator $validator
+     * @throws ApiException
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json($validator->errors(), 422));
+        throw ApiException::getInstanceValidate($validator->errors()->first());
     }
 
     /**

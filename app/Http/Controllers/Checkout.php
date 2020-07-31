@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Adapters\FtObjectAdapter;
 use App\Exceptions\ApiException;
 use App\Exceptions\TravelPortLoggerException;
+use App\Http\Requests\AirReservationRequest;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
+use App\Services\CheckoutService;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 
 class Checkout extends Controller
@@ -35,6 +37,26 @@ class Checkout extends Controller
             $airPriceResult->put('request', $order->result->request);
 
             return new FlightsSearchResults($airPriceResult);
+        } catch (TravelPortLoggerException $exception) {
+            throw ApiException::getInstance($exception->getMessage());
+        }
+    }
+
+    public function reservation(AirReservationRequest $request, CheckoutService $service, $orderId)
+    {
+        $order = FlightsSearchFlightInfo::find($orderId);
+
+        if(is_null($order)) {
+            throw ApiException::getInstanceInvalidId($orderId);
+        }
+
+        $dto = $request->getAirReservationRequestDto();
+        $dto->setOrder($order);
+
+        try {
+            $service->reservation($dto);
+
+            return new FlightsSearchResults();
         } catch (TravelPortLoggerException $exception) {
             throw ApiException::getInstance($exception->getMessage());
         }

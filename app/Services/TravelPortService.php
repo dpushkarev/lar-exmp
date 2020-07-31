@@ -4,12 +4,15 @@
 namespace App\Services;
 
 use App\Dto\AirPriceRequestDto;
+use App\Dto\AirReservationRequestDto;
 use App\Dto\FlightsSearchRequestDto;
 use App\Exceptions\TravelPortException;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air;
 use FilippoToso\Travelport\Air\AirLegModifiers;
 use FilippoToso\Travelport\Air\typeFareRuleType;
+use FilippoToso\Travelport\UniversalRecord\AirCreateReservationReq;
+use FilippoToso\Travelport\UniversalRecord\FormOfPayment;
 use Libs\FilippoToso\Travelport;
 
 /**
@@ -23,6 +26,13 @@ class TravelPortService
     const PASSENGERS_MAP = [
         'CLD' => 'CNN'
     ];
+    const FORM_OF_PAYMENT_ROUTING_NUMBER = 456;
+    const FORM_OF_PAYMENT_ACCOUNT_NUMBER = 789;
+    const FORM_OF_PAYMENT_CHECK_NUMBER = 123456;
+    const FORM_OF_PAYMENT_CHECK_KEY = 1;
+    const FORM_OF_PAYMENT_TYPE = 'Check';
+    const ACTION_STATUS_TYPE = 'ACTIVE';
+    const ACTION_TICKET_DATA = 'T*';
 
     private $travelPort;
     private $traceId;
@@ -70,6 +80,101 @@ class TravelPortService
         return $this->execute($request);
     }
 
+    public function AirCreateReservationReq(AirReservationRequestDto $dto)
+    {
+        $request = $this->getAirCreateReservationRequest($dto);
+        return $this->execute($request);
+    }
+
+    protected function getAirCreateReservationRequest(AirReservationRequestDto $dto)
+    {
+        /** @var AirCreateReservationReq $airCreateReservationReq */
+        $airCreateReservationReq = app()->make(AirCreateReservationReq::class);
+
+        $airPricingSolution = $this->getAirPricingSolution($dto);
+        $bookingTraveler = $this->getBookingTraveler($dto);
+        $billingPointOfSaleInfo = $this->getBillingPointOfSaleInfo();
+        $formOfPayment = $this->getFormOfPayment();
+        $actionStatus = $this->getActionStatus();
+
+        return $airCreateReservationReq
+            ->setActionStatus($actionStatus)
+            ->setFormOfPayment($formOfPayment)
+            ->setProviderCode(static::GALILEO_PROVIDER_ID)
+            ->setBillingPointOfSaleInfo($billingPointOfSaleInfo)
+            ->setAirPricingSolution($airPricingSolution)
+            ->setBookingTraveler($bookingTraveler);
+    }
+
+    protected function getActionStatus()
+    {
+        return (new Air\ActionStatus())
+            ->setType(static::ACTION_STATUS_TYPE)
+            ->setTicketDate(static::ACTION_TICKET_DATA)
+            ->setProviderCode(static::GALILEO_PROVIDER_ID);
+    }
+
+    protected function getFormOfPayment()
+    {
+        return (new FormOfPayment())
+            ->setType(static::FORM_OF_PAYMENT_TYPE)
+            ->setKey(static::FORM_OF_PAYMENT_CHECK_KEY)
+            ->setCheck((new Air\Check())
+                ->setRoutingNumber(static::FORM_OF_PAYMENT_ROUTING_NUMBER)
+                ->setAccountNumber(static::FORM_OF_PAYMENT_ACCOUNT_NUMBER)
+                ->setCheckNumber(static::FORM_OF_PAYMENT_CHECK_NUMBER)
+            );
+    }
+
+    public function getBookingTraveler(AirReservationRequestDto $dto)
+    {
+        $bookingTraveler = [];
+        $phoneNumber = $dto->getPhoneNumber();
+        $address = $dto->getAddress();
+
+        foreach ($dto->getPassengers() as $passenger) {
+            $bookingTraveler[] = (new Air\BookingTraveler())
+                ->setBookingTravelerName((new Air\BookingTravelerName(
+                    $passenger['prefix'],
+                    $passenger['first'],
+                    $passenger['middle'] ?? null,
+                    $passenger['last'],
+                    $passenger['suffix'] ?? null
+                )))
+                ->setPhoneNumber((new Air\PhoneNumber())
+                    ->setCountryCode($phoneNumber['country'])
+                    ->setAreaCode($phoneNumber['area'])
+                    ->setNumber($phoneNumber['number'])
+                )
+                ->setEmail((new Air\Email())->setEmailID($dto->getEmail()))
+                ->setDeliveryInfo((new Air\DeliveryInfo())
+                    ->setShippingAddress((new Air\ShippingAddress())
+                        ->setStreet([$address['street']])
+                        ->setCity($address['city'])
+                        ->setPostalCode($address['postalCode'])
+                        ->setCountry($address['country'])
+                    )
+                )
+                ->setKey(base64_encode(rand(10000000, 20000000)))
+                ->setTravelerType($passenger['travelerType'])
+                ->setAddress((new Air\typeStructuredAddress())
+                    ->setAddressName($address['street'])
+                    ->setStreet([$address['street']])
+                    ->setCity($address['city'])
+                    ->setPostalCode($address['postalCode'])
+                    ->setCountry($address['country'])
+                );
+        }
+
+        return $bookingTraveler;
+    }
+
+    public function getAirPricingSolution(AirReservationRequestDto $dto): Air\AirPricingSolution
+    {
+        return $dto->getAirSolution()
+            ->setAirSegment($dto->getSegments());
+    }
+
     protected function getAirPriceRequest(AirPriceRequestDto $dto)
     {
         /** @var  $airPriceRequest Air\AirPriceReq */
@@ -106,7 +211,7 @@ class TravelPortService
             $airSegmentPricingModifiers[] = (new Air\AirSegmentPricingModifiers())
                 ->setAirSegmentRef($booking->getSegmentRef())
                 ->setPermittedBookingCodes(
-                        new Air\PermittedBookingCodes(new Air\BookingCode($booking->getBookingCode()))
+                    new Air\PermittedBookingCodes(new Air\BookingCode($booking->getBookingCode()))
                 );
         }
 

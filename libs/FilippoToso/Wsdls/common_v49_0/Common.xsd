@@ -731,6 +731,7 @@
 				<xs:element name="SegmentRef" type="typeGeneralReference" minOccurs="0" maxOccurs="999"/>
 				<xs:element ref="BSPPayment" minOccurs="0"/>
 				<xs:element ref="ARCPayment" minOccurs="0"/>
+				<xs:element ref="Check" minOccurs="0"/>
 			</xs:sequence>
 			<xs:attribute name="Key" type="typeRef" use="optional"/>
 			<xs:attribute name="Type" use="required">

@@ -9,6 +9,8 @@ use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\LowFareSearchReq;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use \FilippoToso\Travelport\TravelportLogger as BaseTravelPortLogger;
+use FilippoToso\Travelport\UniversalRecord\AirCreateReservationReq;
+use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
 
 class TravelPortLogger implements BaseTravelPortLogger
 {
@@ -17,6 +19,8 @@ class TravelPortLogger implements BaseTravelPortLogger
         LowFareSearchRsp::class => 'LFS-rsp',
         AirPriceReq::class => 'AP-req',
         AirPriceRsp::class => 'AP-rsp',
+        AirCreateReservationReq::class => 'ACR-req',
+        AirCreateReservationRsp::class => 'ACR-rsp',
     ];
 
     const XML_TYPE = 'xml';
