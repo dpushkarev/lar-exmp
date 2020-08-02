@@ -915,7 +915,15 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
         $groupsData->put('segments', $airSegmentCollection);
         $groupsData->put('prices', $airPriceResultCollection);
-        $results = collect(['groupsData' => $groupsData]);
+        $info = collect([
+            'nationality' => false,
+            'dateOfBirth' => false,
+            'passportNo' => false,
+            'passportCountry' => false,
+            'passportExpiration' => false
+        ]);
+
+        $results = collect(['groupsData' => $groupsData, 'info' => $info]);
 
         foreach ($airports as $airport) {
             $countries = $countries->merge(new Country($airport->country));
