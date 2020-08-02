@@ -56,24 +56,35 @@ class AirReservationRequest extends FormRequest
             if (empty($validator->failed())) {
                 $request = json_decode($validator->getData()['request'], true);
 
-                if (!isset($request['passengers'])) {
-                    $validator->errors()->add('request', 'Passenger was not passed');
+                $validatorInstance = \Illuminate\Support\Facades\Validator::make($request, [
+                    'passengers' => 'required',
+                    'email' => 'required|email',
+                    'airSolutionKey' => 'required|string|max:50',
+                    'phoneNumber' => 'required|string|max:50',
+                    'address.country' => 'required|string|max:50',
+                    'address.city' => 'required|string|max:50',
+                    'address.postalCode' => 'required|integer',
+                    'address.street' => 'required|string|max:50',
+                ]);
+
+                if ($validatorInstance->fails()) {
+                    $validator->errors()->add('request', $validatorInstance->errors()->first());
                     return;
                 }
 
-                if (!isset($request['address'])) {
-                    $validator->errors()->add('request', 'Address was not passed');
-                    return;
-                }
+                foreach($request['passengers'] as $passenger) {
+                    $validatorInstance = \Illuminate\Support\Facades\Validator::make($passenger, [
+                        'travelerType' => 'required|string|max:3',
+                        'first' => 'required|string|max:50',
+                        'last' => 'required|string|max:50',
+                        'prefix' => 'required|string|max:10',
+                    ]);
 
-                if (!isset($request['airSolutionKey'])) {
-                    $validator->errors()->add('request', 'Air Solution Key was not passed');
-                    return;
-                }
+                    if ($validatorInstance->fails()) {
+                        $validator->errors()->add('request', $validatorInstance->errors()->first());
+                        return;
+                    }
 
-                if (!isset($request['email'])) {
-                    $validator->errors()->add('request', 'Email was not passed');
-                    return;
                 }
 
                 if (!PhoneNumberUtil::isViablePhoneNumber($request['phoneNumber'])) {
