@@ -6,7 +6,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CountryList extends JsonResource
 {
-
     /**
      * @param \Illuminate\Http\Request $request
      * @return array

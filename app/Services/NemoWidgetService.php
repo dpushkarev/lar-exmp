@@ -59,6 +59,8 @@ class NemoWidgetService
             });
         }
 
+        $result = $this->modelAdapter->autocompleteAdapt($result);
+
         return $result;
     }
 

@@ -33,17 +33,18 @@ class NemoWidget extends BaseController
 {
 
     use ValidatesRequests;
+
     /**
      * @param NemoWidgetService $service
      * @param $q
      * @param null $iataCode
-     * @return Autocomplete
+     * @return Guide
      */
     public function autocomplete(NemoWidgetService $service, $q, $iataCode = null)
     {
         $result = $service->autocomplete($q);
 
-        return new Autocomplete($result);
+        return new Guide($result);
     }
 
     public function airlinesAll(NemoWidgetService $service)

@@ -5,6 +5,7 @@ namespace App\Http\Resources\NemoWidget\Common;
 
 
 use App\Http\Resources\NemoWidget\AbstractResource;
+use App\Http\Resources\NemoWidget\Common\Autocomplete as AutocompleteCommon;
 
 class Guide extends AbstractResource
 {
@@ -12,6 +13,11 @@ class Guide extends AbstractResource
     {
         return [
             'guide' => [
+                $this->mergeWhen($this->resource->has('autocomplete'), [
+                    'autocomplete' => [
+                        'iata' => AutocompleteCommon::collection($this->resource->get('autocomplete'))
+                    ]
+                ]),
                 $this->mergeWhen($this->resource->has('airlines'), [
                     'airlines' => new AirlineList($this->resource->get('airlines')),
                 ]),

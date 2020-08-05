@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CityList extends JsonResource
 {
+    public $preserveKeys = true;
 
     /**
      * @param \Illuminate\Http\Request $request
@@ -15,7 +16,7 @@ class CityList extends JsonResource
     {
         $cityList = collect();
         foreach ($this->resource as $city) {
-            $cityList = $cityList->merge(new City($city));
+           $cityList->put($city->id, new City($city));
         }
 
         return $cityList;
