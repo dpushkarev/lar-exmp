@@ -79,9 +79,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     ];
 
     protected $indicators = [
-        'I' => 'Included in the fare',
-        'A' => 'Available for a charge',
-        'N' => 'Not offered',
+        'I' => 'Free',
+        'A' => 'Charge',
+        'N' => 'NotAvailable',
     ];
 
     const AGENCY_CHARGE_AMOUNT = 495;
@@ -93,6 +93,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     const INTESA_COMMISSION = 9;
     const PAYPAL_COMMISSION = 2.9;
     const PAYPAL_COMMISSION_FIX = 30;
+
+    const PASSENGER_TYPE_ADULT = 'ADT';
 
     /**
      * @param LowFareSearchRsp $searchRsp
@@ -141,7 +143,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'isCharter' => false,
                 'isLowCost' => false,
                 'marketingCompany' => $carrier,
-                'operatingCompany' => (null !== $airSegment->getCodeshareInfo()) ? $airSegment->getCodeshareInfo()->getOperatingCarrier() : null,
+                'operatingCompany' => $airSegment->getCodeshareInfo() ? $airSegment->getCodeshareInfo()->getOperatingCarrier() : $carrier,
+                'number' => 0,
                 'routeNumber' => $airSegment->getGroup(),
                 'stopPoints' => null
             ];
@@ -157,6 +160,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
             if (!$airLines->has($carrier)) {
                 $airLines->put($carrier, Airline::whereCode($carrier)->first());
+            }
+
+            if (!$airLines->has($airSegmentData['operatingCompany'])) {
+                $airLines->put($airSegmentData['operatingCompany'], Airline::whereCode($airSegmentData['operatingCompany'])->first());
             }
 
             if (!$aircrafts->has($aircraftType)) {
@@ -207,7 +214,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $passengerFares = [];
             /** @var  $airPricingInfo AirPricingInfo */
             foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
-                $airPricePointData['refundable'] = $airPricingInfo->getRefundable();
+                $airPricePointData['refundable'] = $airPricingInfo->getRefundable() ?? false;
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
                 $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
                 $countOfPassengers += $passengerFares['count'];
@@ -264,8 +271,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     "bookingClass" => $bookingInfo->getBookingCode(),
                                     "serviceClass" => $bookingInfo->getCabinClass(),
                                     "avlSeats" => $bookingInfo->getBookingCount(),
-                                    "freeBaggage" => $bookingInfo->getFareInfoRef(),
-                                    "minBaggage" => []
+                                    "freeBaggage" => $bookingInfo->getFareInfoRef()
                                 ];
 
                                 $features = [];
@@ -274,11 +280,14 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                                     foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
                                         list($priority, $indicator) = explode(',', $getFareAttributeSplit);
-
-                                        $features[$this->FareAttributes[$priority]['code']][] = [
-                                            'code' => $this->FareAttributes[$priority]['code'],
-                                            'description' => ['?'],
-                                            'markAsImportant' => '?',
+                                        $fareAttribute = $this->FareAttributes[$priority];
+                                        $features[$fareAttribute['feature']][$fareAttribute['code']][] = [
+                                            'code' => $fareAttribute['code'],
+                                            'description' => [
+                                                'short' => '-',
+                                                'full' => '-'
+                                            ],
+                                            'markAsImportant' => false,
                                             'needToPay' => $this->indicators[$indicator],
                                             'priority' => $priority
                                         ];
@@ -320,11 +329,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $segmentInfo['freeBaggage'] = [];
                 $fareInfo = $fareInfoMap->get($fareInfoRef);
                 foreach ($airPricePointData['passengerFares'] as $passengerFare) {
-                    $segmentInfo['freeBaggage'][] = [
+                    $freeBaggage = [
                         'passtype' => $passengerFare['type'],
-                        'value' => ($fareInfo->getPassengerTypeCode() === $passengerFare['type']) ? $fareInfo->getBaggageAllowance()->getNumberOfPieces() : null,
-                        "measurement" => "pc",
+                        "value" => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null,
+                        'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : null,
                     ];
+                    $segmentInfo['freeBaggage'][] = $freeBaggage;
+
+                    if($passengerFare['type'] === static::PASSENGER_TYPE_ADULT) {
+                        $segmentInfo["minBaggage"] = [
+                            'value' => $freeBaggage['value'],
+                            'measurement' => $freeBaggage['measurement']
+                        ];
+                    }
                 }
             }
 

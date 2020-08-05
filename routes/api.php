@@ -47,6 +47,9 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
 });
 
+Route::get('/guide/airports/{iataCode}', 'NemoWidget@airport')->where('iataCode', '[A-Z]{3}');
+
+
 Route::post('/system/logger/error', 'NemoWidget@ErrorLog');
 Route::get('/flights/search/history', 'NemoWidget@history');
 Route::get('/flights/search/flightInfo/{id}', 'NemoWidget@flightInfo')->where('id', '\d+');

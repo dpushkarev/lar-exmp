@@ -300,7 +300,7 @@ class FlightsSearchTest extends TestCase
                                                 'tariffs' => [
                                                     0 => [
                                                         'code', 'segNum', 'features' => [
-                                                            'carry_on', 'exchangeable', 'refundable', 'vip_service'
+                                                            'baggage', 'refunds', 'misc'
                                                         ]
                                                     ]
                                                 ]

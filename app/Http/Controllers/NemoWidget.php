@@ -7,11 +7,14 @@ use App\Exceptions\TravelPortException;
 use App\Http\Requests\FlightsSearchRequest;
 use App\Http\Resources\NemoWidget\AirlinesAll;
 use App\Http\Resources\NemoWidget\Autocomplete;
+use App\Http\Resources\NemoWidget\Common\Guide;
 use App\Http\Resources\NemoWidget\ErrorLog;
 use App\Http\Resources\NemoWidget\ErrorSearchId;
 use App\Http\Resources\NemoWidget\FlightsSearchFlightInfo;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Http\Resources\NemoWidget\History;
+use App\Models\Airline;
+use App\Models\Airport;
 use App\Models\Error;
 use App\Models\FlightsSearchResult;
 use App\Services\NemoWidgetService;
@@ -51,6 +54,25 @@ class NemoWidget extends BaseController
         $result = collect(['countries' => $countries, 'airlines' => $airlines]);
 
         return new AirlinesAll($result);
+    }
+
+    /**
+     * @param NemoWidgetService $service
+     * @param $iataCode
+     * @return Guide
+     * @throws ApiException
+     */
+    public function airport(NemoWidgetService $service, $iataCode)
+    {
+        $airline = Airport::whereCode($iataCode)->first();
+
+        if(!$airline) {
+            throw ApiException::getInstanceInvalidId($iataCode);
+        }
+
+        $result = collect(['countries' => [$airline->country], 'airlines' => [$airline], 'cities' => [$airline->city]]);
+
+        return new Guide($result);
     }
 
     public function flightsSearchRequest(FlightsSearchRequest $request, NemoWidgetService $service)

@@ -4,6 +4,9 @@ GET http://127.0.0.1:8081/api/guide/autocomplete/iata/belgra/dep/BEG?apilang=rs
 GET http://127.0.0.1:8081/api/guide/airlines/all
 
 ###
+GET http://127.0.0.1:8081/api/guide/airports/ADE
+
+###
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###

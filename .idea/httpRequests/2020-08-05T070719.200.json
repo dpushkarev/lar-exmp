@@ -1,0 +1,59 @@
+{
+  "guide": {
+    "airlines": {
+      "ADE": {
+        "IATA": "ADE",
+        "name": "Yemen Intl Arpt",
+        "nameEn": "Yemen Intl Arpt",
+        "nameFallback": null,
+        "rating": null,
+        "countryCode": "YE",
+        "logo": null,
+        "monochromeLogo": null,
+        "colors": null
+      }
+    },
+    "cities": {
+      "IATA": "ADE",
+      "name": "Aden",
+      "nameEn": "Aden",
+      "countryCode": "YE",
+      "id": 52,
+      "airports": [
+        {
+          "IATA": "ADE"
+        }
+      ]
+    },
+    "countries": {
+      "YE": {
+        "code": "YE",
+        "name": "Yemen",
+        "nameEn": "Yemen"
+      }
+    }
+  },
+  "system": {
+    "info": {
+      "response": {
+        "timestamp": 1596643639,
+        "responseTime": 0.34046101570129395
+      },
+      "user": {
+        "userID": null,
+        "agencyID": null,
+        "status": "guest",
+        "isB2B": false,
+        "settings": {
+          "currentLanguage": "en",
+          "currentCurrency": null,
+          "agencyCurrency": null,
+          "agencyCountry": null,
+          "googleMapsApiKey": null,
+          "googleMapsClientId": null,
+          "showFullFlightsResults": "false"
+        }
+      }
+    }
+  }
+}
