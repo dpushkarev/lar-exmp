@@ -21,6 +21,7 @@ use FilippoToso\Travelport\Air\BagDetails;
 use FilippoToso\Travelport\Air\BaggageAllowanceInfo;
 use FilippoToso\Travelport\Air\BaggageRestriction;
 use FilippoToso\Travelport\Air\BookingInfo;
+use FilippoToso\Travelport\Air\Brand;
 use FilippoToso\Travelport\Air\CarryOnAllowanceInfo;
 use FilippoToso\Travelport\Air\CarryOnDetails;
 use FilippoToso\Travelport\Air\FareInfo;
@@ -117,6 +118,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $flightGroupsCollection = collect();
         $flightGroups = collect();
         $fareInfoMap = collect();
+        $brandMap = collect();
 
         foreach ($searchRsp->getAirSegmentList()->getAirSegment() as $key => $airSegment) {
             $origin = $airSegment->getOrigin();
@@ -187,6 +189,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         /** @var  $fareInfo FareInfo */
         foreach ($searchRsp->getFareInfoList()->getFareInfo() as $fareInfo) {
             $fareInfoMap->put($fareInfo->getKey(), $fareInfo);
+        }
+
+        /** @var  $brand Brand */
+        foreach ($searchRsp->getBrandList()->getBrand() as $brand) {
+            $brandMap->put($brand->getBrandID(), $brand);
         }
 
         /** @var $airPricePoint AirPricePoint */
@@ -281,7 +288,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
                                         list($priority, $indicator) = explode(',', $getFareAttributeSplit);
                                         $fareAttribute = $this->FareAttributes[$priority];
-                                        $features[$fareAttribute['feature']][$fareAttribute['code']][] = [
+                                        $features[$fareAttribute['feature']][] = [
                                             'code' => $fareAttribute['code'],
                                             'description' => [
                                                 'short' => '-',
@@ -294,8 +301,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     }
                                 }
 
+                                $brand = $fareInfoMap->get($bookingInfo->getFareInfoRef())->getBrand();
                                 $passengerFares['tariffs'][] = [
                                     "code" => $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareBasis(),
+                                    "familyName" => !is_null($brand) ? $brandMap->get($brand->getBrandID(), new Brand())->getName() : null,
                                     "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
                                     "features" => $features,
                                     "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
