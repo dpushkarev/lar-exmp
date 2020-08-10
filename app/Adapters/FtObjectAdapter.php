@@ -227,22 +227,22 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $countOfPassengers += $passengerFares['count'];
 
                 $passengerFares['baseFare'] = [
-                    'amount' => (float) substr($airPricingInfo->getBasePrice(), 3),
+                    'amount' => (float)substr($airPricingInfo->getBasePrice(), 3),
                     'currency' => substr($airPricingInfo->getBasePrice(), 0, 3),
                 ];
 
                 $passengerFares['equivFare'] = [
-                    'amount' => (float) substr($airPricingInfo->getEquivalentBasePrice(), 3),
+                    'amount' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 3),
                     'currency' => substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
                 ];
 
                 $passengerFares['equivFare'] = [
-                    'amount' => (float) substr($airPricingInfo->getEquivalentBasePrice(), 3),
+                    'amount' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 3),
                     'currency' => substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
                 ];
 
                 $passengerFares['totalFare'] = [
-                    'amount' => (float) substr($airPricingInfo->getTotalPrice(), 3),
+                    'amount' => (float)substr($airPricingInfo->getTotalPrice(), 3),
                     'currency' => substr($airPricingInfo->getTotalPrice(), 0, 3),
                 ];
 
@@ -329,7 +329,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             ];
 
             $airPricePointData['totalPrice'] = [
-                'amount' =>  (float) substr($airPricePoint->getTotalPrice(), 3) + $agencyChargeAll,
+                'amount' => (float)substr($airPricePoint->getTotalPrice(), 3) + $agencyChargeAll,
                 'currency' => substr($airPricePoint->getTotalPrice(), 0, 3),
             ];
 
@@ -347,7 +347,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     ];
                     $segmentInfo['freeBaggage'][] = $freeBaggage;
 
-                    if($passengerFare['type'] === static::PASSENGER_TYPE_ADULT) {
+                    if ($passengerFare['type'] === static::PASSENGER_TYPE_ADULT) {
                         $segmentInfo["minBaggage"] = [
                             'value' => $freeBaggage['value'],
                             'measurement' => $freeBaggage['measurement']
@@ -528,17 +528,17 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     $countOfPassengers += $airPricingInfoData['count'];
 
                     $airPricingInfoData['baseFare'] = [
-                        'amount' => (float) substr($airPricingInfo->getBasePrice(), 3),
+                        'amount' => (float)substr($airPricingInfo->getBasePrice(), 3),
                         'currency' => substr($airPricingInfo->getBasePrice(), 0, 3),
                     ];
 
                     $airPricingInfoData['equivFare'] = [
-                        'amount' => (float) substr($airPricingInfo->getEquivalentBasePrice(), 3),
+                        'amount' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 3),
                         'currency' => substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
                     ];
 
                     $airPricingInfoData['totalFare'] = [
-                        'amount' => (float) substr($airPricingInfo->getTotalPrice(), 3),
+                        'amount' => (float)substr($airPricingInfo->getTotalPrice(), 3),
                         'currency' => substr($airPricingInfo->getTotalPrice(), 0, 3),
                     ];
 
@@ -547,7 +547,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         foreach ($airPricingInfo->getTaxInfo() as $typeTaxInfo) {
                             $airPricingInfoData['taxes'][] = [
                                 $typeTaxInfo->getCategory() => [
-                                    'amount' => (float) substr($typeTaxInfo->getAmount(), 3),
+                                    'amount' => (float)substr($typeTaxInfo->getAmount(), 3),
                                     'currency' => substr($typeTaxInfo->getAmount(), 0, 3)
                                 ]
                             ];
@@ -573,19 +573,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             ]
                         ];
 
-                        if(!is_null($fareInfo->getFareSurcharge())) {
+                        if (!is_null($fareInfo->getFareSurcharge())) {
                             /** @var FareSurcharge $fareSurcharge */
                             foreach ($fareInfo->getFareSurcharge() as $fareSurcharge) {
                                 $fareInfoData['fareSurcharge'][] = [
                                     'key' => $fareSurcharge->getKey(),
                                     'type' => $fareSurcharge->getType(),
-                                    'amount' =>  (float) substr($fareSurcharge->getAmount(), 3),
+                                    'amount' => (float)substr($fareSurcharge->getAmount(), 3),
                                     'currency' => substr($fareSurcharge->getAmount(), 0, 3)
                                 ];
                             }
                         }
 
-                        if($fareInfo->getBrand()->getTitle()) {
+                        if ($fareInfo->getBrand()->getTitle()) {
                             /** @var typeTextElement $title */
                             foreach ($fareInfo->getBrand()->getTitle() as $title) {
                                 $fareInfoData['brand']['title'][] = [
@@ -596,7 +596,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             }
                         }
 
-                        if($fareInfo->getBrand()->getText()) {
+                        if ($fareInfo->getBrand()->getText()) {
                             /** @var typeTextElement $text */
                             foreach ($fareInfo->getBrand()->getText() as $text) {
                                 $fareInfoData['brand']['text'][] = [
@@ -607,7 +607,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             }
                         }
 
-                        if($fareInfo->getBrand()->getImageLocation()) {
+                        if ($fareInfo->getBrand()->getImageLocation()) {
                             /** @var ImageLocation $imageLocation */
                             foreach ($fareInfo->getBrand()->getImageLocation() as $imageLocation) {
                                 $fareInfoData['brand']['imageLocation'][] = [
@@ -619,7 +619,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             }
                         }
 
-                        if($fareInfo->getBrand()->getOptionalServices()) {
+                        if ($fareInfo->getBrand()->getOptionalServices()) {
                             /** @var OptionalService $optimalService */
                             foreach ($fareInfo->getBrand()->getOptionalServices()->getOptionalService() as $optimalService) {
 
@@ -632,7 +632,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 }
 
                                 $emd = [];
-                                if($optimalService->getEMD()) {
+                                if ($optimalService->getEMD()) {
                                     $emd = [
                                         'AssociatedItem' => $optimalService->getEMD()->getAssociatedItem()
                                     ];
@@ -658,9 +658,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $airPricingInfoData['fareInfo'][] = $fareInfoData;
                     }
 
-                    if($airPricingInfo->getBookingInfo()) {
+                    if ($airPricingInfo->getBookingInfo()) {
                         /** @var BookingInfo $bookingInfo */
-                        foreach($airPricingInfo->getBookingInfo() as $bookingInfo) {
+                        foreach ($airPricingInfo->getBookingInfo() as $bookingInfo) {
                             $airPricingInfoData['bookingInfo'][] = [
                                 'bookingCode' => $bookingInfo->getBookingCode(),
                                 'bookingCount' => $bookingInfo->getBookingCount(),
@@ -674,13 +674,13 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
                     }
 
-                    if($airPricingInfo->getTaxInfo()) {
+                    if ($airPricingInfo->getTaxInfo()) {
                         /** @var typeTaxInfo $taxInfo */
-                        foreach($airPricingInfo->getTaxInfo() as $taxInfo) {
+                        foreach ($airPricingInfo->getTaxInfo() as $taxInfo) {
                             $airPricingInfoData['taxInfo'][] = [
                                 'category' => $taxInfo->getCategory(),
                                 'price' => [
-                                    'amount' => (float) substr($taxInfo->getAmount(), 3),
+                                    'amount' => (float)substr($taxInfo->getAmount(), 3),
                                     'currency' => substr($taxInfo->getAmount(), 0, 3)
                                 ],
                                 'key' => $taxInfo->getKey(),
@@ -688,20 +688,22 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
                     }
 
-                    /** @var typeFarePenalty $chargePenalty */
-                    foreach($airPricingInfo->getChangePenalty() as $chargePenalty) {
-                        $airPricingInfoData['chargePenalty'][] = [
-                            'price' => [
-                                'amount' => (float) substr($chargePenalty->getAmount(), 3),
-                                'currency' => substr($chargePenalty->getAmount(), 0, 3)
-                            ],
-                            'percentage' => $chargePenalty->getPercentage(),
-                            'penaltyApplies' => $chargePenalty->getPenaltyApplies(),
-                            'noShow' => $chargePenalty->getNoShow()
-                        ];
+                    if (!is_null($airPricingInfo->getChangePenalty())) {
+                        /** @var typeFarePenalty $chargePenalty */
+                        foreach ($airPricingInfo->getChangePenalty() as $chargePenalty) {
+                            $airPricingInfoData['chargePenalty'][] = [
+                                'price' => [
+                                    'amount' => (float)substr($chargePenalty->getAmount(), 3),
+                                    'currency' => substr($chargePenalty->getAmount(), 0, 3)
+                                ],
+                                'percentage' => $chargePenalty->getPercentage(),
+                                'penaltyApplies' => $chargePenalty->getPenaltyApplies(),
+                                'noShow' => $chargePenalty->getNoShow()
+                            ];
+                        }
                     }
 
-                    foreach($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
+                    foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
                         $airPricingInfoData['cancelPenalty'][] = [
                             'percentage' => $cancelPenalty->getPercentage(),
                             'penaltyApplies' => $cancelPenalty->getPenaltyApplies(),
@@ -709,7 +711,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
 
                     /** @var BaggageAllowanceInfo $baggageAllowanceInfo */
-                    foreach($airPricingInfo->getBaggageAllowances()->getBaggageAllowanceInfo() as $baggageAllowanceInfo) {
+                    foreach ($airPricingInfo->getBaggageAllowances()->getBaggageAllowanceInfo() as $baggageAllowanceInfo) {
 
                         $urlInfoData = [];
                         /** @var URLInfo $urlInfo */
@@ -731,14 +733,14 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                         /** @var BagDetails $bagDetail */
                         $bagDetailData = [];
-                        foreach($baggageAllowanceInfo->getBagDetails() as $bagDetail) {
+                        foreach ($baggageAllowanceInfo->getBagDetails() as $bagDetail) {
 
                             $baggageRestrictionData = [];
                             /** @var BaggageRestriction $baggageRestriction */
                             foreach ($bagDetail->getBaggageRestriction() as $baggageRestriction) {
 
                                 $textInfoDataBagRest = [];
-                                foreach($baggageRestriction->getTextInfo() as $textInfo) {
+                                foreach ($baggageRestriction->getTextInfo() as $textInfo) {
                                     $textInfoDataBagRest[] = [
                                         'title' => $textInfo->getTitle(),
                                         'text' => $textInfo->getText()
@@ -754,19 +756,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $bagDetailData[] = [
                                 'applicableBags' => $bagDetail->getApplicableBags(),
                                 'basePrice' => [
-                                    'amount' => (float) substr($bagDetail->getBasePrice(), 3),
+                                    'amount' => (float)substr($bagDetail->getBasePrice(), 3),
                                     'currency' => substr($bagDetail->getBasePrice(), 0, 3)
                                 ],
                                 'approximateBasePrice' => [
-                                    'amount' => (float) substr($bagDetail->getApproximateBasePrice(), 3),
+                                    'amount' => (float)substr($bagDetail->getApproximateBasePrice(), 3),
                                     'currency' => substr($bagDetail->getApproximateBasePrice(), 0, 3)
                                 ],
                                 'totalPrice' => [
-                                    'amount' => (float) substr($bagDetail->getTotalPrice(), 3),
+                                    'amount' => (float)substr($bagDetail->getTotalPrice(), 3),
                                     'currency' => substr($bagDetail->getTotalPrice(), 0, 3)
                                 ],
                                 'approximateTotalPrice' => [
-                                    'amount' => (float) substr($bagDetail->getApproximateTotalPrice(), 3),
+                                    'amount' => (float)substr($bagDetail->getApproximateTotalPrice(), 3),
                                     'currency' => substr($bagDetail->getApproximateTotalPrice(), 0, 3)
                                 ],
                                 'baggageRestriction' => $baggageRestrictionData
@@ -785,10 +787,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
 
                     /** @var CarryOnAllowanceInfo $carryOnAllowanceInfo */
-                    foreach($airPricingInfo->getBaggageAllowances()->getCarryOnAllowanceInfo() as $carryOnAllowanceInfo) {
+                    foreach ($airPricingInfo->getBaggageAllowances()->getCarryOnAllowanceInfo() as $carryOnAllowanceInfo) {
 
                         $urlInfoData = [];
-                        if($carryOnAllowanceInfo->getURLInfo()) {
+                        if ($carryOnAllowanceInfo->getURLInfo()) {
                             /** @var URLInfo $urlInfo */
                             foreach ($carryOnAllowanceInfo->getURLInfo() as $urlInfo) {
                                 $urlInfoData[] = [
@@ -808,16 +810,16 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
 
                         $carryOnDetailData = [];
-                        if($carryOnAllowanceInfo->getCarryOnDetails()) {
+                        if ($carryOnAllowanceInfo->getCarryOnDetails()) {
                             /** @var CarryOnDetails $bagDetail */
-                            foreach($carryOnAllowanceInfo->getCarryOnDetails() as $carryOnDetail) {
+                            foreach ($carryOnAllowanceInfo->getCarryOnDetails() as $carryOnDetail) {
 
                                 $baggageRestrictionData = [];
                                 /** @var BaggageRestriction $baggageRestriction */
                                 foreach ($carryOnDetail->getBaggageRestriction() as $baggageRestriction) {
 
                                     $textInfoDataBagRest = [];
-                                    foreach($baggageRestriction->getTextInfo() as $textInfo) {
+                                    foreach ($baggageRestriction->getTextInfo() as $textInfo) {
                                         $textInfoDataBagRest[] = [
                                             'title' => $textInfo->getTitle(),
                                             'text' => $textInfo->getText()
@@ -834,19 +836,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 $carryOnDetailData[] = [
                                     'applicableCarryOnBags' => $carryOnDetail->getApplicableCarryOnBags(),
                                     'basePrice' => [
-                                        'amount' => (float) substr($carryOnDetail->getBasePrice(), 3),
+                                        'amount' => (float)substr($carryOnDetail->getBasePrice(), 3),
                                         'currency' => substr($carryOnDetail->getBasePrice(), 0, 3)
                                     ],
                                     'approximateBasePrice' => [
-                                        'amount' => (float) substr($carryOnDetail->getApproximateBasePrice(), 3),
+                                        'amount' => (float)substr($carryOnDetail->getApproximateBasePrice(), 3),
                                         'currency' => substr($carryOnDetail->getApproximateBasePrice(), 0, 3)
                                     ],
                                     'totalPrice' => [
-                                        'amount' => (float) substr($carryOnDetail->getTotalPrice(), 3),
+                                        'amount' => (float)substr($carryOnDetail->getTotalPrice(), 3),
                                         'currency' => substr($carryOnDetail->getTotalPrice(), 0, 3)
                                     ],
                                     'approximateTotalPrice' => [
-                                        'amount' => (float) substr($carryOnDetail->getApproximateTotalPrice(), 3),
+                                        'amount' => (float)substr($carryOnDetail->getApproximateTotalPrice(), 3),
                                         'currency' => substr($carryOnDetail->getApproximateTotalPrice(), 0, 3)
                                     ],
                                     'baggageRestriction' => $baggageRestrictionData
@@ -874,8 +876,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 ];
 
                 $airSolutionData['totalPrice'] = [
-                    'amount' => (float) substr($airSolution->getTotalPrice(), 3) + $agencyChargeAll,
-                    'currency' => (float) substr($airSolution->getTotalPrice(), 0, 3),
+                    'amount' => (float)substr($airSolution->getTotalPrice(), 3) + $agencyChargeAll,
+                    'currency' => (float)substr($airSolution->getTotalPrice(), 0, 3),
                 ];
 
                 $airSolutionData['paymentOptionCharge'] = [
@@ -893,7 +895,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     ]
                 ];
 
-                if($airSolution->getFareNote()) {
+                if ($airSolution->getFareNote()) {
                     /** @var FareNote $fareNote */
                     foreach ($airSolution->getFareNote() as $fareNote) {
                         $airSolutionData['fareNote'][] = [
@@ -903,7 +905,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
                 }
 
-                if($airSolution->getHostToken()) {
+                if ($airSolution->getHostToken()) {
                     /** @var HostToken $hostToken */
                     foreach ($airSolution->getHostToken() as $hostToken) {
                         $airSolutionData['hostToken'][] = [
@@ -917,8 +919,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             }
 
             /** @var FareRule $fareRule */
-            foreach ($airPriceResult->getFareRule() as $fareRule)
-            {
+            foreach ($airPriceResult->getFareRule() as $fareRule) {
                 $fareRuleLongData = [];
                 /** @var FareRuleLong $fareRuleLong */
                 foreach ($fareRule->getFareRuleLong() as $fareRuleLong) {
