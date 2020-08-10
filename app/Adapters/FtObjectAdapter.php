@@ -563,15 +563,18 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 'providerCode' => $fareInfo->getFareRuleKey()->getProviderCode(),
                                 'textNode' => $fareInfo->getFareRuleKey()->get_(),
                             ],
-                            'brand' => [
+                        ];
+
+                        if (!is_null($fareInfo->getBrand())) {
+                            $fareInfoData['brand'] = [
                                 'key' => $fareInfo->getBrand()->getKey(),
                                 'brandId' => $fareInfo->getBrand()->getBrandID(),
                                 'upSellBrandId' => $fareInfo->getBrand()->getUpSellBrandID(),
                                 'name' => $fareInfo->getBrand()->getName(),
                                 'carrier' => $fareInfo->getBrand()->getCarrier(),
                                 'brandTier' => $fareInfo->getBrand()->getBrandTier()
-                            ]
-                        ];
+                            ];
+                        }
 
                         if (!is_null($fareInfo->getFareSurcharge())) {
                             /** @var FareSurcharge $fareSurcharge */
