@@ -574,6 +574,76 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 'carrier' => $fareInfo->getBrand()->getCarrier(),
                                 'brandTier' => $fareInfo->getBrand()->getBrandTier()
                             ];
+
+                            if ($fareInfo->getBrand()->getTitle()) {
+                                /** @var typeTextElement $title */
+                                foreach ($fareInfo->getBrand()->getTitle() as $title) {
+                                    $fareInfoData['brand']['title'][] = [
+                                        'type' => $title->getType(),
+                                        'languageCode' => $title->getLanguageCode(),
+                                        'textNode' => $title->get_(),
+                                    ];
+                                }
+                            }
+
+                            if ($fareInfo->getBrand()->getText()) {
+                                /** @var typeTextElement $text */
+                                foreach ($fareInfo->getBrand()->getText() as $text) {
+                                    $fareInfoData['brand']['text'][] = [
+                                        'type' => $text->getType(),
+                                        'languageCode' => $text->getLanguageCode(),
+                                        'textNode' => $text->get_(),
+                                    ];
+                                }
+                            }
+
+                            if ($fareInfo->getBrand()->getImageLocation()) {
+                                /** @var ImageLocation $imageLocation */
+                                foreach ($fareInfo->getBrand()->getImageLocation() as $imageLocation) {
+                                    $fareInfoData['brand']['imageLocation'][] = [
+                                        'type' => $imageLocation->getType(),
+                                        'width' => $imageLocation->getImageWidth(),
+                                        'height' => $imageLocation->getImageHeight(),
+                                        'textNode' => $imageLocation->get_(),
+                                    ];
+                                }
+                            }
+
+                            if ($fareInfo->getBrand()->getOptionalServices()) {
+                                /** @var OptionalService $optimalService */
+                                foreach ($fareInfo->getBrand()->getOptionalServices()->getOptionalService() as $optimalService) {
+
+                                    $serviceDataAll = [];
+                                    /** @var ServiceData $serviceDate */
+                                    foreach ($optimalService->getServiceData() as $serviceDate) {
+                                        $serviceDataAll[] = [
+                                            'airSegmentRef' => $serviceDate->getAirSegmentRef()
+                                        ];
+                                    }
+
+                                    $emd = [];
+                                    if ($optimalService->getEMD()) {
+                                        $emd = [
+                                            'AssociatedItem' => $optimalService->getEMD()->getAssociatedItem()
+                                        ];
+                                    }
+
+                                    $fareInfoData['brand']['optimalService'][] = [
+                                        'type' => $optimalService->getType(),
+                                        'createDate' => Carbon::parse($optimalService->getCreateDate())->format('Y-m-d\TH:i:s'),
+                                        'serviceSubCode' => $optimalService->getServiceSubCode(),
+                                        'key' => $optimalService->getKey(),
+                                        'secondaryType' => $optimalService->getSecondaryType(),
+                                        'chargeable' => $optimalService->getChargeable(),
+                                        'tag' => $optimalService->getTag(),
+                                        'displayOrder' => $optimalService->getDisplayOrder(),
+                                        'serviceData' => $serviceDataAll,
+                                        'serviceInfo' => $optimalService->getServiceInfo(),
+                                        'emd' => $emd
+                                    ];
+
+                                }
+                            }
                         }
 
                         if (!is_null($fareInfo->getFareSurcharge())) {
@@ -585,76 +655,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     'amount' => (float)substr($fareSurcharge->getAmount(), 3),
                                     'currency' => substr($fareSurcharge->getAmount(), 0, 3)
                                 ];
-                            }
-                        }
-
-                        if ($fareInfo->getBrand()->getTitle()) {
-                            /** @var typeTextElement $title */
-                            foreach ($fareInfo->getBrand()->getTitle() as $title) {
-                                $fareInfoData['brand']['title'][] = [
-                                    'type' => $title->getType(),
-                                    'languageCode' => $title->getLanguageCode(),
-                                    'textNode' => $title->get_(),
-                                ];
-                            }
-                        }
-
-                        if ($fareInfo->getBrand()->getText()) {
-                            /** @var typeTextElement $text */
-                            foreach ($fareInfo->getBrand()->getText() as $text) {
-                                $fareInfoData['brand']['text'][] = [
-                                    'type' => $text->getType(),
-                                    'languageCode' => $text->getLanguageCode(),
-                                    'textNode' => $text->get_(),
-                                ];
-                            }
-                        }
-
-                        if ($fareInfo->getBrand()->getImageLocation()) {
-                            /** @var ImageLocation $imageLocation */
-                            foreach ($fareInfo->getBrand()->getImageLocation() as $imageLocation) {
-                                $fareInfoData['brand']['imageLocation'][] = [
-                                    'type' => $imageLocation->getType(),
-                                    'width' => $imageLocation->getImageWidth(),
-                                    'height' => $imageLocation->getImageHeight(),
-                                    'textNode' => $imageLocation->get_(),
-                                ];
-                            }
-                        }
-
-                        if ($fareInfo->getBrand()->getOptionalServices()) {
-                            /** @var OptionalService $optimalService */
-                            foreach ($fareInfo->getBrand()->getOptionalServices()->getOptionalService() as $optimalService) {
-
-                                $serviceDataAll = [];
-                                /** @var ServiceData $serviceDate */
-                                foreach ($optimalService->getServiceData() as $serviceDate) {
-                                    $serviceDataAll[] = [
-                                        'airSegmentRef' => $serviceDate->getAirSegmentRef()
-                                    ];
-                                }
-
-                                $emd = [];
-                                if ($optimalService->getEMD()) {
-                                    $emd = [
-                                        'AssociatedItem' => $optimalService->getEMD()->getAssociatedItem()
-                                    ];
-                                }
-
-                                $fareInfoData['brand']['optimalService'][] = [
-                                    'type' => $optimalService->getType(),
-                                    'createDate' => Carbon::parse($optimalService->getCreateDate())->format('Y-m-d\TH:i:s'),
-                                    'serviceSubCode' => $optimalService->getServiceSubCode(),
-                                    'key' => $optimalService->getKey(),
-                                    'secondaryType' => $optimalService->getSecondaryType(),
-                                    'chargeable' => $optimalService->getChargeable(),
-                                    'tag' => $optimalService->getTag(),
-                                    'displayOrder' => $optimalService->getDisplayOrder(),
-                                    'serviceData' => $serviceDataAll,
-                                    'serviceInfo' => $optimalService->getServiceInfo(),
-                                    'emd' => $emd
-                                ];
-
                             }
                         }
 
