@@ -164,7 +164,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $airLines->put($carrier, Airline::whereCode($carrier)->first());
             }
 
-            if (!$airLines->has($airSegmentData['operatingCompany'])) {
+            if (!is_null($airSegmentData['operatingCompany']) && !$airLines->has($airSegmentData['operatingCompany'])) {
                 $airLines->put($airSegmentData['operatingCompany'], Airline::whereCode($airSegmentData['operatingCompany'])->first());
             }
 
