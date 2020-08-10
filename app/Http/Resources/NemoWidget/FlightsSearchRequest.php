@@ -2,15 +2,11 @@
 
 namespace App\Http\Resources\NemoWidget;
 
-use App\Http\Resources\NemoWidget\Common\AirportList;
-use App\Http\Resources\NemoWidget\Common\City;
-use App\Http\Resources\NemoWidget\Common\Country;
 use App\Http\Resources\NemoWidget\Common\Flights;
 use App\Http\Resources\NemoWidget\Common\FormData;
+use App\Http\Resources\NemoWidget\Common\Guide;
 use App\Http\Resources\NemoWidget\Common\Request;
 use App\Http\Resources\NemoWidget\Common\Results;
-use App\Models\City as CityModel;
-use App\Models\Airport as AirportModel;
 
 class FlightsSearchRequest extends AbstractResource
 {
@@ -29,11 +25,7 @@ class FlightsSearchRequest extends AbstractResource
                     'results' => new Results(collect(['request_id' => $this->resource->get('request')->id]))
                 ]
             ],
-            'guide' => [
-                'airports' => new AirportList($this->resource->get('airports')),
-                'cities' => $this->resource->get('cities'),
-                'countries' => $this->resource->get('countries')
-            ],
+            $this->merge(new Guide($this->resource))
         ];
     }
 

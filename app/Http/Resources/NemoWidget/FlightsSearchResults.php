@@ -2,10 +2,8 @@
 
 namespace App\Http\Resources\NemoWidget;
 
-use App\Http\Resources\NemoWidget\Common\AircraftList;
-use App\Http\Resources\NemoWidget\Common\AirlineList;
-use App\Http\Resources\NemoWidget\Common\AirportList;
 use App\Http\Resources\NemoWidget\Common\FormData;
+use App\Http\Resources\NemoWidget\Common\Guide;
 use App\Http\Resources\NemoWidget\Common\Request;
 use App\Http\Resources\NemoWidget\Common\ResultData;
 use App\Http\Resources\NemoWidget\Common\Results;
@@ -27,17 +25,7 @@ class FlightsSearchResults extends AbstractResource
                     'resultData' => new ResultData([])
                 ]
             ],
-            'guide' => [
-                $this->mergeWhen($this->resource->has('airlines'), [
-                    'airlines' => new AirlineList($this->resource->get('airlines')),
-                ]),
-                $this->mergeWhen($this->resource->has('aircrafts'), [
-                    'aircrafts' => new AircraftList($this->resource->get('aircrafts')),
-                ]),
-                'airports' => new AirportList($this->resource->get('airports')),
-                'cities' => $this->resource->get('cities'),
-                'countries' => $this->resource->get('countries')
-            ],
+            $this->merge(new Guide($this->resource))
         ];
     }
 

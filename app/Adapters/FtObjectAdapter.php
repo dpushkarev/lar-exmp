@@ -390,8 +390,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $results = collect(['groupsData' => $groupsData, 'flightGroups' => $flightGroups]);
 
         foreach ($airports as $airport) {
-            $countries = $countries->merge(new Country($airport->country));
-            $cities[$airport->city->id] = new City($airport->city);
+            $countries = $countries->add($airport->country);
+            $cities = $cities->add($airport->city);
         }
 
         return collect([
@@ -955,8 +955,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $results = collect(['groupsData' => $groupsData, 'info' => $info]);
 
         foreach ($airports as $airport) {
-            $countries = $countries->merge(new Country($airport->country));
-            $cities[$airport->city->id] = new City($airport->city);
+            $countries = $countries->add($airport->country);
+            $cities = $cities->add($airport->city);
         }
 
         return collect([

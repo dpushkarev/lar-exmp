@@ -130,6 +130,7 @@ class NemoWidgetService
                     'errorMessageEng' => $travelPortException->getMessage()
                 ])
             ]));
+
             return $flightsSearchRequestAdapt;
         } finally {
             $request->save();

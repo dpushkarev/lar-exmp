@@ -15,7 +15,7 @@ class Guide extends AbstractResource
             'guide' => [
                 $this->mergeWhen($this->resource->has('autocomplete'), [
                     'autocomplete' => [
-                        'iata' => AutocompleteCommon::collection($this->resource->get('autocomplete'))
+                        'iata' => AutocompleteCommon::collection($this->resource->get('autocomplete', collect()))
                     ]
                 ]),
                 $this->mergeWhen($this->resource->has('airlines'), [
