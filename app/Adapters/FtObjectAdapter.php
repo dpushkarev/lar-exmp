@@ -706,56 +706,69 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
                     }
 
-                    foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
-                        $airPricingInfoData['cancelPenalty'][] = [
-                            'percentage' => $cancelPenalty->getPercentage(),
-                            'penaltyApplies' => $cancelPenalty->getPenaltyApplies(),
-                        ];
+                    if (!is_null($airPricingInfo->getCancelPenalty())) {
+                        foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
+                            $airPricingInfoData['cancelPenalty'][] = [
+                                'percentage' => $cancelPenalty->getPercentage(),
+                                'penaltyApplies' => $cancelPenalty->getPenaltyApplies(),
+                            ];
+                        }
                     }
 
                     /** @var BaggageAllowanceInfo $baggageAllowanceInfo */
                     foreach ($airPricingInfo->getBaggageAllowances()->getBaggageAllowanceInfo() as $baggageAllowanceInfo) {
 
                         $urlInfoData = [];
-                        /** @var URLInfo $urlInfo */
-                        foreach ($baggageAllowanceInfo->getURLInfo() as $urlInfo) {
-                            $urlInfoData[] = [
-                                'url' => $urlInfo->getURL(),
-                                'text' => $urlInfo->getText(),
-                            ];
+                        if (!is_null($baggageAllowanceInfo->getURLInfo())) {
+                            /** @var URLInfo $urlInfo */
+                            foreach ($baggageAllowanceInfo->getURLInfo() as $urlInfo) {
+                                $urlInfoData[] = [
+                                    'url' => $urlInfo->getURL(),
+                                    'text' => $urlInfo->getText(),
+                                ];
+                            }
                         }
 
                         $textInfoData = [];
-                        /** @var TextInfo $textInfo */
-                        foreach ($baggageAllowanceInfo->getTextInfo() as $textInfo) {
-                            $textInfoData[] = [
-                                'title' => $textInfo->getTitle(),
-                                'text' => $textInfo->getText()
-                            ];
+                        if (!is_null($baggageAllowanceInfo->getTextInfo())) {
+                            /** @var TextInfo $textInfo */
+                            foreach ($baggageAllowanceInfo->getTextInfo() as $textInfo) {
+                                $textInfoData[] = [
+                                    'title' => $textInfo->getTitle(),
+                                    'text' => $textInfo->getText()
+                                ];
+                            }
                         }
+
 
                         /** @var BagDetails $bagDetail */
                         $bagDetailData = [];
                         foreach ($baggageAllowanceInfo->getBagDetails() as $bagDetail) {
 
                             $baggageRestrictionData = [];
-                            /** @var BaggageRestriction $baggageRestriction */
-                            foreach ($bagDetail->getBaggageRestriction() as $baggageRestriction) {
+                            if (!is_null($bagDetail->getBaggageRestriction())) {
+                                /** @var BaggageRestriction $baggageRestriction */
+                                foreach ($bagDetail->getBaggageRestriction() as $baggageRestriction) {
 
-                                $textInfoDataBagRest = [];
-                                foreach ($baggageRestriction->getTextInfo() as $textInfo) {
-                                    $textInfoDataBagRest[] = [
-                                        'title' => $textInfo->getTitle(),
-                                        'text' => $textInfo->getText()
+                                    $textInfoDataBagRest = [];
+                                    if (!is_null($baggageRestriction->getTextInfo())) {
+                                        foreach ($baggageRestriction->getTextInfo() as $textInfo) {
+                                            $textInfoDataBagRest[] = [
+                                                'title' => $textInfo->getTitle(),
+                                                'text' => $textInfo->getText()
+                                            ];
+                                        }
+                                    }
+
+
+                                    $baggageRestrictionData[] = [
+                                        'dimension' => $baggageRestriction->getDimension(),
+                                        'maxWeight' => $baggageRestriction->getMaxWeight(),
+                                        'textInfo' => $textInfoDataBagRest
                                     ];
                                 }
-
-                                $baggageRestrictionData[] = [
-                                    'dimension' => $baggageRestriction->getDimension(),
-                                    'maxWeight' => $baggageRestriction->getMaxWeight(),
-                                    'textInfo' => $textInfoDataBagRest
-                                ];
                             }
+
                             $bagDetailData[] = [
                                 'applicableBags' => $bagDetail->getApplicableBags(),
                                 'basePrice' => [
@@ -804,13 +817,16 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
 
                         $textInfoData = [];
-                        /** @var TextInfo $textInfo */
-                        foreach ($carryOnAllowanceInfo->getTextInfo() as $textInfo) {
-                            $textInfoData[] = [
-                                'title' => $textInfo->getTitle(),
-                                'text' => $textInfo->getText()
-                            ];
+                        if (!is_null($carryOnAllowanceInfo->getTextInfo())) {
+                            /** @var TextInfo $textInfo */
+                            foreach ($carryOnAllowanceInfo->getTextInfo() as $textInfo) {
+                                $textInfoData[] = [
+                                    'title' => $textInfo->getTitle(),
+                                    'text' => $textInfo->getText()
+                                ];
+                            }
                         }
+
 
                         $carryOnDetailData = [];
                         if ($carryOnAllowanceInfo->getCarryOnDetails()) {
@@ -818,22 +834,26 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             foreach ($carryOnAllowanceInfo->getCarryOnDetails() as $carryOnDetail) {
 
                                 $baggageRestrictionData = [];
-                                /** @var BaggageRestriction $baggageRestriction */
-                                foreach ($carryOnDetail->getBaggageRestriction() as $baggageRestriction) {
+                                if (!is_null($carryOnDetail->getBaggageRestriction())) {
+                                    /** @var BaggageRestriction $baggageRestriction */
+                                    foreach ($carryOnDetail->getBaggageRestriction() as $baggageRestriction) {
 
-                                    $textInfoDataBagRest = [];
-                                    foreach ($baggageRestriction->getTextInfo() as $textInfo) {
-                                        $textInfoDataBagRest[] = [
-                                            'title' => $textInfo->getTitle(),
-                                            'text' => $textInfo->getText()
+                                        $textInfoDataBagRest = [];
+                                        if (!is_null($baggageRestriction->getTextInfo())) {
+                                            foreach ($baggageRestriction->getTextInfo() as $textInfo) {
+                                                $textInfoDataBagRest[] = [
+                                                    'title' => $textInfo->getTitle(),
+                                                    'text' => $textInfo->getText()
+                                                ];
+                                            }
+                                        }
+
+                                        $baggageRestrictionData[] = [
+                                            'dimension' => $baggageRestriction->getDimension(),
+                                            'maxWeight' => $baggageRestriction->getMaxWeight(),
+                                            'textInfo' => $textInfoDataBagRest
                                         ];
                                     }
-
-                                    $baggageRestrictionData[] = [
-                                        'dimension' => $baggageRestriction->getDimension(),
-                                        'maxWeight' => $baggageRestriction->getMaxWeight(),
-                                        'textInfo' => $textInfoDataBagRest
-                                    ];
                                 }
 
                                 $carryOnDetailData[] = [
