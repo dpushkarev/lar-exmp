@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Adapters\FtObjectAdapter;
 use App\Dto\AirReservationRequestDto;
 use App\Facades\TP;
 use FilippoToso\Travelport\Air\AirPriceResult;
@@ -13,14 +14,17 @@ use FilippoToso\Travelport\Air\AirSegmentRef;
 use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
+use Illuminate\Support\Facades\Cache;
 
 class CheckoutService
 {
     protected $logger;
+    protected $adapter;
 
-    public function __construct(TravelportLogger $logger)
+    public function __construct(TravelportLogger $logger, FtObjectAdapter $adapter)
     {
         $this->logger = $logger;
+        $this->adapter = $adapter;
     }
 
     public function reservation(AirReservationRequestDto $dto)
@@ -75,11 +79,11 @@ class CheckoutService
             }
         }
 
-        $response = TP::AirCreateReservationReq($dto);
+        $response = Cache::rememberForever('reservation' . $dto->getOrder()->flight_search_result_id, function () use ($dto) {
+            return TP::AirCreateReservationReq($dto);
+        });
 
-        echo "<pre>";
-        print_r($response);
-        die;
+        return $this->adapter->AirReservationAdapt($response);
     }
 
 }

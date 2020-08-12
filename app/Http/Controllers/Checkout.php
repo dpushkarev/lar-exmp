@@ -6,6 +6,7 @@ use App\Adapters\FtObjectAdapter;
 use App\Exceptions\ApiException;
 use App\Exceptions\TravelPortLoggerException;
 use App\Http\Requests\AirReservationRequest;
+use App\Http\Resources\NemoWidget\AirReservation;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
@@ -54,9 +55,9 @@ class Checkout extends Controller
         $dto->setOrder($order);
 
         try {
-            $service->reservation($dto);
+            $response = $service->reservation($dto);
 
-            return new FlightsSearchResults();
+            return new AirReservation($response);
         } catch (TravelPortLoggerException $exception) {
             throw ApiException::getInstance($exception->getMessage());
         }

@@ -10,9 +10,8 @@ GET http://127.0.0.1:8081/api/guide/airports/ADE
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/10
-###
-POST https://data.reservio.flights/api/flights/search/results/744?user_language_get_change=sr
+POST http://127.0.0.1:8081/api/flights/search/results/12
+
 ###
 GET http://127.0.0.1:8081/api/flights/search/results/4
 
@@ -35,6 +34,8 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
 GET http://127.0.0.1:8081/api/flights/search/history
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/55
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/171
 
+###
+POST https://data.reservio.flights/api/flights/search/results/744?user_language_get_change=sr
 ###

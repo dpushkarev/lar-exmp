@@ -12,6 +12,7 @@ use App\Models\Airport;
 use App\Models\FlightsSearchResult;
 use App\Services\TravelPortService;
 use Carbon\Carbon;
+use FilippoToso\Travelport\Air\ActionStatus;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
@@ -21,9 +22,11 @@ use FilippoToso\Travelport\Air\BagDetails;
 use FilippoToso\Travelport\Air\BaggageAllowanceInfo;
 use FilippoToso\Travelport\Air\BaggageRestriction;
 use FilippoToso\Travelport\Air\BookingInfo;
+use FilippoToso\Travelport\Air\BookingTraveler;
 use FilippoToso\Travelport\Air\Brand;
 use FilippoToso\Travelport\Air\CarryOnAllowanceInfo;
 use FilippoToso\Travelport\Air\CarryOnDetails;
+use FilippoToso\Travelport\Air\DeliveryInfo;
 use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\FareNote;
 use FilippoToso\Travelport\Air\FareRule;
@@ -37,13 +40,28 @@ use FilippoToso\Travelport\Air\ImageLocation;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use FilippoToso\Travelport\Air\Option;
 use FilippoToso\Travelport\Air\OptionalService;
+use FilippoToso\Travelport\Air\ProviderReservationInfoRef;
 use FilippoToso\Travelport\Air\ServiceData;
+use FilippoToso\Travelport\Air\SupplierLocator;
 use FilippoToso\Travelport\Air\TextInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\Air\typeFarePenalty;
+use FilippoToso\Travelport\Air\typeStructuredAddress;
 use FilippoToso\Travelport\Air\typeTaxInfo;
 use FilippoToso\Travelport\Air\typeTextElement;
 use FilippoToso\Travelport\Air\URLInfo;
+use FilippoToso\Travelport\UniversalRecord\AgentAction;
+use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
+use FilippoToso\Travelport\UniversalRecord\BookingTravelerRef;
+use FilippoToso\Travelport\UniversalRecord\Email;
+use FilippoToso\Travelport\UniversalRecord\Endorsement;
+use FilippoToso\Travelport\UniversalRecord\FormOfPayment;
+use FilippoToso\Travelport\UniversalRecord\PassengerType;
+use FilippoToso\Travelport\UniversalRecord\PhoneNumber;
+use FilippoToso\Travelport\UniversalRecord\SegmentRemark;
+use FilippoToso\Travelport\UniversalRecord\TicketingModifiers;
+use FilippoToso\Travelport\UniversalRecord\TicketingModifiersRef;
+use FilippoToso\Travelport\UniversalRecord\typeFormOfPaymentPNRReference;
 use Illuminate\Support\Collection;
 
 class FtObjectAdapter extends NemoWidgetAbstractAdapter
@@ -989,6 +1007,640 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'cities' => $cities,
             'countries' => $countries,
             'results' => $results
+        ]);
+    }
+
+    public function AirReservationAdapt(AirCreateReservationRsp $response)
+    {
+        $bookingTravelerCollection = collect();
+        $actionStatusCollection = collect();
+        $providerReservationCollection = collect();
+
+        /** @var BookingTraveler $bookingTraveler */
+        foreach ($response->getUniversalRecord()->getBookingTraveler() as $bookingTraveler) {
+
+            $bookingTravelerData = [
+                'key' => $bookingTraveler->getKey(),
+                'travelerType' => $bookingTraveler->getTravelerType(),
+                'age' => $bookingTraveler->getAge(),
+                'vip' => $bookingTraveler->getVIP(),
+                'dob' => $bookingTraveler->getDOB(),
+                'gender' => $bookingTraveler->getGender(),
+                'nationality' => $bookingTraveler->getNationality(),
+                'elStat' => $bookingTraveler->getElStat(),
+                'keyOverride' => $bookingTraveler->getKeyOverride(),
+                'loyaltyCard' => $bookingTraveler->getLoyaltyCard(),
+                'discountCard' => $bookingTraveler->getDiscountCard(),
+                'ssr' => $bookingTraveler->getSSR(),
+                'nameRemark' => $bookingTraveler->getNameRemark(),
+                'airSeatAssignment' => $bookingTraveler->getAirSeatAssignment(),
+                'railSeatAssignment' => $bookingTraveler->getRailSeatAssignment(),
+                'emergencyInfo' => $bookingTraveler->getEmergencyInfo(),
+                'driversLicense' => $bookingTraveler->getDriversLicense(),
+                'appliedProfile' => $bookingTraveler->getAppliedProfile(),
+                'customizedNameData' => $bookingTraveler->getCustomizedNameData(),
+                'travelComplianceData' => $bookingTraveler->getTravelComplianceData(),
+            ];
+
+            $bookingTravelerData['bookingTravelerName'] = [
+                'prefix' => $bookingTraveler->getBookingTravelerName()->getPrefix(),
+                'first' => $bookingTraveler->getBookingTravelerName()->getFirst(),
+                'middle' => $bookingTraveler->getBookingTravelerName()->getMiddle(),
+                'last' => $bookingTraveler->getBookingTravelerName()->getLast(),
+                'suffix' => $bookingTraveler->getBookingTravelerName()->getSuffix(),
+            ];
+
+            $deliveryInfoData = [];
+            /** @var DeliveryInfo $deliveryInfo */
+            foreach ($bookingTraveler->getDeliveryInfo() as $deliveryInfo) {
+
+                $providerReservationInfoRef = [];
+                if (!is_null($deliveryInfo->getProviderReservationInfoRef())) {
+                    /** @var ProviderReservationInfoRef $reservationRefs */
+                    foreach ($deliveryInfo->getProviderReservationInfoRef() as $reservationRefs) {
+                        $providerReservationInfoRef[] = $reservationRefs->getKey();
+                    }
+                }
+
+                $deliveryInfoData[]['shippingAddress'] = [
+                    'key' => $deliveryInfo->getShippingAddress()->getKey(),
+                    'AddressName' => $deliveryInfo->getShippingAddress()->getAddressName(),
+                    'street' => $deliveryInfo->getShippingAddress()->getStreet(),
+                    'city' => $deliveryInfo->getShippingAddress()->getCity(),
+                    'state' => $deliveryInfo->getShippingAddress()->getState(),
+                    'postalCode' => $deliveryInfo->getShippingAddress()->getPostalCode(),
+                    'country' => $deliveryInfo->getShippingAddress()->getCountry(),
+                    'elStat' => $deliveryInfo->getShippingAddress()->getElStat(),
+                    'keyOverride' => $deliveryInfo->getShippingAddress()->getKeyOverride(),
+                    'providerReservationInfoRef' => $providerReservationInfoRef
+                ];
+            }
+
+            $bookingTravelerData['deliveryInfo'] = $deliveryInfoData;
+
+            $phoneNumberData = [];
+            /** @var PhoneNumber $phoneNumber */
+            foreach ($bookingTraveler->getPhoneNumber() as $phoneNumber) {
+
+                $providerReservationInfoRef = [];
+                if (!is_null($phoneNumber->getProviderReservationInfoRef())) {
+                    /** @var ProviderReservationInfoRef $reservationRefs */
+                    foreach ($phoneNumber->getProviderReservationInfoRef() as $reservationRefs) {
+                        $providerReservationInfoRef[] = $reservationRefs->getKey();
+                    }
+                }
+
+                $phoneNumberData[] = [
+                    'key' => $phoneNumber->getKey(),
+                    'type' => $phoneNumber->getType(),
+                    'location' => $phoneNumber->getLocation(),
+                    'countryCode' => $phoneNumber->getCountryCode(),
+                    'areaCode' => $phoneNumber->getAreaCode(),
+                    'number' => $phoneNumber->getNumber(),
+                    'extension' => $phoneNumber->getExtension(),
+                    'text' => $phoneNumber->getText(),
+                    'elStat' => $phoneNumber->getElStat(),
+                    'keyOverride' => $phoneNumber->getKeyOverride(),
+                    'providerReservationInfoRef' => $providerReservationInfoRef
+                ];
+            }
+
+            $bookingTravelerData['phoneNumber'] = $phoneNumberData;
+
+            $emailData = [];
+            /** @var Email $email */
+            foreach ($bookingTraveler->getEmail() as $email) {
+
+                $providerReservationInfoRef = [];
+                /** @var ProviderReservationInfoRef $reservationRefs */
+                foreach ($email->getProviderReservationInfoRef() as $reservationRefs) {
+                    $providerReservationInfoRef[] = $reservationRefs->getKey();
+                }
+
+                $emailData[] = [
+                    'key' => $email->getKey(),
+                    'type' => $email->getType(),
+                    'comment' => $email->getComment(),
+                    'emailID' => $email->getEmailID(),
+                    'elStat' => $email->getElStat(),
+                    'keyOverride' => $email->getKeyOverride(),
+                    'providerReservationInfoRef' => $providerReservationInfoRef
+                ];
+            }
+
+            $bookingTravelerData['email'] = $emailData;
+
+            $addressData = [];
+            /** @var typeStructuredAddress $address */
+            foreach ($bookingTraveler->getAddress() as $address) {
+
+                $providerReservationInfoRef = [];
+                /** @var ProviderReservationInfoRef $reservationRefs */
+                foreach ($address->getProviderReservationInfoRef() as $reservationRefs) {
+                    $providerReservationInfoRef[] = $reservationRefs->getKey();
+                }
+
+                $addressData[] = [
+                    'addressName' => $address->getAddressName(),
+                    'street' => $address->getStreet(),
+                    'city' => $address->getCity(),
+                    'state' => $address->getState(),
+                    'postalCode' => $address->getPostalCode(),
+                    'country' => $address->getCountry(),
+                    'elStat' => $address->getElStat(),
+                    'keyOverride' => $address->getKeyOverride(),
+                    'providerReservationInfoRef' => $providerReservationInfoRef
+                ];
+            }
+
+            $bookingTravelerData['address'] = $addressData;
+
+            $bookingTravelerCollection->add($bookingTravelerData);
+        }
+
+        /** @var ActionStatus $actionStatus */
+        foreach ($response->getUniversalRecord()->getActionStatus() as $actionStatus) {
+            $actionStatusCollection->add([
+                'remark' => $actionStatus->getRemark(),
+                'type' => $actionStatus->getType(),
+                'ticketDate' => $actionStatus->getTicketDate(),
+                'key' => $actionStatus->getKey(),
+                'providerReservationInfoRef' => $actionStatus->getProviderReservationInfoRef(),
+                'queueCategory' => $actionStatus->getQueueCategory(),
+                'airportCode' => $actionStatus->getAirportCode(),
+                'pseudoCityCode' => $actionStatus->getPseudoCityCode(),
+                'accountCode' => $actionStatus->getAccountCode(),
+                'providerCode' => $actionStatus->getProviderCode(),
+                'supplierCode' => $actionStatus->getSupplierCode(),
+                'elStat' => $actionStatus->getElStat(),
+                'keyOverride' => $actionStatus->getKeyOverride(),
+            ]);
+        }
+
+        /** @var \FilippoToso\Travelport\UniversalRecord\ProviderReservationInfo $providerReservation */
+        foreach ($response->getUniversalRecord()->getProviderReservationInfo() as $providerReservation) {
+            $providerReservationCollection->add([
+                'providerCode' => $providerReservation->getProviderCode(),
+                'providerLocatorCode' => $providerReservation->getProviderLocatorCode(),
+                'supplierCode' => $providerReservation->getSupplierCode(),
+                'key' => $providerReservation->Key,
+                'locatorCode' => $providerReservation->LocatorCode,
+                'createDate' => $providerReservation->CreateDate,
+                'hostCreateDate' => $providerReservation->HostCreateDate,
+                'modifiedDate' => $providerReservation->ModifiedDate,
+                'owningPCC' => $providerReservation->OwningPCC,
+            ]);
+        }
+
+        $airReservationData = [];
+        /** @var \FilippoToso\Travelport\UniversalRecord\AirReservation $airReservation */
+        foreach ($response->getUniversalRecord()->getAirReservation() as $airReservation) {
+            $supplierLocatorData = [];
+            /** @var SupplierLocator $supplierLocator */
+            foreach ($airReservation->getSupplierLocator() as $supplierLocator) {
+                $supplierLocatorData[] = [
+                    'segmentRef' => $supplierLocator->getSegmentRef(),
+                    'supplierCode' => $supplierLocator->getSupplierCode(),
+                    'supplierLocatorCode' => $supplierLocator->getSupplierLocatorCode(),
+                    'providerReservationInfoRef' => $supplierLocator->getProviderReservationInfoRef(),
+                    'createDateTime' => $supplierLocator->getCreateDateTime(),
+                ];
+            }
+
+            $airReservationData['supplierLocator'] = $supplierLocatorData;
+
+            $bookingTravelerRefData = [];
+            /** @var BookingTravelerRef $bookingTravelerRef */
+            foreach ($airReservation->getBookingTravelerRef() as $bookingTravelerRef) {
+                $bookingTravelerRefData[] = $bookingTravelerRef->getKey();
+            }
+
+            $airReservationData['bookingTravelerRef'] = $bookingTravelerRefData;
+
+            $providerReservationInfoRefData = [];
+            /** @var \FilippoToso\Travelport\UniversalRecord\ProviderReservationInfoRef $providerReservationInfoRef */
+            foreach ($airReservation->getProviderReservationInfoRef() as $providerReservationInfoRef) {
+                $providerReservationInfoRefData[] = $providerReservationInfoRef->getKey();
+            }
+
+            $airReservationData['providerReservationInfoRef'] = $providerReservationInfoRefData;
+
+            $airSegmentData = [];
+            /** @var \FilippoToso\Travelport\UniversalRecord\typeBaseAirSegment $airSegment */
+            foreach ($airReservation->getAirSegment() as $airSegment) {
+                $flightDetailsData = [];
+                /** @var \FilippoToso\Travelport\UniversalRecord\FlightDetails $flightDetails */
+                foreach ($airSegment->getFlightDetails() as $flightDetails) {
+                    $flightDetailsData[] = [
+                        'key' => $flightDetails->getKey(),
+                        'connection' => $flightDetails->getConnection(),
+                        'meals' => $flightDetails->getMeals(),
+                        'inFlightServices' => $flightDetails->getInFlightServices(),
+                        'equipment' => $flightDetails->getEquipment(),
+                        'onTimePerformance' => $flightDetails->getOnTimePerformance(),
+                        'originTerminal' => $flightDetails->getOriginTerminal(),
+                        'destinationTerminal' => $flightDetails->getDestinationTerminal(),
+                        'groundTime' => $flightDetails->getGroundTime(),
+                        'automatedCheckin' => $flightDetails->getAutomatedCheckin(),
+                        'origin' => $flightDetails->getOrigin(),
+                        'destination' => $flightDetails->getDestination(),
+                        'departureTime' => $flightDetails->getDepartureTime(),
+                        'arrivalTime' => $flightDetails->getArrivalTime(),
+                        'flightTime' => $flightDetails->getFlightTime(),
+                        'travelTime' => $flightDetails->getTravelTime(),
+                        'distance' => $flightDetails->getDistance(),
+                        'elStat' => $flightDetails->getElStat(),
+                        'keyOverride' => $flightDetails->getKeyOverride(),
+                    ];
+                }
+
+                $segmentRemarkData = [];
+                if (!is_null($airSegment->getSegmentRemark())) {
+                    /** @var SegmentRemark $segmentRemark */
+                    foreach ($airSegment->getSegmentRemark() as $segmentRemark) {
+                        $segmentRemarkData[] = [
+                            '_' => $segmentRemark->get_(),
+                            'key' => $segmentRemark->getKey(),
+                        ];
+                    }
+                }
+
+                $connection = [];
+                if (!is_null($airSegment->getConnection())) {
+                    $connection = [
+                        'fareNote' => $airSegment->getConnection()->getFareNote(),
+                        'changeOfPlane' => $airSegment->getConnection()->getChangeOfPlane(),
+                        'changeOfTerminal' => $airSegment->getConnection()->getChangeOfTerminal(),
+                        'changeOfAirport' => $airSegment->getConnection()->getChangeOfAirport(),
+                        'stopover' => $airSegment->getConnection()->getStopOver(),
+                        'minConnectionTime' => $airSegment->getConnection()->getMinConnectionTime(),
+                        'duration' => $airSegment->getConnection()->getDuration(),
+                        'segmentIndex' => $airSegment->getConnection()->getSegmentIndex(),
+                        'flightDetailsIndex' => $airSegment->getConnection()->getFlightDetailsIndex(),
+                        'includeStopOverToFareQuote' => $airSegment->getConnection()->getIncludeStopOverToFareQuote(),
+                    ];
+                }
+
+                $airSegmentData[] = [
+                    'sponsoredFltInfo' => $airSegment->getSponsoredFltInfo(),
+                    'codeShareInfo' => $airSegment->getCodeshareInfo(),
+                    'flightDetails' => $flightDetailsData,
+                    'flightDetailsRef' => $airSegment->getFlightDetailsRef(),
+                    'alternateLocationDistanceRef' => $airSegment->getAlternateLocationDistanceRef(),
+                    'sellMessage' => $airSegment->getSellMessage(),
+                    'railCoachDetails' => $airSegment->getRailCoachDetails(),
+                    'openSegment' => $airSegment->getOpenSegment(),
+                    'group' => $airSegment->getGroup(),
+                    'carrier' => $airSegment->getCarrier(),
+                    'cabinClass' => $airSegment->getCabinClass(),
+                    'flightNumber' => $airSegment->getFlightNumber(),
+                    'classOfService' => $airSegment->getClassOfService(),
+                    'eTicketAbility' => $airSegment->getETicketability(),
+                    'equipment' => $airSegment->getEquipment(),
+                    'marriageGroup' => $airSegment->getMarriageGroup(),
+                    'numberOfStops' => $airSegment->getNumberOfStops(),
+                    'connection' => $connection,
+                    'seamless' => $airSegment->getSeamless(),
+                    'changeOfPlane' => $airSegment->getChangeOfPlane(),
+                    'guaranteedPaymentCarrier' => $airSegment->getGuaranteedPaymentCarrier(),
+                    'hostTokenRef' => $airSegment->getHostTokenRef(),
+                    'providerReservationInfoRef' => $airSegment->getProviderReservationInfoRef(),
+                    'passiveProviderReservationInfoRef' => $airSegment->getPassiveProviderReservationInfoRef(),
+                    'optionalServicesIndicator' => $airSegment->getOptionalServicesIndicator(),
+                    'availabilitySource' => $airSegment->getAvailabilitySource(),
+                    'APISRequirementsRef' => $airSegment->getAPISRequirementsRef(),
+                    'blackListed' => $airSegment->getBlackListed(),
+                    'operationalStatus' => $airSegment->getOperationalStatus(),
+                    'numberInParty' => $airSegment->getNumberInParty(),
+                    'railCoachNumber' => $airSegment->getRailCoachNumber(),
+                    'bookingDate' => $airSegment->getBookingDate(),
+                    'flownSegment' => $airSegment->getFlownSegment(),
+                    'scheduleChange' => $airSegment->getScheduleChange(),
+                    'brandIndicator' => $airSegment->getBrandIndicator(),
+                    'origin' => $airSegment->getOrigin(),
+                    'destination' => $airSegment->getDestination(),
+                    'departureTime' => $airSegment->getDepartureTime(),
+                    'arrivalTime' => $airSegment->getArrivalTime(),
+                    'flightTime' => $airSegment->getFlightTime(),
+                    'travelTime' => $airSegment->getTravelTime(),
+                    'distance' => $airSegment->getDistance(),
+                    'providerCode' => $airSegment->getProviderCode(),
+                    'supplierCode' => $airSegment->getSupplierCode(),
+                    'participantLevel' => $airSegment->getParticipantLevel(),
+                    'linkAvailability' => $airSegment->getLinkAvailability(),
+                    'polledAvailabilityOption' => $airSegment->getPolledAvailabilityOption(),
+                    'availabilityDisplayType' => $airSegment->getAvailabilityDisplayType(),
+                    'segmentRemark' => $segmentRemarkData,
+                    'key' => $airSegment->getKey(),
+                    'status' => $airSegment->getStatus(),
+                    'passive' => $airSegment->getPassive(),
+                    'travelOrder' => $airSegment->getTravelOrder(),
+                    'providerSegmentOrder' => $airSegment->getProviderSegmentOrder(),
+                    'elStat' => $airSegment->getElStat(),
+                    'keyOverride' => $airSegment->getKeyOverride(),
+                ];
+            }
+
+            $airReservationData['airSegmentInfo'] = $airSegmentData;
+
+            $airPricingInfoData = [];
+            /** @var \FilippoToso\Travelport\UniversalRecord\AirPricingInfo $airPricingInfo */
+            foreach ($airReservation->getAirPricingInfo() as $airPricingInfo) {
+                $fareInfoData = [];
+                /** @var \FilippoToso\Travelport\UniversalRecord\FareInfo $fareInfo */
+                foreach ($airPricingInfo->getFareInfo() as $fareInfo) {
+                    $endorsementData = [];
+                    /** @var Endorsement $endorsement */
+                    foreach ($fareInfo->getEndorsement() as $endorsement) {
+                        $endorsementData[] = [
+                            'value' => $endorsement->getValue(),
+                        ];
+                    }
+                    $fareInfoData[] = [
+                        'fareTicketDesignator' => $fareInfo->getFareTicketDesignator(),
+                        'fareSurcharge' => $fareInfo->getFareSurcharge(),
+                        'accountCode' => $fareInfo->getAccountCode(),
+                        'contractCode' => $fareInfo->getContractCode(),
+                        'endorsement' => $endorsementData,
+                        'baggageAllowance' => [
+                            'NumberOfPieces' => $fareInfo->getBaggageAllowance()->getNumberOfPieces(),
+                            'maxWeight' => $fareInfo->getBaggageAllowance()->getMaxWeight(),
+                        ],
+                        'fareRuleKey' => $fareInfo->getFareRuleKey(),
+                        'fareRuleFailureInfo' => $fareInfo->getFareRuleFailureInfo(),
+                        'fareRemarkRef' => $fareInfo->getFareRemarkRef(),
+                        'brand' => $fareInfo->getBrand(), //??
+                        'commission' => $fareInfo->getCommission(),
+                        'key' => $fareInfo->getKey(),
+                        'fareBasis' => $fareInfo->getFareBasis(),
+                        'passengerTypeCode' => $fareInfo->getPassengerTypeCode(),
+                        'origin' => $fareInfo->getOrigin(),
+                        'destination' => $fareInfo->getDestination(),
+                        'effectiveDate' => $fareInfo->getEffectiveDate(),
+                        'travelDate' => $fareInfo->getTravelDate(),
+                        'departureDate' => $fareInfo->getDepartureDate(),
+                        'amount' => [
+                            'value' => (float)substr($fareInfo->getAmount(), 3),
+                            'currency' => (float)substr($fareInfo->getAmount(), 0, 3),
+                        ],
+                        'privateFare' => $fareInfo->getPrivateFare(),
+                        'negotiatedFare' => $fareInfo->getNegotiatedFare(),
+                        'pseudoCityCode' => $fareInfo->getPseudoCityCode(),
+                        'fareFamily' => $fareInfo->getFareFamily(),
+                        'promotionalFare' => $fareInfo->getPromotionalFare(),
+                        'supplierCode' => $fareInfo->getSupplierCode(),
+                        'elStat' => $fareInfo->getElStat(),
+                        'keyOverride' => $fareInfo->getKeyOverride(),
+                    ];
+                }
+
+                $bookingInfoData = [];
+                /** @var \FilippoToso\Travelport\UniversalRecord\BookingInfo $bookingInfo */
+                foreach ($airPricingInfo->getBookingInfo() as $bookingInfo) {
+                    $bookingInfoData[] = [
+                        'bookingCode' => $bookingInfo->getBookingCode(),
+                        'bookingCount' => $bookingInfo->getBookingCount(),
+                        'cabinClass' => $bookingInfo->getCabinClass(),
+                        'fareInfoRef' => $bookingInfo->getFareInfoRef(),
+                        'segmentRef' => $bookingInfo->getSegmentRef(),
+                        'couponRef' => $bookingInfo->getCouponRef(),
+                        'airItinerarySolutionRef' => $bookingInfo->getAirItinerarySolutionRef(),
+                        'hostTokenRef' => $bookingInfo->getHostTokenRef(),
+                    ];
+                }
+
+                $taxInfoData = [];
+                /** @var \FilippoToso\Travelport\UniversalRecord\typeTaxInfo $taxInfo */
+                foreach ($airPricingInfo->getTaxInfo() as $taxInfo) {
+                    $taxInfoData[] = [
+                        'taxDetail' => $taxInfo->getTaxDetail(),
+                        'includedInBase' => $taxInfo->getIncludedInBase(),
+                        'key' => $taxInfo->getKey(),
+                        'category' => $taxInfo->getCategory(),
+                        'carrierDefinedCategory' => $taxInfo->getCarrierDefinedCategory(),
+                        'segmentRef' => $taxInfo->getSegmentRef(),
+                        'flightDetailsRef' => $taxInfo->getFlightDetailsRef(),
+                        'couponRef' => $taxInfo->getCouponRef(),
+                        'taxExempted' => $taxInfo->getTaxExempted(),
+                        'providerCode' => $taxInfo->getProviderCode(),
+                        'supplierCode' => $taxInfo->getSupplierCode(),
+                        'text' => $taxInfo->getText(),
+                        'amount' => [
+                            'value' => (float)substr($taxInfo->getAmount(), 3),
+                            'currency' => (float)substr($taxInfo->getAmount(), 0, 3),
+                        ],
+                        'originAirport' => $taxInfo->getOriginAirport(),
+                        'destinationAirport' => $taxInfo->getDestinationAirport(),
+                        'countryCode' => $taxInfo->getCountryCode(),
+                        'fareInfoRef' => $taxInfo->getFareInfoRef(),
+                    ];
+                }
+
+                $passengerTypeData = [];
+                /** @var PassengerType $passengerTpe */
+                foreach ($airPricingInfo->getPassengerType() as $passengerTpe) {
+                    $passengerTypeData[] = [
+                        'fareGuaranteeInfo' => [
+                            'guaranteeDate' => $passengerTpe->getFareGuaranteeInfo()->getGuaranteeDate(),
+                            'guaranteeType' => $passengerTpe->getFareGuaranteeInfo()->getGuaranteeType()
+                        ],
+                        'name' => $passengerTpe->getName(),
+                        'loyaltyCard' => $passengerTpe->getLoyaltyCard(),
+                        'discountCard' => $passengerTpe->getDiscountCard(),
+                        'personalGeography' => $passengerTpe->getPersonalGeography(),
+                        'code' => $passengerTpe->getCode(),
+                        'age' => $passengerTpe->getAge(),
+                        'dob' => $passengerTpe->getDOB(),
+                        'gender' => $passengerTpe->getGender(),
+                        'pricePTCOnly' => $passengerTpe->getPricePTCOnly(),
+                        'bookingTravelerRef' => $passengerTpe->getBookingTravelerRef(),
+                        'accompaniedPassenger' => $passengerTpe->getAccompaniedPassenger(),
+                        'residencyType' => $passengerTpe->getResidencyType(),
+                    ];
+                }
+
+                $bookingTravelerRefData = [];
+                /** @var BookingTravelerRef $bookingTravelerRef */
+                foreach ($airPricingInfo->getBookingTravelerRef() as $bookingTravelerRef) {
+                    $bookingTravelerRefData[] = $bookingTravelerRef->getKey();
+                }
+
+                $ticketingModifiersRefData = [];
+                /** @var TicketingModifiersRef $ticketingModifiersRef */
+                foreach ($airPricingInfo->getTicketingModifiersRef() as $ticketingModifiersRef) {
+                    $ticketingModifiersRefData[] = $ticketingModifiersRef->getKey();
+                }
+
+                $changePenaltyData = [];
+                /** @var \FilippoToso\Travelport\UniversalRecord\typeFarePenalty $changePenalty */
+                foreach ($airPricingInfo->getChangePenalty() as $changePenalty) {
+                    $changePenaltyData[] = [
+                        'amount' => [
+                            'value' => (float)substr($changePenalty->getAmount(), 3),
+                            'currency' => (float)substr($changePenalty->getAmount(), 0, 3),
+                        ],
+                        'percentage' => $changePenalty->getPercentage(),
+                        'penaltyApplies' => $changePenalty->getPenaltyApplies(),
+                        'noShow' => $changePenalty->getNoShow(),
+                    ];
+                }
+
+                $cancelPenaltyData = [];
+                /** @var \FilippoToso\Travelport\UniversalRecord\typeFarePenalty $cancelPenalty */
+                foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
+                    $cancelPenaltyData[] = [
+                        'amount' => [
+                            'value' => (float)substr($cancelPenalty->getAmount(), 3),
+                            'currency' => (float)substr($cancelPenalty->getAmount(), 0, 3),
+                        ],
+                        'percentage' => $cancelPenalty->getPercentage(),
+                        'penaltyApplies' => $cancelPenalty->getPenaltyApplies(),
+                        'noShow' => $cancelPenalty->getNoShow(),
+                    ];
+                }
+
+                $airPricingInfoData[] = [
+                    'fareInfo' => $fareInfoData,
+                    'fareStatus' => $airPricingInfo->getFareStatus(),
+                    'fareInfoRef' => $airPricingInfo->getFareInfoRef(),
+                    'waiverCode' => $airPricingInfo->getWaiverCode(),
+                    'paymentRef' => $airPricingInfo->getPaymentRef(),
+                    'bookingInfo' => $bookingInfoData,
+                    'taxInfo' => $taxInfoData,
+                    'fareCalc' => $airPricingInfo->getFareCalc(),
+                    'passengerType' => $passengerTypeData,
+                    'bookingTravelerRef' => $bookingTravelerRefData,
+                    'changePenalty' => $changePenaltyData,
+                    'cancelPenalty' => $cancelPenaltyData,
+                    'ticketingModifiersRef' => $ticketingModifiersRefData,
+                    'airSegmentPricingModifiers' => $airPricingInfo->getAirSegmentPricingModifiers(),
+//                    'flightOptionsList' => $airPricingInfo->getAirSegmentPricingModifiers(), ??
+                    'key' => $airPricingInfo->getKey(),
+                    'refundable' => $airPricingInfo->getRefundable(),
+                    'exchangeable' => $airPricingInfo->getExchangeable(),
+                    'commandKey' => $airPricingInfo->getCommandKey(),
+                    'amountType' => $airPricingInfo->getAmountType(),
+                    'includesVAT' => $airPricingInfo->getIncludesVAT(),
+                    'exchangeAmount' => $airPricingInfo->getExchangeAmount(),
+                    'latestTicketingTime' => $airPricingInfo->getTrueLastDateToTicket(),
+                    'pricingMethod' => $airPricingInfo->getPricingMethod(),
+                    'checksum' => $airPricingInfo->getChecksum(),
+                    'eTicketAbility' => $airPricingInfo->getETicketability(),
+                    'platingCarrier' => $airPricingInfo->getPlatingCarrier(),
+                    'providerReservationInfoRef' => $airPricingInfo->getProviderReservationInfoRef(),
+                    'airPricingInfoGroup' => $airPricingInfo->getAirPricingInfoGroup(),
+                    'totalNetPrice' => $airPricingInfo->getTotalNetPrice(),
+                    'ticketed' => $airPricingInfo->getTicketed(),
+                    'pricingType' => $airPricingInfo->getPricingType(),
+                    'trueLastDateToTicket' => $airPricingInfo->getTrueLastDateToTicket(),
+                    'fareCalculationInd' => $airPricingInfo->getFareCalculationInd(),
+                    'cat35Indicator' => $airPricingInfo->getCat35Indicator(),
+                    'totalPrice' => [
+                        'amount' => (float)substr($airPricingInfo->getTotalPrice(), 3),
+                        'currency' => (float)substr($airPricingInfo->getTotalPrice(), 0, 3),
+                    ],
+                    'basePrice' => [
+                        'amount' => (float)substr($airPricingInfo->getBasePrice(), 3),
+                        'currency' => (float)substr($airPricingInfo->getBasePrice(), 0, 3),
+                    ],
+                    'approximateTotalPrice' => [
+                        'amount' => (float)substr($airPricingInfo->getApproximateTotalPrice(), 3),
+                        'currency' => (float)substr($airPricingInfo->getApproximateTotalPrice(), 0, 3),
+                    ],
+                    'approximateBasePrice' => [
+                        'amount' => (float)substr($airPricingInfo->getApproximateBasePrice(), 3),
+                        'currency' => (float)substr($airPricingInfo->getApproximateBasePrice(), 0, 3),
+                    ],
+                    'equivalentBasePrice' => [
+                        'amount' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 3),
+                        'currency' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
+                    ],
+                    'taxes' => [
+                        'amount' => (float)substr($airPricingInfo->getTaxes(), 3),
+                        'currency' => (float)substr($airPricingInfo->getTaxes(), 0, 3),
+                    ],
+                    'fees' => [
+                        'amount' => (float)substr($airPricingInfo->getFees(), 3),
+                        'currency' => (float)substr($airPricingInfo->getFees(), 0, 3),
+                    ],
+                    'providerCode' => $airPricingInfo->getProviderCode(),
+                    'supplierCode' => $airPricingInfo->getSupplierCode(),
+                    'elStat' => $airPricingInfo->getElStat(),
+                ];
+            }
+
+            $airReservationData['airPricingInfo'] = $airPricingInfoData;
+
+            $ticketingModifiersData = [];
+            /** @var TicketingModifiers $ticketingModifiers */
+            foreach ($airReservation->getTicketingModifiers() as $ticketingModifiers) {
+                $ticketingModifiersData[] = [
+                    'key' => $ticketingModifiers->getKey(),
+                    'platingCarrier' => $ticketingModifiers->getPlatingCarrier(),
+                    'elStat' => $ticketingModifiers->getElStat(),
+                    'documentSelect' => [
+                        'IssueElectronicTicket' => $ticketingModifiers->getDocumentSelect()->getIssueElectronicTicket(),
+                    ],
+                ];
+            }
+
+            $airReservationData['ticketingModifiers'] = $ticketingModifiersData;
+            $airReservationData['locatorCode'] = $airReservation->getLocatorCode();
+            $airReservationData['createDate'] = $airReservation->getCreateDate();
+            $airReservationData['modifiedDate'] = $airReservation->getModifiedDate();
+        }
+
+        $agencyInfoData = [];
+        /** @var AgentAction $agentAction */
+        foreach ($response->getUniversalRecord()->getAgencyInfo()->getAgentAction() as $agentAction) {
+            $agencyInfoData['agentAction'][] = [
+                'actionType' => $agentAction->getActionType(),
+                'agentCode' => $agentAction->getAgencyCode(),
+                'brandCode' => $agentAction->getBranchCode(),
+                'agencyCode' => $agentAction->getAgencyCode(),
+                'agentSine' => $agentAction->getAgentSine(),
+                'eventTime' => $agentAction->getEventTime(),
+                'agentOverride' => $agentAction->getAgentOverride(),
+            ];
+        }
+
+        $formOfPaymentData = [];
+        /** @var FormOfPayment $formOfPayment */
+        foreach ($response->getUniversalRecord()->getFormOfPayment() as $formOfPayment) {
+
+            $providerReservationInfoRefData = [];
+            /** @var typeFormOfPaymentPNRReference $providerReservationInfoRef */
+            foreach ($formOfPayment->getProviderReservationInfoRef() as $providerReservationInfoRef) {
+                $providerReservationInfoRefData[] = [
+                    'key' => $providerReservationInfoRef->getKey(),
+                    'providerReservationLevel' => $providerReservationInfoRef->getProviderReservationLevel(),
+                ];
+            }
+
+            $formOfPaymentData[] = [
+                'check' => [
+                    'MICRNumber' => $formOfPayment->getCheck()->getMICRNumber(),
+                    'routingNumber' => $formOfPayment->getCheck()->getRoutingNumber(),
+                    'accountNumber' => $formOfPayment->getCheck()->getAccountNumber(),
+                    'checkNumber' => $formOfPayment->getCheck()->getCheckNumber(),
+                ],
+                'providerReservationInfoRef' => $providerReservationInfoRefData
+            ];
+        }
+
+        return collect([
+            'universalRecord' => [
+                'bookingTraveler' => $bookingTravelerCollection,
+                'actionStatus' => $actionStatusCollection,
+                'providerReservationInfo' => $providerReservationCollection,
+                'airReservation' => $airReservationData,
+                'agencyInfo' => $agencyInfoData,
+                'formOfPayment' => $formOfPaymentData,
+                'locatorCode' => $response->getUniversalRecord()->getLocatorCode(),
+                'status' => $response->getUniversalRecord()->getStatus(),
+                'version' => $response->getUniversalRecord()->getVersion(),
+            ],
+            'responseTime' => $response->getResponseTime(),
         ]);
     }
 }
