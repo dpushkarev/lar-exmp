@@ -10,14 +10,17 @@ GET http://127.0.0.1:8081/api/guide/airports/ADE
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/12
+POST http://127.0.0.1:8081/api/flights/search/results/15
+
+###
+POST https://v2.ekarte.rs/api/flights/search/results/762
 
 ###
 GET http://127.0.0.1:8081/api/flights/search/results/4
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
- request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-10-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+ request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":true},"departureDate":"2020-10-28T00:00:00"},{"departure":{"IATA":"TIV","isCity":true},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-11-13T00:00:00"}],"passengers":[{"type":"ADT","count":6},{"type":"CLD","count":2},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 ###
 
 // Example 1: {"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-05-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
@@ -37,5 +40,5 @@ GET http://127.0.0.1:8081/api/flights/search/history
 GET http://127.0.0.1:8081/api/flights/search/flightInfo/171
 
 ###
-POST https://data.reservio.flights/api/flights/search/results/744?user_language_get_change=sr
+POST https://data.reservio.flights/api/flights/search/results/752?user_language_get_change=sr
 ###
