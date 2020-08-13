@@ -10,17 +10,17 @@ GET http://127.0.0.1:8081/api/guide/airports/ADE
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/15
+POST http://127.0.0.1:8081/api/flights/search/results/16
 
 ###
 POST https://v2.ekarte.rs/api/flights/search/results/762
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/results/4
+GET http://127.0.0.1:8081/api/flights/search/results/16
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
- request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":true},"departureDate":"2020-10-28T00:00:00"},{"departure":{"IATA":"TIV","isCity":true},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-11-13T00:00:00"}],"passengers":[{"type":"ADT","count":6},{"type":"CLD","count":2},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+ request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-11T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":true},"departureDate":"2020-11-18T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 ###
 
 // Example 1: {"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-05-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}

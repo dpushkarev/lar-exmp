@@ -28,6 +28,7 @@ use FilippoToso\Travelport\Air\Option;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class NemoWidgetService
 {

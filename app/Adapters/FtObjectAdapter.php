@@ -221,6 +221,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         foreach ($searchRsp->getAirPricePointList()->getAirPricePoint() as $key => $airPricePoint) {
             $segmentsGroup = [];
             $segmentFareMap = [];
+            $segmentRefStack = [];
             $airPricePointKey = sprintf('P%d', $key + 1);
             $countOfPassengers = 0;
 
@@ -291,17 +292,21 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $segmentFareHash = md5($bookingInfo->getFareInfoRef() . $bookingInfo->getSegmentRef());
                             if (!isset($airPricePointData['passengerFares'])) {
                                 $segmentsGroup[$legRefKey][$optionKey][] = $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey');
+
+                                if (!isset($segmentRefStack[(string) $bookingInfo->getSegmentRef()])) {
+                                    $airPricePointData['segmentInfo'][] = [
+                                        "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
+                                        "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
+                                        "bookingClass" => $bookingInfo->getBookingCode(),
+                                        "serviceClass" => $bookingInfo->getCabinClass(),
+                                        "avlSeats" => $bookingInfo->getBookingCount(),
+                                        "freeBaggage" => $bookingInfo->getFareInfoRef()
+                                    ];
+
+                                    $segmentRefStack[(string) $bookingInfo->getSegmentRef()] = (string) $bookingInfo->getSegmentRef();
+                                }
                             }
                             if (!isset($segmentFareMap[$segmentFareHash])) {
-                                $airPricePointData['segmentInfo'][] = [
-                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
-                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
-                                    "bookingClass" => $bookingInfo->getBookingCode(),
-                                    "serviceClass" => $bookingInfo->getCabinClass(),
-                                    "avlSeats" => $bookingInfo->getBookingCount(),
-                                    "freeBaggage" => $bookingInfo->getFareInfoRef()
-                                ];
-
                                 $features = [];
                                 if ($getFareAttributes = $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareAttributes()) {
                                     $getFareAttributesSplit = explode('|', $getFareAttributes);
