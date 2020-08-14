@@ -240,9 +240,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'warnings' => []
             ];
 
-            $passengerFares = [];
             /** @var  $airPricingInfo AirPricingInfo */
             foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
+                $passengerFares = [];
                 $airPricePointData['refundable'] = $airPricingInfo->getRefundable() ?? false;
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
                 $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
@@ -369,7 +369,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     $freeBaggage = [
                         'passtype' => $passengerFare['type'],
                         "value" => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null,
-                        'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : null,
+                        'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : ($fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : null),
                     ];
                     $segmentInfo['freeBaggage'][] = $freeBaggage;
 
