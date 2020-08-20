@@ -57,6 +57,13 @@ class AirReservationRequestDto
         return $this->passengers;
     }
 
+    public function getPassengersGenerator()
+    {
+        foreach ($this->getPassengers() as $passenger) {
+            yield $passenger;
+        }
+    }
+
     /**
      * @return array|null
      */
@@ -90,9 +97,9 @@ class AirReservationRequestDto
     }
 
     /**
-     * @return AirPricingSolution
+     * @return AirPricingSolution|null
      */
-    public function getAirSolution(): AirPricingSolution
+    public function getAirSolution(): ?AirPricingSolution
     {
         return $this->airSolution;
     }

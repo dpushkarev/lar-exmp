@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Adapters\FtObjectAdapter;
 use App\Dto\AirReservationRequestDto;
+use App\Exceptions\ApiException;
 use App\Facades\TP;
 use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
@@ -27,12 +28,19 @@ class CheckoutService
         $this->adapter = $adapter;
     }
 
+    /**
+     * @param AirReservationRequestDto $dto
+     * @return \Illuminate\Support\Collection
+     * @throws ApiException
+     */
     public function reservation(AirReservationRequestDto $dto)
     {
         $segmentKeys = collect();
         $log = $this->logger->getLog(AirPriceRsp::class, $dto->getOrder()->transaction_id, \App\Logging\TravelPortLogger::OBJECT_TYPE);
         /** @var AirPriceRsp $airPriceRsp */
         $airPriceRsp = unserialize($log);
+        $passengerCount = 0;
+        $passengerGenerator = $dto->getPassengersGenerator();
 
         /** @var $airPriceResult AirPriceResult */
         foreach ($airPriceRsp->getAirPriceResult() as $airPriceResult) {
@@ -60,6 +68,14 @@ class CheckoutService
                             $fareInfo->setFareSurcharge(null);
                             $fareInfo->setBrand(null);
                         }
+
+                        foreach ($airPricingInfo->getPassengerType() as $passengerType) {
+                            $passengerCount++;
+                            $passengerFromRequest = $passengerGenerator->current();
+                            $passengerType->BookingTravelerRef = $passengerFromRequest['key'];
+                            $passengerType->DOB = $passengerFromRequest['birth'] ?? null;
+                            $passengerGenerator->next();
+                        }
                     }
                     $airSolution->setAirSegmentRef(null);
                     $airSolution->setJourney(null);
@@ -70,6 +86,14 @@ class CheckoutService
                     break 2;
                 }
             }
+        }
+
+        if(is_null($dto->getAirSolution())) {
+            throw ApiException::getInstance('AirSolutionKey is invalid');
+        }
+
+        if(count($dto->getPassengers()) !== $passengerCount) {
+            throw ApiException::getInstance('Count of passenger is not correct');
         }
 
         /** @var typeBaseAirSegment $airSegment */

@@ -1,9 +1,9 @@
-GET http://127.0.0.1:8081/api/checkout/5
+GET http://127.0.0.1:8081/api/checkout/2
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?
- request={"passengers":[{"travelerType":"ADT", "first":"Pushakrev","last":"Pushkarev","prefix":"Mr"}],"address":{"street":"Pobeda striie","postalCode":32,"city":"Grad","country":"RS"},"airSolutionKey":"/ggZhOfYlDKAherHhGAAAA==","email":"psuk@bk.ru","phoneNumber":"381637796918"}
+POST http://127.0.0.1:8081/api/reservation/1?
+ request={"passengers":[{"travelerType":"ADT", "first":"Pushakrev","last":"Pushkarev","prefix":"Mr"},{"travelerType":"ADT", "first":"Pushakreva","last":"Pushkareva","prefix":"Mrs"}, {"travelerType":"CLD", "first":"Pushakrevchik","last":"Pushakrevchik","prefix":"Mr", "birth":"2015-02-04"}, {"travelerType":"INF", "first":"Ivanov","last":"Ivanov","prefix":"Mr", "birth":"2015-02-04"}],"address":{"street":"Pobeda striie","postalCode":32,"city":"Grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"psuk@bk.ru","phoneNumber":"381637796918"}
 
 ###
 

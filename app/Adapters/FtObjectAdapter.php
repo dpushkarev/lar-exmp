@@ -322,8 +322,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                             ],
                                             'markAsImportant' => false,
                                             'needToPay' => $this->indicators[$indicator],
-                                            'priority' => $priority
+                                            'priority' => $priority,
                                         ];
+
+                                        $features['hasFeatures'] = true;
                                     }
                                 }
 
@@ -336,6 +338,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
                                     "features" => $features,
                                     "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
+                                    'serviceClass' => $bookingInfo->getCabinClass()
                                 ];
 
                                 $segmentFareMap[$segmentFareHash] = $segmentFareHash;
@@ -926,7 +929,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                 $airSolutionData['totalPrice'] = [
                     'amount' => (float)substr($airSolution->getTotalPrice(), 3) + $agencyChargeAll,
-                    'currency' => (float)substr($airSolution->getTotalPrice(), 0, 3),
+                    'currency' => substr($airSolution->getTotalPrice(), 0, 3),
                 ];
 
                 $airSolutionData['paymentOptionCharge'] = [
@@ -1023,9 +1026,12 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $bookingTravelerCollection = collect();
         $actionStatusCollection = collect();
         $providerReservationCollection = collect();
+        $countOfPassengers = 0;
 
         /** @var BookingTraveler $bookingTraveler */
         foreach ($response->getUniversalRecord()->getBookingTraveler() as $bookingTraveler) {
+
+            $countOfPassengers++;
 
             $bookingTravelerData = [
                 'key' => $bookingTraveler->getKey(),
@@ -1143,9 +1149,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             foreach ($bookingTraveler->getAddress() as $address) {
 
                 $providerReservationInfoRef = [];
-                /** @var ProviderReservationInfoRef $reservationRefs */
-                foreach ($address->getProviderReservationInfoRef() as $reservationRefs) {
-                    $providerReservationInfoRef[] = $reservationRefs->getKey();
+                if (!is_null($address->getProviderReservationInfoRef())) {
+                    /** @var ProviderReservationInfoRef $reservationRefs */
+                    foreach ($address->getProviderReservationInfoRef() as $reservationRefs) {
+                        $providerReservationInfoRef[] = $reservationRefs->getKey();
+                    }
                 }
 
                 $addressData[] = [
@@ -1390,7 +1398,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             'departureDate' => $fareInfo->getDepartureDate(),
                             'amount' => [
                                 'value' => (float)substr($fareInfo->getAmount(), 3),
-                                'currency' => (float)substr($fareInfo->getAmount(), 0, 3),
+                                'currency' => substr($fareInfo->getAmount(), 0, 3),
                             ],
                             'privateFare' => $fareInfo->getPrivateFare(),
                             'negotiatedFare' => $fareInfo->getNegotiatedFare(),
@@ -1436,7 +1444,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             'text' => $taxInfo->getText(),
                             'amount' => [
                                 'value' => (float)substr($taxInfo->getAmount(), 3),
-                                'currency' => (float)substr($taxInfo->getAmount(), 0, 3),
+                                'currency' => substr($taxInfo->getAmount(), 0, 3),
                             ],
                             'originAirport' => $taxInfo->getOriginAirport(),
                             'destinationAirport' => $taxInfo->getDestinationAirport(),
@@ -1486,7 +1494,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $changePenaltyData[] = [
                             'amount' => [
                                 'value' => (float)substr($changePenalty->getAmount(), 3),
-                                'currency' => (float)substr($changePenalty->getAmount(), 0, 3),
+                                'currency' => substr($changePenalty->getAmount(), 0, 3),
                             ],
                             'percentage' => $changePenalty->getPercentage(),
                             'penaltyApplies' => $changePenalty->getPenaltyApplies(),
@@ -1546,31 +1554,31 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         'cat35Indicator' => $airPricingInfo->getCat35Indicator(),
                         'totalPrice' => [
                             'amount' => (float)substr($airPricingInfo->getTotalPrice(), 3),
-                            'currency' => (float)substr($airPricingInfo->getTotalPrice(), 0, 3),
+                            'currency' => substr($airPricingInfo->getTotalPrice(), 0, 3),
                         ],
                         'basePrice' => [
                             'amount' => (float)substr($airPricingInfo->getBasePrice(), 3),
-                            'currency' => (float)substr($airPricingInfo->getBasePrice(), 0, 3),
+                            'currency' => substr($airPricingInfo->getBasePrice(), 0, 3),
                         ],
                         'approximateTotalPrice' => [
                             'amount' => (float)substr($airPricingInfo->getApproximateTotalPrice(), 3),
-                            'currency' => (float)substr($airPricingInfo->getApproximateTotalPrice(), 0, 3),
+                            'currency' => substr($airPricingInfo->getApproximateTotalPrice(), 0, 3),
                         ],
                         'approximateBasePrice' => [
                             'amount' => (float)substr($airPricingInfo->getApproximateBasePrice(), 3),
-                            'currency' => (float)substr($airPricingInfo->getApproximateBasePrice(), 0, 3),
+                            'currency' => substr($airPricingInfo->getApproximateBasePrice(), 0, 3),
                         ],
                         'equivalentBasePrice' => [
                             'amount' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 3),
-                            'currency' => (float)substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
+                            'currency' => substr($airPricingInfo->getEquivalentBasePrice(), 0, 3),
                         ],
                         'taxes' => [
                             'amount' => (float)substr($airPricingInfo->getTaxes(), 3),
-                            'currency' => (float)substr($airPricingInfo->getTaxes(), 0, 3),
+                            'currency' => substr($airPricingInfo->getTaxes(), 0, 3),
                         ],
                         'fees' => [
                             'amount' => (float)substr($airPricingInfo->getFees(), 3),
-                            'currency' => (float)substr($airPricingInfo->getFees(), 0, 3),
+                            'currency' => substr($airPricingInfo->getFees(), 0, 3),
                         ],
                         'providerCode' => $airPricingInfo->getProviderCode(),
                         'supplierCode' => $airPricingInfo->getSupplierCode(),
@@ -1640,9 +1648,30 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             ];
         }
 
+
+        $agencyChargeAll = static::AGENCY_CHARGE_AMOUNT * $countOfPassengers;
+
         return collect([
             'universalRecord' => [
                 'bookingTraveler' => $bookingTravelerCollection,
+                'agencyCharge' => [
+                    'amount' => $agencyChargeAll,
+                    'currency' => static::AGENCY_CHARGE_CURRENCY
+                ],
+                'paymentOptionCharge' => [
+                    'cache' => [
+                        'amount' => $countOfPassengers * static::CACHE_AMOUNT,
+                        'currency' => static::CACHE_CURRENCY
+                    ],
+                    'intesa' => [
+                        'amount' => $airReservationData['airPricingInfo'][0]['totalPrice']['amount'] * static::INTESA_COMMISSION / 100,
+                        'currency' => $airReservationData['airPricingInfo'][0]['totalPrice']['currency']
+                    ],
+                    'paypal' => [
+                        'amount' => ($airReservationData['airPricingInfo'][0]['totalPrice']['amount'] * static::PAYPAL_COMMISSION / 100) + static::PAYPAL_COMMISSION_FIX,
+                        'currency' => $airReservationData['airPricingInfo'][0]['totalPrice']['currency']
+                    ]
+                ],
                 'actionStatus' => $actionStatusCollection,
                 'providerReservationInfo' => $providerReservationCollection,
                 'airReservation' => $airReservationData,
