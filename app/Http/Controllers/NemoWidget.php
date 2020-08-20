@@ -50,6 +50,8 @@ class NemoWidget extends BaseController
     public function airlinesAll(NemoWidgetService $service)
     {
         $airlines = $service->airlinesAll();
+        $airlines->put("", null);
+
         $countries = $service->countriesAll();
 
         $result = collect(['countries' => $countries, 'airlines' => $airlines]);
