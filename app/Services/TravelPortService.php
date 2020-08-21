@@ -86,6 +86,23 @@ class TravelPortService
         return $this->execute($request);
     }
 
+    public function airFareRules($fareRulesKeys)
+    {
+        $request = $this->getAirFareRulesRequest($fareRulesKeys);
+        return $this->execute($request);
+    }
+
+    protected  function  getAirFareRulesRequest($fareRulesKeys)
+    {
+        /** @var Air\AirFareRulesReq $airFareRulesRequest */
+        $airFareRulesRequest = app()->make(Air\AirFareRulesReq::class);
+
+        $billingPointOfSaleInfo = $this->getBillingPointOfSaleInfo();
+
+        return $airFareRulesRequest->setFareRuleKey($fareRulesKeys)
+            ->setBillingPointOfSaleInfo($billingPointOfSaleInfo);
+    }
+
     protected function getAirCreateReservationRequest(AirReservationRequestDto $dto)
     {
         /** @var AirCreateReservationReq $airCreateReservationReq */
@@ -228,26 +245,6 @@ class TravelPortService
                 ->setAirAvailInfo(null)
                 ->setFlightDetailsRef(null)
                 ->setProviderCode(static::GALILEO_PROVIDER_ID);
-//            $airSegments[] = (new Air\typeBaseAirSegment())
-//                ->setKey($segment->getKey())
-//                ->setGroup($segment->getGroup())
-//                ->setCarrier($segment->getCarrier())
-//                ->setFlightNumber($segment->getFlightNumber())
-//                ->setOrigin($segment->getOrigin())
-//                ->setDestination($segment->getDestination())
-//                ->setDepartureTime($segment->getDepartureTime())
-//                ->setArrivalTime($segment->getArrivalTime())
-//                ->setFlightTime($segment->getFlightTime())
-//                ->setDistance($segment->getDistance())
-//                ->setETicketability($segment->getETicketability())
-//                ->setEquipment($segment->getEquipment())
-//                ->setChangeOfPlane($segment->getChangeOfPlane())
-//                ->setParticipantLevel($segment->getParticipantLevel())
-//                ->setPolledAvailabilityOption($segment->getPolledAvailabilityOption())
-//                ->setOptionalServicesIndicator($segment->getOptionalServicesIndicator())
-//                ->setAvailabilitySource($segment->getAvailabilitySource())
-//                ->setAvailabilityDisplayType($segment->getAvailabilityDisplayType())
-//                ->setProviderCode(static::GALILEO_PROVIDER_ID);
         }
 
         return (new Air\AirItinerary())->setAirSegment($airSegments);

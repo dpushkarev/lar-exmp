@@ -142,13 +142,15 @@ class NemoWidget extends BaseController
         return new FlightsSearchFlightInfo($flightInfo);
     }
 
-    public function FareRules($id)
+    public function FareRules($id, NemoWidgetService $service)
     {
         $result = FlightsSearchResult::find($id);
 
         if(null === $result) {
             return new ErrorLog("f9ed00a9");
         }
+
+        $fareRule = $service->getFareRule($result);
 
     }
 

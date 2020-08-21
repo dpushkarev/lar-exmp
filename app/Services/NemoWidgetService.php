@@ -21,7 +21,10 @@ use App\Models\VocabularyName;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
+use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\BookingInfo;
+use FilippoToso\Travelport\Air\FareInfo;
+use FilippoToso\Travelport\Air\FareInfoRef;
 use FilippoToso\Travelport\Air\FlightOption;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use FilippoToso\Travelport\Air\Option;
@@ -151,7 +154,7 @@ class NemoWidgetService
             throw NemoWidgetServiceException::getInstance('Log of result was not found');
         }
 
-        /** @var  $lowFareSearchRsp  LowFareSearchRsp*/
+        /** @var  $lowFareSearchRsp  LowFareSearchRsp */
         $lowFareSearchRsp = unserialize($log);
         $allAirSegments = $lowFareSearchRsp->getAirSegmentList()->getAirSegment();
 
@@ -203,10 +206,48 @@ class NemoWidgetService
             'flight_search_result_id' => $resultModel->id
         ]);
 
-        $aiePriceRsp =  $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
+        $aiePriceRsp = $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
         $aiePriceRsp->put('createOrderLink', sprintf('/checkout?id=%d', $order->id));
 
         return $aiePriceRsp;
+    }
+
+    public function getFareRule(FlightsSearchResult $resultModel)
+    {
+        $log = $this->logger->getLog(LowFareSearchRsp::class, $resultModel->request->transaction_id, \App\Logging\TravelPortLogger::OBJECT_TYPE);
+
+        if (null === $log) {
+            throw NemoWidgetServiceException::getInstance('Log of result was not found');
+        }
+
+        /** @var  $lowFareSearchRsp  LowFareSearchRsp */
+        $lowFareSearchRsp = unserialize($log);
+
+        $airPriceNum = (int)filter_var($resultModel->price, FILTER_SANITIZE_NUMBER_INT) - 1;
+        /** @var AirPricePoint $airPricePoint */
+        $airPricePoint = $lowFareSearchRsp->getAirPricePointList()->getAirPricePoint()[$airPriceNum];
+
+        $airPricingInfoRefs = collect();
+        /** @var AirPricingInfo $airPricingInfo */
+        foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
+            /** @var FareInfoRef $fareInfoRef */
+            foreach ($airPricingInfo->getFareInfoRef() as $fareInfoRef) {
+                $airPricingInfoRefs->put($fareInfoRef->getKey(),$fareInfoRef->getKey());
+            }
+        }
+
+        $fareRulesKeys = collect();
+        /** @var FareInfo $fareINfo */
+        foreach ($lowFareSearchRsp->getFareInfoList()->getFareInfo() as $fareINfo) {
+            if($airPricingInfoRefs->has($fareINfo->getKey())) {
+                $fareRulesKeys->add($fareINfo->getFareRuleKey());
+            }
+        }
+
+        $airFareRulesRsp = TP::airFareRules($fareRulesKeys->toArray());
+        echo "<pre>";
+        print_r($airFareRulesRsp);
+        die;
     }
 
 

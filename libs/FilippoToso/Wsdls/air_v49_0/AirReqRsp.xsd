@@ -831,7 +831,7 @@
 			<xs:complexContent>
 				<xs:extension base="common:BaseReq">
 					<xs:sequence>
-						<xs:choice>
+						<xs:choice minOccurs="0" maxOccurs="unbounded">
 							<xs:element name="AirReservationSelector">
 								<xs:annotation>
 									<xs:documentation>Provider: 1G,1V,1P,1J,ACH-Parameters to use for a fare rule lookup associated with an Air Reservation Locator Code</xs:documentation>
