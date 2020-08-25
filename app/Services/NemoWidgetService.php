@@ -244,10 +244,13 @@ class NemoWidgetService
             }
         }
 
-        $airFareRulesRsp = TP::airFareRules($fareRulesKeys->toArray());
-        echo "<pre>";
-        print_r($airFareRulesRsp);
-        die;
+        $airFareRulesRsp = Cache::rememberForever('fareRules' . $resultModel->id, function () use ($fareRulesKeys) {
+            return TP::airFareRules($fareRulesKeys->toArray());
+        });
+
+//        $airFareRulesRsp = TP::airFareRules($fareRulesKeys->toArray());
+
+       return $this->ftObjectAdapter->airFareRulesAdapt($airFareRulesRsp);
     }
 
 

@@ -40,7 +40,7 @@ GET http://127.0.0.1:8081/api/flights/search/history
 GET http://127.0.0.1:8081/api/flights/search/flightInfo/73
 
 ###
-GET http://127.0.0.1:8081/api/flights/utils/rules/4
+POST http://127.0.0.1:8081/api/flights/utils/rules/4
 
 ###
 POST https://data.reservio.flights/api/flights/search/results/752?user_language_get_change=sr

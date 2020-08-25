@@ -13,6 +13,7 @@ use App\Models\FlightsSearchResult;
 use App\Services\TravelPortService;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air\ActionStatus;
+use FilippoToso\Travelport\Air\AirFareRulesRsp;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
@@ -1684,6 +1685,29 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'responseTime' => $response->getResponseTime(),
         ]);
     }
+
+    public function airFareRulesAdapt(AirFareRulesRsp $response)
+    {
+        $fareRuleData = [];
+        /** @var FareRule $fareRule */
+        foreach ($response->getFareRule() as $key => $fareRule) {
+            /** @var FareRuleLong $fareRuleLong */
+            foreach ($fareRule->getFareRuleLong() as $fareRuleLong) {
+                $fareRuleData[$key][] = [
+                    'name' => trim(strstr($fareRuleLong->get_(),"\n", true)),
+                    'text' => trim(strstr($fareRuleLong->get_(),"\n")),
+                    'code' => $fareRuleLong->getCategory(),
+                    'segmentNumber' => $key,
+                    'passengerTypes' => '?',
+                    'isURL' => false,
+                    'tariffCode' => '?'
+                ];
+            }
+        }
+
+        return $fareRuleData;
+    }
+
 }
 
 

@@ -10,10 +10,10 @@ use App\Http\Resources\NemoWidget\Autocomplete;
 use App\Http\Resources\NemoWidget\Common\Guide;
 use App\Http\Resources\NemoWidget\ErrorLog;
 use App\Http\Resources\NemoWidget\ErrorSearchId;
+use App\Http\Resources\NemoWidget\FareRules;
 use App\Http\Resources\NemoWidget\FlightsSearchFlightInfo;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Http\Resources\NemoWidget\History;
-use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\Error;
 use App\Models\FlightsSearchResult;
@@ -150,8 +150,9 @@ class NemoWidget extends BaseController
             return new ErrorLog("f9ed00a9");
         }
 
-        $fareRule = $service->getFareRule($result);
+        $fareRules = $service->getFareRule($result);
 
+        return new FareRules($fareRules);
     }
 
     public function history()
