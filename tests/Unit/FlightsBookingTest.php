@@ -65,7 +65,7 @@ class FlightsBookingTestTest extends TestCase
         $flightInfo = \factory(FlightsSearchFlightInfo::class, 1)->create(['flight_search_result_id' => $result->id])->first();
 
         $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
-            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/AP-rsp-2.obj'))->once();
+            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/AP-rsp-2.obj'))->twice();
         });
         $this->json('GET', '/api/checkout/' . $flightInfo->id)
             ->assertStatus(200)
@@ -125,8 +125,16 @@ class FlightsBookingTestTest extends TestCase
             ->assertJsonCount(21, 'flights.search.results.groupsData.prices.0.airSolution.0.fareNote')
             ->assertJsonCount(6, 'flights.search.results.groupsData.prices.0.airSolution.0.hostToken')
             ->assertJsonCount(12, 'flights.search.results.groupsData.prices.0.fareRule')
-            ->assertJsonCount(15, 'flights.search.results.groupsData.prices.0.fareRule.0.fareRuleLong');
-    }
+            ->assertJsonCount(15, 'flights.search.results.groupsData.prices.0.fareRule.0.fareRuleLong')
+            ->assertJsonCount(3, 'flights.search.results.info');
 
+        TP::shouldReceive('AirCreateReservationReq')
+            ->once()
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj')));
+
+        $res = $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
+            ->assertStatus(200)
+            ->decodeResponseJson();
+    }
 
 }
