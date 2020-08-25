@@ -23,9 +23,7 @@ class FareRules extends AbstractResource
                         'agencyRules' => '?',
                         'canBeTranslated' => '?',
                         'manualRulesArray' => '?',
-                        'tariffRules' => [
-                            $this->resource
-                        ]
+                        'tariffRules' => $this->resource
                     ]
                 ]
             ]

@@ -3,7 +3,7 @@ GET http://127.0.0.1:8081/api/checkout/2
 ###
 
 POST http://127.0.0.1:8081/api/reservation/1?
- request={"passengers":[{"travelerType":"ADT", "first":"Pushakrev","last":"Pushkarev","prefix":"Mr"},{"travelerType":"ADT", "first":"Pushakreva","last":"Pushkareva","prefix":"Mrs"}, {"travelerType":"CLD", "first":"Pushakrevchik","last":"Pushakrevchik","prefix":"Mr", "birth":"2015-02-04"}, {"travelerType":"INF", "first":"Ivanov","last":"Ivanov","prefix":"Mr", "birth":"2015-02-04"}],"address":{"street":"Pobeda striie","postalCode":32,"city":"Grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"psuk@bk.ru","phoneNumber":"381637796918"}
+ request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Imeni","last":"Prezni","gender":"m","dob":"","nationality":"RS","passport":"","passportExpiry":"","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Miss","first":"Zime","last":"Zenski","gender":"f","dob":"","nationality":"RS","passport":"","passportExpiry":"","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11100","city":"Grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381 637783048"}
 
 ###
 

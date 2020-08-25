@@ -103,6 +103,7 @@ class CheckoutService
             }
         }
 
+        /** @todo remove cache */
         $response = Cache::rememberForever('reservation' . $dto->getOrder()->flight_search_result_id, function () use ($dto) {
             return TP::AirCreateReservationReq($dto);
         });
