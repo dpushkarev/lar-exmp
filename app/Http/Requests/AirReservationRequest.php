@@ -78,7 +78,7 @@ class AirReservationRequest extends FormRequest
                         'first' => 'required|string|max:50',
                         'last' => 'required|string|max:50',
                         'prefix' => 'required|string|max:10',
-                        'birth' => 'required_if:travelerType,INF'
+                        'birth' => 'required_if:travelerType,INF|date'
                     ]);
 
                     if ($validatorInstance->fails()) {

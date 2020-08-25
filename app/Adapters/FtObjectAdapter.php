@@ -481,6 +481,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $airSegmentCollection = collect();
         $airPriceResultCollection = collect();
         $airSegmentMap = collect();
+        $infoData = collect();
 
         /** @var typeBaseAirSegment $airSegment */
         foreach ($response->getAirItinerary()->getAirSegment() as $key => $airSegment) {
@@ -556,6 +557,14 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         'fareCalc' => $airPricingInfo->getFareCalc(),
                     ];
                     $countOfPassengers += $airPricingInfoData['count'];
+
+                    $infoData->put($airPricingInfoData['type'], [
+                        'nationality' => false,
+                        'dateOfBirth' => false,
+                        'passportNo' => false,
+                        'passportCountry' => false,
+                        'passportExpiration' => false
+                    ]);
 
                     $airPricingInfoData['baseFare'] = [
                         'amount' => (float)substr($airPricingInfo->getBasePrice(), 3),
@@ -997,15 +1006,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
         $groupsData->put('segments', $airSegmentCollection);
         $groupsData->put('prices', $airPriceResultCollection);
-        $info = collect([
-            'nationality' => false,
-            'dateOfBirth' => false,
-            'passportNo' => false,
-            'passportCountry' => false,
-            'passportExpiration' => false
-        ]);
 
-        $results = collect(['groupsData' => $groupsData, 'info' => $info]);
+        $results = collect(['groupsData' => $groupsData, 'info' => $infoData]);
 
         foreach ($airports as $airport) {
             $countries = $countries->add($airport->country);
