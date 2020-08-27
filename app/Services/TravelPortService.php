@@ -174,7 +174,7 @@ class TravelPortService
                 )
                 ->setDOB($passenger['birth'] ?? null)
                 ->setKey($passenger['key'])
-                ->setTravelerType($passenger['travelerType'])
+                ->setTravelerType(static::PASSENGERS_MAP[$passenger['travelerType']] ?? $passenger['travelerType'])
                 ->setAddress((new Air\typeStructuredAddress())
                     ->setAddressName($address['street'])
                     ->setStreet([$address['street']])

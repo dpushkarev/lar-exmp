@@ -4,8 +4,6 @@
 namespace App\Adapters;
 
 
-use App\Http\Resources\NemoWidget\Common\City;
-use App\Http\Resources\NemoWidget\Common\Country;
 use App\Models\Aircraft;
 use App\Models\Airline;
 use App\Models\Airport;
@@ -115,6 +113,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     const PAYPAL_COMMISSION_FIX = 30;
 
     const PASSENGER_TYPE_ADULT = 'ADT';
+    const PASSENGER_TYPE_INFANT = ' INF';
 
     /**
      * @param LowFareSearchRsp $searchRsp
@@ -560,7 +559,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                     $infoData->put($airPricingInfoData['type'], [
                         'nationality' => false,
-                        'dateOfBirth' => false,
+                        'dateOfBirth' => ($airPricingInfoData['type'] === static::PASSENGER_TYPE_INFANT),
                         'passportNo' => false,
                         'passportCountry' => false,
                         'passportExpiration' => false
