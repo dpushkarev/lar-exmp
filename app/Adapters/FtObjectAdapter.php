@@ -113,7 +113,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     const PAYPAL_COMMISSION_FIX = 30;
 
     const PASSENGER_TYPE_ADULT = 'ADT';
-    const PASSENGER_TYPE_INFANT = ' INF';
+    const PASSENGER_TYPE_INFANT = 'INF';
 
     /**
      * @param LowFareSearchRsp $searchRsp
