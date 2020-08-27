@@ -13,6 +13,7 @@ use FilippoToso\Travelport\Air\AirLegModifiers;
 use FilippoToso\Travelport\Air\typeFareRuleType;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationReq;
 use FilippoToso\Travelport\UniversalRecord\FormOfPayment;
+use FilippoToso\Travelport\UniversalRecord\typeRetainReservation;
 use Libs\FilippoToso\Travelport;
 
 /**
@@ -115,6 +116,7 @@ class TravelPortService
         $actionStatus = $this->getActionStatus();
 
         return $airCreateReservationReq
+            ->setRetainReservation(typeRetainReservation::Both)
             ->setActionStatus($actionStatus)
             ->setFormOfPayment($formOfPayment)
             ->setProviderCode(static::GALILEO_PROVIDER_ID)
