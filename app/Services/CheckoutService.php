@@ -73,7 +73,7 @@ class CheckoutService
                             $passengerCount++;
                             $passengerFromRequest = $passengerGenerator->current();
                             $passengerType->BookingTravelerRef = $passengerFromRequest['key'];
-                            $passengerType->DOB = $passengerFromRequest['birth'] ?? null;
+                            $passengerType->DOB = $passengerFromRequest['dob'] ?? null;
                             $passengerGenerator->next();
                         }
                     }
