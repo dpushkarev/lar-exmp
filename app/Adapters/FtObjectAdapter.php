@@ -1369,12 +1369,15 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     /** @var \FilippoToso\Travelport\UniversalRecord\FareInfo $fareInfo */
                     foreach ($airPricingInfo->getFareInfo() as $fareInfo) {
                         $endorsementData = [];
-                        /** @var Endorsement $endorsement */
-                        foreach ($fareInfo->getEndorsement() as $endorsement) {
-                            $endorsementData[] = [
-                                'value' => $endorsement->getValue(),
-                            ];
+                        if (!is_null($fareInfo->getEndorsement())) {
+                            /** @var Endorsement $endorsement */
+                            foreach ($fareInfo->getEndorsement() as $endorsement) {
+                                $endorsementData[] = [
+                                    'value' => $endorsement->getValue(),
+                                ];
+                            }
                         }
+
                         $fareInfoData[] = [
                             'fareTicketDesignator' => $fareInfo->getFareTicketDesignator(),
                             'fareSurcharge' => $fareInfo->getFareSurcharge(),
