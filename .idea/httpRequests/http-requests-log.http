@@ -1,3 +1,99 @@
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110648.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110607.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110523.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110508.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110503.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110330.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T110218.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T105832.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-09-02T105120.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Miss","first":"Devojcica","last":"Dete","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Master","first":"Drugi","last":"Decak","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"Baby","first":"Zgebac","last":"Bebac","gender":"f","dob":"2020-06-11","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345"}
+
+<> 2020-08-31T104256.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Miss","first":"Devojcica","last":"Dete","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Master","first":"Drugi","last":"Decak","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"Baby","first":"Zgebac","last":"Bebac","gender":"f","dob":"2020-06-11","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345"}
+
+<> 2020-08-31T104235.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Miss","first":"Devojcica","last":"Dete","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Master","first":"Drugi","last":"Decak","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"Baby","first":"Zgebac","last":"Bebac","gender":"f","dob":"2020-06-11","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345"}
+
+<> 2020-08-31T104127.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/1
+
+<> 2020-08-27T013223.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/1
+
+<> 2020-08-27T013148.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/1
+
+<> 2020-08-27T013108.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/1
+
+<> 2020-08-27T013021.200.json
+
+###
+
 POST http://127.0.0.1:8081/api/flights/search/results/64
 
 <> 2020-06-21T055628.200.json
@@ -199,102 +295,6 @@ POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"dep
 POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
 <> 2020-06-21T014311.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-06-21T012643.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-06-21T012028.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-06-21T123825.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-06-21T123710.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-06-21T123111.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-09-15T00:00:00"},{"departure":{"IATA":"FCO","isCity":false},"arrival":{"IATA":"DME","isCity":false},"departureDate":"2020-09-25T00:00:00"}],"passengers":[{"type":"ADT","count":3},{"type":"CLD","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-06-21T123011.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T081107.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T081051.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T081041.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T081002.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T080915.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T080650.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T080627.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T080549.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T080532.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/51
-
-<> 2020-06-20T080500.422.json
 
 ###
 

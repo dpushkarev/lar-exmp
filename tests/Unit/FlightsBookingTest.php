@@ -132,9 +132,24 @@ class FlightsBookingTestTest extends TestCase
             ->once()
             ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj')));
 
-        $res = $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
+        $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
             ->assertStatus(200)
-            ->decodeResponseJson();
+            ->assertJsonCount(4, 'universalRecord.bookingTraveler')
+            ->assertJsonPath('universalRecord.bookingTraveler.0.bookingTravelerName.first', 'Pushakrev')
+            ->assertJsonCount(2, 'universalRecord.bookingTraveler.0.phoneNumber')
+            ->assertJsonCount(1, 'universalRecord.bookingTraveler.0.email')
+            ->assertJsonCount(1, 'universalRecord.bookingTraveler.0.address')
+            ->assertJsonCount(1, 'universalRecord.actionStatus')
+            ->assertJsonPath('universalRecord.actionStatus.0.type', 'ACTIVE')
+            ->assertJsonCount(1, 'universalRecord.providerReservationInfo')
+            ->assertJsonCount(2, 'universalRecord.airReservation.supplierLocator')
+            ->assertJsonCount(4, 'universalRecord.airReservation.bookingTravelerRef')
+            ->assertJsonCount(1, 'universalRecord.airReservation.airSegmentInfo.0.flightDetails')
+            ->assertJsonCount(6, 'universalRecord.airReservation.airSegmentInfo')
+            ->assertJsonPath('universalRecord.paymentOptionCharge.cache.amount', 3180)
+            ->assertJsonPath('universalRecord.paymentOptionCharge.intesa.amount', 10379.79)
+        ;
+
     }
 
 }

@@ -163,7 +163,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'isCharter' => false,
                 'isLowCost' => false,
                 'marketingCompany' => $carrier,
-                'operatingCompany' => $airSegment->getCodeshareInfo() ? $airSegment->getCodeshareInfo()->getOperatingCarrier() : $carrier,
+                'operatingCompany' => is_null($airSegment->getCodeshareInfo()) ? $carrier : ($airSegment->getCodeshareInfo()->getOperatingCarrier() ? $airSegment->getCodeshareInfo()->getOperatingCarrier() : $carrier),
                 'number' => 0,
                 'routeNumber' => $airSegment->getGroup(),
                 'stopPoints' => null
@@ -1491,31 +1491,35 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
 
                     $changePenaltyData = [];
-                    /** @var \FilippoToso\Travelport\UniversalRecord\typeFarePenalty $changePenalty */
-                    foreach ($airPricingInfo->getChangePenalty() as $changePenalty) {
-                        $changePenaltyData[] = [
-                            'amount' => [
-                                'value' => (float)substr($changePenalty->getAmount(), 3),
-                                'currency' => substr($changePenalty->getAmount(), 0, 3),
-                            ],
-                            'percentage' => $changePenalty->getPercentage(),
-                            'penaltyApplies' => $changePenalty->getPenaltyApplies(),
-                            'noShow' => $changePenalty->getNoShow(),
-                        ];
+                    if (!is_null($airPricingInfo->getChangePenalty())) {
+                        /** @var \FilippoToso\Travelport\UniversalRecord\typeFarePenalty $changePenalty */
+                        foreach ($airPricingInfo->getChangePenalty() as $changePenalty) {
+                            $changePenaltyData[] = [
+                                'amount' => [
+                                    'value' => (float)substr($changePenalty->getAmount(), 3),
+                                    'currency' => substr($changePenalty->getAmount(), 0, 3),
+                                ],
+                                'percentage' => $changePenalty->getPercentage(),
+                                'penaltyApplies' => $changePenalty->getPenaltyApplies(),
+                                'noShow' => $changePenalty->getNoShow(),
+                            ];
+                        }
                     }
 
                     $cancelPenaltyData = [];
-                    /** @var \FilippoToso\Travelport\UniversalRecord\typeFarePenalty $cancelPenalty */
-                    foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
-                        $cancelPenaltyData[] = [
-                            'amount' => [
-                                'value' => (float)substr($cancelPenalty->getAmount(), 3),
-                                'currency' => (float)substr($cancelPenalty->getAmount(), 0, 3),
-                            ],
-                            'percentage' => $cancelPenalty->getPercentage(),
-                            'penaltyApplies' => $cancelPenalty->getPenaltyApplies(),
-                            'noShow' => $cancelPenalty->getNoShow(),
-                        ];
+                    if (!is_null($airPricingInfo->getCancelPenalty())) {
+                        /** @var \FilippoToso\Travelport\UniversalRecord\typeFarePenalty $cancelPenalty */
+                        foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
+                            $cancelPenaltyData[] = [
+                                'amount' => [
+                                    'value' => (float)substr($cancelPenalty->getAmount(), 3),
+                                    'currency' => (float)substr($cancelPenalty->getAmount(), 0, 3),
+                                ],
+                                'percentage' => $cancelPenalty->getPercentage(),
+                                'penaltyApplies' => $cancelPenalty->getPenaltyApplies(),
+                                'noShow' => $cancelPenalty->getNoShow(),
+                            ];
+                        }
                     }
 
                     $airPricingInfoData[] = [

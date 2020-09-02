@@ -108,6 +108,8 @@ class CheckoutService
             return TP::AirCreateReservationReq($dto);
         });
 
+//        $response = TP::AirCreateReservationReq($dto);
+
         return $this->adapter->AirReservationAdapt($response);
     }
 
