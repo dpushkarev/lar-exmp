@@ -32,6 +32,14 @@ class FlightsSearchTest extends TestCase
             ->once()
             ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.obj')));
 
+        TP::shouldReceive('airFareRules')
+            ->once()
+            ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/AFR-rsp.obj')));
+
+        $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
+            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.obj'))->once();
+        });
+
         $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req.json');
 
         $search = $this->json('POST', '/api/flights/search/request', [
@@ -113,6 +121,16 @@ class FlightsSearchTest extends TestCase
         $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S3","S2"]']);
 
         $this->assertEquals(2, FlightsSearchResult::all()->count());
+
+        /** GetFareRules */
+        $this->json('POST', '/api/flights/utils/rules/1')
+            ->assertStatus(200)
+            ->assertJsonCount(4, 'flights.utils.rules.tariffRules')
+            ->assertJsonCount(18, 'flights.utils.rules.tariffRules.0')
+            ->assertJsonCount(18, 'flights.utils.rules.tariffRules.1')
+            ->assertJsonPath('flights.utils.rules.tariffRules.0.14.name', 'TOUR CONDUCTOR DISCOUNTS')
+            ->assertJsonPath('flights.utils.rules.tariffRules.0.14.text', 'NONE UNLESS OTHERWISE SPECIFIED')
+            ->assertJsonPath('flights.utils.rules.tariffRules.0.14.code', 20);
 
         $this->json('GET', $search['results']['url'])
             ->assertStatus(200);

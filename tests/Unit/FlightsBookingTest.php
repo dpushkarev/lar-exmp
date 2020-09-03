@@ -67,6 +67,8 @@ class FlightsBookingTestTest extends TestCase
         $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
             $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/AP-rsp-2.obj'))->twice();
         });
+
+        /** Get checkout */
         $this->json('GET', '/api/checkout/' . $flightInfo->id)
             ->assertStatus(200)
             ->assertJsonStructure([
@@ -132,6 +134,7 @@ class FlightsBookingTestTest extends TestCase
             ->once()
             ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj')));
 
+        /** Reservation */
         $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
             ->assertStatus(200)
             ->assertJsonCount(4, 'universalRecord.bookingTraveler')
@@ -148,6 +151,19 @@ class FlightsBookingTestTest extends TestCase
             ->assertJsonCount(6, 'universalRecord.airReservation.airSegmentInfo')
             ->assertJsonPath('universalRecord.paymentOptionCharge.cache.amount', 3180)
             ->assertJsonPath('universalRecord.paymentOptionCharge.intesa.amount', 10379.79)
+            ->assertJsonPath('universalRecord.agencyInfo.agentAction.0.actionType', 'Created')
+            ->assertJsonPath('universalRecord.locatorCode', '8EHXP0')
+            ->assertJsonPath('universalRecord.status', 'Active')
+            ->assertJsonStructure([
+                'universalRecord' => [
+                    'formOfPayment' => [
+                        [
+                            'check', 'providerReservationInfoRef'
+                        ]
+                    ]
+                ]
+            ])
+
         ;
 
     }

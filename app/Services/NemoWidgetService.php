@@ -244,11 +244,11 @@ class NemoWidgetService
             }
         }
 
-        $airFareRulesRsp = Cache::rememberForever('fareRules' . $resultModel->id, function () use ($fareRulesKeys) {
-            return TP::airFareRules($fareRulesKeys->toArray());
-        });
+//        $airFareRulesRsp = Cache::rememberForever('fareRules' . $resultModel->id, function () use ($fareRulesKeys) {
+//            return TP::airFareRules($fareRulesKeys->toArray());
+//        });
 
-//        $airFareRulesRsp = TP::airFareRules($fareRulesKeys->toArray());
+        $airFareRulesRsp = TP::airFareRules($fareRulesKeys->toArray());
 
        return $this->ftObjectAdapter->airFareRulesAdapt($airFareRulesRsp);
     }

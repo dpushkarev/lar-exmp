@@ -50,10 +50,10 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 Route::get('/guide/airports/{iataCode}', 'NemoWidget@airport')->where('iataCode', '[A-Z]{3}');
 
 
-Route::post('/system/logger/error', 'NemoWidget@ErrorLog');
+Route::post('/system/logger/error', 'NemoWidget@errorLog');
 Route::get('/flights/search/history', 'NemoWidget@history');
 Route::get('/flights/search/flightInfo/{id}', 'NemoWidget@flightInfo')->where('id', '\d+');
-Route::post('/flights/utils/rules/{id}', 'NemoWidget@FareRules')->where('id', '\d+');
+Route::post('/flights/utils/rules/{id}', 'NemoWidget@fareRules')->where('id', '\d+');
 
 Route::get('/checkout/{id}', 'Checkout@getData')->where('id', '\d+')->name('checkout');
 Route::post('/reservation/{id}', 'Checkout@reservation')->where('id', '\d+')->name('reservation');

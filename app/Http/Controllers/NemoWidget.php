@@ -104,7 +104,7 @@ class NemoWidget extends BaseController
         return new FlightsSearchResults($flightsSearchResults);
     }
 
-    public function ErrorLog(Request $request)
+    public function errorLog(Request $request)
     {
         try {
             $this->validate($request, [
@@ -129,7 +129,7 @@ class NemoWidget extends BaseController
      * @return ErrorLog|FlightsSearchFlightInfo
      * @throws \App\Exceptions\NemoWidgetServiceException
      */
-    public function FlightInfo($resultId, NemoWidgetService $service)
+    public function flightInfo($resultId, NemoWidgetService $service)
     {
         $result = FlightsSearchResult::find($resultId);
 
@@ -142,7 +142,13 @@ class NemoWidget extends BaseController
         return new FlightsSearchFlightInfo($flightInfo);
     }
 
-    public function FareRules($id, NemoWidgetService $service)
+    /**
+     * @param $id
+     * @param NemoWidgetService $service
+     * @return ErrorLog|FareRules
+     * @throws \App\Exceptions\NemoWidgetServiceException
+     */
+    public function fareRules($id, NemoWidgetService $service)
     {
         $result = FlightsSearchResult::find($id);
 
