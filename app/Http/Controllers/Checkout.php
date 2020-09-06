@@ -24,13 +24,14 @@ class Checkout extends Controller
      */
     public function getData($orderId, FtObjectAdapter $adapter)
     {
+        /** @var FlightsSearchFlightInfo $order */
         $order = FlightsSearchFlightInfo::find($orderId);
 
         if(is_null($order)) {
             throw ApiException::getInstanceInvalidId($orderId);
         }
 
-        if ($order->isBooked) {
+        if ($order->isBooked()) {
             throw ApiException::getInstance('Finished order');
         }
 
