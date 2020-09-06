@@ -23,6 +23,7 @@ use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\BookingInfo;
+use FilippoToso\Travelport\Air\Connection;
 use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\FareInfoRef;
 use FilippoToso\Travelport\Air\FlightOption;
@@ -157,9 +158,7 @@ class NemoWidgetService
         /** @var  $lowFareSearchRsp  LowFareSearchRsp */
         $lowFareSearchRsp = unserialize($log);
         $allAirSegments = $lowFareSearchRsp->getAirSegmentList()->getAirSegment();
-
         $airSegments = collect();
-        $airSegmentKeys = collect();
 
         foreach ($resultModel->segments as $segmentNumber) {
             $segmentNumber = (int)filter_var($segmentNumber, FILTER_SANITIZE_NUMBER_INT) - 1;
@@ -168,15 +167,13 @@ class NemoWidgetService
             $airSegment = $allAirSegments[$segmentNumber] ?? null;
 
             if (null !== $airSegment) {
-                $airSegments->add($airSegment);
-                $airSegmentKeys->put($airSegment->getKey(), 1);
+                $airSegments->put($airSegment->getKey(), $airSegment);
             }
         }
 
         $airPriceNum = (int)filter_var($resultModel->price, FILTER_SANITIZE_NUMBER_INT) - 1;
         /** @var AirPricePoint $airPricePoint */
         $airPricePoint = $lowFareSearchRsp->getAirPricePointList()->getAirPricePoint()[$airPriceNum];
-        $oldTotalPrice = $airPricePoint->getTotalPrice();
 
         $bookings = collect();
         /** @var FlightOption $flightOprion */
@@ -184,9 +181,20 @@ class NemoWidgetService
             /** @var Option $option */
             foreach ($flightOprion->getOption() as $option) {
                 /** @var BookingInfo $bookingInfo */
-                foreach ($option->getBookingInfo() as $bookingInfo) {
-                    if ($airSegmentKeys->has($bookingInfo->getSegmentRef())) {
+                foreach ($option->getBookingInfo() as $bookingIndex => $bookingInfo) {
+                    /** @var typeBaseAirSegment $airSegmentNode */
+                    if ($airSegmentNode = $airSegments->get($bookingInfo->getSegmentRef())) {
                         $bookings->add($bookingInfo);
+
+                        if (!is_null($option->getConnection())) {
+                            /** @var Connection $connection */
+                            foreach ($option->getConnection() as $connection) {
+                                if (!$connection->getStopOver() &&
+                                    $bookingIndex === $connection->getSegmentIndex()) {
+                                    $airSegmentNode->setConnection($connection);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -232,14 +240,14 @@ class NemoWidgetService
         foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
             /** @var FareInfoRef $fareInfoRef */
             foreach ($airPricingInfo->getFareInfoRef() as $fareInfoRef) {
-                $airPricingInfoRefs->put($fareInfoRef->getKey(),$fareInfoRef->getKey());
+                $airPricingInfoRefs->put($fareInfoRef->getKey(), $fareInfoRef->getKey());
             }
         }
 
         $fareRulesKeys = collect();
         /** @var FareInfo $fareINfo */
         foreach ($lowFareSearchRsp->getFareInfoList()->getFareInfo() as $fareINfo) {
-            if($airPricingInfoRefs->has($fareINfo->getKey())) {
+            if ($airPricingInfoRefs->has($fareINfo->getKey())) {
                 $fareRulesKeys->add($fareINfo->getFareRuleKey());
             }
         }
@@ -250,7 +258,7 @@ class NemoWidgetService
 
         $airFareRulesRsp = TP::airFareRules($fareRulesKeys->toArray());
 
-       return $this->ftObjectAdapter->airFareRulesAdapt($airFareRulesRsp);
+        return $this->ftObjectAdapter->airFareRulesAdapt($airFareRulesRsp);
     }
 
 
