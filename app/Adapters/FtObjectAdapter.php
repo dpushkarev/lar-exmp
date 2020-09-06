@@ -1706,9 +1706,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     'text' => trim(strstr($fareRuleLong->get_(),"\n")),
                     'code' => $fareRuleLong->getCategory(),
                     'segmentNumber' => $key,
-                    'passengerTypes' => static::PASSENGER_TYPE_ADULT,
+                    'passengerTypes' => [static::PASSENGER_TYPE_ADULT],
                     'isURL' => false,
-                    'tariffCode' => '?'
+                    'tariffCode' => static::PASSENGER_TYPE_ADULT
                 ];
             }
         }

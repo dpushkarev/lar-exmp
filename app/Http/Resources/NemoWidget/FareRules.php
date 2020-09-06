@@ -20,9 +20,9 @@ class FareRules extends AbstractResource
             'flights' => [
                 'utils' => [
                     'rules' => [
-                        'agencyRules' => '?',
-                        'canBeTranslated' => '?',
-                        'manualRulesArray' => '?',
+                        'agencyRules' => '<a target="_blank" href="https://v2.ekarte.rs/uslovi-koriscenja/">Uslovi korišćenja</a> | <a target="_blank" href="https://v2.ekarte.rs/politika-privatnosti/">Politika privatnosti</a>',
+                        'canBeTranslated' => false,
+                        'manualRulesArray' => null,
                         'tariffRules' => $this->resource
                     ]
                 ]

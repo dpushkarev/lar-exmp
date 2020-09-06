@@ -329,7 +329,7 @@ class TravelPortService
             );
         }
 
-        if (isset($parameters['serviceClass']) && $parameters['serviceClass'] !== 'All') {
+        if (isset($parameters['serviceClass']) && $parameters['serviceClass'] !== 'Economy') {
             $searchModifiers->setPreferredCabins(
                 (new Air\PreferredCabins())->setCabinClass(new Air\CabinClass($parameters['serviceClass']))
             );
