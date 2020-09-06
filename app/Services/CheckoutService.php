@@ -7,6 +7,7 @@ use App\Adapters\FtObjectAdapter;
 use App\Dto\AirReservationRequestDto;
 use App\Exceptions\ApiException;
 use App\Facades\TP;
+use App\Models\FlightsSearchFlightInfo;
 use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
@@ -109,6 +110,8 @@ class CheckoutService
         });
 
 //        $response = TP::AirCreateReservationReq($dto);
+        $dto->getOrder()->booked = FlightsSearchFlightInfo::IS_BOOKED;
+        $dto->getOrder()->save();
 
         return $this->adapter->AirReservationAdapt($response);
     }

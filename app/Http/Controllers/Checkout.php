@@ -30,6 +30,10 @@ class Checkout extends Controller
             throw ApiException::getInstanceInvalidId($orderId);
         }
 
+        if ($order->isBooked) {
+            throw ApiException::getInstance('Finished order');
+        }
+
         try {
             $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
                 ->getLog(AirPriceRsp::class, $order->transaction_id, TravelPortLogger::OBJECT_TYPE);
@@ -43,12 +47,24 @@ class Checkout extends Controller
         }
     }
 
+    /**
+     * @param AirReservationRequest $request
+     * @param CheckoutService $service
+     * @param $orderId
+     * @return AirReservation
+     * @throws ApiException
+     */
     public function reservation(AirReservationRequest $request, CheckoutService $service, $orderId)
     {
+        /** @var FlightsSearchFlightInfo $order */
         $order = FlightsSearchFlightInfo::find($orderId);
 
         if(is_null($order)) {
             throw ApiException::getInstanceInvalidId($orderId);
+        }
+
+        if ($order->isBooked()) {
+            throw ApiException::getInstance('Finished order');
         }
 
         $dto = $request->getAirReservationRequestDto();
