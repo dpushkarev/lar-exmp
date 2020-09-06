@@ -174,6 +174,7 @@ class NemoWidgetService
         $airPriceNum = (int)filter_var($resultModel->price, FILTER_SANITIZE_NUMBER_INT) - 1;
         /** @var AirPricePoint $airPricePoint */
         $airPricePoint = $lowFareSearchRsp->getAirPricePointList()->getAirPricePoint()[$airPriceNum];
+        $oldTotalPrice = $airPricePoint->getTotalPrice();
 
         $bookings = collect();
         /** @var FlightOption $flightOprion */
@@ -191,7 +192,7 @@ class NemoWidgetService
                             foreach ($option->getConnection() as $connection) {
                                 if (!$connection->getStopOver() &&
                                     $bookingIndex === $connection->getSegmentIndex()) {
-                                    $airSegmentNode->setConnection($connection);
+                                    $airSegmentNode->setConnection(new Connection());
                                 }
                             }
                         }
