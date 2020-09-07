@@ -114,6 +114,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
     const PASSENGER_TYPE_ADULT = 'ADT';
     const PASSENGER_TYPE_INFANT = 'INF';
+    const PASSENGER_TYPE_CHILD = 'CNN';
 
     /**
      * @param LowFareSearchRsp $searchRsp
@@ -933,7 +934,17 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                 $airSolutionData['agencyCharge'] = [
                     'amount' => $agencyChargeAll,
-                    'currency' => static::AGENCY_CHARGE_CURRENCY
+                    'currency' => static::AGENCY_CHARGE_CURRENCY,
+                    'regular' => [
+                        static::PASSENGER_TYPE_ADULT => 495,
+                        static::PASSENGER_TYPE_CHILD => 495,
+                        static::PASSENGER_TYPE_INFANT => 495,
+                    ],
+                    'brand' => [
+                        static::PASSENGER_TYPE_ADULT => 955,
+                        static::PASSENGER_TYPE_CHILD => 955,
+                        static::PASSENGER_TYPE_INFANT => 955,
+                    ]
                 ];
 
                 $airSolutionData['totalPrice'] = [

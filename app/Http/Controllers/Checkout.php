@@ -12,35 +12,36 @@ use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
 use App\Services\CheckoutService;
 use FilippoToso\Travelport\Air\AirPriceRsp;
+use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
 
 class Checkout extends Controller
 {
 
     /**
-     * @param $orderId
+     * @param $flightInfoId
      * @param FtObjectAdapter $adapter
      * @return FlightsSearchResults
      * @throws ApiException
      */
-    public function getData($orderId, FtObjectAdapter $adapter)
+    public function getData($flightInfoId, FtObjectAdapter $adapter)
     {
-        /** @var FlightsSearchFlightInfo $order */
-        $order = FlightsSearchFlightInfo::find($orderId);
+        /** @var FlightsSearchFlightInfo $flightInfo */
+        $flightInfo = FlightsSearchFlightInfo::find($flightInfoId);
 
-        if(is_null($order)) {
-            throw ApiException::getInstanceInvalidId($orderId);
+        if(is_null($flightInfo)) {
+            throw ApiException::getInstanceInvalidId($flightInfoId);
         }
 
-        if ($order->isBooked()) {
+        if ($flightInfo->reservation) {
             throw ApiException::getInstance('Finished order');
         }
 
         try {
             $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
-                ->getLog(AirPriceRsp::class, $order->transaction_id, TravelPortLogger::OBJECT_TYPE);
+                ->getLog(AirPriceRsp::class, $flightInfo->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
             $airPriceResult = $adapter->AirPriceAdaptCheckout(unserialize($log));
-            $airPriceResult->put('request', $order->result->request);
+            $airPriceResult->put('request', $flightInfo->result->request);
 
             return new FlightsSearchResults($airPriceResult);
         } catch (TravelPortLoggerException $exception) {
@@ -51,25 +52,25 @@ class Checkout extends Controller
     /**
      * @param AirReservationRequest $request
      * @param CheckoutService $service
-     * @param $orderId
+     * @param $flightInfoId
      * @return AirReservation
      * @throws ApiException
      */
-    public function reservation(AirReservationRequest $request, CheckoutService $service, $orderId)
+    public function reservation(AirReservationRequest $request, CheckoutService $service, $flightInfoId)
     {
-        /** @var FlightsSearchFlightInfo $order */
-        $order = FlightsSearchFlightInfo::find($orderId);
+        /** @var FlightsSearchFlightInfo $flightInfo */
+        $flightInfo = FlightsSearchFlightInfo::find($flightInfoId);
 
-        if(is_null($order)) {
-            throw ApiException::getInstanceInvalidId($orderId);
+        if(is_null($flightInfo)) {
+            throw ApiException::getInstanceInvalidId($flightInfoId);
         }
 
-        if ($order->isBooked()) {
+        if ($flightInfo->reservation) {
             throw ApiException::getInstance('Finished order');
         }
 
         $dto = $request->getAirReservationRequestDto();
-        $dto->setOrder($order);
+        $dto->setOrder($flightInfo);
 
         try {
             $response = $service->reservation($dto);
@@ -78,5 +79,20 @@ class Checkout extends Controller
         } catch (TravelPortLoggerException $exception) {
             throw ApiException::getInstance($exception->getMessage());
         }
+    }
+
+    public function order(FtObjectAdapter $adapter, $orderId)
+    {
+        /** @var FlightsSearchFlightInfo $order */
+        $flightInfo = FlightsSearchFlightInfo::whereId($orderId)->has('reservation')->with('reservation')->first();
+
+        if(is_null($flightInfo)) {
+            throw ApiException::getInstanceInvalidId($orderId);
+        }
+
+        $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
+            ->getLog(AirCreateReservationRsp::class, $flightInfo->reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
+
+       return new AirReservation($adapter->AirReservationAdapt(unserialize($log)));
     }
 }

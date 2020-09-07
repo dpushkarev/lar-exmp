@@ -8,3 +8,7 @@ POST http://127.0.0.1:8081/api/reservation/1?
 
 ###
 
+GET http://127.0.0.1:8081/api/order/1
+
+###
+

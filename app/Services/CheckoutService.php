@@ -7,7 +7,7 @@ use App\Adapters\FtObjectAdapter;
 use App\Dto\AirReservationRequestDto;
 use App\Exceptions\ApiException;
 use App\Facades\TP;
-use App\Models\FlightsSearchFlightInfo;
+use App\Models\Reservation;
 use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
@@ -16,6 +16,7 @@ use FilippoToso\Travelport\Air\AirSegmentRef;
 use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
+use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
 use Illuminate\Support\Facades\Cache;
 
 class CheckoutService
@@ -105,13 +106,16 @@ class CheckoutService
         }
 
         /** @todo remove cache */
+        /** @var AirCreateReservationRsp $response */
         $response = Cache::rememberForever('reservation' . $dto->getOrder()->flight_search_result_id, function () use ($dto) {
             return TP::AirCreateReservationReq($dto);
         });
 
 //        $response = TP::AirCreateReservationReq($dto);
-        $dto->getOrder()->booked = FlightsSearchFlightInfo::IS_BOOKED;
-        $dto->getOrder()->save();
+        Reservation::forceCreate([
+            'transaction_id' => $response->getTransactionId(),
+            'flights_search_flight_info_id' => $dto->getOrder()->id
+        ]);
 
         return $this->adapter->AirReservationAdapt($response);
     }

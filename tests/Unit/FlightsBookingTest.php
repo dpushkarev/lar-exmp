@@ -20,6 +20,7 @@ class FlightsBookingTestTest extends TestCase
         $this->useTable('flights_search_requests');
         $this->useTable('flights_search_results');
         $this->useTable('flights_search_flight_infos');
+        $this->useTable('reservations');
     }
 
 
@@ -162,9 +163,19 @@ class FlightsBookingTestTest extends TestCase
                         ]
                     ]
                 ]
-            ])
+            ]);
 
-        ;
+        $this->assertDatabaseHas('reservations', ['flights_search_flight_info_id' => $flightInfo->id, 'transaction_id' => '0C42A5590A0742610CA0F41AE03B3BD2']);
+
+        $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
+            ->assertStatus(422);
+
+        $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
+            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj'))->once();
+        });
+
+        $this->json('GET','/api/order/' . $flightInfo->id)
+            ->assertStatus(200);
 
     }
 

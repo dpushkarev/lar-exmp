@@ -4,6 +4,7 @@
 namespace App\Logging;
 
 use App\Exceptions\TravelPortLoggerException;
+use FilippoToso\Travelport\Air\AirFareRulesRsp;
 use FilippoToso\Travelport\Air\AirPriceReq;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\LowFareSearchReq;
@@ -21,6 +22,7 @@ class TravelPortLogger implements BaseTravelPortLogger
         AirPriceRsp::class => 'AP-rsp',
         AirCreateReservationReq::class => 'ACR-req',
         AirCreateReservationRsp::class => 'ACR-rsp',
+        AirFareRulesRsp::class => 'AFR-rsp'
     ];
 
     const XML_TYPE = 'xml';

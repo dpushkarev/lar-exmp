@@ -57,6 +57,7 @@ Route::post('/flights/utils/rules/{id}', 'NemoWidget@fareRules')->where('id', '\
 
 Route::get('/checkout/{id}', 'Checkout@getData')->where('id', '\d+')->name('checkout');
 Route::post('/reservation/{id}', 'Checkout@reservation')->where('id', '\d+')->name('reservation');
+Route::get('/order/{id}', 'Checkout@order')->where('id', '\d+')->name('reservation');
 
 Route::get('/guide/airports/nearest', function () {
     return '{
