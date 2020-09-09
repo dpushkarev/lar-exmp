@@ -1039,6 +1039,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $bookingTravelerCollection = collect();
         $actionStatusCollection = collect();
         $providerReservationCollection = collect();
+        $countries = collect();
+        $cities = collect();
+        $airports = collect();
+        $airLines = collect();
+        $aircrafts = collect();
         $countOfPassengers = 0;
 
         /** @var BookingTraveler $bookingTraveler */
@@ -1258,6 +1263,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             /** @var \FilippoToso\Travelport\UniversalRecord\typeBaseAirSegment $airSegment */
             foreach ($airReservation->getAirSegment() as $airSegment) {
                 $flightDetailsData = [];
+                $origin = $airSegment->getOrigin();
+                $destination = $airSegment->getDestination();
+                $carrier = $airSegment->getCarrier();
+                $aircraftType = $airSegment->getEquipment();
+
                 /** @var \FilippoToso\Travelport\UniversalRecord\FlightDetails $flightDetails */
                 foreach ($airSegment->getFlightDetails() as $flightDetails) {
                     $flightDetailsData[] = [
@@ -1281,6 +1291,22 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         'elStat' => $flightDetails->getElStat(),
                         'keyOverride' => $flightDetails->getKeyOverride(),
                     ];
+                }
+
+                if (!$airports->has($origin)) {
+                    $airports->put($origin, Airport::whereCode($origin)->first());
+                }
+
+                if (!$airports->has($destination)) {
+                    $airports->put($destination, Airport::whereCode($destination)->first());
+                }
+
+                if (!$airLines->has($carrier)) {
+                    $airLines->put($carrier, Airline::whereCode($carrier)->first());
+                }
+
+                if (!$aircrafts->has($aircraftType)) {
+                    $aircrafts->put($aircraftType, Aircraft::whereCode($aircraftType)->first());
                 }
 
                 $segmentRemarkData = [];
@@ -1671,6 +1697,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
         $agencyChargeAll = static::AGENCY_CHARGE_AMOUNT * $countOfPassengers;
 
+        foreach ($airports as $airport) {
+            $countries = $countries->add($airport->country);
+            $cities = $cities->add($airport->city);
+        }
+
         return collect([
             'universalRecord' => [
                 'bookingTraveler' => $bookingTravelerCollection,
@@ -1702,6 +1733,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'version' => $response->getUniversalRecord()->getVersion(),
             ],
             'responseTime' => $response->getResponseTime(),
+            'airlines' => $airLines,
+            'airports' => $airports,
+            'aircrafts' => $aircrafts,
+            'cities' => $cities,
+            'countries' => $countries,
         ]);
     }
 

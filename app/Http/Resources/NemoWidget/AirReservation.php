@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\NemoWidget;
 
+use App\Http\Resources\NemoWidget\Common\Guide;
+
 class AirReservation extends AbstractResource
 {
     /**
@@ -10,7 +12,11 @@ class AirReservation extends AbstractResource
      */
     public function toArray($request)
     {
-        return $this->resource;
+        return [
+            'universalRecord' => $this->resource->get('universalRecord'),
+            'responseTime' => $this->resource->get('responseTime'),
+            $this->merge(new Guide($this->resource))
+        ];
     }
 
 }

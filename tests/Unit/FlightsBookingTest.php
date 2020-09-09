@@ -138,6 +138,7 @@ class FlightsBookingTestTest extends TestCase
         /** Reservation */
         $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
             ->assertStatus(200)
+            ->assertJsonCount(5, 'guide')
             ->assertJsonCount(4, 'universalRecord.bookingTraveler')
             ->assertJsonPath('universalRecord.bookingTraveler.0.bookingTravelerName.first', 'Pushakrev')
             ->assertJsonCount(2, 'universalRecord.bookingTraveler.0.phoneNumber')
