@@ -11,8 +11,9 @@ use Illuminate\Http\Response;
 class NemoWidgetCache
 {
 
-    const AUTOCOMPLETE_ROUTE_NAME = 'autocomplete';
-    const AIRLINES_ALL_ROUTE_NAME = 'airlines.all';
+    const AUTOCOMPLETE = 'autocomplete';
+    const AIRLINES_ALL = 'airlines.all';
+    const AIRPORT_BY_CODE = 'airport';
     const FLIGHTS_SEARCH_POST_REQUEST = 'flights.search.post.request';
     const FLIGHTS_SEARCH_GET_REQUEST = 'flights.search.get.request';
     const FLIGHTS_SEARCH_GET_FORM_DATA = 'flights.search.get.formData';
@@ -20,6 +21,7 @@ class NemoWidgetCache
     const FLIGHTS_SEARCH_GET_RESULTS = 'flights.search.get.results';
 
     use ResponseCache;
+
     /**
      * Handle an incoming request.
      *

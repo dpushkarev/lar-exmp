@@ -26,25 +26,25 @@ trait ResponseCache
 
     protected function autocompleteGetCache($request)
     {
-        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AUTOCOMPLETE_ROUTE_NAME, $request->q, App::getLocale());
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AUTOCOMPLETE, $request->q, App::getLocale());
         return Cache::get($cacheKey, null);
     }
 
     protected function autocompleteSetCache($request, $response)
     {
-        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AUTOCOMPLETE_ROUTE_NAME, $request->q, App::getLocale());
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AUTOCOMPLETE, $request->q, App::getLocale());
         Cache::put($cacheKey, $response->getContent());
     }
 
     protected function airlinesAllGetCache($request)
     {
-        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AIRLINES_ALL_ROUTE_NAME, App::getLocale());
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AIRLINES_ALL, App::getLocale());
         return Cache::get($cacheKey, null);
     }
 
     protected function airlinesAllSetCache($request, $response)
     {
-        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AIRLINES_ALL_ROUTE_NAME, App::getLocale());
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::AIRLINES_ALL, App::getLocale());
         Cache::put($cacheKey, $response->getContent());
     }
 
@@ -90,22 +90,3 @@ trait ResponseCache
         return $name . '_' . $hash;
     }
 }
-
-//switch ($routeName) {
-//    case 'autocomplete';
-//        $cacheKey = NemoWidgetCache::getCacheKey($routeName, $request->q, App::getLocale());
-//        break;
-//    case 'airlinesAll';
-//        $cacheKey = NemoWidgetCache::getCacheKey($routeName, App::getLocale());
-//        break;
-//    case 'flights.search.post.results';
-//    case 'flights.search.get.results';
-//        $cacheKey = NemoWidgetCache::getCacheKey($routeName, (int)$request->id, App::getLocale());
-//        break;
-//    case 'flights.search.get.request';
-//    case 'flights.search.get.formData';
-//        $cacheKey = NemoWidgetCache::getCacheKey('flights.search.request', (int)$request->id, App::getLocale());
-//        break;
-//    default:
-//        $cacheKey = null;
-//}

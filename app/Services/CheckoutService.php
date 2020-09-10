@@ -107,11 +107,12 @@ class CheckoutService
 
         /** @todo remove cache */
         /** @var AirCreateReservationRsp $response */
-        $response = Cache::rememberForever('reservation' . $dto->getOrder()->flight_search_result_id, function () use ($dto) {
-            return TP::AirCreateReservationReq($dto);
-        });
+//        $response = Cache::rememberForever('reservation' . $dto->getOrder()->flight_search_result_id, function () use ($dto) {
+//            return TP::AirCreateReservationReq($dto);
+//        });
 
-//        $response = TP::AirCreateReservationReq($dto);
+        $response = TP::AirCreateReservationReq($dto);
+
         Reservation::forceCreate([
             'transaction_id' => $response->getTransactionId(),
             'flights_search_flight_info_id' => $dto->getOrder()->id

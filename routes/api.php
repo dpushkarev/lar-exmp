@@ -19,7 +19,7 @@ use App\Http\Resources\NemoWidget\ErrorSearchId;
 //Route::post('/flights/search/request', 'TravelPort@search');
 
 Route::middleware(['nemo.widget.cache'])->group(function () {
-    Route::name(NemoWidgetCache::AUTOCOMPLETE_ROUTE_NAME)->group(function () {
+    Route::name(NemoWidgetCache::AUTOCOMPLETE)->group(function () {
         Route::get('/guide/autocomplete/iata/{q}/dep/{iataCode}', 'NemoWidget@autocomplete')->where('iataCode', '[A-Z]{3}');
         Route::get('/guide/autocomplete/iata/{q}/arr/{iataCode}', 'NemoWidget@autocomplete')->where('iataCode', '[A-Z]{3}');
         Route::get('/guide/autocomplete/iata/{q}/dep', 'NemoWidget@autocomplete')->where('q', '.*');
@@ -43,7 +43,7 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
     })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS);
 
 
-    Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL_ROUTE_NAME);
+    Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL);
 
 });
 

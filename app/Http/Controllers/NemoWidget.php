@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -60,16 +61,17 @@ class NemoWidget extends BaseController
     }
 
     /**
-     * @param NemoWidgetService $service
      * @param $iataCode
      * @return Guide
      * @throws ApiException
      */
-    public function airport(NemoWidgetService $service, $iataCode)
+    public function airport($iataCode)
     {
-        $airline = Airport::whereCode($iataCode)->first();
+        $airline = Cache::rememberForever('airport' . $iataCode, function () use ($iataCode) {
+            return Airport::whereCode($iataCode)->first();
+        });
 
-        if(!$airline) {
+        if (!$airline) {
             throw ApiException::getInstanceInvalidId($iataCode);
         }
 
@@ -96,7 +98,7 @@ class NemoWidget extends BaseController
     {
         $FlightsSearchRequestModel = FlightsSearchRequestModel::find($id);
 
-        if(null === $FlightsSearchRequestModel) {
+        if (null === $FlightsSearchRequestModel) {
             return new ErrorSearchId(null);
         }
         $flightsSearchResults = $service->flightsSearchResult($FlightsSearchRequestModel);
@@ -133,7 +135,7 @@ class NemoWidget extends BaseController
     {
         $result = FlightsSearchResult::find($resultId);
 
-        if(null === $result) {
+        if (null === $result) {
             return new ErrorLog("f9ed00a9");
         }
 
@@ -152,7 +154,7 @@ class NemoWidget extends BaseController
     {
         $result = FlightsSearchResult::find($id);
 
-        if(null === $result) {
+        if (null === $result) {
             return new ErrorLog("f9ed00a9");
         }
 
