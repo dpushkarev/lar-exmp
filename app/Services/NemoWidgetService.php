@@ -111,14 +111,11 @@ class NemoWidgetService
         );
 
         try {
-//            $lowFareSearchRsp = Cache::rememberForever('result'. $request->id, function () use ($requestDto) {
-//                return TP::LowFareSearchReq($requestDto);
-//            });
-//
-            $lowFareSearchRsp = TP::LowFareSearchReq($requestDto);
+            $lowFareSearchRsp = Cache::remember('lowFareSearchReq'. $request->id, 3600 * 3, function () use ($requestDto) {
+                return TP::LowFareSearchReq($requestDto);
+            });
 
-//            print_r('<pre>');
-//            print_r($lowFareSearchRsp);die;
+//            $lowFareSearchRsp = TP::LowFareSearchReq($requestDto);
 
             $LowFareSearchAdapt = $this->ftObjectAdapter->LowFareSearchAdapt($lowFareSearchRsp, $request->id);
             $LowFareSearchAdapt->put('request', $request);
@@ -208,7 +205,9 @@ class NemoWidgetService
         );
 
         /** @var  $airPriceRsp AirPriceRsp */
-        $airPriceRsp = TP::AirPriceReq($airPriceRequestDto);
+        $airPriceRsp = Cache::remember('airPriceReq'. $resultModel->id, 3600 * 3, function () use ($airPriceRequestDto) {
+            return TP::AirPriceReq($airPriceRequestDto);
+        });
 
         $order = FlightsSearchFlightInfo::forceCreate([
             'transaction_id' => $airPriceRsp->getTransactionId(),
