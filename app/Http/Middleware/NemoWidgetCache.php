@@ -19,6 +19,9 @@ class NemoWidgetCache
     const FLIGHTS_SEARCH_GET_FORM_DATA = 'flights.search.get.formData';
     const FLIGHTS_SEARCH_POST_RESULTS = 'flights.search.post.results';
     const FLIGHTS_SEARCH_GET_RESULTS = 'flights.search.get.results';
+    const FLIGHTS_INFO = 'flights.info';
+    const FLIGHTS_RULES = 'flights.rules';
+    const CHECKOUT = 'checkout';
 
     use ResponseCache;
 

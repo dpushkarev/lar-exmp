@@ -11,6 +11,7 @@ use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
 use App\Services\CheckoutService;
+use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
 
@@ -28,12 +29,16 @@ class Checkout extends Controller
         /** @var FlightsSearchFlightInfo $flightInfo */
         $flightInfo = FlightsSearchFlightInfo::find($flightInfoId);
 
-        if(is_null($flightInfo)) {
+        if (is_null($flightInfo)) {
             throw ApiException::getInstanceInvalidId($flightInfoId);
         }
 
         if ($flightInfo->reservation) {
             throw ApiException::getInstance('Finished order');
+        }
+
+        if ($flightInfo->created_at->diffInHours(Carbon::now()) > 3) {
+            throw ApiException::getInstance('Offer has expired');
         }
 
         try {
@@ -61,7 +66,7 @@ class Checkout extends Controller
         /** @var FlightsSearchFlightInfo $flightInfo */
         $flightInfo = FlightsSearchFlightInfo::find($flightInfoId);
 
-        if(is_null($flightInfo)) {
+        if (is_null($flightInfo)) {
             throw ApiException::getInstanceInvalidId($flightInfoId);
         }
 
@@ -86,13 +91,13 @@ class Checkout extends Controller
         /** @var FlightsSearchFlightInfo $order */
         $flightInfo = FlightsSearchFlightInfo::whereId($orderId)->has('reservation')->with('reservation')->first();
 
-        if(is_null($flightInfo)) {
+        if (is_null($flightInfo)) {
             throw ApiException::getInstanceInvalidId($orderId);
         }
 
         $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
             ->getLog(AirCreateReservationRsp::class, $flightInfo->reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
-       return new AirReservation($adapter->AirReservationAdapt(unserialize($log)));
+        return new AirReservation($adapter->AirReservationAdapt(unserialize($log)));
     }
 }

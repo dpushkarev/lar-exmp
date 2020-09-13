@@ -51,7 +51,7 @@ trait ResponseCache
     protected function flightsSearchPostRequestSetCache($request, $response)
     {
         $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_SEARCH_GET_REQUEST, $response->requestId, App::getLocale());
-        Cache::put($cacheKey, $response->getContent());
+        Cache::put($cacheKey, $response->getContent(), 3600 * 3);
     }
 
     protected function flightsSearchGetRequestGetCache($request)
@@ -69,12 +69,48 @@ trait ResponseCache
     protected function flightsSearchPostResultsSetCache($request, $response)
     {
         $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS, (int)$request->id, App::getLocale());
-        Cache::put($cacheKey, $response->getContent());
+        Cache::put($cacheKey, $response->getContent(), 3600 * 24);
     }
 
     protected function flightsSearchGetResultsGetCache($request)
     {
         $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS, (int)$request->id, App::getLocale());
+        return Cache::get($cacheKey, null);
+    }
+
+    protected function flightsInfoSetCache($request, $response)
+    {
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_INFO, (int)$request->id, App::getLocale());
+        Cache::put($cacheKey, $response->getContent(), 3600 * 24);
+    }
+
+    protected function flightsInfoGetCache($request)
+    {
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_INFO, (int)$request->id, App::getLocale());
+        return Cache::get($cacheKey, null);
+    }
+
+    protected function flightsRulesSetCache($request, $response)
+    {
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_RULES, (int)$request->id, App::getLocale());
+        Cache::put($cacheKey, $response->getContent(), 3600 * 24);
+    }
+
+    protected function flightsRulesGetCache($request)
+    {
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::FLIGHTS_RULES, (int)$request->id, App::getLocale());
+        return Cache::get($cacheKey, null);
+    }
+
+    protected function checkoutSetCache($request, $response)
+    {
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::CHECKOUT, (int)$request->id, App::getLocale());
+        Cache::put($cacheKey, $response->getContent(), 3600 * 3);
+    }
+
+    protected function checkoutGetCache($request)
+    {
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::CHECKOUT, (int)$request->id, App::getLocale());
         return Cache::get($cacheKey, null);
     }
 

@@ -45,6 +45,14 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL);
 
+    Route::get('/flights/search/flightInfo/{id}', 'NemoWidget@flightInfo')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_INFO);
+
+    Route::post('/flights/utils/rules/{id}', 'NemoWidget@fareRules')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_RULES);
+
+    Route::get('/checkout/{id}', 'Checkout@getData')->where('id', '\d+')->name(NemoWidgetCache::CHECKOUT);
+
+
+
 });
 
 Route::get('/guide/airports/{iataCode}', 'NemoWidget@airport')->where('iataCode', '[A-Z]{3}');
@@ -52,10 +60,7 @@ Route::get('/guide/airports/{iataCode}', 'NemoWidget@airport')->where('iataCode'
 
 Route::post('/system/logger/error', 'NemoWidget@errorLog');
 Route::get('/flights/search/history', 'NemoWidget@history');
-Route::get('/flights/search/flightInfo/{id}', 'NemoWidget@flightInfo')->where('id', '\d+');
-Route::post('/flights/utils/rules/{id}', 'NemoWidget@fareRules')->where('id', '\d+');
 
-Route::get('/checkout/{id}', 'Checkout@getData')->where('id', '\d+')->name('checkout');
 Route::post('/reservation/{id}', 'Checkout@reservation')->where('id', '\d+')->name('reservation');
 Route::get('/order/{id}', 'Checkout@order')->where('id', '\d+')->name('reservation');
 
