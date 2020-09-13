@@ -31,7 +31,7 @@ class ResultData extends JsonResource
             "defaultSort" => "price",
             "carrierDefaultSort" => "depTime",
             "showAirplanePopup" => true,
-            "defaultViewType" => "tile",
+            "defaultViewType" => "list",
             "showBlocks" => [
                 "useShowCase" => true,
                 "showBestOffers" => true,
