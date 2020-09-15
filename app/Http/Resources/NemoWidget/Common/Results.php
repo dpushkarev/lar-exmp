@@ -27,7 +27,7 @@ class Results extends JsonResource
             ]),
             $this->mergeWhen($results->isNotEmpty(), [
                 'flightGroups' => FlightGroups::collection($results->get('flightGroups', [])),
-                'groupsData' => $results->get('groupsData', []),
+                'groupsData' => $results->get('groupsData', ['prices' => [], 'segments' => []]),
                 'info' => $results->get('info', [])
             ]),
         ];
