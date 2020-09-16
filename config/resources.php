@@ -6,9 +6,9 @@ return [
             'fullName' => 'English',
             'shortName' => 'en'
         ],
-        'rs' => [
+        'sr' => [
             'fullName' => 'Српски',
-            'shortName' => 'rs'
+            'shortName' => 'sr'
         ],
     ]
 ];

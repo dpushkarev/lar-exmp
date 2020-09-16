@@ -1,4 +1,4 @@
-GET http://127.0.0.1:8081/api/guide/autocomplete/iata/belgra/dep/BEG?apilang=rs
+GET http://127.0.0.1:8081/api/guide/autocomplete/iata/belgra/dep/BEG?apilang=sr
 
 ###
 GET http://127.0.0.1:8081/api/guide/airlines/all
