@@ -70,14 +70,14 @@ Route::get('/guide/airports/nearest', function () {
               "countries":{
                  "RS":{
                     "code":"RS",
-                    "name":"Serbia",
+                    "name":"Srbija",
                     "nameEn":"Serbia"
                  }
               },
               "cities":{
                  "350":{
                     "IATA":"BEG",
-                    "name":"Belgrade",
+                    "name":"Beograd",
                     "nameEn":"Belgrade",
                     "countryCode":"RS",
                     "id":350
