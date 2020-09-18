@@ -23,6 +23,7 @@ class AirReservationRequestDto
     private $hostTokens = [];
     private $phoneNumber;
     private $email;
+    private $paymentOption;
 
     /**
      * AirReservationRequestDto constructor.
@@ -31,14 +32,16 @@ class AirReservationRequestDto
      * @param $airSolutionKey
      * @param $phoneNumber
      * @param $email
+     * @param $paymentOption
      */
-    public function __construct($passengers, $address, $airSolutionKey, $phoneNumber, $email)
+    public function __construct($passengers, $address, $airSolutionKey, $phoneNumber, $email, $paymentOption)
     {
         $this->passengers = $passengers;
         $this->address = $address;
         $this->airSolutionKey = $airSolutionKey;
         $this->phoneNumber = $phoneNumber;
         $this->email = $email;
+        $this->paymentOption = $paymentOption;
     }
 
     /**
@@ -140,5 +143,21 @@ class AirReservationRequestDto
         return $this->email;
     }
 
+    public function getPaymentOption()
+    {
+        return $this->paymentOption;
+    }
+
+    public function getRequest()
+    {
+        return [
+            'passengers' => $this->getPassengers(),
+            'address' => $this->getAddress(),
+            'airSolutionKey' => $this->getAirSolutionKey(),
+            'email' => $this->getEmail(),
+            'paymentOption' => $this->getPaymentOption(),
+            'phoneNumber' => $this->getPhoneNumber()
+        ];
+    }
 
 }

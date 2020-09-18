@@ -65,6 +65,7 @@ class AirReservationRequest extends FormRequest
                     'address.city' => 'required|string|max:50',
                     'address.postalCode' => 'required|integer',
                     'address.street' => 'required|string|max:50',
+                    'paymentOption' => 'required|in:card,cash',
                 ]);
 
                 if ($validatorInstance->fails()) {
@@ -120,7 +121,8 @@ class AirReservationRequest extends FormRequest
             $this->postRequest['address'],
             $this->postRequest['airSolutionKey'],
             $this->postRequest['phoneNumber'],
-            $this->postRequest['email']
+            $this->postRequest['email'],
+            $this->postRequest['paymentOption']
         );
     }
 

@@ -115,7 +115,8 @@ class CheckoutService
 
         Reservation::forceCreate([
             'transaction_id' => $response->getTransactionId(),
-            'flights_search_flight_info_id' => $dto->getOrder()->id
+            'flights_search_flight_info_id' => $dto->getOrder()->id,
+            'data' => $dto->getRequest()
         ]);
 
         return $this->adapter->AirReservationAdapt($response);
