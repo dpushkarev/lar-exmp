@@ -98,6 +98,9 @@ class Checkout extends Controller
         $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
             ->getLog(AirCreateReservationRsp::class, $flightInfo->reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
-        return new AirReservation($adapter->AirReservationAdapt(unserialize($log)));
+        $response = $adapter->AirReservationAdapt(unserialize($log));
+        $response->put('paymentOption', $flightInfo->reservation->data['paymentOption']);
+
+        return new AirReservation($response);
     }
 }

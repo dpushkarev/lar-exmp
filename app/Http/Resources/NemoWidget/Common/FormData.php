@@ -28,11 +28,7 @@ class FormData extends JsonResource
             "dateOptions" => [
                 "minOffset" => 2,
                 "maxOffset" => 365,
-                "aroundDatesValues" => [
-                    1,
-                    2,
-                    3
-                ]
+                "aroundDatesValues" => false
             ],
             "showCitySwapBtn" => true,
             "scheduleSearchEnable" => false,

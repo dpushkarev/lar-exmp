@@ -176,7 +176,17 @@ class FlightsBookingTestTest extends TestCase
         });
 
         $this->json('GET','/api/order/' . $flightInfo->id)
-            ->assertStatus(200);
+            ->assertStatus(200)
+            ->assertJsonPath('paymentOption', 'card')
+            ->assertJsonStructure([
+                'universalRecord' => [
+                    'formOfPayment' => [
+                        [
+                            'check', 'providerReservationInfoRef'
+                        ]
+                    ]
+                ],
+            ]);
 
     }
 

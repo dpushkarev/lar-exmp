@@ -278,9 +278,8 @@ class TravelPortService
     protected function getAirPricingModifiers()
     {
         return (new Air\AirPricingModifiers())
-            ->setInventoryRequestType(Air\typeInventoryRequest::DirectAccess)
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
-            ->setReturnFareAttributes(true)
+            ->setReturnFareAttributes(false)
             ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
     }
 

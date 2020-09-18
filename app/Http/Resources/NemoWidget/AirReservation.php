@@ -14,6 +14,7 @@ class AirReservation extends AbstractResource
     {
         return [
             'universalRecord' => $this->resource->get('universalRecord'),
+            'paymentOption' => $this->resource->get('paymentOption'),
             'responseTime' => $this->resource->get('responseTime'),
             $this->merge(new Guide($this->resource))
         ];
