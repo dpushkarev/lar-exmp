@@ -64,7 +64,7 @@ class FlightsSearchRequest extends FormRequest
                 }
 
                 $request['parameters']['searchType'] = [
-                    1 => 'OW',
+                    1 => 'CR',
                     2 => 'RT',
                 ][count($request['segments'])] ?? 'MC';
 

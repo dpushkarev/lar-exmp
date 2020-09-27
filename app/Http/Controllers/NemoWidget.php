@@ -99,11 +99,24 @@ class NemoWidget extends BaseController
         $FlightsSearchRequestModel = FlightsSearchRequestModel::find($id);
 
         if (null === $FlightsSearchRequestModel) {
-            return new ErrorSearchId(null);
+            return new ErrorSearchId(collect());
         }
         $flightsSearchResults = $service->flightsSearchResult($FlightsSearchRequestModel);
 
         return new FlightsSearchResults($flightsSearchResults);
+    }
+
+    public function flightsSearchResultExpired(int $id, NemoWidgetService $service)
+    {
+        $FlightsSearchRequestModel = FlightsSearchRequestModel::find($id);
+
+        if (null === $FlightsSearchRequestModel) {
+            return new ErrorSearchId(collect());
+        }
+
+        $flightsSearchResults = $service->flightsSearchResultExpired($FlightsSearchRequestModel);
+
+        return new ErrorSearchId($flightsSearchResults);
     }
 
     public function errorLog(Request $request)

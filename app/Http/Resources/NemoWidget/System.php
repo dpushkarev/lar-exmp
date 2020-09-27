@@ -32,6 +32,8 @@ class System extends JsonResource
                         "agencyCountry" => null,
                         "googleMapsApiKey" => null,
                         "googleMapsClientId" => null,
+                        "googleRecaptchaSiteKey" => '6LdAWfQUAAAAAIYESdG7Q2bbBIiFCaStKKqGF1-Y',
+                        "googleRecaptchaSecretKey" => '6LdAWfQUAAAAAFoKV2bQ3Uq8eMvAJMNVIay20eE-',
                         "showFullFlightsResults" => "false"
                     ]
                 ]

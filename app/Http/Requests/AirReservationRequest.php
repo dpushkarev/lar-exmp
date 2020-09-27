@@ -65,7 +65,7 @@ class AirReservationRequest extends FormRequest
                     'address.city' => 'required|string|max:50',
                     'address.postalCode' => 'required|integer',
                     'address.street' => 'required|string|max:50',
-                    'paymentOption' => 'required|in:card,cash',
+                    'paymentOption' => 'required|in:card,bank',
                 ]);
 
                 if ($validatorInstance->fails()) {

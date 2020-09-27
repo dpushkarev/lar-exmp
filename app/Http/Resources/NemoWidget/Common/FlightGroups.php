@@ -20,7 +20,7 @@ class FlightGroups extends JsonResource
                     'id' => $this->resource->id,
                     'nemo2id' => $this->resource->id,
                     'price' => $this->resource->price,
-                    'rating' => mt_rand(900000, 1000000) / 100000,
+                    'rating' => 9.8,
                     'service' => TravelPortService::APPLICATION,
                     'travelPolicies' => [],
                 ]

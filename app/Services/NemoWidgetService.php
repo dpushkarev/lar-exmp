@@ -98,6 +98,11 @@ class NemoWidgetService
         return $this->modelAdapter->flightsSearchRequestAdapt($fsrModel);
     }
 
+    public function flightsSearchResultExpired(FlightsSearchRequest $request)
+    {
+        return $this->modelAdapter->flightsSearchRequestAdapt($request);
+    }
+
     /**
      * @param FlightsSearchRequestModel $request
      * @return Collection

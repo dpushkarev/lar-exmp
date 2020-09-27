@@ -108,7 +108,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     const CACHE_AMOUNT = 795;
     const CACHE_CURRENCY = 'RSD';
 
-    const INTESA_COMMISSION = 9;
+    const INTESA_COMMISSION = 0;
     const PAYPAL_COMMISSION = 2.9;
     const PAYPAL_COMMISSION_FIX = 30;
 
@@ -370,10 +370,12 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $segmentInfo['freeBaggage'] = [];
                 $fareInfo = $fareInfoMap->get($fareInfoRef);
                 foreach ($airPricePointData['passengerFares'] as $passengerFare) {
+                    $value = $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null;
+
                     $freeBaggage = [
                         'passtype' => $passengerFare['type'],
-                        "value" => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null,
-                        'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : ($fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : null),
+                        "value" => $value,
+                        'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : ($fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : 'pc'),
                     ];
                     $segmentInfo['freeBaggage'][] = $freeBaggage;
 

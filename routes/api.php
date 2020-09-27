@@ -29,19 +29,16 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
     Route::post('/flights/search/request', 'NemoWidget@flightsSearchRequest')->name(NemoWidgetCache::FLIGHTS_SEARCH_POST_REQUEST);
     Route::get('/flights/search/request/{id}', function($id){
-        return new ErrorSearchId(null);
+        return new ErrorSearchId(collect());
     })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_REQUEST);
 
     Route::get('/flights/search/formData/{id}', function($id){
-        return new ErrorSearchId(null);
+        return new ErrorSearchId(collect());
     })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_FORM_DATA);
 
 
     Route::post('/flights/search/results/{id}', 'NemoWidget@flightsSearchResult')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_POST_RESULTS);
-    Route::get('/flights/search/results/{id}', function(){
-        return new ErrorSearchId(null);
-    })->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS);
-
+    Route::get('/flights/search/results/{id}', 'NemoWidget@flightsSearchResultExpired')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_SEARCH_GET_RESULTS);
 
     Route::get('/guide/airlines/all', 'NemoWidget@airlinesAll')->name(NemoWidgetCache::AIRLINES_ALL);
 
