@@ -12,6 +12,7 @@ use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use \FilippoToso\Travelport\TravelportLogger as BaseTravelPortLogger;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationReq;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
+use Illuminate\Support\Facades\File;
 
 class TravelPortLogger implements BaseTravelPortLogger
 {
@@ -40,13 +41,20 @@ class TravelPortLogger implements BaseTravelPortLogger
      */
     public function log($class, $service, $request, $content)
     {
-        $fileName = static::getPath(static::XML_TYPE) . '/' . static::getFileLogName($class, $this->transactionId, static::XML_TYPE);
+        $fileName = static::getPath(static::XML_TYPE, $this->transactionId, $class) . '/' . static::getFileLogName($class, $this->transactionId, static::XML_TYPE);
         file_put_contents($fileName, $content);
     }
 
-    protected static function getPath($type)
+    protected static function getPath($type, $transactionId, $class)
     {
-        return storage_path() . static::DIR . '/' . $type;
+        list($dir1, $dir2) = [substr($transactionId, 0, 2), substr($transactionId, 2, 2)];
+        $alias = static::ALIASES[$class] ?? getClassName($class);
+        $path = sprintf('%s/%s/%s/%s/%s', storage_path() . static::DIR, $type, $alias, $dir1, $dir2);
+        if (!File::exists($path)) {
+            File::makeDirectory($path, 0755, true);
+        }
+
+        return $path;
     }
 
     protected static function getFileLogName($class, $transactionId, $type)
@@ -68,9 +76,9 @@ class TravelPortLogger implements BaseTravelPortLogger
      */
     public function getLog($class, $transactionId, $type)
     {
-        $fileName = static::getPath($type) . '/' . static::getFileLogName($class, $transactionId, $type);
+        $fileName = static::getPath($type, $transactionId, $class) . '/' . static::getFileLogName($class, $transactionId, $type);
 
-        if(!file_exists($fileName)) {
+        if (!file_exists($fileName)) {
             throw TravelPortLoggerException::getNonexistentFile();
         }
 
@@ -79,7 +87,7 @@ class TravelPortLogger implements BaseTravelPortLogger
 
     public function saveSerializedObject($class, $content)
     {
-        $fileName = static::getPath(static::OBJECT_TYPE) . '/' . static::getFileLogName($class, $this->transactionId, static::OBJECT_TYPE);
+        $fileName = static::getPath(static::OBJECT_TYPE, $this->transactionId, $class) . '/' . static::getFileLogName($class, $this->transactionId, static::OBJECT_TYPE);
         file_put_contents($fileName, $content);
     }
 

@@ -97,7 +97,7 @@ class AirReservationRequest extends FormRequest
 
                 try {
                     $phoneUnit = PhoneNumberUtil::getInstance();
-                    $phone = $phoneUnit->parse("+" . $request['phoneNumber'], PhoneNumberFormat::INTERNATIONAL);
+                    $phone = $phoneUnit->parse($request['phoneNumber'], PhoneNumberFormat::INTERNATIONAL);
                     list($phonePieces['country'], $phonePieces['area'], $phonePieces['number']) = explode(' ', $phoneUnit->format($phone, PhoneNumberFormat::INTERNATIONAL));
                     $request['phoneNumber'] = $phonePieces;
                 } catch (NumberParseException $exception) {

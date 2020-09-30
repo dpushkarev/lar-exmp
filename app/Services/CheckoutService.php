@@ -39,6 +39,7 @@ class CheckoutService
     {
         $segmentKeys = collect();
         $log = $this->logger->getLog(AirPriceRsp::class, $dto->getOrder()->transaction_id, \App\Logging\TravelPortLogger::OBJECT_TYPE);
+
         /** @var AirPriceRsp $airPriceRsp */
         $airPriceRsp = unserialize($log);
         $passengerCount = 0;
