@@ -1058,6 +1058,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $airLines = collect();
         $aircrafts = collect();
         $countOfPassengers = 0;
+        $passengersCount = collect();
 
         /** @var BookingTraveler $bookingTraveler */
         foreach ($response->getUniversalRecord()->getBookingTraveler() as $bookingTraveler) {
@@ -1529,6 +1530,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             'accompaniedPassenger' => $passengerTpe->getAccompaniedPassenger(),
                             'residencyType' => $passengerTpe->getResidencyType(),
                         ];
+
+                        $code = (string) $passengerTpe->getCode();
+                        $passengersCount->put($code, $passengersCount->get($code, 0) + 1);
                     }
 
                     $bookingTravelerRefData = [];
@@ -1761,6 +1765,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'aircrafts' => $aircrafts,
             'cities' => $cities,
             'countries' => $countries,
+            'passengersCount' => $passengersCount,
         ]);
     }
 

@@ -1,14 +1,14 @@
-GET http://127.0.0.1:8081/api/checkout/?di=3
+GET http://127.0.0.1:8081/api/checkout/4
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?
- request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Miss","first":"Devojcica","last":"Dete","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Master","first":"Drugi","last":"Decak","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"Baby","first":"Zgebac","last":"Bebac","gender":"f","dob":"2020-06-11","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/reservation/4?
+ request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"dZ9FNT3R2BKA6YI4BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381 637712345", "paymentOption": "card"}
 # request={"passengers":[{"travelerType":"ADT", "first":"Pushakrev","last":"Pushkarev","prefix":"Mr"},{"travelerType":"ADT", "first":"Pushakreva","last":"Pushkareva","prefix":"Mrs"}, {"travelerType":"CLD", "first":"Pushakrevchik","last":"Pushakrevchik","prefix":"Mr", "birth":"2015-02-04"}, {"travelerType":"INF", "first":"Ivanov","last":"Ivanov","prefix":"Mr", "dob":"2015-02-04"}],"address":{"street":"Pobeda striie","postalCode":32,"city":"Grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"psuk@bk.ru","phoneNumber":"381637796918"}
 
 ###
 
-GET http://127.0.0.1:8081/api/order/1
+GET http://127.0.0.1:8081/api/order/4
 
 ###
 
