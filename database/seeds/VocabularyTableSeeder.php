@@ -14,7 +14,7 @@ class VocabularyTableSeeder extends Seeder
     {
         $cities = file(storage_path('seeder_data/RCTY.TXT'), FILE_IGNORE_NEW_LINES);
         $airports = file(storage_path('seeder_data/RAPT.TXT'), FILE_IGNORE_NEW_LINES);
-        $citiesTranslated = file(storage_path('seeder_data/rs.csv'), FILE_IGNORE_NEW_LINES);
+        $citiesTranslated = file(storage_path('seeder_data/sr.csv'), FILE_IGNORE_NEW_LINES);
 
         $cityIds = DB::table('cities')->select(['id', 'code'])->get();
         $cityIds = $cityIds->pluck('id', 'code');
@@ -85,7 +85,7 @@ class VocabularyTableSeeder extends Seeder
                 'name' => $this->cleanString($ar[1]),
                 'nameable_id' => $cityId,
                 'nameable_type' => \App\Models\City::class,
-                'lang' => 'rs'
+                'lang' => 'sr'
             ]);
 
         }
