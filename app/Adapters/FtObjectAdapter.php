@@ -355,7 +355,18 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
             $airPricePointData['agencyCharge'] = [
                 'amount' => $agencyChargeAll,
-                'currency' => static::AGENCY_CHARGE_CURRENCY
+                'currency' => static::AGENCY_CHARGE_CURRENCY,
+                'regular' => [
+                    static::PASSENGER_TYPE_ADULT => 495,
+                    static::PASSENGER_TYPE_CHILD => 495,
+                    static::PASSENGER_TYPE_INFANT => 495,
+                ],
+                'brand' => [
+                    static::PASSENGER_TYPE_ADULT => 955,
+                    static::PASSENGER_TYPE_CHILD => 955,
+                    static::PASSENGER_TYPE_INFANT => 955,
+                ]
+
             ];
 
             $airPricePointData['totalPrice'] = [
@@ -1709,7 +1720,17 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'bookingTraveler' => $bookingTravelerCollection,
                 'agencyCharge' => [
                     'amount' => $agencyChargeAll,
-                    'currency' => static::AGENCY_CHARGE_CURRENCY
+                    'currency' => static::AGENCY_CHARGE_CURRENCY,
+                    'regular' => [
+                        static::PASSENGER_TYPE_ADULT => 495,
+                        static::PASSENGER_TYPE_CHILD => 495,
+                        static::PASSENGER_TYPE_INFANT => 495,
+                    ],
+                    'brand' => [
+                        static::PASSENGER_TYPE_ADULT => 955,
+                        static::PASSENGER_TYPE_CHILD => 955,
+                        static::PASSENGER_TYPE_INFANT => 955,
+                    ]
                 ],
                 'paymentOptionCharge' => [
                     'cache' => [
