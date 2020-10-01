@@ -64,9 +64,9 @@ class FlightsSearchRequest extends FormRequest
                 }
 
                 $request['parameters']['searchType'] = [
-                    1 => 'CR',
+                    1 => 'OW',
                     2 => 'RT',
-                ][count($request['segments'])] ?? 'MC';
+                ][count($request['segments'])] ?? 'CR';
 
                 $request['parameters']['flightNumbers'] = [];
                 $request['parameters']['priceRefundType'] = null;
