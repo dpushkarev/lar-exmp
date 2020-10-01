@@ -220,7 +220,7 @@ class NemoWidgetService
         ]);
 
         $aiePriceRsp = $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
-        $aiePriceRsp->put('createOrderLink', sprintf('/checkout?id=%d', $order->id));
+        $aiePriceRsp->put('createOrderLink', sprintf('/checkout/%d', $order->id));
 
         return $aiePriceRsp;
     }
