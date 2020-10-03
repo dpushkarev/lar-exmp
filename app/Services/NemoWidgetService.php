@@ -187,7 +187,7 @@ class NemoWidgetService
                 foreach ($option->getBookingInfo() as $bookingIndex => $bookingInfo) {
                     /** @var typeBaseAirSegment $airSegmentNode */
                     if ($airSegmentNode = $airSegments->get($bookingInfo->getSegmentRef())) {
-                        $bookings->add($bookingInfo);
+                        $bookings->put($bookingInfo->getSegmentRef(), $bookingInfo);
 
                         if (!is_null($option->getConnection())) {
                             /** @var Connection $connection */
