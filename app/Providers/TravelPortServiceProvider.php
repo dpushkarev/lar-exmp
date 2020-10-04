@@ -41,11 +41,11 @@ class TravelPortServiceProvider extends ServiceProvider
 //
 //        App::bind('TP', function () {
 //            return App::makeWith(TravelPortService::class, ['travelPort' => new Travelport(
-//                'Universal API/uAPI2405065644-c384cfd6',
-//                'Xk9}g%P67c',
-//                'P3589307',
+//                config('services.travel_port.user_id'),
+//                config('services.travel_port.password'),
+//                config('services.travel_port.target_branch'),
 //                Endpoints::REGION_EMEA,
-//                true,
+//                config('app.env') === 'production' ? true : false,
 //                resolve(\FilippoToso\Travelport\TravelportLogger::class)
 //            )]);
 //        });

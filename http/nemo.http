@@ -10,14 +10,14 @@ GET http://127.0.0.1:8081/api/guide/airports/ADE
 GET http://127.0.0.1:8081/api/flights/search/request/48
 
 ###
-POST http://127.0.0.1:8081/api/flights/search/results/15
+POST http://127.0.0.1:8081/api/flights/search/results/1
 
 ###
 GET http://127.0.0.1:8081/api/flights/search/results/2
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
- request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SFO","isCity":true},"departureDate":"2020-10-24T00:00:00"},{"departure":{"IATA":"SFO","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-10-31T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+ request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
 ###
 
@@ -35,11 +35,9 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
 GET http://127.0.0.1:8081/api/flights/search/history
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/550
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/3
 
 ###
 POST http://127.0.0.1:8081/api/flights/utils/rules/4
 
-###
-POST https://data.reservio.flights/api/flights/search/results/752?user_language_get_change=sr
 ###

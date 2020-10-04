@@ -1282,29 +1282,31 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $carrier = $airSegment->getCarrier();
                 $aircraftType = $airSegment->getEquipment();
 
-                /** @var \FilippoToso\Travelport\UniversalRecord\FlightDetails $flightDetails */
-                foreach ($airSegment->getFlightDetails() as $flightDetails) {
-                    $flightDetailsData[] = [
-                        'key' => $flightDetails->getKey(),
-                        'connection' => $flightDetails->getConnection(),
-                        'meals' => $flightDetails->getMeals(),
-                        'inFlightServices' => $flightDetails->getInFlightServices(),
-                        'equipment' => $flightDetails->getEquipment(),
-                        'onTimePerformance' => $flightDetails->getOnTimePerformance(),
-                        'originTerminal' => $flightDetails->getOriginTerminal(),
-                        'destinationTerminal' => $flightDetails->getDestinationTerminal(),
-                        'groundTime' => $flightDetails->getGroundTime(),
-                        'automatedCheckin' => $flightDetails->getAutomatedCheckin(),
-                        'origin' => $flightDetails->getOrigin(),
-                        'destination' => $flightDetails->getDestination(),
-                        'departureTime' => $flightDetails->getDepartureTime(),
-                        'arrivalTime' => $flightDetails->getArrivalTime(),
-                        'flightTime' => $flightDetails->getFlightTime(),
-                        'travelTime' => $flightDetails->getTravelTime(),
-                        'distance' => $flightDetails->getDistance(),
-                        'elStat' => $flightDetails->getElStat(),
-                        'keyOverride' => $flightDetails->getKeyOverride(),
-                    ];
+                if (!is_null($airSegment->getFlightDetails())) {
+                    /** @var \FilippoToso\Travelport\UniversalRecord\FlightDetails $flightDetails */
+                    foreach ($airSegment->getFlightDetails() as $flightDetails) {
+                        $flightDetailsData[] = [
+                            'key' => $flightDetails->getKey(),
+                            'connection' => $flightDetails->getConnection(),
+                            'meals' => $flightDetails->getMeals(),
+                            'inFlightServices' => $flightDetails->getInFlightServices(),
+                            'equipment' => $flightDetails->getEquipment(),
+                            'onTimePerformance' => $flightDetails->getOnTimePerformance(),
+                            'originTerminal' => $flightDetails->getOriginTerminal(),
+                            'destinationTerminal' => $flightDetails->getDestinationTerminal(),
+                            'groundTime' => $flightDetails->getGroundTime(),
+                            'automatedCheckin' => $flightDetails->getAutomatedCheckin(),
+                            'origin' => $flightDetails->getOrigin(),
+                            'destination' => $flightDetails->getDestination(),
+                            'departureTime' => $flightDetails->getDepartureTime(),
+                            'arrivalTime' => $flightDetails->getArrivalTime(),
+                            'flightTime' => $flightDetails->getFlightTime(),
+                            'travelTime' => $flightDetails->getTravelTime(),
+                            'distance' => $flightDetails->getDistance(),
+                            'elStat' => $flightDetails->getElStat(),
+                            'keyOverride' => $flightDetails->getKeyOverride(),
+                        ];
+                    }
                 }
 
                 if (!$airports->has($origin)) {
@@ -1483,30 +1485,32 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
 
                     $taxInfoData = [];
-                    /** @var \FilippoToso\Travelport\UniversalRecord\typeTaxInfo $taxInfo */
-                    foreach ($airPricingInfo->getTaxInfo() as $taxInfo) {
-                        $taxInfoData[] = [
-                            'taxDetail' => $taxInfo->getTaxDetail(),
-                            'includedInBase' => $taxInfo->getIncludedInBase(),
-                            'key' => $taxInfo->getKey(),
-                            'category' => $taxInfo->getCategory(),
-                            'carrierDefinedCategory' => $taxInfo->getCarrierDefinedCategory(),
-                            'segmentRef' => $taxInfo->getSegmentRef(),
-                            'flightDetailsRef' => $taxInfo->getFlightDetailsRef(),
-                            'couponRef' => $taxInfo->getCouponRef(),
-                            'taxExempted' => $taxInfo->getTaxExempted(),
-                            'providerCode' => $taxInfo->getProviderCode(),
-                            'supplierCode' => $taxInfo->getSupplierCode(),
-                            'text' => $taxInfo->getText(),
-                            'amount' => [
-                                'value' => (float)substr($taxInfo->getAmount(), 3),
-                                'currency' => substr($taxInfo->getAmount(), 0, 3),
-                            ],
-                            'originAirport' => $taxInfo->getOriginAirport(),
-                            'destinationAirport' => $taxInfo->getDestinationAirport(),
-                            'countryCode' => $taxInfo->getCountryCode(),
-                            'fareInfoRef' => $taxInfo->getFareInfoRef(),
-                        ];
+                    if (!is_null($airPricingInfo->getTaxInfo())) {
+                        /** @var \FilippoToso\Travelport\UniversalRecord\typeTaxInfo $taxInfo */
+                        foreach ($airPricingInfo->getTaxInfo() as $taxInfo) {
+                            $taxInfoData[] = [
+                                'taxDetail' => $taxInfo->getTaxDetail(),
+                                'includedInBase' => $taxInfo->getIncludedInBase(),
+                                'key' => $taxInfo->getKey(),
+                                'category' => $taxInfo->getCategory(),
+                                'carrierDefinedCategory' => $taxInfo->getCarrierDefinedCategory(),
+                                'segmentRef' => $taxInfo->getSegmentRef(),
+                                'flightDetailsRef' => $taxInfo->getFlightDetailsRef(),
+                                'couponRef' => $taxInfo->getCouponRef(),
+                                'taxExempted' => $taxInfo->getTaxExempted(),
+                                'providerCode' => $taxInfo->getProviderCode(),
+                                'supplierCode' => $taxInfo->getSupplierCode(),
+                                'text' => $taxInfo->getText(),
+                                'amount' => [
+                                    'value' => (float)substr($taxInfo->getAmount(), 3),
+                                    'currency' => substr($taxInfo->getAmount(), 0, 3),
+                                ],
+                                'originAirport' => $taxInfo->getOriginAirport(),
+                                'destinationAirport' => $taxInfo->getDestinationAirport(),
+                                'countryCode' => $taxInfo->getCountryCode(),
+                                'fareInfoRef' => $taxInfo->getFareInfoRef(),
+                            ];
+                        }
                     }
 
                     $passengerTypeData = [];
@@ -1650,8 +1654,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 }
             }
 
-            $airReservationData['airPricingInfo'] = $airPricingInfoData;
-
             $ticketingModifiersData = [];
             if (!is_null($airReservation->getTicketingModifiers())) {
                 /** @var TicketingModifiers $ticketingModifiers */
@@ -1667,6 +1669,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 }
             }
 
+            $airReservationData['airPricingInfo'] = $airPricingInfoData;
             $airReservationData['ticketingModifiers'] = $ticketingModifiersData;
             $airReservationData['locatorCode'] = $airReservation->getLocatorCode();
             $airReservationData['createDate'] = $airReservation->getCreateDate();
