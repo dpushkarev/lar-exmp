@@ -1,300 +1,300 @@
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T115545.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-10-01T115537.200.json
+<> 2020-10-04T101139.200.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T115522.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-10-01T115327.200.json
+<> 2020-10-04T100926.500.json
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T114923.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-10-01T114819.200.json
+<> 2020-10-04T095313.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airlines/all
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T114721.200.html
-
-###
-
-GET http://127.0.0.1:8081/api/guide/airlines/all
-
-<> 2020-10-01T114647.200.json
+<> 2020-10-04T094415.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/guide/airports/ADE
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T114628.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-11-01T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-10-01T114613.200.json
+<> 2020-10-04T094310.500.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-11-01T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T114557.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-10-01T114554.200.json
+<> 2020-10-04T094240.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/checkout/7
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T114440.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/checkout/7
-
-<> 2020-10-01T114428.200.json
+<> 2020-10-04T094025.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/checkout/7
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T114412.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/checkout/7
-
-<> 2020-10-01T101022.200.json
+<> 2020-10-04T093406.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/487
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T100906.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/12
-
-<> 2020-10-01T100844.200.json
+<> 2020-10-04T093048.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/12
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T100810.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"DME","isCity":false},"arrival":{"IATA":"FCO","isCity":false},"departureDate":"2020-11-01T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-10-01T100757.200.json
+<> 2020-10-04T093006.500.json
 
 ###
 
-GET http://127.0.0.1:8081/api/checkout/6
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T085702.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/467
-
-<> 2020-10-01T085647.200.json
+<> 2020-10-04T092954.422.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/11
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-10-01T085607.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-11-24T00:00:00"}],"passengers":[{"type":"ADT","count":2}, {"type":"CLD","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-10-01T085549.200.json
+<> 2020-10-04T092849.500.json
 
 ###
 
-GET http://127.0.0.1:8081/api/order/5
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/3
 
-<> 2020-09-30T104238.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
-
-<> 2020-09-30T104223.200.json
+<> 2020-10-04T092634.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/flights/search/results/1
 
-<> 2020-09-30T104145.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T103933.200.html
+<> 2020-10-04T092543.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-09-30T103731.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T103726.500.json
+<> 2020-10-04T092522.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s\\ BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"pUQulTtYlDKA//nREBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T095316.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s\\ BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T095314.200.html
+<> 2020-10-04T092303.500.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"pUQulTtYlDKA//nREBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T095158.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T095135.200.html
+<> 2020-10-04T092241.422.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"pUQulTtYlDKA//nREBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T095059.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T095006.200.html
+<> 2020-10-04T092053.500.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s\ BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+GET http://127.0.0.1:8081/api/checkout/1
 
-<> 2020-09-30T094915.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T094819.200.html
+<> 2020-10-04T091955.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/158
 
-<> 2020-09-30T094752.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T094634.200.html
+<> 2020-10-04T091945.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/flights/search/results/1
 
-<> 2020-09-30T094622.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T094549.200.html
+<> 2020-10-04T091916.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
-<> 2020-09-30T094432.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKA/1s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T094358.422.json
+<> 2020-10-04T091855.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKA/1s BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T094318.422.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"dZ9FNT3R2BKA6YI4BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":" 381 637712345", "paymentOption": "card"}
-
-<> 2020-09-30T094231.422.json
+<> 2020-10-04T090813.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/checkout/5
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T094215.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/465
-
-<> 2020-09-30T094048.200.json
+<> 2020-10-04T090804.422.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/10
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T094021.200.json
+<> 2020-10-04T090723.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/10
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
-<> 2020-09-30T094013.502.html
+<> 2020-10-04T090342.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T090204.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T090153.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T090101.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085820.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085806.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085713.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085654.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085650.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"srZulTwYlDKAdCEPDBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085135.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"ElABhT7Q2BKAMHFRBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T085051.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"ElABhT7Q2BKAMHFRBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":" 381 631234567"}
+
+<> 2020-10-04T084849.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"ElABhT7Q2BKAMHFRBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":" 381 631234567"}
+
+<> 2020-10-04T084746.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"ElABhT7Q2BKAMHFRBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":" 381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T084731.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"ElABhT7Q2BKAMHFRBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":" 381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-04T084509.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"INF","prefix":"Mr","first":"John","last":"Bocsh","gender":"m","nationality":"RS","issuingCountry":"RS","dob":"2015-02-04"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"srZulTwYlDKA17DPDBAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
+
+<> 2020-10-04T084150.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"INF","prefix":"Mr","first":"John","last":"Bocsh","gender":"m","nationality":"RS","issuingCountry":"RS","dob":"2015-02-04"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
+
+<> 2020-10-04T084028.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"INF","prefix":"Mr","first":"John","last":"Bocsh","gender":"m","nationality":"RS","issuingCountry":"RS","dob":"2015-02-04"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
+
+<> 2020-10-04T084015.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"INF","prefix":"Mr","first":"John","last":"Bocsh","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
+
+<> 2020-10-04T083925.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/5?request={"passengers":[{"travelerType":"ADT","prefix":"Mr","first":"Ime","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"Ms","first":"Zensko","last":"Drugo","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"Mr","first":"Osoba","last":"Treca","gender":"m","nationality":"RS","issuingCountry":"RS"}, ,{"travelerType":"INF","prefix":"Mr","first":"John","last":"Bocsh","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Moja ulica 3","postalCode":"11000","city":"Moj grad","country":"RS"},"airSolutionKey":"YcoFNT4R2BKAG3s+BAAAAA==","email":"stbeli@yahoo.com","phoneNumber":"+381637712345", "paymentOption": "card"}
+
+<> 2020-10-04T083908.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/1
+
+<> 2020-10-04T083741.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/158
+
+<> 2020-10-04T083719.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/1
+
+<> 2020-10-04T083328.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-10-04T083303.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request{"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}=
+
+<> 2020-10-04T083230.422.json
 
 ###
 

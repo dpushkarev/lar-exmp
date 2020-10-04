@@ -48,6 +48,6 @@ class FlushTables extends Command
         FlightsSearchRequest::query()->truncate();
         Error::query()->truncate();
 
-        $this->comment('Tables were cleaned');
+        $this->comment('Tables have been cleared');
     }
 }
