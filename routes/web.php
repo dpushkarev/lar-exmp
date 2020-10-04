@@ -17,6 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{id}', 'NemoWidget@order')->where('id', '\d+')->name('order');
-
 
