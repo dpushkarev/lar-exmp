@@ -13,6 +13,7 @@ use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
 use FilippoToso\Travelport\Air\AirPricingSolution;
 use FilippoToso\Travelport\Air\AirSegmentRef;
+use FilippoToso\Travelport\Air\Connection;
 use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
@@ -102,6 +103,10 @@ class CheckoutService
         /** @var typeBaseAirSegment $airSegment */
         foreach ($airPriceRsp->getAirItinerary()->getAirSegment() as $airSegment) {
             if ($segmentKeys->contains($airSegment->getKey())) {
+                if (!is_null($airSegment->getConnection())) {
+                    $airSegment->setConnection(new Connection());
+                }
+
                 $dto->setSegment($airSegment);
             }
         }
