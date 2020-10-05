@@ -1,3 +1,15 @@
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segmentss":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-10-04T114720.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-10-04T114200.500.json
+
+###
+
 POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
 <> 2020-10-04T101139.200.json
@@ -283,18 +295,6 @@ GET http://127.0.0.1:8081/api/flights/search/flightInfo/158
 POST http://127.0.0.1:8081/api/flights/search/results/1
 
 <> 2020-10-04T083328.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-10-04T083303.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request{"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}=
-
-<> 2020-10-04T083230.422.json
 
 ###
 

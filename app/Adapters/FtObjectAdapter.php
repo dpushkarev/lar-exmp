@@ -380,21 +380,24 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $fareInfoRef = $segmentInfo['freeBaggage'];
                 $segmentInfo['freeBaggage'] = [];
                 $fareInfo = $fareInfoMap->get($fareInfoRef);
-                foreach ($airPricePointData['passengerFares'] as $passengerFare) {
-                    $value = $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null;
 
-                    $freeBaggage = [
-                        'passtype' => $passengerFare['type'],
-                        "value" => $value,
-                        'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : ($fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : 'pc'),
-                    ];
-                    $segmentInfo['freeBaggage'][] = $freeBaggage;
+                if (!is_null($fareInfo->getBaggageAllowance())) {
+                    foreach ($airPricePointData['passengerFares'] as $passengerFare) {
+                        $value = $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null;
 
-                    if ($passengerFare['type'] === static::PASSENGER_TYPE_ADULT) {
-                        $segmentInfo["minBaggage"] = [
-                            'value' => $freeBaggage['value'],
-                            'measurement' => $freeBaggage['measurement']
+                        $freeBaggage = [
+                            'passtype' => $passengerFare['type'],
+                            "value" => $value,
+                            'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : ($fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : 'pc'),
                         ];
+                        $segmentInfo['freeBaggage'][] = $freeBaggage;
+
+                        if ($passengerFare['type'] === static::PASSENGER_TYPE_ADULT) {
+                            $segmentInfo["minBaggage"] = [
+                                'value' => $freeBaggage['value'],
+                                'measurement' => $freeBaggage['measurement']
+                            ];
+                        }
                     }
                 }
             }
@@ -1244,15 +1247,17 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         /** @var \FilippoToso\Travelport\UniversalRecord\AirReservation $airReservation */
         foreach ($response->getUniversalRecord()->getAirReservation() as $airReservation) {
             $supplierLocatorData = [];
-            /** @var SupplierLocator $supplierLocator */
-            foreach ($airReservation->getSupplierLocator() as $supplierLocator) {
-                $supplierLocatorData[] = [
-                    'segmentRef' => $supplierLocator->getSegmentRef(),
-                    'supplierCode' => $supplierLocator->getSupplierCode(),
-                    'supplierLocatorCode' => $supplierLocator->getSupplierLocatorCode(),
-                    'providerReservationInfoRef' => $supplierLocator->getProviderReservationInfoRef(),
-                    'createDateTime' => $supplierLocator->getCreateDateTime(),
-                ];
+            if (!is_null($airReservation->getSupplierLocator())) {
+                /** @var SupplierLocator $supplierLocator */
+                foreach ($airReservation->getSupplierLocator() as $supplierLocator) {
+                    $supplierLocatorData[] = [
+                        'segmentRef' => $supplierLocator->getSegmentRef(),
+                        'supplierCode' => $supplierLocator->getSupplierCode(),
+                        'supplierLocatorCode' => $supplierLocator->getSupplierLocatorCode(),
+                        'providerReservationInfoRef' => $supplierLocator->getProviderReservationInfoRef(),
+                        'createDateTime' => $supplierLocator->getCreateDateTime(),
+                    ];
+                }
             }
 
             $airReservationData['supplierLocator'] = $supplierLocatorData;
