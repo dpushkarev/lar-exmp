@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Reservation
  * @package App\Models
+ * @property $data
  */
 class Reservation extends Model
 {
@@ -19,5 +20,10 @@ class Reservation extends Model
     public function flightInfo()
     {
         return $this->belongsTo(FlightsSearchFlightInfo::class, 'flights_search_flight_info_id', 'id');
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        return 123.50;
     }
 }

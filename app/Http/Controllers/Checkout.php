@@ -86,6 +86,12 @@ class Checkout extends Controller
         }
     }
 
+    /**
+     * @param FtObjectAdapter $adapter
+     * @param $orderId
+     * @return AirReservation
+     * @throws ApiException
+     */
     public function order(FtObjectAdapter $adapter, $orderId)
     {
         /** @var FlightsSearchFlightInfo $order */
@@ -95,12 +101,16 @@ class Checkout extends Controller
             throw ApiException::getInstanceInvalidId($orderId);
         }
 
-        $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
-            ->getLog(AirCreateReservationRsp::class, $flightInfo->reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
+        try {
+            $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
+                ->getLog(AirCreateReservationRsp::class, $flightInfo->reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
-        $response = $adapter->AirReservationAdapt(unserialize($log));
-        $response->put('paymentOption', $flightInfo->reservation->data['paymentOption']);
+            $response = $adapter->AirReservationAdapt(unserialize($log));
+            $response->put('paymentOption', $flightInfo->reservation->data['paymentOption']);
 
-        return new AirReservation($response);
+            return new AirReservation($response);
+        } catch (TravelPortLoggerException $exception) {
+            throw ApiException::getInstance($exception->getMessage());
+        }
     }
 }

@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TravelPortServiceProvider::class,
+        App\Providers\NestpayServiceProvider::class,
+
 
     ],
 
@@ -227,7 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'NP' => \App\Facades\NP::class,
     ],
 
 ];

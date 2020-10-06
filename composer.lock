@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "008f087dd15acec470013982bbc0912c",
+    "content-hash": "9c8791895d023665d48a67a94e82351a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -210,6 +210,67 @@
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
             "time": "2020-08-25T05:50:16+00:00"
+        },
+        {
+            "name": "cubes-doo/nestpay",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cubes-doo/nestpay.git",
+                "reference": "80bdd6b8bfb5b18570a1650f40382b7228630252"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cubes-doo/nestpay/zipball/80bdd6b8bfb5b18570a1650f40382b7228630252",
+                "reference": "80bdd6b8bfb5b18570a1650f40382b7228630252",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.6"
+            },
+            "suggest": {
+                "illuminate/support": "Required to integrate with Laravel framework (^5.4)."
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cubes\\Nestpay\\Laravel\\NestpayServiceProvider"
+                    ],
+                    "aliases": {
+                        "Nestpay": "Cubes\\Nestpay\\Laravel\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cubes\\Nestpay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandar Dimic",
+                    "email": "aleksandar.dimic@cubes.rs"
+                },
+                {
+                    "name": "Aleksa Cvijic",
+                    "email": "aleksa.cvijic@cubes.rs"
+                }
+            ],
+            "description": "Nestpay e-commerce integration",
+            "homepage": "https://github.com/cubes-doo/nestpay",
+            "keywords": [
+                "composer",
+                "laravel",
+                "nestpay",
+                "php"
+            ],
+            "time": "2020-05-04T12:08:33+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
