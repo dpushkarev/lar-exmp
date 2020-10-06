@@ -17,6 +17,7 @@ class AirReservation extends AbstractResource
             'paymentOption' => $this->resource->get('paymentOption'),
             'responseTime' => $this->resource->get('responseTime'),
             'passengersCount' => $this->resource->get('passengersCount'),
+            'airSolutionChangeInfo' => $this->resource->get('airSolutionChangeInfo'),
             $this->merge(new Guide($this->resource))
         ];
     }

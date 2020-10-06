@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Adapters\FtObjectAdapter;
 use App\Exceptions\ApiException;
+use App\Exceptions\NemoWidgetServiceException;
 use App\Exceptions\TravelPortLoggerException;
 use App\Http\Requests\AirReservationRequest;
 use App\Http\Resources\NemoWidget\AirReservation;
@@ -12,7 +13,9 @@ use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
 use App\Services\CheckoutService;
 use Carbon\Carbon;
+use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
+use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
 
 class Checkout extends Controller
@@ -23,11 +26,12 @@ class Checkout extends Controller
      * @param FtObjectAdapter $adapter
      * @return FlightsSearchResults
      * @throws ApiException
+     * @throws NemoWidgetServiceException
      */
     public function getData($flightInfoId, FtObjectAdapter $adapter)
     {
         /** @var FlightsSearchFlightInfo $flightInfo */
-        $flightInfo = FlightsSearchFlightInfo::find($flightInfoId);
+        $flightInfo = FlightsSearchFlightInfo::whereId($flightInfoId)->with('result.request')->first();
 
         if (is_null($flightInfo)) {
             throw ApiException::getInstanceInvalidId($flightInfoId);
@@ -42,10 +46,21 @@ class Checkout extends Controller
         }
 
         try {
-            $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
+            $logLfs = resolve(\FilippoToso\Travelport\TravelportLogger::class)
+                ->getLog(LowFareSearchRsp::class, $flightInfo->result->request->transaction_id, TravelPortLogger::OBJECT_TYPE);
+
+            /** @var  $lowFareSearchRsp  LowFareSearchRsp */
+            $lowFareSearchRsp = unserialize($logLfs);
+            $airPriceNum = (int)filter_var($flightInfo->result->price, FILTER_SANITIZE_NUMBER_INT) - 1;
+
+            /** @var AirPricePoint $airPricePoint */
+            $airPricePoint = $lowFareSearchRsp->getAirPricePointList()->getAirPricePoint()[$airPriceNum];
+            $oldTotalPrice = $airPricePoint->getTotalPrice();
+
+            $logAp = resolve(\FilippoToso\Travelport\TravelportLogger::class)
                 ->getLog(AirPriceRsp::class, $flightInfo->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
-            $airPriceResult = $adapter->AirPriceAdaptCheckout(unserialize($log));
+            $airPriceResult = $adapter->AirPriceAdaptCheckout(unserialize($logAp), $oldTotalPrice);
             $airPriceResult->put('request', $flightInfo->result->request);
 
             return new FlightsSearchResults($airPriceResult);

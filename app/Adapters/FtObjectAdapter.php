@@ -51,6 +51,7 @@ use FilippoToso\Travelport\Air\typeTextElement;
 use FilippoToso\Travelport\Air\URLInfo;
 use FilippoToso\Travelport\UniversalRecord\AgentAction;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
+use FilippoToso\Travelport\UniversalRecord\AirSolutionChangedInfo;
 use FilippoToso\Travelport\UniversalRecord\BookingTravelerRef;
 use FilippoToso\Travelport\UniversalRecord\Email;
 use FilippoToso\Travelport\UniversalRecord\Endorsement;
@@ -294,7 +295,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             if (!isset($airPricePointData['passengerFares'])) {
                                 $segmentsGroup[$legRefKey][$optionKey][] = $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segmentKey');
 
-                                if (!isset($segmentRefStack[(string) $bookingInfo->getSegmentRef()])) {
+                                if (!isset($segmentRefStack[(string)$bookingInfo->getSegmentRef()])) {
                                     $airPricePointData['segmentInfo'][] = [
                                         "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
                                         "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
@@ -304,7 +305,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                         "freeBaggage" => $bookingInfo->getFareInfoRef()
                                     ];
 
-                                    $segmentRefStack[(string) $bookingInfo->getSegmentRef()] = (string) $bookingInfo->getSegmentRef();
+                                    $segmentRefStack[(string)$bookingInfo->getSegmentRef()] = (string)$bookingInfo->getSegmentRef();
                                 }
                             }
                             if (!isset($segmentFareMap[$segmentFareHash])) {
@@ -486,7 +487,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         ]);
     }
 
-    public function AirPriceAdaptCheckout(AirPriceRsp $response)
+    public function AirPriceAdaptCheckout(AirPriceRsp $response, $price)
     {
         $countries = collect();
         $cities = collect();
@@ -1002,6 +1003,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         ];
                     }
                 }
+
+                $airSolutionData['myChoice'] = ($airSolution->getTotalPrice() === $price);
 
                 $airPriceResultData['airSolution'][] = $airSolutionData;
             }
@@ -1540,7 +1543,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             'residencyType' => $passengerTpe->getResidencyType(),
                         ];
 
-                        $code = (string) $passengerTpe->getCode();
+                        $code = (string)$passengerTpe->getCode();
                         $passengersCount->put($code, $passengersCount->get($code, 0) + 1);
                     }
 
@@ -1719,6 +1722,152 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             ];
         }
 
+        $airSolutionChangeInfoData = [];
+        if (!is_null($response->getAirSolutionChangedInfo())) {
+            /** @var AirSolutionChangedInfo $airSolutionChangeInfo */
+            foreach ($response->getAirSolutionChangedInfo() as $airSolutionChangeInfo) {
+                $airSegmentData = [];
+                /** @var typeBaseAirSegment $airSegment */
+                foreach ($airSolutionChangeInfo->getAirPricingSolution()->getAirSegment() as $airSegment) {
+                    $flightDetailsData = [];
+                    $origin = $airSegment->getOrigin();
+                    $destination = $airSegment->getDestination();
+                    $carrier = $airSegment->getCarrier();
+                    $aircraftType = $airSegment->getEquipment();
+
+                    if (!is_null($airSegment->getFlightDetails())) {
+                        /** @var \FilippoToso\Travelport\UniversalRecord\FlightDetails $flightDetails */
+                        foreach ($airSegment->getFlightDetails() as $flightDetails) {
+                            $flightDetailsData[] = [
+                                'key' => $flightDetails->getKey(),
+                                'connection' => $flightDetails->getConnection(),
+                                'meals' => $flightDetails->getMeals(),
+                                'inFlightServices' => $flightDetails->getInFlightServices(),
+                                'equipment' => $flightDetails->getEquipment(),
+                                'onTimePerformance' => $flightDetails->getOnTimePerformance(),
+                                'originTerminal' => $flightDetails->getOriginTerminal(),
+                                'destinationTerminal' => $flightDetails->getDestinationTerminal(),
+                                'groundTime' => $flightDetails->getGroundTime(),
+                                'automatedCheckin' => $flightDetails->getAutomatedCheckin(),
+                                'origin' => $flightDetails->getOrigin(),
+                                'destination' => $flightDetails->getDestination(),
+                                'departureTime' => $flightDetails->getDepartureTime(),
+                                'arrivalTime' => $flightDetails->getArrivalTime(),
+                                'flightTime' => $flightDetails->getFlightTime(),
+                                'travelTime' => $flightDetails->getTravelTime(),
+                                'distance' => $flightDetails->getDistance(),
+                                'elStat' => $flightDetails->getElStat(),
+                                'keyOverride' => $flightDetails->getKeyOverride(),
+                            ];
+                        }
+                    }
+
+                    if (!$airports->has($origin)) {
+                        $airports->put($origin, Airport::whereCode($origin)->first());
+                    }
+
+                    if (!$airports->has($destination)) {
+                        $airports->put($destination, Airport::whereCode($destination)->first());
+                    }
+
+                    if (!$airLines->has($carrier)) {
+                        $airLines->put($carrier, Airline::whereCode($carrier)->first());
+                    }
+
+                    if (!$aircrafts->has($aircraftType)) {
+                        $aircrafts->put($aircraftType, Aircraft::whereCode($aircraftType)->first());
+                    }
+
+                    $segmentRemarkData = [];
+                    if (!is_null($airSegment->getSegmentRemark())) {
+                        /** @var SegmentRemark $segmentRemark */
+                        foreach ($airSegment->getSegmentRemark() as $segmentRemark) {
+                            $segmentRemarkData[] = [
+                                '_' => $segmentRemark->get_(),
+                                'key' => $segmentRemark->getKey(),
+                            ];
+                        }
+                    }
+
+                    $connection = [];
+                    if (!is_null($airSegment->getConnection())) {
+                        $connection = [
+                            'fareNote' => $airSegment->getConnection()->getFareNote(),
+                            'changeOfPlane' => $airSegment->getConnection()->getChangeOfPlane(),
+                            'changeOfTerminal' => $airSegment->getConnection()->getChangeOfTerminal(),
+                            'changeOfAirport' => $airSegment->getConnection()->getChangeOfAirport(),
+                            'stopover' => $airSegment->getConnection()->getStopOver(),
+                            'minConnectionTime' => $airSegment->getConnection()->getMinConnectionTime(),
+                            'duration' => $airSegment->getConnection()->getDuration(),
+                            'segmentIndex' => $airSegment->getConnection()->getSegmentIndex(),
+                            'flightDetailsIndex' => $airSegment->getConnection()->getFlightDetailsIndex(),
+                            'includeStopOverToFareQuote' => $airSegment->getConnection()->getIncludeStopOverToFareQuote(),
+                        ];
+                    }
+
+                    $airSegmentData[] = [
+                        'sponsoredFltInfo' => $airSegment->getSponsoredFltInfo(),
+                        'codeShareInfo' => $airSegment->getCodeshareInfo(),
+                        'flightDetails' => $flightDetailsData,
+                        'flightDetailsRef' => $airSegment->getFlightDetailsRef(),
+                        'alternateLocationDistanceRef' => $airSegment->getAlternateLocationDistanceRef(),
+                        'sellMessage' => $airSegment->getSellMessage(),
+                        'railCoachDetails' => $airSegment->getRailCoachDetails(),
+                        'openSegment' => $airSegment->getOpenSegment(),
+                        'group' => $airSegment->getGroup(),
+                        'carrier' => $airSegment->getCarrier(),
+                        'cabinClass' => $airSegment->getCabinClass(),
+                        'flightNumber' => $airSegment->getFlightNumber(),
+                        'classOfService' => $airSegment->getClassOfService(),
+                        'eTicketAbility' => $airSegment->getETicketability(),
+                        'equipment' => $airSegment->getEquipment(),
+                        'marriageGroup' => $airSegment->getMarriageGroup(),
+                        'numberOfStops' => $airSegment->getNumberOfStops(),
+                        'connection' => $connection,
+                        'seamless' => $airSegment->getSeamless(),
+                        'changeOfPlane' => $airSegment->getChangeOfPlane(),
+                        'guaranteedPaymentCarrier' => $airSegment->getGuaranteedPaymentCarrier(),
+                        'hostTokenRef' => $airSegment->getHostTokenRef(),
+                        'providerReservationInfoRef' => $airSegment->getProviderReservationInfoRef(),
+                        'passiveProviderReservationInfoRef' => $airSegment->getPassiveProviderReservationInfoRef(),
+                        'optionalServicesIndicator' => $airSegment->getOptionalServicesIndicator(),
+                        'availabilitySource' => $airSegment->getAvailabilitySource(),
+                        'APISRequirementsRef' => $airSegment->getAPISRequirementsRef(),
+                        'blackListed' => $airSegment->getBlackListed(),
+                        'operationalStatus' => $airSegment->getOperationalStatus(),
+                        'numberInParty' => $airSegment->getNumberInParty(),
+                        'railCoachNumber' => $airSegment->getRailCoachNumber(),
+                        'bookingDate' => $airSegment->getBookingDate(),
+                        'flownSegment' => $airSegment->getFlownSegment(),
+                        'scheduleChange' => $airSegment->getScheduleChange(),
+                        'brandIndicator' => $airSegment->getBrandIndicator(),
+                        'origin' => $airSegment->getOrigin(),
+                        'destination' => $airSegment->getDestination(),
+                        'departureTime' => $airSegment->getDepartureTime(),
+                        'arrivalTime' => $airSegment->getArrivalTime(),
+                        'flightTime' => $airSegment->getFlightTime(),
+                        'travelTime' => $airSegment->getTravelTime(),
+                        'distance' => $airSegment->getDistance(),
+                        'providerCode' => $airSegment->getProviderCode(),
+                        'supplierCode' => $airSegment->getSupplierCode(),
+                        'participantLevel' => $airSegment->getParticipantLevel(),
+                        'linkAvailability' => $airSegment->getLinkAvailability(),
+                        'polledAvailabilityOption' => $airSegment->getPolledAvailabilityOption(),
+                        'availabilityDisplayType' => $airSegment->getAvailabilityDisplayType(),
+                        'segmentRemark' => $segmentRemarkData,
+                        'key' => $airSegment->getKey(),
+                        'status' => $airSegment->getStatus(),
+                        'passive' => $airSegment->getPassive(),
+                        'travelOrder' => $airSegment->getTravelOrder(),
+                        'providerSegmentOrder' => $airSegment->getProviderSegmentOrder(),
+                        'elStat' => $airSegment->getElStat(),
+                        'keyOverride' => $airSegment->getKeyOverride(),
+                    ];
+                }
+
+                $airSolutionChangeInfoData['airSegmentInfo'] = $airSegmentData;
+            }
+        }
 
         $agencyChargeAll = static::AGENCY_CHARGE_AMOUNT * $countOfPassengers;
 
@@ -1767,6 +1916,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'status' => $response->getUniversalRecord()->getStatus(),
                 'version' => $response->getUniversalRecord()->getVersion(),
             ],
+            'airSolutionChangeInfo' => $airSolutionChangeInfoData,
             'responseTime' => $response->getResponseTime(),
             'airlines' => $airLines,
             'airports' => $airports,
@@ -1785,8 +1935,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             /** @var FareRuleLong $fareRuleLong */
             foreach ($fareRule->getFareRuleLong() as $fareRuleLong) {
                 $fareRuleData[$key][] = [
-                    'name' => trim(strstr($fareRuleLong->get_(),"\n", true)),
-                    'text' => trim(strstr($fareRuleLong->get_(),"\n")),
+                    'name' => trim(strstr($fareRuleLong->get_(), "\n", true)),
+                    'text' => trim(strstr($fareRuleLong->get_(), "\n")),
                     'code' => $fareRuleLong->getCategory(),
                     'segmentNumber' => $key,
                     'passengerTypes' => [static::PASSENGER_TYPE_ADULT],

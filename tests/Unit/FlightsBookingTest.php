@@ -66,6 +66,7 @@ class FlightsBookingTestTest extends TestCase
         $flightInfo = \factory(FlightsSearchFlightInfo::class, 1)->create(['flight_search_result_id' => $result->id])->first();
 
         $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
+            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-rsp.obj'))->once();
             $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/AP-rsp-2.obj'))->twice();
         });
 
