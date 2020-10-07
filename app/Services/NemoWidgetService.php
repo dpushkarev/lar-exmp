@@ -40,18 +40,21 @@ class NemoWidgetService
     protected $modelAdapter;
     protected $xmlAdapter;
     protected $logger;
+    protected $moneyService;
 
     public function __construct(
         FtObjectAdapter $ftObjectAdapter,
         ModelAdapter $modelAdapter,
         XmlAdapter $xmlAdapter,
-        TravelportLogger $logger
+        TravelportLogger $logger,
+        MoneyService $moneyService
     )
     {
         $this->ftObjectAdapter = $ftObjectAdapter;
         $this->modelAdapter = $modelAdapter;
         $this->xmlAdapter = $xmlAdapter;
         $this->logger = $logger;
+        $this->moneyService = $moneyService;
     }
 
     public function autocomplete($q, $iataCode = null)
@@ -106,6 +109,7 @@ class NemoWidgetService
     /**
      * @param FlightsSearchRequestModel $request
      * @return Collection
+     * @throws \Brick\Money\Exception\MoneyMismatchException
      */
     public function flightsSearchResult(FlightsSearchRequest $request)
     {
@@ -176,7 +180,7 @@ class NemoWidgetService
         $airPriceNum = (int)filter_var($resultModel->price, FILTER_SANITIZE_NUMBER_INT) - 1;
         /** @var AirPricePoint $airPricePoint */
         $airPricePoint = $lowFareSearchRsp->getAirPricePointList()->getAirPricePoint()[$airPriceNum];
-        $oldTotalPrice = $airPricePoint->getTotalPrice();
+        $oldTotalPrice = $this->moneyService->getMoneyByString($airPricePoint->getTotalPrice());
 
         $bookings = collect();
         /** @var FlightOption $flightOprion */

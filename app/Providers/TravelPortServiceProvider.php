@@ -38,14 +38,14 @@ class TravelPortServiceProvider extends ServiceProvider
                 resolve(\FilippoToso\Travelport\TravelportLogger::class)
             )]);
         });
-//
+
 //        App::bind('TP', function () {
 //            return App::makeWith(TravelPortService::class, ['travelPort' => new Travelport(
-//                config('services.travel_port.user_id'),
-//                config('services.travel_port.password'),
-//                config('services.travel_port.target_branch'),
+//                'Universal API/uAPI2405065644-c384cfd6',
+//                'Xk9}g%P67c',
+//                'P3589307',
 //                Endpoints::REGION_EMEA,
-//                config('app.env') === 'production' ? true : false,
+//                true,
 //                resolve(\FilippoToso\Travelport\TravelportLogger::class)
 //            )]);
 //        });

@@ -1,300 +1,300 @@
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T013825.200.json
-
-###
-
-GET http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-06T013306.200.html
+<> 2020-10-07T023724.200.json
 
 ###
 
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T013233.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/9
-
-<> 2020-10-06T013146.200.json
+<> 2020-10-07T023713.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/9
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T012633.200.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/9
-
-<> 2020-10-06T012611.200.html
+<> 2020-10-07T023547.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/9
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T012500.200.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/9
-
-<> 2020-10-06T012432.200.html
+<> 2020-10-07T023505.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/9
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T012409.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/9
-
-<> 2020-10-06T012307.500.html
+<> 2020-10-07T023134.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/9
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T012155.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/9
-
-<> 2020-10-06T012044.500.html
+<> 2020-10-07T022924.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/9
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T011600.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-06T011435.500.html
+<> 2020-10-07T022835.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T010716.200.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-06T010519.419.html
+<> 2020-10-07T022801.200.json
 
 ###
 
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-06T114920.200.json
-
-###
-
-GET http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-06T114845.500.html
+<> 2020-10-07T022719.200.json
 
 ###
 
-POST http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-05T051427.404.html
-
-###
-
-GET http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-05T042732.200.json
+<> 2020-10-07T022639.200.json
 
 ###
 
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-05T042617.500.html
-
-###
-
-GET http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-05T042133.200.json
+<> 2020-10-07T022558.500.json
 
 ###
 
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-05T042026.200.json
-
-###
-
-GET http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-05T040305.200.json
+<> 2020-10-07T022512.200.json
 
 ###
 
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-05T040131.500.html
-
-###
-
-GET http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-05T040046.500.html
+<> 2020-10-07T022437.200.json
 
 ###
 
-GET http://127.0.0.1:8081/payment/confirm/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-05T035747.500.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segmentss":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-10-04T114720.422.json
+<> 2020-10-07T020934.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T114200.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T101139.200.json
+<> 2020-10-07T020916.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T100926.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T095313.200.html
+<> 2020-10-07T020837.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T094415.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T094310.500.json
+<> 2020-10-07T020555.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T094240.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T094025.200.html
+<> 2020-10-07T020537.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T093406.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T093048.200.html
+<> 2020-10-07T020507.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T093006.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T092954.422.json
+<> 2020-10-07T020431.500.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"wzvfpT8Q2BKAbpzfAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T092849.500.json
-
-###
-
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/3
-
-<> 2020-10-04T092634.200.json
+<> 2020-10-07T020405.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T092543.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-11-18T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-11-26T00:00:00"}],"passengers":[{"type":"ADT","count":2},{"type":"CLD","count":1},{"type":"INF","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-10-04T092522.200.json
+<> 2020-10-07T020035.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"pUQulTtYlDKA//nREBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T092303.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"pUQulTtYlDKA//nREBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-04T092241.422.json
+<> 2020-10-07T020016.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"ADT","prefix":"MRS","first":"Druga","last":"Prezime","gender":"f","nationality":"RS","issuingCountry":"RS"},{"travelerType":"CLD","prefix":"MSTR","first":"Dete","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"},{"travelerType":"INF","prefix":"MISS","first":"Beba","last":"Prezime","gender":"f","dob":"2020-08-06","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"Ulica","postalCode":"11000","city":"Grad","country":"RS"},"airSolutionKey":"pUQulTtYlDKA//nREBAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T092053.500.json
-
-###
-
-GET http://127.0.0.1:8081/api/checkout/1
-
-<> 2020-10-04T091955.200.json
+<> 2020-10-07T015955.500.json
 
 ###
 
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/158
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T091945.200.json
+<> 2020-10-07T015033.200.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/3
 
-<> 2020-10-04T091916.200.json
+<> 2020-10-07T014925.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014906.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014829.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014807.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014737.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014713.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014639.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014621.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T014557.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T012212.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T011801.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T011714.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010708.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010608.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010557.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010536.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010518.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010501.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T010202.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T122155.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T122033.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T121734.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T121702.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T121655.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/3
+
+<> 2020-10-07T121645.200.html
 
 ###
 

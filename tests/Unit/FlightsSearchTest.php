@@ -2,20 +2,23 @@
 
 namespace Tests\Unit;
 
-use App\Adapters\FtObjectAdapter;
 use App\Facades\TP;
-use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
+use App\Services\MoneyService;
 use Tests\TestCase;
 
 class FlightsSearchTest extends TestCase
 {
-    protected $agencyChargeAmount = FtObjectAdapter::AGENCY_CHARGE_AMOUNT;
-    protected $agencyChargeCurrency = FtObjectAdapter::AGENCY_CHARGE_CURRENCY;
+    /** @var MoneyService */
+    protected $moneyService;
 
+    /**
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     public function setUp(): void
     {
         parent::setUp();
+        $this->moneyService = app()->make(MoneyService::class);
         $this->useTable('flights_search_requests');
         $this->useTable('flights_search_results');
         $this->useTable('flights_search_flight_infos');
@@ -23,6 +26,9 @@ class FlightsSearchTest extends TestCase
 
     }
 
+    /**
+     * @throws \Brick\Money\Exception\MoneyMismatchException
+     */
     public function testFlightsSearchDirect()
     {
         $transaction_id = 'C8B3F5700A07647789A75EC6238CACE3';
@@ -108,12 +114,12 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(3, 'flights.search.results.groupsData.segments')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P1.passengerFares')
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.amount', $this->agencyChargeAmount * $countOfPassenger)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.currency', $this->agencyChargeCurrency)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', 41739)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount', 41739 + $this->agencyChargeAmount * $countOfPassenger)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P2.flightPrice.amount', 58371)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P2.totalPrice.amount', 58371 + $this->agencyChargeAmount * $countOfPassenger)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.amount',(string) $this->moneyService->getAgencyChargeForAllPassengers($countOfPassenger)->getAmount())
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.currency', MoneyService::AGENCY_CHARGE_CURRENCY)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', '41739.00')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount',(string) $this->moneyService->getAgencyChargeForAllPassengers($countOfPassenger)->plus(41739)->getAmount())
+            ->assertJsonPath('flights.search.results.groupsData.prices.P2.flightPrice.amount', '58371.00')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P2.totalPrice.amount',(string) $this->moneyService->getAgencyChargeForAllPassengers($countOfPassenger)->plus(58371)->getAmount())
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P2.passengerFares');
 
         $this->assertDatabaseHas('flights_search_requests', ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]);
@@ -216,10 +222,10 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(8, 'flights.search.results.groupsData.segments')
             ->assertJsonCount(4, 'flights.search.results.groupsData.prices')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P1.passengerFares')
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', 41823)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount', 41823 + $this->agencyChargeAmount * $countOfPassenger)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P4.flightPrice.amount', 279780)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P4.totalPrice.amount', 279780 + $this->agencyChargeAmount * $countOfPassenger)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', '41823.00')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount',(string) $this->moneyService->getAgencyChargeForAllPassengers($countOfPassenger)->plus(41823)->getAmount())
+            ->assertJsonPath('flights.search.results.groupsData.prices.P4.flightPrice.amount', '279780.00')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P4.totalPrice.amount',(string) $this->moneyService->getAgencyChargeForAllPassengers($countOfPassenger)->plus(279780)->getAmount())
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P2.passengerFares')
             ->assertJsonCount(4, 'flights.search.results.groupsData.prices.P4.segmentInfo');
 
@@ -297,8 +303,8 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(10, 'flights.search.results.groupsData.segments')
             ->assertJsonCount(3, 'flights.search.results.groupsData.prices')
             ->assertJsonCount(1, 'flights.search.results.groupsData.prices.P1.passengerFares')
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', 107649)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount', 107649 + $this->agencyChargeAmount * $countOfPassenger)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', '107649.00')
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount',(string) $this->moneyService->getAgencyChargeForAllPassengers($countOfPassenger)->plus(107649)->getAmount())
             ->assertJsonCount(12, 'flights.search.results.groupsData.prices.P2.passengerFares.0.taxes')
             ->assertJsonCount(6, 'flights.search.results.groupsData.prices.P3.segmentInfo')
             ->assertJsonCount(4, 'flights.search.results.groupsData.prices.P1.passengerFares.0.tariffs')
