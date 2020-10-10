@@ -118,14 +118,18 @@ class CheckoutService
 //        });
 
         $response = TP::AirCreateReservationReq($dto);
+        $responseCollection = $this->adapter->AirReservationAdapt($response);
 
         Reservation::forceCreate([
             'transaction_id' => $response->getTransactionId(),
             'flights_search_flight_info_id' => $dto->getOrder()->id,
-            'data' => $dto->getRequest()
+            'data' => $dto->getRequest(),
+            'amount' => $responseCollection->get('totalPrice')['amount'],
+            'currency_code' => $responseCollection->get('totalPrice')['currency'],
         ]);
 
-        return $this->adapter->AirReservationAdapt($response);
+        return $responseCollection;
+
     }
 
 }

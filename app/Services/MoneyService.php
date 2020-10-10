@@ -59,6 +59,15 @@ class MoneyService
         return Money::of(static::AGENCY_CHARGE_AMOUNT, static::AGENCY_CHARGE_CURRENCY);
     }
 
+    protected function getAgencyChargeMoneyByPassengerType($type): Money
+    {
+        return [
+            'ADT' => Money::of(static::AGENCY_CHARGE_AMOUNT, static::AGENCY_CHARGE_CURRENCY),
+            'CNN' => Money::of(static::AGENCY_CHARGE_AMOUNT, static::AGENCY_CHARGE_CURRENCY),
+            'INF' => Money::of(static::AGENCY_CHARGE_AMOUNT, static::AGENCY_CHARGE_CURRENCY)
+        ][$type];
+    }
+
     protected function getCashMoney(): Money
     {
         return Money::of(static::CASH_AMOUNT, static::CASH_CURRENCY);
@@ -67,6 +76,11 @@ class MoneyService
     protected function getPayPalFixCommissionMoney(): Money
     {
         return Money::of(static::PAYPAL_COMMISSION_FIX, static::PAYPAL_CURRENCY);
+    }
+
+    public function addAgencyChargeByPassengerType(Money $money, $type = 'ADT')
+    {
+        return $money->plus($this->getAgencyChargeMoneyByPassengerType($type));
     }
 
 }
