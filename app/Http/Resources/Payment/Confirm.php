@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class Confirm extends JsonResource
 {
 
+    public static $wrap = '';
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return array

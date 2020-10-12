@@ -68,7 +68,7 @@
         $('#nestpay-confirm-payment-submit').attr('disabled', 'disabled');
 		
 		$.ajax({
-			'url': "{{route('nestpay.confirm')}}",
+			'url': "{{route('nestpay.confirm', ['id' => $paymentData['INVOICENUMBER']])}}",
 			'type': "post",
 			'data': {
 				'_token': "{{csrf_token()}}"

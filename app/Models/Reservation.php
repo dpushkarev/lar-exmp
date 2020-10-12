@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Reservation extends Model
 {
+    const IS_PAID = 1;
+    const IS_NOT_PAID = 0;
+
     protected $guarded = ['id'];
 
     protected $casts = [
@@ -20,10 +23,5 @@ class Reservation extends Model
     public function flightInfo()
     {
         return $this->belongsTo(FlightsSearchFlightInfo::class, 'flights_search_flight_info_id', 'id');
-    }
-
-    public function getTotalPriceAttribute()
-    {
-        return 123.50;
     }
 }

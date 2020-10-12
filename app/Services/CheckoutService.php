@@ -120,13 +120,15 @@ class CheckoutService
         $response = TP::AirCreateReservationReq($dto);
         $responseCollection = $this->adapter->AirReservationAdapt($response);
 
-        Reservation::forceCreate([
+        $reservationId = Reservation::forceCreate([
             'transaction_id' => $response->getTransactionId(),
             'flights_search_flight_info_id' => $dto->getOrder()->id,
             'data' => $dto->getRequest(),
             'amount' => $responseCollection->get('totalPrice')['amount'],
             'currency_code' => $responseCollection->get('totalPrice')['currency'],
         ]);
+
+        $responseCollection->put('reservation_id', $reservationId);
 
         return $responseCollection;
 

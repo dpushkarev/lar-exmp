@@ -109,9 +109,6 @@ $successfulPayment = !empty($payment) && $payment->isSuccess();
                         </table>
                         @endif
                     </div>
-                    <div class="card-footer">
-                        <a href="{{route('nestpay.confirment')}}" class="btn btn-secondary">OK</a>
-                    </div>
                 </div>
             </div>
         </div>
