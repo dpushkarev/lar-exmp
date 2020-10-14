@@ -1,5 +1,4 @@
 <?php
-ini_set("soap.wsdl_cache_enabled", 0);
 
 /**
  * Laravel - A PHP Framework For Web Artisans

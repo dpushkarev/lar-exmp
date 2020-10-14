@@ -718,6 +718,6 @@ class Money extends AbstractMoney
     public function getAmountAsFloat()
     {
         $value = (string) $this->getAmount();
-        return (float) (number_format((float) $value, 2, ".", ""));
+        return (float) $value;
     }
 }

@@ -241,7 +241,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
             $airPricePointData = [
                 'flightPrice' => [
-                    'amount' => $flightPrice->getAmount(),
+                    'amount' => $flightPrice->getAmountAsFloat(),
                     'currency' => $flightPrice->getCurrency()->getCurrencyCode()
                 ],
                 'id' => $airPricePointKey,
@@ -264,19 +264,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                 $baseFare = $this->moneyService->getMoneyByString($airPricingInfo->getBasePrice());
                 $passengerFares['baseFare'] = [
-                    'amount' => $baseFare->getAmount(),
+                    'amount' => $baseFare->getAmountAsFloat(),
                     'currency' => $baseFare->getCurrency()->getCurrencyCode()
                 ];
 
                 $equivFare = $this->moneyService->getMoneyByString($airPricingInfo->getEquivalentBasePrice());
                 $passengerFares['equivFare'] = [
-                    'amount' => $equivFare->getAmount(),
+                    'amount' => $equivFare->getAmountAsFloat(),
                     'currency' => $equivFare->getCurrency()->getCurrencyCode(),
                 ];
 
                 $totalPrice = $this->moneyService->getMoneyByString($airPricingInfo->getTotalPrice());
                 $passengerFares['totalFare'] = [
-                    'amount' => $totalPrice->getAmount(),
+                    'amount' => $totalPrice->getAmountAsFloat(),
                     'currency' => $totalPrice->getCurrency()->getCurrencyCode(),
                 ];
 
@@ -287,7 +287,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $taxInfoPrice = $this->moneyService->getMoneyByString($typeTaxInfo->getAmount());
                         $passengerFares['taxes'][] = [
                             $typeTaxInfo->getCategory() => [
-                                'amount' => $taxInfoPrice->getAmount(),
+                                'amount' => $taxInfoPrice->getAmountAsFloat(),
                                 'currency' => $taxInfoPrice->getCurrency()->getCurrencyCode()
                             ]
                         ];
@@ -366,7 +366,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $agencyChargeAll = $this->moneyService->getAgencyChargeForAllPassengers($countOfPassengers);
 
             $airPricePointData['agencyCharge'] = [
-                'amount' => $agencyChargeAll->getAmount(),
+                'amount' => $agencyChargeAll->getAmountAsFloat(),
                 'currency' => $agencyChargeAll->getCurrency()->getCurrencyCode(),
                 'regular' => [
                     static::PASSENGER_TYPE_ADULT => MoneyService::AGENCY_CHARGE_AMOUNT,
@@ -383,7 +383,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
             $totalPrice = $this->moneyService->getMoneyByString($airPricePoint->getTotalPrice())->plus($agencyChargeAll);
             $airPricePointData['totalPrice'] = [
-                'amount' => $totalPrice->getAmount(),
+                'amount' => $totalPrice->getAmountAsFloat(),
                 'currency' => $totalPrice->getCurrency()->getCurrencyCode()
             ];
 
@@ -491,11 +491,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             "priceStatus" => [
                 "changed" => !$newTotalPrice->isEqualTo($oldTotalPrice),
                 "oldValue" => [
-                    'amount' => $oldTotalPrice->getAmount(),
+                    'amount' => $oldTotalPrice->getAmountAsFloat(),
                     'currency' => $oldTotalPrice->getCurrency()->getCurrencyCode()
                 ],
                 "newValue" => [
-                    'amount' => $newTotalPrice->getAmount(),
+                    'amount' => $newTotalPrice->getAmountAsFloat(),
                     'currency' => $newTotalPrice->getCurrency()->getCurrencyCode()
                 ]
             ],
@@ -505,7 +505,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         ]);
     }
 
-    public function AirPriceAdaptCheckout(AirPriceRsp $response, $price)
+    public function AirPriceAdaptCheckout(AirPriceRsp $response, Money $price)
     {
         $countries = collect();
         $cities = collect();
@@ -603,19 +603,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                     $baseFare = $this->moneyService->getMoneyByString($airPricingInfo->getBasePrice());
                     $airPricingInfoData['baseFare'] = [
-                        'amount' => $baseFare->getAmount(),
+                        'amount' => $baseFare->getAmountAsFloat(),
                         'currency' => $baseFare->getCurrency()->getCurrencyCode()
                     ];
 
                     $equivFare = $this->moneyService->getMoneyByString($airPricingInfo->getEquivalentBasePrice());
                     $airPricingInfoData['equivFare'] = [
-                        'amount' => $equivFare->getAmount(),
+                        'amount' => $equivFare->getAmountAsFloat(),
                         'currency' => $equivFare->getCurrency()->getCurrencyCode()
                     ];
 
                     $totalPrice = $this->moneyService->getMoneyByString($airPricingInfo->getTotalPrice());
                     $airPricingInfoData['totalFare'] = [
-                        'amount' => $totalPrice->getAmount(),
+                        'amount' => $totalPrice->getAmountAsFloat(),
                         'currency' => $totalPrice->getCurrency()->getCurrencyCode()
                     ];
 
@@ -625,7 +625,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $taxPrice = $this->moneyService->getMoneyByString($typeTaxInfo->getAmount());
                             $airPricingInfoData['taxes'][] = [
                                 $typeTaxInfo->getCategory() => [
-                                    'amount' => $taxPrice->getAmount(),
+                                    'amount' => $taxPrice->getAmountAsFloat(),
                                     'currency' => $taxPrice->getCurrency()->getCurrencyCode()
                                 ]
                             ];
@@ -760,7 +760,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $airPricingInfoData['taxInfo'][] = [
                                 'category' => $taxInfo->getCategory(),
                                 'price' => [
-                                    'amount' => $taxInfoPrice->getAmount(),
+                                    'amount' => $taxInfoPrice->getAmountAsFloat(),
                                     'currency' => $taxInfoPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'key' => $taxInfo->getKey(),
@@ -774,7 +774,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $chargePenaltyPrice = $this->moneyService->getMoneyByString($chargePenalty->getAmount());
                             $airPricingInfoData['chargePenalty'][] = [
                                 'price' => [
-                                    'amount' => $chargePenaltyPrice->getAmount(),
+                                    'amount' => $chargePenaltyPrice->getAmountAsFloat(),
                                     'currency' => $chargePenaltyPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'percentage' => $chargePenalty->getPercentage(),
@@ -854,19 +854,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $bagDetailData[] = [
                                 'applicableBags' => $bagDetail->getApplicableBags(),
                                 'basePrice' => [
-                                    'amount' => $basePrice->getAmount(),
+                                    'amount' => $basePrice->getAmountAsFloat(),
                                     'currency' => $basePrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'approximateBasePrice' => [
-                                    'amount' => $approximateBasePrice->getAmount(),
+                                    'amount' => $approximateBasePrice->getAmountAsFloat(),
                                     'currency' => $approximateBasePrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'totalPrice' => [
-                                    'amount' => $totalPrice->getAmount(),
+                                    'amount' => $totalPrice->getAmountAsFloat(),
                                     'currency' => $totalPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'approximateTotalPrice' => [
-                                    'amount' => $approximateTotalPrice->getAmount(),
+                                    'amount' => $approximateTotalPrice->getAmountAsFloat(),
                                     'currency' => $approximateTotalPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'baggageRestriction' => $baggageRestrictionData
@@ -945,19 +945,19 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 $carryOnDetailData[] = [
                                     'applicableCarryOnBags' => $carryOnDetail->getApplicableCarryOnBags(),
                                     'basePrice' => [
-                                        'amount' => $basePrice->getAmount(),
+                                        'amount' => $basePrice->getAmountAsFloat(),
                                         'currency' => $basePrice->getCurrency()->getCurrencyCode()
                                     ],
                                     'approximateBasePrice' => [
-                                        'amount' => $approximateBasePrice->getAmount(),
+                                        'amount' => $approximateBasePrice->getAmountAsFloat(),
                                         'currency' => $approximateBasePrice->getCurrency()->getCurrencyCode()
                                     ],
                                     'totalPrice' => [
-                                        'amount' => $totalPrice->getAmount(),
+                                        'amount' => $totalPrice->getAmountAsFloat(),
                                         'currency' => $totalPrice->getCurrency()->getCurrencyCode()
                                     ],
                                     'approximateTotalPrice' => [
-                                        'amount' => $approximateTotalPrice->getAmount(),
+                                        'amount' => $approximateTotalPrice->getAmountAsFloat(),
                                         'currency' => $approximateTotalPrice->getCurrency()->getCurrencyCode()
                                     ],
                                     'baggageRestriction' => $baggageRestrictionData
@@ -981,7 +981,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $agencyChargeAll = $this->moneyService->getAgencyChargeForAllPassengers($countOfPassengers);
 
                 $airSolutionData['agencyCharge'] = [
-                    'amount' => $agencyChargeAll->getAmount(),
+                    'amount' => $agencyChargeAll->getAmountAsFloat(),
                     'currency' => $agencyChargeAll->getCurrency()->getCurrencyCode(),
                     'regular' => [
                         static::PASSENGER_TYPE_ADULT => MoneyService::AGENCY_CHARGE_AMOUNT,
@@ -995,9 +995,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     ]
                 ];
 
-                $totalPrice = $this->moneyService->getMoneyByString($airSolution->getTotalPrice())->plus($agencyChargeAll);
+                $airSolutionPrice = $this->moneyService->getMoneyByString($airSolution->getTotalPrice());
+                $totalPrice = $airSolutionPrice->plus($agencyChargeAll);
                 $airSolutionData['totalPrice'] = [
-                    'amount' => $totalPrice->getAmount(),
+                    'amount' => $totalPrice->getAmountAsFloat(),
                     'currency' => $totalPrice->getCurrency()->getCurrencyCode()
                 ];
 
@@ -1007,15 +1008,15 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                 $airSolutionData['paymentOptionCharge'] = [
                     'cache' => [
-                        'amount' => $cashPrice->getAmount(),
+                        'amount' => $cashPrice->getAmountAsFloat(),
                         'currency' => $cashPrice->getCurrency()->getCurrencyCode()
                     ],
                     'intesa' => [
-                        'amount' => $intesaPrice->getAmount(),
+                        'amount' => $intesaPrice->getAmountAsFloat(),
                         'currency' => $intesaPrice->getCurrency()->getCurrencyCode()
                     ],
                     'paypal' => [
-                        'amount' => $payPalPrice->getAmount(),
+                        'amount' => $payPalPrice->getAmountAsFloat(),
                         'currency' => $payPalPrice->getCurrency()->getCurrencyCode()
                     ]
                 ];
@@ -1040,7 +1041,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
                 }
 
-                $airSolutionData['myChoice'] = ($airSolution->getTotalPrice() === $price);
+                $airSolutionData['myChoice'] = $airSolutionPrice->isEqualTo($price);
 
                 $airPriceResultData['airSolution'][] = $airSolutionData;
             }
@@ -1544,7 +1545,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 'supplierCode' => $taxInfo->getSupplierCode(),
                                 'text' => $taxInfo->getText(),
                                 'amount' => [
-                                    'value' => $taxInfoPrice->getAmount(),
+                                    'value' => $taxInfoPrice->getAmountAsFloat(),
                                     'currency' => $taxInfoPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'originAirport' => $taxInfo->getOriginAirport(),
@@ -1601,7 +1602,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $changePenaltyPrice = $this->moneyService->getMoneyByString($changePenalty->getAmount());
                             $changePenaltyData[] = [
                                 'amount' => [
-                                    'value' => $changePenaltyPrice->getAmount(),
+                                    'value' => $changePenaltyPrice->getAmountAsFloat(),
                                     'currency' => $changePenaltyPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'percentage' => $changePenalty->getPercentage(),
@@ -1618,7 +1619,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             $cancelPenaltyPrice = $this->moneyService->getMoneyByString($cancelPenalty->getAmount());
                             $cancelPenaltyData[] = [
                                 'amount' => [
-                                    'value' => $cancelPenaltyPrice->getAmount(),
+                                    'value' => $cancelPenaltyPrice->getAmountAsFloat(),
                                     'currency' => $cancelPenaltyPrice->getCurrency()->getCurrencyCode()
                                 ],
                                 'percentage' => $cancelPenalty->getPercentage(),
@@ -1674,31 +1675,31 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         'fareCalculationInd' => $airPricingInfo->getFareCalculationInd(),
                         'cat35Indicator' => $airPricingInfo->getCat35Indicator(),
                         'totalPrice' => [
-                            'amount' => $airPricingInfoPrice->getAmount(),
+                            'amount' => $airPricingInfoPrice->getAmountAsFloat(),
                             'currency' => $airPricingInfoPrice->getCurrency()->getCurrencyCode()
                         ],
                         'basePrice' => [
-                            'amount' => $basePrice->getAmount(),
+                            'amount' => $basePrice->getAmountAsFloat(),
                             'currency' => $basePrice->getCurrency()->getCurrencyCode()
                         ],
                         'approximateTotalPrice' => [
-                            'amount' => $approximateTotalPrice->getAmount(),
+                            'amount' => $approximateTotalPrice->getAmountAsFloat(),
                             'currency' => $approximateTotalPrice->getCurrency()->getCurrencyCode()
                         ],
                         'approximateBasePrice' => [
-                            'amount' => $approximateBasePrice->getAmount(),
+                            'amount' => $approximateBasePrice->getAmountAsFloat(),
                             'currency' => $approximateBasePrice->getCurrency()->getCurrencyCode()
                         ],
                         'equivalentBasePrice' => [
-                            'amount' => $equivalentBasePrice->getAmount(),
+                            'amount' => $equivalentBasePrice->getAmountAsFloat(),
                             'currency' => $equivalentBasePrice->getCurrency()->getCurrencyCode()
                         ],
                         'taxes' => [
-                            'amount' => $taxesPrice->getAmount(),
+                            'amount' => $taxesPrice->getAmountAsFloat(),
                             'currency' => $taxesPrice->getCurrency()->getCurrencyCode()
                         ],
                         'fees' => [
-                            'amount' => $feesPrice->getAmount(),
+                            'amount' => $feesPrice->getAmountAsFloat(),
                             'currency' => $feesPrice->getCurrency()->getCurrencyCode()
                         ],
                         'providerCode' => $airPricingInfo->getProviderCode(),
@@ -1930,7 +1931,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'universalRecord' => [
                 'bookingTraveler' => $bookingTravelerCollection,
                 'agencyCharge' => [
-                    'amount' => $agencyChargeAll->getAmount(),
+                    'amount' => $agencyChargeAll->getAmountAsFloat(),
                     'currency' => $agencyChargeAll->getCurrency()->getCurrencyCode(),
                     'regular' => [
                         static::PASSENGER_TYPE_ADULT => MoneyService::AGENCY_CHARGE_AMOUNT,
@@ -1945,15 +1946,15 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 ],
                 'paymentOptionCharge' => [
                     'cache' => [
-                        'amount' =>  $cashPrice->getAmount(),
+                        'amount' =>  $cashPrice->getAmountAsFloat(),
                         'currency' => $cashPrice->getCurrency()->getCurrencyCode()
                     ],
                     'intesa' => [
-                        'amount' => $intesaPrice->getAmount(),
+                        'amount' => $intesaPrice->getAmountAsFloat(),
                         'currency' => $intesaPrice->getCurrency()->getCurrencyCode()
                     ],
                     'paypal' => [
-                        'amount' => $payPalPrice->getAmount(),
+                        'amount' => $payPalPrice->getAmountAsFloat(),
                         'currency' => $payPalPrice->getCurrency()->getCurrencyCode()
                     ]
                 ],
@@ -1975,7 +1976,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'countries' => $countries,
             'passengersCount' => $countOfPassengersMap,
             'totalPrice' => [
-                'amount' => $totalPrice->getAmount(),
+                'amount' => $totalPrice->getAmountAsFloat(),
                 'currency' => $totalPrice->getCurrency()->getCurrencyCode(),
             ]
         ]);

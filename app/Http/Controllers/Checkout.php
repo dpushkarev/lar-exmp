@@ -12,6 +12,7 @@ use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
 use App\Services\CheckoutService;
+use App\Services\MoneyService;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
@@ -24,11 +25,12 @@ class Checkout extends Controller
     /**
      * @param $flightInfoId
      * @param FtObjectAdapter $adapter
+     * @param MoneyService $moneyService
      * @return FlightsSearchResults
      * @throws ApiException
-     * @throws NemoWidgetServiceException
+     *
      */
-    public function getData($flightInfoId, FtObjectAdapter $adapter)
+    public function getData($flightInfoId, FtObjectAdapter $adapter, MoneyService $moneyService)
     {
         /** @var FlightsSearchFlightInfo $flightInfo */
         $flightInfo = FlightsSearchFlightInfo::whereId($flightInfoId)->with('result.request')->first();
@@ -55,7 +57,7 @@ class Checkout extends Controller
 
             /** @var AirPricePoint $airPricePoint */
             $airPricePoint = $lowFareSearchRsp->getAirPricePointList()->getAirPricePoint()[$airPriceNum];
-            $oldTotalPrice = $airPricePoint->getTotalPrice();
+            $oldTotalPrice = $moneyService->getMoneyByString($airPricePoint->getTotalPrice());
 
             $logAp = resolve(\FilippoToso\Travelport\TravelportLogger::class)
                 ->getLog(AirPriceRsp::class, $flightInfo->transaction_id, TravelPortLogger::OBJECT_TYPE);

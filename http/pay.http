@@ -2,6 +2,6 @@
 GET http://127.0.0.1:8081/payment/confirm/1
 
 ###
-POST http://127.0.0.1:8081/payment/confirm/2
+POST http://127.0.0.1:8081/payment/confirm/4
 
 ###

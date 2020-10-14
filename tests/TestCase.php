@@ -18,6 +18,7 @@ abstract class TestCase extends BaseTestCase
         $this->useTableWithData('countries');
         $this->useTableWithData('cities');
         $this->useTableWithData('airports');
+        $this->useTableWithData('aircrafts');
     }
 
     public function __construct($name = null, array $data = [], $dataName = '')

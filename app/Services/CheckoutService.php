@@ -128,7 +128,7 @@ class CheckoutService
             'currency_code' => $responseCollection->get('totalPrice')['currency'],
         ]);
 
-        $responseCollection->put('reservation_id', $reservation->id);
+        $responseCollection->put('reservationId', $reservation->id);
 
         return $responseCollection;
 
