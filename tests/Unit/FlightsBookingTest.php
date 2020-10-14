@@ -142,6 +142,7 @@ class FlightsBookingTestTest extends TestCase
             ->assertJsonCount(5, 'guide')
             ->assertJsonCount(4, 'universalRecord.bookingTraveler')
             ->assertJsonPath('universalRecord.bookingTraveler.0.bookingTravelerName.first', 'Pushakrev')
+            ->assertJsonPath('reservationId', 1)
             ->assertJsonCount(2, 'universalRecord.bookingTraveler.0.phoneNumber')
             ->assertJsonCount(1, 'universalRecord.bookingTraveler.0.email')
             ->assertJsonCount(1, 'universalRecord.bookingTraveler.0.address')
