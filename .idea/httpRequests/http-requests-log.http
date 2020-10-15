@@ -1,3 +1,57 @@
+GET http://127.0.0.1:8081/api/reservation/4
+
+<> 2020-10-15T123053.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/reservation/1
+
+<> 2020-10-15T123046.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T123007.410.html
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T122737.410.html
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T122727.410.html
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T122709.410.html
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T122624.500.json
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T122600.410.html
+
+###
+
+GET http://127.0.0.1:8081/api/order/1
+
+<> 2020-10-15T122443.500.json
+
+###
+
 POST http://127.0.0.1:8081/payment/confirm/4
 
 <> 2020-10-14T094639.200.json
@@ -233,60 +287,6 @@ POST http://127.0.0.1:8081/payment/confirm/2
 POST http://127.0.0.1:8081/payment/confirm/2
 
 <> 2020-10-12T110354.200.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T110310.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T110256.200.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T110101.200.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T105349.200.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T105258.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T105159.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T104943.500.html
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-12T104707.200.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-12T104654.200.json
 
 ###
 
