@@ -71,7 +71,7 @@ class PaymentController extends Controller
     {
        $payment = $this->paymentService->processCallback($request);
 
-        return view('nestpay::result', [
+        return view('web.sections.payment.success', [
             'payment' => $payment,
         ]);
     }
@@ -88,7 +88,7 @@ class PaymentController extends Controller
     {
         $payment = $this->paymentService->processCallback($request, true);
 
-        return view('nestpay::result', [
+        return view('web.sections.payment.fail', [
             'payment' => $payment,
         ]);
     }
