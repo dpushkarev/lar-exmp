@@ -180,6 +180,7 @@ class FlightsBookingTestTest extends TestCase
         $this->json('GET','/api/order/' . $flightInfo->id)
             ->assertStatus(200)
             ->assertJsonPath('paymentOption', 'card')
+            ->assertJsonPath('reservationId', 1)
             ->assertJsonStructure([
                 'universalRecord' => [
                     'formOfPayment' => [

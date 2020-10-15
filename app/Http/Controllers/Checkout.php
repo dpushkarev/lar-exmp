@@ -124,6 +124,7 @@ class Checkout extends Controller
 
             $response = $adapter->AirReservationAdapt(unserialize($log));
             $response->put('paymentOption', $flightInfo->reservation->data['paymentOption']);
+            $response->put('reservationId', $flightInfo->reservation->id);
 
             return new AirReservation($response);
         } catch (TravelPortLoggerException $exception) {

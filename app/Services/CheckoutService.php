@@ -97,7 +97,7 @@ class CheckoutService
         }
 
         if(count($dto->getPassengers()) !== $passengerCount) {
-            throw ApiException::getInstance('Count of passenger is not correct');
+            throw ApiException::getInstance('Count of passenger is not matched');
         }
 
         /** @var typeBaseAirSegment $airSegment */
