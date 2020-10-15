@@ -58,8 +58,11 @@ Route::get('/guide/airports/{iataCode}', 'NemoWidget@airport')->where('iataCode'
 Route::post('/system/logger/error', 'NemoWidget@errorLog');
 Route::get('/flights/search/history', 'NemoWidget@history');
 
-Route::post('/reservation/{id}', 'Checkout@reservation')->where('id', '\d+')->name('reservation');
-Route::get('/order/{id}', 'Checkout@order')->where('id', '\d+')->name('reservation');
+Route::post('/reservation/{id}', 'Checkout@reservation')->where('id', '\d+')->name('create.reservation');
+Route::get('/reservation/{id}', 'Checkout@getReservation')->where('id', '\d+')->name('get.reservation');
+Route::get('/order/{id}', function (){
+    return response(sprintf('You should use %s', 'GET /reservation/{ID from reservationId node}'), 410);
+})->name('get.reservation.old');
 
 Route::get('/guide/airports/nearest', function () {
     return '{

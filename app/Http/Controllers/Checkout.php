@@ -11,6 +11,7 @@ use App\Http\Resources\NemoWidget\AirReservation;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
+use App\Models\Reservation;
 use App\Services\CheckoutService;
 use App\Services\MoneyService;
 use Carbon\Carbon;
@@ -105,26 +106,25 @@ class Checkout extends Controller
 
     /**
      * @param FtObjectAdapter $adapter
-     * @param $orderId
+     * @param $reservationId
      * @return AirReservation
      * @throws ApiException
      */
-    public function order(FtObjectAdapter $adapter, $orderId)
+    public function getReservation(FtObjectAdapter $adapter, $reservationId)
     {
         /** @var FlightsSearchFlightInfo $order */
-        $flightInfo = FlightsSearchFlightInfo::whereId($orderId)->has('reservation')->with('reservation')->first();
+        $reservation = Reservation::find($reservationId);
 
-        if (is_null($flightInfo)) {
-            throw ApiException::getInstanceInvalidId($orderId);
+        if (is_null($reservation)) {
+            throw ApiException::getInstanceInvalidId($reservationId);
         }
 
         try {
             $log = resolve(\FilippoToso\Travelport\TravelportLogger::class)
-                ->getLog(AirCreateReservationRsp::class, $flightInfo->reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
+                ->getLog(AirCreateReservationRsp::class, $reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
             $response = $adapter->AirReservationAdapt(unserialize($log));
-            $response->put('paymentOption', $flightInfo->reservation->data['paymentOption']);
-            $response->put('reservationId', $flightInfo->reservation->id);
+            $response->put('paymentOption', $reservation->data['paymentOption']);
 
             return new AirReservation($response);
         } catch (TravelPortLoggerException $exception) {

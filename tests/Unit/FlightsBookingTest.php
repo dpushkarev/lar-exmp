@@ -177,10 +177,9 @@ class FlightsBookingTestTest extends TestCase
             $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj'))->once();
         });
 
-        $this->json('GET','/api/order/' . $flightInfo->id)
+        $this->json('GET','/api/reservation/' . 1)
             ->assertStatus(200)
             ->assertJsonPath('paymentOption', 'card')
-            ->assertJsonPath('reservationId', 1)
             ->assertJsonStructure([
                 'universalRecord' => [
                     'formOfPayment' => [
