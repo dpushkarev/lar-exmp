@@ -28,5 +28,12 @@ if (!function_exists('getXmlAttribute')) {
     }
 }
 
+if (!function_exists('getUniqueCode')) {
+    function getUniqueCode($length)
+    {
+       return bin2hex(random_bytes($length));
+    }
+}
+
 
 

@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Logging\TravelPortLogger;
+use App\Models\FlightsSearchFlightInfo;
+use App\Models\Reservation;
+use App\Observers\CheckoutObserver;
+use App\Observers\ReservationObserver;
 use FilippoToso\Travelport\TravelportLogger as BaseTravelPortLogger;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(BaseTravelPortLogger::class, TravelPortLogger::class);
+
+        FlightsSearchFlightInfo::observe(CheckoutObserver::class);
+        Reservation::observe(ReservationObserver::class);
     }
 }

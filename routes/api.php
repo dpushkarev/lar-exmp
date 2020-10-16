@@ -46,7 +46,7 @@ Route::middleware(['nemo.widget.cache'])->group(function () {
 
     Route::post('/flights/utils/rules/{id}', 'NemoWidget@fareRules')->where('id', '\d+')->name(NemoWidgetCache::FLIGHTS_RULES);
 
-    Route::get('/checkout/{id}', 'Checkout@getData')->where('id', '\d+')->name(NemoWidgetCache::CHECKOUT);
+    Route::get('/checkout/{code}', 'Checkout@getData')->where('code', '[0-9a-f]{10}')->name(NemoWidgetCache::CHECKOUT);
 
 
 
@@ -58,10 +58,10 @@ Route::get('/guide/airports/{iataCode}', 'NemoWidget@airport')->where('iataCode'
 Route::post('/system/logger/error', 'NemoWidget@errorLog');
 Route::get('/flights/search/history', 'NemoWidget@history');
 
-Route::post('/reservation/{id}', 'Checkout@reservation')->where('id', '\d+')->name('create.reservation');
-Route::get('/reservation/{id}', 'Checkout@getReservation')->where('id', '\d+')->name('get.reservation');
-Route::get('/order/{id}', function (){
-    return response(sprintf('You should use %s', 'GET /reservation/{ID from reservationId node}'), 410);
+Route::post('/reservation/{code}', 'Checkout@reservation')->where('code', '[0-9a-f]{10}')->name('create.reservation');
+Route::get('/reservation/{code}', 'Checkout@getReservation')->where('code', '[0-9a-f]{10}')->name('get.reservation');
+Route::get('/order/{code}', function (){
+    return response(sprintf('You should use %s', 'GET /reservation/{Code from reservationCode node}'), 410);
 })->name('get.reservation.old');
 
 Route::get('/guide/airports/nearest', function () {

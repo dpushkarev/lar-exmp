@@ -152,6 +152,7 @@ class NemoWidgetService
      * @param FlightsSearchResult $resultModel
      * @return Collection
      * @throws NemoWidgetServiceException
+     * @throws \Brick\Money\Exception\MoneyMismatchException
      */
     public function getFlightInfo(FlightsSearchResult $resultModel)
     {
@@ -224,7 +225,7 @@ class NemoWidgetService
         ]);
 
         $aiePriceRsp = $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
-        $aiePriceRsp->put('createOrderLink', sprintf('/checkout/%d', $order->id));
+        $aiePriceRsp->put('createOrderLink', sprintf('/checkout/%s', $order->code));
 
         return $aiePriceRsp;
     }

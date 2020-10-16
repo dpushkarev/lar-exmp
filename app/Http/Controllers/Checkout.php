@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Adapters\FtObjectAdapter;
 use App\Exceptions\ApiException;
-use App\Exceptions\NemoWidgetServiceException;
 use App\Exceptions\TravelPortLoggerException;
 use App\Http\Requests\AirReservationRequest;
 use App\Http\Resources\NemoWidget\AirReservation;
+use App\Http\Resources\NemoWidget\FinishedOrder;
 use App\Http\Resources\NemoWidget\FlightsSearchResults;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
@@ -19,33 +19,33 @@ use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
+use Illuminate\Http\Request;
 
 class Checkout extends Controller
 {
 
     /**
-     * @param $flightInfoId
+     * @param $flightInfoCode
      * @param FtObjectAdapter $adapter
      * @param MoneyService $moneyService
-     * @return FlightsSearchResults
+     * @return FinishedOrder|FlightsSearchResults
      * @throws ApiException
-     *
      */
-    public function getData($flightInfoId, FtObjectAdapter $adapter, MoneyService $moneyService)
+    public function getData($flightInfoCode, FtObjectAdapter $adapter, MoneyService $moneyService)
     {
         /** @var FlightsSearchFlightInfo $flightInfo */
-        $flightInfo = FlightsSearchFlightInfo::whereId($flightInfoId)->with('result.request')->first();
+        $flightInfo = FlightsSearchFlightInfo::whereCode($flightInfoCode)->with('result.request')->first();
 
         if (is_null($flightInfo)) {
-            throw ApiException::getInstanceInvalidId($flightInfoId);
+            throw ApiException::getInstanceInvalidId($flightInfoCode);
         }
 
         if ($flightInfo->reservation) {
-            throw ApiException::getInstance('Finished order');
+            return new FinishedOrder($flightInfo->reservation);
         }
 
         if ($flightInfo->created_at->diffInHours(Carbon::now()) > 3) {
-            throw ApiException::getInstance('Offer has expired');
+            throw ApiException::getInstance('Order has expired');
         }
 
         try {
@@ -75,21 +75,21 @@ class Checkout extends Controller
     /**
      * @param AirReservationRequest $request
      * @param CheckoutService $service
-     * @param $flightInfoId
-     * @return AirReservation
+     * @param $flightInfoCode
+     * @return AirReservation|FinishedOrder
      * @throws ApiException
      */
-    public function reservation(AirReservationRequest $request, CheckoutService $service, $flightInfoId)
+    public function reservation(AirReservationRequest $request, CheckoutService $service, $flightInfoCode)
     {
         /** @var FlightsSearchFlightInfo $flightInfo */
-        $flightInfo = FlightsSearchFlightInfo::find($flightInfoId);
+        $flightInfo = FlightsSearchFlightInfo::whereCode($flightInfoCode)->with('reservation')->first();
 
         if (is_null($flightInfo)) {
-            throw ApiException::getInstanceInvalidId($flightInfoId);
+            throw ApiException::getInstanceInvalidId($flightInfoCode);
         }
 
         if ($flightInfo->reservation) {
-            throw ApiException::getInstance('Finished order');
+            return new FinishedOrder($flightInfo->reservation);
         }
 
         $dto = $request->getAirReservationRequestDto();
@@ -106,17 +106,30 @@ class Checkout extends Controller
 
     /**
      * @param FtObjectAdapter $adapter
-     * @param $reservationId
+     * @param Request $request
+     * @param $reservationCode
      * @return AirReservation
      * @throws ApiException
      */
-    public function getReservation(FtObjectAdapter $adapter, $reservationId)
+    public function getReservation(FtObjectAdapter $adapter, Request $request, $reservationCode)
     {
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'access_code' => 'required|max:5',
+        ]);
+
+        if ($validator->fails()) {
+            throw ApiException::getInstanceValidate($validator->errors()->first());
+        }
+
         /** @var FlightsSearchFlightInfo $order */
-        $reservation = Reservation::find($reservationId);
+        $reservation = Reservation::where('code', $reservationCode)->first();
 
         if (is_null($reservation)) {
-            throw ApiException::getInstanceInvalidId($reservationId);
+            throw ApiException::getInstanceInvalidId($reservationCode);
+        }
+
+        if ($reservation->access_code !== $request->get('access_code')) {
+            throw ApiException::getInstance('Wrong access code');
         }
 
         try {

@@ -40,15 +40,16 @@ class FlightsBookingTestTest extends TestCase
             $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-rsp.obj'))->once();
         });
 
-        $this->json('GET', '/api/flights/search/flightInfo/' . $request->id)
+        $response = $this->json('GET', '/api/flights/search/flightInfo/' . $request->id)
             ->assertStatus(200)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.changed', false)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 572999)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.currency', 'RSD')
             ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 572999)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
-            ->assertJsonPath('flights.search.flightInfo.createOrderLink', '/checkout/1');
+            ->decodeResponseJson();
 
+        $this->assertRegExp('/\/checkout\/[0-9a-f]{10}/', $response['flights']['search']['flightInfo']['createOrderLink']);
 
         $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '4DD22E310A076478E8B1D2309D8229A7']);
     }
@@ -71,7 +72,7 @@ class FlightsBookingTestTest extends TestCase
         });
 
         /** Get checkout */
-        $this->json('GET', '/api/checkout/' . $flightInfo->id)
+        $this->json('GET', '/api/checkout/' . $flightInfo->code)
             ->assertStatus(200)
             ->assertJsonStructure([
                 'flights' => [
@@ -137,12 +138,11 @@ class FlightsBookingTestTest extends TestCase
             ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj')));
 
         /** Reservation */
-        $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
+        $response = $this->json('POST','/api/reservation/' . $flightInfo->code, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
             ->assertStatus(200)
             ->assertJsonCount(5, 'guide')
             ->assertJsonCount(4, 'universalRecord.bookingTraveler')
             ->assertJsonPath('universalRecord.bookingTraveler.0.bookingTravelerName.first', 'Pushakrev')
-            ->assertJsonPath('reservationId', 1)
             ->assertJsonCount(2, 'universalRecord.bookingTraveler.0.phoneNumber')
             ->assertJsonCount(1, 'universalRecord.bookingTraveler.0.email')
             ->assertJsonCount(1, 'universalRecord.bookingTraveler.0.address')
@@ -166,18 +166,27 @@ class FlightsBookingTestTest extends TestCase
                         ]
                     ]
                 ]
-            ]);
+            ])
+            ->decodeResponseJson();
+
+        $this->assertNotNull($response['reservationCode']);
+        $this->assertNotNull($response['reservationAccessCode']);
 
         $this->assertDatabaseHas('reservations', ['flights_search_flight_info_id' => $flightInfo->id, 'transaction_id' => '0C42A5590A0742610CA0F41AE03B3BD2']);
 
-        $this->json('POST','/api/reservation/' . $flightInfo->id, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
-            ->assertStatus(422);
+        $this->json('POST','/api/reservation/' . $flightInfo->code, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
+            ->assertStatus(200)
+            ->assertJsonPath('message', "Finished order")
+            ->assertJsonPath('reservationCode', $response['reservationCode']);
 
         $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
             $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj'))->once();
         });
 
-        $this->json('GET','/api/reservation/' . 1)
+        $this->json('GET','/api/reservation/' . $response['reservationCode'], ['access_code' => 'dfs43'])
+            ->assertStatus(422);
+
+        $this->json('GET','/api/reservation/' . $response['reservationCode'], ['access_code' => $response['reservationAccessCode']])
             ->assertStatus(200)
             ->assertJsonPath('paymentOption', 'card')
             ->assertJsonStructure([
