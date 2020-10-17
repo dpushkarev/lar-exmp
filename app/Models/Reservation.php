@@ -24,4 +24,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(FlightsSearchFlightInfo::class, 'flights_search_flight_info_id', 'id');
     }
+
+    public function getUrl()
+    {
+        return route('get.reservation', ['code' => $this->code]);
+    }
 }

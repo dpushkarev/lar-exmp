@@ -22,9 +22,9 @@ class PaymentController extends Controller
         $this->paymentService = $paymentService;
     }
 
-    public function confirment($reservation_id)
+    public function confirment($reservationCode)
     {
-        $reservation = Reservation::find($reservation_id);
+        $reservation = Reservation::whereCode($reservationCode)->first();
 
         if (!$reservation) {
             return response()->json(['error' => 'Reservation not found']);
@@ -35,18 +35,19 @@ class PaymentController extends Controller
         }
 
         return view('nestpay::confirm', [
-            'paymentData' => $this->paymentService->getPaymentData($reservation)
+            'paymentData' => $this->paymentService->getPaymentData($reservation),
+            'reservation' => $reservation
         ]);
 
     }
 
     /**
-     * @param $reservation_id
+     * @param $reservationCode
      * @return Confirm|\Illuminate\Http\JsonResponse
      */
-    public function confirm($reservation_id)
+    public function confirm($reservationCode)
     {
-        $reservation = Reservation::find($reservation_id);
+        $reservation = Reservation::whereCode($reservationCode)->first();
 
         if (!$reservation) {
             return response()->json(['error' => 'The reservation not found']);
@@ -73,6 +74,7 @@ class PaymentController extends Controller
 
         return view('web.sections.payment.success', [
             'payment' => $payment,
+            'reservation' => $payment->reservation,
         ]);
     }
 
@@ -90,6 +92,7 @@ class PaymentController extends Controller
 
         return view('web.sections.payment.fail', [
             'payment' => $payment,
+            'reservation' => $payment->reservation,
         ]);
     }
 

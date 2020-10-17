@@ -24,8 +24,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         NestpayPaymentProcessedSuccessfullyEvent::class => [
+            UpdateReservation::class,
             PaymentAlert::class,
-            UpdateReservation::class
         ],
         NestpayPaymentProcessedFailedEvent::class => [
             PaymentAlert::class,

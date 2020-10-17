@@ -386,7 +386,7 @@
                                                             <td align="center" bgcolor="#efa52d" role="presentation"
                                                                 style="border:none;border-radius:3px;cursor:auto;mso-padding-alt:10px 25px;background:#efa52d;"
                                                                 valign="middle">
-                                                                <a href="{{ route('get.reservation', ['id' => $payment['INVOICENUMBER']]) }}"
+                                                                <a href="{{ $reservation->getUrl() }}"
                                                                    style="display:inline-block;width:250px;background:#efa52d;color:#ffffff;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;font-size:17px;font-weight:bold;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:10px 25px;mso-padding-alt:0px;border-radius:3px;"
                                                                    target="_blank"> Pogledaj rezervaciju </a>
                                                             </td>

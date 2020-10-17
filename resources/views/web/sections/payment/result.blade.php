@@ -10,9 +10,14 @@
             </tr>
             </thead>
             <tbody>
+            @yield('error')
             <tr>
                 <th scope="row">Broj rezervacije</th>
                 <td>{{ $payment->INVOICENUMBER }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Шифра rezervacije</th>
+                <td>{{ $reservation->code }}</td>
             </tr>
             <tr>
                 <th scope="row">Ime Prezime</th>
