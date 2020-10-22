@@ -104,13 +104,13 @@ trait ResponseCache
 
     protected function checkoutSetCache($request, $response)
     {
-        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::CHECKOUT, (int)$request->id, App::getLocale());
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::CHECKOUT, $request->code, App::getLocale());
         Cache::put($cacheKey, $response->getContent(), 3600 * 3);
     }
 
     protected function checkoutGetCache($request)
     {
-        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::CHECKOUT, (int)$request->id, App::getLocale());
+        $cacheKey = NemoWidgetCache::getCacheKey(NemoWidgetCache::CHECKOUT, $request->code, App::getLocale());
         return Cache::get($cacheKey, null);
     }
 
