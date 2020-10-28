@@ -5,6 +5,7 @@ namespace App\Exceptions;
 class ApiException extends \Exception
 {
     const DEFAULT_ERROR = 1000;
+    const VALIDATION_ERROR = 422;
     const ERROR_INVALID_ID = 101;
 
     /**
@@ -39,11 +40,12 @@ class ApiException extends \Exception
 
     /**
      * @param $massage
+     * @param int $code
      * @return ApiException
      */
-    public static function getInstanceValidate($massage)
+    public static function getInstanceValidate($massage, $code = self::VALIDATION_ERROR)
     {
-        return new self('Validation error: ' . $massage);
+        return new self('Validation error: ' . $massage, $code);
     }
 
     public function getResponseArray()

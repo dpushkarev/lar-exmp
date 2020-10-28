@@ -15,6 +15,7 @@ class FinishedOrder extends JsonResource
     public function toArray($request)
     {
         return [
+            'code' => 301,
             'message' => 'Finished order',
             'reservationCode' => $this->resource->code,
         ];

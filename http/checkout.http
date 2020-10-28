@@ -11,7 +11,7 @@ POST http://127.0.0.1:8081/api/reservation/70fe1088f3?
 GET http://127.0.0.1:8081/api/order/1
 
 ###
-GET http://127.0.0.1:8081/api/reservation/1a78ca3970?access_code=6ac7
+GET http://127.0.0.1:8081/api/reservation/1a78ca3970
 
 ###
 

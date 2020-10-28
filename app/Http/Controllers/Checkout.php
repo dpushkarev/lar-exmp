@@ -114,11 +114,11 @@ class Checkout extends Controller
     public function getReservation(FtObjectAdapter $adapter, Request $request, $reservationCode)
     {
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
-            'access_code' => 'required|max:5',
+            'access_code' => 'required',
         ]);
 
         if ($validator->fails()) {
-            throw ApiException::getInstanceValidate($validator->errors()->first());
+            throw ApiException::getInstanceValidate($validator->errors()->first(), 666);
         }
 
         /** @var FlightsSearchFlightInfo $order */
@@ -129,7 +129,7 @@ class Checkout extends Controller
         }
 
         if ($reservation->access_code !== $request->get('access_code')) {
-            throw ApiException::getInstance('Wrong access code');
+            throw ApiException::getInstanceValidate('Wrong access code');
         }
 
         try {
