@@ -15,7 +15,7 @@ class FlightGroups extends JsonResource
             'flights' => [
                 [
                     'canProcessFareFamilies' => false,
-                    'createOrderLink' => "/checkout/",
+                    'createOrderLink' => "/reservation/",
                     'expectedNumberOfTickets' => false,
                     'id' => $this->resource->id,
                     'nemo2id' => $this->resource->id,
