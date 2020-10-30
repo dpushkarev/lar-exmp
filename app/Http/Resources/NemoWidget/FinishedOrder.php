@@ -16,7 +16,7 @@ class FinishedOrder extends JsonResource
     {
         return [
             'code' => 301,
-            'message' => 'Finished order',
+            'message' => 'Finished checkout',
             'reservationCode' => $this->resource->code,
         ];
     }

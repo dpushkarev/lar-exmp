@@ -6,6 +6,7 @@ use App\Models\Error;
 use App\Models\FlightsSearchFlightInfo;
 use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
+use App\Models\NestpayPayment;
 use App\Models\Reservation;
 use Illuminate\Console\Command;
 
@@ -47,6 +48,7 @@ class FlushTables extends Command
         FlightsSearchResult::query()->truncate();
         FlightsSearchRequest::query()->truncate();
         Error::query()->truncate();
+        NestpayPayment::query()->truncate();
 
         $this->comment('Tables have been cleared');
     }
