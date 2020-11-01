@@ -49,7 +49,7 @@ class FlightsBookingTestTest extends TestCase
             ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
             ->decodeResponseJson();
 
-        $this->assertRegExp('/\/checkout\/[0-9a-f]{10}/', $response['flights']['search']['flightInfo']['createOrderLink']);
+        $this->assertRegExp('/\/reservation\/[0-9a-f]{10}/', $response['flights']['search']['flightInfo']['createOrderLink']);
 
         $this->assertDatabaseHas('flights_search_flight_infos', ['flight_search_result_id' => $result->id, 'transaction_id' => '4DD22E310A076478E8B1D2309D8229A7']);
     }
@@ -176,7 +176,7 @@ class FlightsBookingTestTest extends TestCase
 
         $this->json('POST','/api/reservation/' . $flightInfo->code, ['request' => file_get_contents(__DIR__ . '/files/Reservation/reservation.json')])
             ->assertStatus(200)
-            ->assertJsonPath('message', "Finished order")
+            ->assertJsonPath('message', "Finished checkout")
             ->assertJsonPath('reservationCode', $response['reservationCode']);
 
         $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {

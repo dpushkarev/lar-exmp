@@ -819,58 +819,60 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
 
 
-                        /** @var BagDetails $bagDetail */
                         $bagDetailData = [];
-                        foreach ($baggageAllowanceInfo->getBagDetails() as $bagDetail) {
+                        if (!is_null($baggageAllowanceInfo->getBagDetails())) {
+                            /** @var BagDetails $bagDetail */
+                            foreach ($baggageAllowanceInfo->getBagDetails() as $bagDetail) {
 
-                            $baggageRestrictionData = [];
-                            if (!is_null($bagDetail->getBaggageRestriction())) {
-                                /** @var BaggageRestriction $baggageRestriction */
-                                foreach ($bagDetail->getBaggageRestriction() as $baggageRestriction) {
+                                $baggageRestrictionData = [];
+                                if (!is_null($bagDetail->getBaggageRestriction())) {
+                                    /** @var BaggageRestriction $baggageRestriction */
+                                    foreach ($bagDetail->getBaggageRestriction() as $baggageRestriction) {
 
-                                    $textInfoDataBagRest = [];
-                                    if (!is_null($baggageRestriction->getTextInfo())) {
-                                        foreach ($baggageRestriction->getTextInfo() as $textInfo) {
-                                            $textInfoDataBagRest[] = [
-                                                'title' => $textInfo->getTitle(),
-                                                'text' => $textInfo->getText()
-                                            ];
+                                        $textInfoDataBagRest = [];
+                                        if (!is_null($baggageRestriction->getTextInfo())) {
+                                            foreach ($baggageRestriction->getTextInfo() as $textInfo) {
+                                                $textInfoDataBagRest[] = [
+                                                    'title' => $textInfo->getTitle(),
+                                                    'text' => $textInfo->getText()
+                                                ];
+                                            }
                                         }
+
+
+                                        $baggageRestrictionData[] = [
+                                            'dimension' => $baggageRestriction->getDimension(),
+                                            'maxWeight' => $baggageRestriction->getMaxWeight(),
+                                            'textInfo' => $textInfoDataBagRest
+                                        ];
                                     }
-
-
-                                    $baggageRestrictionData[] = [
-                                        'dimension' => $baggageRestriction->getDimension(),
-                                        'maxWeight' => $baggageRestriction->getMaxWeight(),
-                                        'textInfo' => $textInfoDataBagRest
-                                    ];
                                 }
-                            }
 
-                            $basePrice = $this->moneyService->getMoneyByString($bagDetail->getBasePrice());
-                            $approximateBasePrice = $this->moneyService->getMoneyByString($bagDetail->getApproximateBasePrice());
-                            $totalPrice = $this->moneyService->getMoneyByString($bagDetail->getTotalPrice());
-                            $approximateTotalPrice = $this->moneyService->getMoneyByString($bagDetail->getApproximateTotalPrice());
-                            $bagDetailData[] = [
-                                'applicableBags' => $bagDetail->getApplicableBags(),
-                                'basePrice' => [
-                                    'amount' => $basePrice->getAmountAsFloat(),
-                                    'currency' => $basePrice->getCurrency()->getCurrencyCode()
-                                ],
-                                'approximateBasePrice' => [
-                                    'amount' => $approximateBasePrice->getAmountAsFloat(),
-                                    'currency' => $approximateBasePrice->getCurrency()->getCurrencyCode()
-                                ],
-                                'totalPrice' => [
-                                    'amount' => $totalPrice->getAmountAsFloat(),
-                                    'currency' => $totalPrice->getCurrency()->getCurrencyCode()
-                                ],
-                                'approximateTotalPrice' => [
-                                    'amount' => $approximateTotalPrice->getAmountAsFloat(),
-                                    'currency' => $approximateTotalPrice->getCurrency()->getCurrencyCode()
-                                ],
-                                'baggageRestriction' => $baggageRestrictionData
-                            ];
+                                $basePrice = $this->moneyService->getMoneyByString($bagDetail->getBasePrice());
+                                $approximateBasePrice = $this->moneyService->getMoneyByString($bagDetail->getApproximateBasePrice());
+                                $totalPrice = $this->moneyService->getMoneyByString($bagDetail->getTotalPrice());
+                                $approximateTotalPrice = $this->moneyService->getMoneyByString($bagDetail->getApproximateTotalPrice());
+                                $bagDetailData[] = [
+                                    'applicableBags' => $bagDetail->getApplicableBags(),
+                                    'basePrice' => [
+                                        'amount' => $basePrice->getAmountAsFloat(),
+                                        'currency' => $basePrice->getCurrency()->getCurrencyCode()
+                                    ],
+                                    'approximateBasePrice' => [
+                                        'amount' => $approximateBasePrice->getAmountAsFloat(),
+                                        'currency' => $approximateBasePrice->getCurrency()->getCurrencyCode()
+                                    ],
+                                    'totalPrice' => [
+                                        'amount' => $totalPrice->getAmountAsFloat(),
+                                        'currency' => $totalPrice->getCurrency()->getCurrencyCode()
+                                    ],
+                                    'approximateTotalPrice' => [
+                                        'amount' => $approximateTotalPrice->getAmountAsFloat(),
+                                        'currency' => $approximateTotalPrice->getCurrency()->getCurrencyCode()
+                                    ],
+                                    'baggageRestriction' => $baggageRestrictionData
+                                ];
+                            }
                         }
 
                         $airPricingInfoData['baggageAllowances']['baggageAllowanceInfo'][] = [

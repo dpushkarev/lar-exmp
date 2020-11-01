@@ -1,3 +1,129 @@
+GET http://127.0.0.1:8081/api/checkout/41861d33c0
+
+<> 2020-10-30T015200.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/41861d33c1?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"ElGz2VwYlDKAqqHHNAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T015151.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/reservation/0d60d37732?access_code=44d
+
+<> 2020-10-30T014901.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/reservation/0d60d37732?access_code=44d4
+
+<> 2020-10-30T014851.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/41861d33c0?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"ElGz2VwYlDKAqqHHNAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T014559.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1393b9bc93?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"ElGz2VwYlDKAqqHHNAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T014545.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/41861d33c0
+
+<> 2020-10-30T014440.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/1
+
+<> 2020-10-30T014424.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/1
+
+<> 2020-10-30T014407.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-12-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-10-30T014354.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1393b9bc93?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"immBDVAqWDKAbC4JBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T014208.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1393b9bc93?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"immBDVAqWDKAbC4JBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T014034.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1393b9bc93?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/immBDVAqWDKAbC4JBAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T013959.422.json
+
+###
+
+POST http://127.0.0.1:8081/api/reservation/1393b9bc93?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+
+<> 2020-10-30T013820.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/1393b9bc93
+
+<> 2020-10-30T013212.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/checkout/70fe1088f3
+
+<> 2020-10-30T013205.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/1
+
+<> 2020-10-30T011508.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/reservation/1393b9bc93
+
+<> 2020-10-30T011415.422.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/1
+
+<> 2020-10-30T011335.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/1
+
+<> 2020-10-30T011255.200.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-12-24T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+
+<> 2020-10-30T011238.200.json
+
+###
+
 GET http://127.0.0.1:8081/api/checkout/70fe1088f3
 
 <> 2020-10-28T043302.200.json
@@ -169,128 +295,6 @@ POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"t
 POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 
 <> 2020-10-21T093826.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-21T093743.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-21T093659.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-21T093620.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-21T093300.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-<> 2020-10-21T093223.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/reservation/70fe1088f3?request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Prvi","last":"Prezime","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"t9o/BV4R2BKA6p9uAAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"+381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
-
-###
-
-GET http://127.0.0.1:8081/api/reservation/4
-
-<> 2020-10-15T123053.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/reservation/1
-
-<> 2020-10-15T123046.422.json
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T123007.410.html
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T122737.410.html
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T122727.410.html
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T122709.410.html
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T122624.500.json
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T122600.410.html
-
-###
-
-GET http://127.0.0.1:8081/api/order/1
-
-<> 2020-10-15T122443.500.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/4
-
-<> 2020-10-14T094639.200.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-14T094604.200.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/1
-
-<> 2020-10-14T094546.200.json
-
-###
-
-POST http://127.0.0.1:8081/payment/confirm/2
-
-<> 2020-10-14T094539.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/3
-
-<> 2020-10-14T084754.200.json
 
 ###
 
