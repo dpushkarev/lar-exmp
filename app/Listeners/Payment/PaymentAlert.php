@@ -17,7 +17,7 @@ class PaymentAlert
         $template = $payment->isSuccess() ? 'mail.nestpaysuccess' : 'mail.nestpayfail';
 
         Mail::send($template, ['payment' => $payment->toArray(), 'reservation' => $reservation], function ($message) use($payment){
-            $message->to($payment->getEmail(), 'Receiver')->subject('Information about reservation');
+            $message->to($payment->getEmail(), 'Receiver')->subject('eKarte - informacija o transakciji');
         });
     }
 }

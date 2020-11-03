@@ -35,7 +35,7 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
 GET http://127.0.0.1:8081/api/flights/search/history
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/1
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/7
 
 ###
 POST http://127.0.0.1:8081/api/flights/utils/rules/4

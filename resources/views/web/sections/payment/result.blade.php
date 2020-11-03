@@ -16,7 +16,7 @@
                 <td>{{ $payment->INVOICENUMBER }}</td>
             </tr>
             <tr>
-                <th scope="row">Шифра rezervacije</th>
+                <th scope="row">Sifra rezervacije</th>
                 <td>{{ $reservation->code }}</td>
             </tr>
             <tr>

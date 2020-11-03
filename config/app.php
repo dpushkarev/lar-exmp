@@ -54,6 +54,11 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    /*
+     * Frontend url
+     */
+    'ff_url' => 'http://v2.ekarte.rs',
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

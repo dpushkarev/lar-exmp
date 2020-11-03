@@ -126,6 +126,7 @@ class CheckoutService
             'data' => $dto->getRequest(),
             'amount' => $responseCollection->get('totalPrice')['amount'],
             'currency_code' => $responseCollection->get('totalPrice')['currency'],
+//            'access_code' => $responseCollection->get('universalRecord')['locatorCode'],
         ]);
 
         $responseCollection->put('reservationCode', $reservation->code);

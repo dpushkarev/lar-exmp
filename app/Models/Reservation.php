@@ -27,6 +27,6 @@ class Reservation extends Model
 
     public function getUrl()
     {
-        return route('get.reservation', ['code' => $this->code]);
+        return config('app.ff_url') . '/reservation/' . $this->code;
     }
 }
