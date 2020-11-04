@@ -18,7 +18,6 @@ use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
-use Illuminate\Support\Facades\Cache;
 
 class CheckoutService
 {
@@ -126,7 +125,7 @@ class CheckoutService
             'data' => $dto->getRequest(),
             'amount' => $responseCollection->get('totalPrice')['amount'],
             'currency_code' => $responseCollection->get('totalPrice')['currency'],
-            'access_code' => $responseCollection->get('universalRecord')['locatorCode'],
+            'access_code' => $responseCollection->get('accessCode')
         ]);
 
         $responseCollection->put('reservationCode', $reservation->code);

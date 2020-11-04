@@ -1105,6 +1105,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $countOfPassengers = 0;
         $countOfPassengersMap = collect();
         $totalPrice = Money::zero(MoneyService::AGENCY_CHARGE_CURRENCY);
+        $accessCode = null;
 
         /** @var BookingTraveler $bookingTraveler */
         foreach ($response->getUniversalRecord()->getBookingTraveler() as $bookingTraveler) {
@@ -1273,6 +1274,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
         /** @var \FilippoToso\Travelport\UniversalRecord\ProviderReservationInfo $providerReservation */
         foreach ($response->getUniversalRecord()->getProviderReservationInfo() as $providerReservation) {
+            $accessCode = $providerReservation->LocatorCode;
             $providerReservationCollection->add([
                 'providerCode' => $providerReservation->getProviderCode(),
                 'providerLocatorCode' => $providerReservation->getProviderLocatorCode(),
@@ -1970,6 +1972,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 'version' => $response->getUniversalRecord()->getVersion(),
             ],
             'airSolutionChangeInfo' => $airSolutionChangeInfoData,
+            'accessCode' => $accessCode,
             'responseTime' => $response->getResponseTime(),
             'airlines' => $airLines,
             'airports' => $airports,
