@@ -18,6 +18,7 @@ use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
+use Illuminate\Support\Facades\Cache;
 
 class CheckoutService
 {

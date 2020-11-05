@@ -16,6 +16,7 @@ class AirReservation extends AbstractResource
             'universalRecord' => $this->resource->get('universalRecord'),
             'paymentOption' => $this->resource->get('paymentOption'),
             'responseTime' => $this->resource->get('responseTime'),
+            'totalPrice' => $this->resource->get('totalPrice'),
             'passengersCount' => $this->resource->get('passengersCount'),
             'airSolutionChangeInfo' => $this->resource->get('airSolutionChangeInfo'),
             'reservationCode' => $this->resource->get('reservationCode'),

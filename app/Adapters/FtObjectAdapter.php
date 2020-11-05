@@ -1468,6 +1468,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             if (!is_null($airReservation->getAirPricingInfo())) {
                 /** @var \FilippoToso\Travelport\UniversalRecord\AirPricingInfo $airPricingInfo */
                 foreach ($airReservation->getAirPricingInfo() as $airPricingInfo) {
+                    $airPricingInfoPrice = $this->moneyService->getMoneyByString($airPricingInfo->getTotalPrice());
                     $fareInfoData = [];
                     /** @var \FilippoToso\Travelport\UniversalRecord\FareInfo $fareInfo */
                     foreach ($airPricingInfo->getFareInfo() as $fareInfo) {
@@ -1585,6 +1586,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $code = (string)$passengerTpe->getCode();
                         $countOfPassengersMap->put($code, $countOfPassengersMap->get($code, 0) + 1);
                         $totalPrice = $this->moneyService->addAgencyChargeByPassengerType($totalPrice, $code);
+                        $totalPrice = $totalPrice->plus($airPricingInfoPrice);
                     }
 
                     $bookingTravelerRefData = [];
@@ -1633,8 +1635,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
                     }
 
-                    $airPricingInfoPrice = $this->moneyService->getMoneyByString($airPricingInfo->getTotalPrice());
-                    $totalPrice = $totalPrice->plus($airPricingInfoPrice);
                     $basePrice = $this->moneyService->getMoneyByString($airPricingInfo->getBasePrice());
                     $approximateTotalPrice = $this->moneyService->getMoneyByString($airPricingInfo->getApproximateTotalPrice());
                     $approximateBasePrice = $this->moneyService->getMoneyByString($airPricingInfo->getApproximateBasePrice());
