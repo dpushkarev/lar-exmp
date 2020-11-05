@@ -39,7 +39,7 @@ class MoneyService
 
     public function calculateCashPrice($count)
     {
-        return $this->getCashMoney();
+        return $this->getCashMoney()->multipliedBy($count);
     }
 
     /**
