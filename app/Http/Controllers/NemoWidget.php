@@ -92,7 +92,7 @@ class NemoWidget extends BaseController
      * @param int $id
      * @param NemoWidgetService $service
      * @return ErrorSearchId|FlightsSearchResults
-     * @throws TravelPortException
+     * @throws \Brick\Money\Exception\MoneyMismatchException
      */
     public function flightsSearchResult(int $id, NemoWidgetService $service)
     {

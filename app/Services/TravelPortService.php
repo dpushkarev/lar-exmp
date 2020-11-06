@@ -27,6 +27,7 @@ class TravelPortService
     const PASSENGERS_MAP = [
         'CLD' => 'CNN'
     ];
+    const CHILDREN_AGE = 11;
     const FORM_OF_PAYMENT_ROUTING_NUMBER = 456;
     const FORM_OF_PAYMENT_ACCOUNT_NUMBER = 789;
     const FORM_OF_PAYMENT_CHECK_NUMBER = 123456;
@@ -360,6 +361,7 @@ class TravelPortService
         foreach ($passengers as $passenger) {
             for ($i = 0; $i < $passenger['count']; $i++) {
                 $searchPassengers[] = (new Air\SearchPassenger)
+                    ->setAge($passenger['type'] === 'CLD' ? static::CHILDREN_AGE : null)
                     ->setCode(static::PASSENGERS_MAP[$passenger['type']] ?? $passenger['type'])
                     ->setBookingTravelerRef(base64_encode(rand(10000000, 20000000)))
                     ->setKey(base64_encode(rand(10000000, 20000000)));

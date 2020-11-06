@@ -595,7 +595,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                     $infoData->put($airPricingInfoData['type'], [
                         'nationality' => false,
-                        'dateOfBirth' => ($airPricingInfoData['type'] === static::PASSENGER_TYPE_INFANT),
+                        'dateOfBirth' => in_array($airPricingInfoData['type'], [static::PASSENGER_TYPE_INFANT, static::PASSENGER_TYPE_CHILD]),
                         'passportNo' => false,
                         'passportCountry' => false,
                         'passportExpiration' => false
