@@ -72,7 +72,7 @@ class NemoWidget extends BaseController
         });
 
         if (!$airline) {
-            throw ApiException::getInstanceInvalidId($iataCode);
+            throw ApiException::getInstanceInvalidCode($iataCode);
         }
 
         $result = collect(['countries' => [$airline->country], 'airlines' => [$airline], 'cities' => [$airline->city]]);
@@ -123,7 +123,7 @@ class NemoWidget extends BaseController
     {
         try {
             $this->validate($request, [
-                'searchId' => 'required',
+                'searchId' => 'sometimes',
                 'error' => 'required|array',
             ]);
         } catch (ValidationException $validationException) {

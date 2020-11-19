@@ -6,7 +6,7 @@ class ApiException extends \Exception
 {
     const DEFAULT_ERROR = 1000;
     const VALIDATION_ERROR = 422;
-    const ERROR_INVALID_ID = 101;
+    const ERROR_INVALID_CODE = 101;
 
     /**
      * ApiException constructor.
@@ -30,12 +30,12 @@ class ApiException extends \Exception
     }
 
     /**
-     * @param $id
+     * @param $code
      * @return ApiException
      */
-    public static function getInstanceInvalidId($id): self
+    public static function getInstanceInvalidCode($code): self
     {
-        return new self('Invalid id: ' . $id, self::ERROR_INVALID_ID);
+        return new self('Invalid code: ' . $code, self::ERROR_INVALID_CODE);
     }
 
     /**

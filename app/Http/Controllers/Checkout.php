@@ -37,7 +37,7 @@ class Checkout extends Controller
         $flightInfo = FlightsSearchFlightInfo::whereCode($flightInfoCode)->with('result.request')->first();
 
         if (is_null($flightInfo)) {
-            throw ApiException::getInstanceInvalidId($flightInfoCode);
+            throw ApiException::getInstanceInvalidCode($flightInfoCode);
         }
 
         if ($flightInfo->reservation) {
@@ -85,7 +85,7 @@ class Checkout extends Controller
         $flightInfo = FlightsSearchFlightInfo::whereCode($flightInfoCode)->with('reservation')->first();
 
         if (is_null($flightInfo)) {
-            throw ApiException::getInstanceInvalidId($flightInfoCode);
+            throw ApiException::getInstanceInvalidCode($flightInfoCode);
         }
 
         if ($flightInfo->reservation) {
@@ -125,7 +125,7 @@ class Checkout extends Controller
         $reservation = Reservation::where('code', $reservationCode)->first();
 
         if (is_null($reservation)) {
-            throw ApiException::getInstanceInvalidId($reservationCode);
+            throw ApiException::getInstanceInvalidCode($reservationCode);
         }
 
         if ($reservation->access_code !== $request->get('access_code')) {
