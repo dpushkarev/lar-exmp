@@ -35,5 +35,16 @@ if (!function_exists('getUniqueCode')) {
     }
 }
 
+if (!function_exists('convertToEngChar')) {
+    function convertToEngChar($string)
+    {
+        return str_replace(
+            ['Ć', 'Č', 'Ž', 'Đ', 'Š', 'š', 'đ', 'ž', 'č', 'ć'],
+            ['C', 'C', 'Z', 'D', 'S', 's', 'd', 'z', 'c', 'c'],
+            $string
+        );
+    }
+}
+
 
 

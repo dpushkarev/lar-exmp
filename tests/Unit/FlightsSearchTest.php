@@ -324,7 +324,7 @@ class FlightsSearchTest extends TestCase
                                                 'tariffs' => [
                                                     0 => [
                                                         'code', 'segNum', 'features' => [
-                                                            'baggage', 'refunds', 'misc'
+                                                            'refunds'
                                                         ]
                                                     ]
                                                 ]

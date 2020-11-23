@@ -123,6 +123,7 @@ class CheckoutService
         $reservation = Reservation::forceCreate([
             'transaction_id' => $response->getTransactionId(),
             'flights_search_flight_info_id' => $dto->getOrder()->id,
+            'code' => $dto->getOrder()->code,
             'data' => $dto->getRequest(),
             'amount' => $responseCollection->get('totalPrice')['amount'],
             'currency_code' => $responseCollection->get('totalPrice')['currency'],

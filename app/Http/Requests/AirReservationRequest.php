@@ -73,6 +73,10 @@ class AirReservationRequest extends FormRequest
                     return;
                 }
 
+                foreach ($request['address'] as $kay => &$item) {
+                    $item = convertToEngChar($item);
+                }
+
                 foreach($request['passengers'] as &$passenger) {
                     $validatorInstance = \Illuminate\Support\Facades\Validator::make($passenger, [
                         'travelerType' => 'required|string|max:3',
@@ -88,6 +92,8 @@ class AirReservationRequest extends FormRequest
                     }
 
                     $passenger['key'] = base64_encode(rand(10000000, 20000000));
+                    $passenger['first'] = convertToEngChar($passenger['first']);
+                    $passenger['last'] = convertToEngChar($passenger['last']);
                 }
 
                 if (!PhoneNumberUtil::isViablePhoneNumber($request['phoneNumber'])) {

@@ -49,6 +49,7 @@ use FilippoToso\Travelport\Air\typeFarePenalty;
 use FilippoToso\Travelport\Air\typeStructuredAddress;
 use FilippoToso\Travelport\Air\typeTaxInfo;
 use FilippoToso\Travelport\Air\typeTextElement;
+use FilippoToso\Travelport\Air\typeWeight;
 use FilippoToso\Travelport\Air\URLInfo;
 use FilippoToso\Travelport\UniversalRecord\AgentAction;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
@@ -73,10 +74,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'code' => 'baggage',
             'feature' => 'baggage',
         ],
-        2 => [
-            'code' => 'carry_on',
-            'feature' => 'baggage',
-        ],
+//        2 => [
+//            'code' => 'carry_on',
+//            'feature' => 'baggage',
+//        ],
         3 => [
             'code' => 'exchangeable',
             'feature' => 'refunds',
@@ -85,18 +86,18 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'code' => 'refundable',
             'feature' => 'refunds',
         ],
-        5 => [
-            'code' => 'vip_service',
-            'feature' => 'misc',
-        ],
-        6 => [
-            'code' => 'vip_service',
-            'feature' => 'misc',
-        ],
-        7 => [
-            'code' => 'vip_service',
-            'feature' => 'misc',
-        ],
+//        5 => [
+//            'code' => 'vip_service',
+//            'feature' => 'misc',
+//        ],
+//        6 => [
+//            'code' => 'vip_service',
+//            'feature' => 'misc',
+//        ],
+//        7 => [
+//            'code' => 'vip_service',
+//            'feature' => 'misc',
+//        ],
     ];
 
     protected $indicators = [
@@ -258,6 +259,33 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             foreach ($airPricePoint->getAirPricingInfo() as $airPricingInfo) {
                 $passengerFares = [];
                 $airPricePointData['refundable'] = $airPricingInfo->getRefundable() ?? false;
+                $refundsData = [];
+                if ($airPricingInfo->getChangePenalty()) {
+                    /** @var typeFarePenalty $chargePenalty */
+                    foreach ($airPricingInfo->getChangePenalty() as $chargePenalty) {
+                        $refundsData['exchangeable'][] = [
+                            'code' => 'exchangeable',
+                            'description' => [
+                                'short' => 'exchange',
+                                'full' => sprintf('%s (Anytime, Before departure or after departure) %s', $chargePenalty->getPenaltyApplies(), $chargePenalty->getPercentage()),
+                            ],
+                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'Free' : 'Charge'
+                        ];
+                    }
+                }
+                if ($airPricingInfo->getCancelPenalty()) {
+                    /** @var typeFarePenalty $cancelPenalty */
+                    foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
+                        $refundsData['refundable'][] = [
+                            'code' => 'refundable',
+                            'description' => [
+                                'short' => 'refund',
+                                'full' => sprintf('%s (Anytime, Before departure or after departure) %s', $cancelPenalty->getPenaltyApplies(), $cancelPenalty->getPercentage()),
+                            ],
+                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'Free' : 'Charge'
+                        ];
+                    }
+                }
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
                 $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
                 $countOfPassengers += $passengerFares['count'];
@@ -321,22 +349,55 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                             }
                             if (!isset($segmentFareMap[$segmentFareHash])) {
                                 $features = [];
-                                if ($getFareAttributes = $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareAttributes()) {
+                                /** @var FareInfo $getFareInfo */
+                                $getFareInfo = $fareInfoMap->get($bookingInfo->getFareInfoRef());
+                                if ($getFareInfo &&
+                                    $getFareInfo->getFareAttributes())
+                                {
+                                    $getFareAttributes = $getFareInfo->getFareAttributes();
+                                    $numberOfPiece = $getFareInfo->getBaggageAllowance()->getNumberOfPieces();
+                                    /** @var typeWeight $maxWeight */
+                                    $maxWeight = $getFareInfo->getBaggageAllowance()->getMaxWeight();
                                     $getFareAttributesSplit = explode('|', $getFareAttributes);
-
                                     foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
                                         list($priority, $indicator) = explode(',', $getFareAttributeSplit);
-                                        $fareAttribute = $this->FareAttributes[$priority];
-                                        $features[$fareAttribute['feature']][] = [
-                                            'code' => $fareAttribute['code'],
-                                            'description' => [
-                                                'short' => '-',
-                                                'full' => '-'
-                                            ],
-                                            'markAsImportant' => false,
-                                            'needToPay' => $this->indicators[$indicator],
-                                            'priority' => $priority,
-                                        ];
+                                        $fareAttribute = $this->FareAttributes[$priority] ?? null;
+
+                                        if (is_null($fareAttribute)) {
+                                            continue;
+                                        }
+
+                                        $short = '';
+                                        $indicator = 'N';
+                                        if ($numberOfPiece > 0) {
+                                            $short = "$numberOfPiece bag(s)";
+                                            $indicator = 'I';
+                                        }
+
+                                        if ($maxWeight && $maxWeight->getValue() > 0) {
+                                            $short = "$maxWeight kg";
+                                            $indicator = 'I';
+                                        }
+
+                                        $refundSection = $refundsData[$fareAttribute['code']] ?? [];
+                                        $features[$fareAttribute['feature']][] = array_merge(
+                                            [
+                                                'baggage' => [
+                                                    'code' => $fareAttribute['code'],
+                                                    'description' => [
+                                                        'short' => $short,
+                                                        'full' => ''
+                                                    ],
+                                                ],
+                                                'refunds' => array_shift($refundSection)
+                                            ][$fareAttribute['feature']],
+                                            [
+                                                'needToPay' => $this->indicators[$indicator],
+                                                'markAsImportant' => false,
+                                                'priority' => $priority,
+                                                'showTitle' => true
+                                            ]
+                                        );
 
                                         $features['hasFeatures'] = true;
                                     }
@@ -1950,7 +2011,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 ],
                 'paymentOptionCharge' => [
                     'cache' => [
-                        'amount' =>  $cashPrice->getAmountAsFloat(),
+                        'amount' => $cashPrice->getAmountAsFloat(),
                         'currency' => $cashPrice->getCurrency()->getCurrencyCode()
                     ],
                     'intesa' => [
