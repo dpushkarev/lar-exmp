@@ -17,7 +17,7 @@ GET http://127.0.0.1:8081/api/flights/search/results/4
 
 ###
 POST http://127.0.0.1:8081/api/flights/search/request?
- request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-12-24T00:00:00"}],"passengers":[{"type":"ADT","count":3}, {"type":"CLD","count":2},{"type":"INF","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+ request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"TIV","isCity":true},"departureDate":"2020-12-11T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
 
 ###
 

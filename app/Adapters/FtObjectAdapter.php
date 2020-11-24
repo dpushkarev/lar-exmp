@@ -446,7 +446,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     "code" => $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareBasis(),
                                     "familyName" => !is_null($title) ? $title->get_() : null,
                                     "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
-                                    "features" => $features,
+                                    "features" => !is_null($title) ? $features : [],
                                     "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
                                     'serviceClass' => $bookingInfo->getCabinClass()
                                 ];
