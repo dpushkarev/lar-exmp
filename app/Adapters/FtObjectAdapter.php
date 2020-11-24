@@ -263,7 +263,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 if ($airPricingInfo->getChangePenalty()) {
                     /** @var typeFarePenalty $chargePenalty */
                     foreach ($airPricingInfo->getChangePenalty() as $chargePenalty) {
-                        $refundsData['exchangeable'][] = [
+                        $refundsData[] = [
                             'code' => 'exchangeable',
                             'description' => [
                                 'short' => 'exchange',
@@ -279,7 +279,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 if ($airPricingInfo->getCancelPenalty()) {
                     /** @var typeFarePenalty $cancelPenalty */
                     foreach ($airPricingInfo->getCancelPenalty() as $cancelPenalty) {
-                        $refundsData['refundable'][] = [
+                        $refundsData[] = [
                             'code' => 'refundable',
                             'description' => [
                                 'short' => 'refund',
