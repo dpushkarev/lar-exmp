@@ -269,7 +269,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 'short' => 'exchange',
                                 'full' => sprintf('%s (Anytime, Before departure or after departure) %s', $chargePenalty->getPenaltyApplies(), $chargePenalty->getPercentage()),
                             ],
-                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'Free' : 'Charge'
+                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'Free' : 'Charge',
+                            'markAsImportant' => false,
+                            'priority' => 3,
+                            'showTitle' => false
                         ];
                     }
                 }
@@ -282,7 +285,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 'short' => 'refund',
                                 'full' => sprintf('%s (Anytime, Before departure or after departure) %s', $cancelPenalty->getPenaltyApplies(), $cancelPenalty->getPercentage()),
                             ],
-                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'Free' : 'Charge'
+                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'Free' : 'Charge',
+                            'markAsImportant' => false,
+                            'priority' => 3,
+                            'showTitle' => false
                         ];
                     }
                 }
@@ -387,6 +393,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     ];
 
                                     $features['hasFeatures'] = true;
+                                    $features['refunds'] = $refundsData;
 //                                    $getFareAttributesSplit = explode('|', $getFareAttributes);
 //                                    foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
 //                                        list($priority, $indicator) = explode(',', $getFareAttributeSplit);
