@@ -351,56 +351,85 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 $features = [];
                                 /** @var FareInfo $getFareInfo */
                                 $getFareInfo = $fareInfoMap->get($bookingInfo->getFareInfoRef());
-                                if ($getFareInfo &&
-                                    $getFareInfo->getFareAttributes())
-                                {
-                                    $getFareAttributes = $getFareInfo->getFareAttributes();
+
+                                if ($getFareInfo
+//                                    && $getFareInfo->getFareAttributes()
+                                    && $getFareInfo->getBaggageAllowance()
+                                ) {
+//                                    $getFareAttributes = $getFareInfo->getFareAttributes();
                                     $numberOfPiece = $getFareInfo->getBaggageAllowance()->getNumberOfPieces();
                                     /** @var typeWeight $maxWeight */
                                     $maxWeight = $getFareInfo->getBaggageAllowance()->getMaxWeight();
-                                    $getFareAttributesSplit = explode('|', $getFareAttributes);
-                                    foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
-                                        list($priority, $indicator) = explode(',', $getFareAttributeSplit);
-                                        $fareAttribute = $this->FareAttributes[$priority] ?? null;
 
-                                        if (is_null($fareAttribute)) {
-                                            continue;
-                                        }
-
-                                        $short = '';
-                                        $indicator = 'N';
-                                        if ($numberOfPiece > 0) {
-                                            $short = "$numberOfPiece bag(s)";
-                                            $indicator = 'I';
-                                        }
-
-                                        if ($maxWeight && $maxWeight->getValue() > 0) {
-                                            $short = "$maxWeight kg";
-                                            $indicator = 'I';
-                                        }
-
-                                        $refundSection = $refundsData[$fareAttribute['code']] ?? [];
-                                        $features[$fareAttribute['feature']][] = array_merge(
-                                            [
-                                                'baggage' => [
-                                                    'code' => $fareAttribute['code'],
-                                                    'description' => [
-                                                        'short' => $short,
-                                                        'full' => ''
-                                                    ],
-                                                ],
-                                                'refunds' => array_shift($refundSection)
-                                            ][$fareAttribute['feature']],
-                                            [
-                                                'needToPay' => $this->indicators[$indicator],
-                                                'markAsImportant' => false,
-                                                'priority' => $priority,
-                                                'showTitle' => true
-                                            ]
-                                        );
-
-                                        $features['hasFeatures'] = true;
+                                    $short = '';
+                                    $indicator = 'N';
+                                    if ($numberOfPiece > 0) {
+                                        $short = "$numberOfPiece bag(s)";
+                                        $indicator = 'I';
                                     }
+
+                                    if ($maxWeight && $maxWeight->getValue() > 0) {
+                                        $short = "$maxWeight kg";
+                                        $indicator = 'I';
+                                    }
+
+//                                    $refundSection = $refundsData[$fareAttribute['code']] ?? [];
+                                    $features['baggage'][] = [
+                                        'code' => 'baggage',
+                                        'description' => [
+                                            'short' => $short,
+                                            'full' => ''
+                                        ],
+                                        'needToPay' => $this->indicators[$indicator],
+                                        'markAsImportant' => false,
+                                        'priority' => 2,
+                                        'showTitle' => true
+                                    ];
+
+                                    $features['hasFeatures'] = true;
+//                                    $getFareAttributesSplit = explode('|', $getFareAttributes);
+//                                    foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
+//                                        list($priority, $indicator) = explode(',', $getFareAttributeSplit);
+//                                        $fareAttribute = $this->FareAttributes[$priority] ?? null;
+//
+//                                        if (is_null($fareAttribute)) {
+//                                            continue;
+//                                        }
+//
+//                                        $short = '';
+//                                        $indicator = 'N';
+//                                        if ($numberOfPiece > 0) {
+//                                            $short = "$numberOfPiece bag(s)";
+//                                            $indicator = 'I';
+//                                        }
+//
+//                                        if ($maxWeight && $maxWeight->getValue() > 0) {
+//                                            $short = "$maxWeight kg";
+//                                            $indicator = 'I';
+//                                        }
+//
+//                                        $refundSection = $refundsData[$fareAttribute['code']] ?? [];
+//                                        $features[$fareAttribute['feature']][] = array_merge(
+//                                            [
+//                                                'baggage' => [
+//                                                    'code' => $fareAttribute['code'],
+//                                                    'description' => [
+//                                                        'short' => $short,
+//                                                        'full' => ''
+//                                                    ],
+//                                                ],
+//                                                'refunds' => array_shift($refundSection)
+//                                            ][$fareAttribute['feature']],
+//                                            [
+//                                                'needToPay' => $this->indicators[$indicator],
+//                                                'markAsImportant' => false,
+//                                                'priority' => $priority,
+//                                                'showTitle' => true
+//                                            ]
+//                                        );
+//
+//                                        $features['hasFeatures'] = true;
+//                                    }
                                 }
 
                                 $brand = $fareInfoMap->get($bookingInfo->getFareInfoRef())->getBrand();
