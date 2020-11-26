@@ -27,9 +27,9 @@ class System extends JsonResource
                     "isB2B" => false,
                     "settings" => [
                         "currentLanguage" => App::getLocale(),
-                        "currentCurrency" => null,
-                        "agencyCurrency" => null,
-                        "agencyCountry" => null,
+                        "currentCurrency" => 'RSD',
+                        "agencyCurrency" => 'RSD',
+                        "agencyCountry" => 'RS',
                         "googleMapsApiKey" => null,
                         "googleMapsClientId" => null,
                         "googleRecaptchaSiteKey" => '6LdAWfQUAAAAAIYESdG7Q2bbBIiFCaStKKqGF1-Y',

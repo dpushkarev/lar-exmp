@@ -65,6 +65,7 @@ use FilippoToso\Travelport\UniversalRecord\TicketingModifiers;
 use FilippoToso\Travelport\UniversalRecord\TicketingModifiersRef;
 use FilippoToso\Travelport\UniversalRecord\typeFormOfPaymentPNRReference;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Libs\Money;
 
 class FtObjectAdapter extends NemoWidgetAbstractAdapter
@@ -266,12 +267,12 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $refundsData[] = [
                             'code' => 'exchangeable',
                             'description' => [
-                                'short' => 'exchange',
-                                'full' => sprintf('%s (Anytime, Before departure or after departure) %s', $chargePenalty->getPenaltyApplies(), $chargePenalty->getPercentage()),
+                                'short' => 'Exchange',
+                                'full' => $chargePenalty->getPercentage() === '0.00' ? 'Non-exchangeable' : 'Exchangeable',
                             ],
-                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'Free' : 'Charge',
+                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'NotAvailable' : 'agencyCharge',
                             'markAsImportant' => false,
-                            'priority' => 3,
+                            'priority' => 2,
                             'showTitle' => false
                         ];
                     }
@@ -282,10 +283,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $refundsData[] = [
                             'code' => 'refundable',
                             'description' => [
-                                'short' => 'refund',
-                                'full' => sprintf('%s (Anytime, Before departure or after departure) %s', $cancelPenalty->getPenaltyApplies(), $cancelPenalty->getPercentage()),
+                                'short' => 'Refund',
+                                'full' => $cancelPenalty->getPercentage() === '0.00' ? 'Non-refundable' : 'Refundable',
                             ],
-                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'Free' : 'Charge',
+                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'NotAvailable' : 'agencyCharge',
                             'markAsImportant' => false,
                             'priority' => 3,
                             'showTitle' => false
@@ -370,12 +371,12 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     $short = '';
                                     $indicator = 'N';
                                     if ($numberOfPiece > 0) {
-                                        $short = "$numberOfPiece bag(s)";
+                                        $short = Str::plural('bag', $numberOfPiece);
                                         $indicator = 'I';
                                     }
 
                                     if ($maxWeight && $maxWeight->getValue() > 0) {
-                                        $short = "$maxWeight kg";
+                                        $short = $maxWeight->getValue() . " kg";
                                         $indicator = 'I';
                                     }
 
@@ -388,12 +389,13 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                         ],
                                         'needToPay' => $this->indicators[$indicator],
                                         'markAsImportant' => false,
-                                        'priority' => 2,
+                                        'priority' => 1,
                                         'showTitle' => true
                                     ];
 
                                     $features['hasFeatures'] = true;
                                     $features['refunds'] = $refundsData;
+                                    $features['misc'] = [];
 //                                    $getFareAttributesSplit = explode('|', $getFareAttributes);
 //                                    foreach ($getFareAttributesSplit as $getFareAttributeSplit) {
 //                                        list($priority, $indicator) = explode(',', $getFareAttributeSplit);
