@@ -267,10 +267,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $refundsData[] = [
                             'code' => 'exchangeable',
                             'description' => [
-                                'short' => 'Exchange',
-                                'full' => $chargePenalty->getPercentage() === '0.00' ? 'Non-exchangeable' : 'Exchangeable',
+                                'short' => __('tariff.exchange'),
+                                'full' => $chargePenalty->getPercentage() === '0.00' ? __('tariff.non_exchangeable') : __('tariff.exchangeable'),
                             ],
-                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'NotAvailable' : 'agencyCharge',
+                            'needToPay' => $chargePenalty->getPercentage() === '0.00' ? 'Free' : 'NotAvailable',
                             'markAsImportant' => false,
                             'priority' => 2,
                             'showTitle' => false
@@ -283,10 +283,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $refundsData[] = [
                             'code' => 'refundable',
                             'description' => [
-                                'short' => 'Refund',
-                                'full' => $cancelPenalty->getPercentage() === '0.00' ? 'Non-refundable' : 'Refundable',
+                                'short' => __('tariff.refund'),
+                                'full' => $cancelPenalty->getPercentage() === '0.00' ? __('tariff.non_refundable') : __('tariff.refundable'),
                             ],
-                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'NotAvailable' : 'agencyCharge',
+                            'needToPay' => $cancelPenalty->getPercentage() === '0.00' ? 'Free' : 'NotAvailable',
                             'markAsImportant' => false,
                             'priority' => 3,
                             'showTitle' => false
@@ -368,10 +368,10 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                     /** @var typeWeight $maxWeight */
                                     $maxWeight = $getFareInfo->getBaggageAllowance()->getMaxWeight();
 
-                                    $short = '';
+                                    $short = __('tariff.not_included');
                                     $indicator = 'N';
                                     if ($numberOfPiece > 0) {
-                                        $short = Str::plural('bag', $numberOfPiece);
+                                        $short = trans_choice('tariff.bag', $numberOfPiece, ['value' => $numberOfPiece]);
                                         $indicator = 'I';
                                     }
 
@@ -388,7 +388,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                             'full' => ''
                                         ],
                                         'needToPay' => $this->indicators[$indicator],
-                                        'markAsImportant' => false,
+                                        'markAsImportant' => true,
                                         'priority' => 1,
                                         'showTitle' => true
                                     ];
@@ -447,9 +447,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 $passengerFares['tariffs'][] = [
                                     "code" => $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareBasis(),
                                     "familyName" => !is_null($title) ? $title->get_() : null,
-                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
+//                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
+                                    "segNum" => 0,
                                     "features" => !is_null($brand) ? $features : [],
-                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
+//                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
+                                    "routeNumber" => 0,
                                     'serviceClass' => $bookingInfo->getCabinClass()
                                 ];
 
