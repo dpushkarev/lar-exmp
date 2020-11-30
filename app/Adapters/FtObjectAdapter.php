@@ -446,12 +446,14 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                                 $title = !is_null($brand) ? $brand->getTitle()[0] : null;
                                 $passengerFares['tariffs'][] = [
                                     "code" => $fareInfoMap->get($bookingInfo->getFareInfoRef())->getFareBasis(),
-                                    "familyName" => !is_null($title) ? $title->get_() : null,
-                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
-//                                    "segNum" => 0,
-                                    "features" => !is_null($brand) ? $features : [],
-                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
-//                                    "routeNumber" => 0,
+                                    "familyName" => !is_null($title) ? $title->get_() : $bookingInfo->getCabinClass(),
+//                                    "segNum" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('key'),
+                                    "segNum" => 0,
+//                                    "features" => !is_null($brand) ? $features : [],
+                                    "features" => $features,
+//                                    "routeNumber" => $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup(),
+//                                    "routeNumber" => !is_null($brand) ? $airSegmentMap->get($bookingInfo->getSegmentRef())->get('segment')->getGroup() : 0,
+                                    "routeNumber" => 0,
                                     'serviceClass' => $bookingInfo->getCabinClass()
                                 ];
 
