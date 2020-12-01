@@ -50,9 +50,9 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('FE_URL').'/wp-content/plugins/reservio/assets',
             'visibility' => 'public',
+            'root' => storage_path('app'),
         ],
 
         's3' => [

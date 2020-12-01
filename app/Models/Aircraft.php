@@ -17,6 +17,7 @@ class Aircraft extends Model
 
     protected static $cacheTags = ['airCrafts'];
     protected static $cacheMinutes = 0;
+    protected $table = 'aircrafts';
 
     use CacheTrait;
 
