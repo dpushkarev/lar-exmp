@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Avatar;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Airline extends Resource
 {
@@ -52,7 +50,7 @@ class Airline extends Resource
             })->disk('public'),
             Code::make('Logo', 'logo')->json(),
             Text::make('Code', 'code')->sortable()->rules('required'),
-            Text::make('Name', 'name')->sortable()->rules('required')
+            Text::make('Name', 'name')->sortable()->rules('required'),
         ];
     }
 
