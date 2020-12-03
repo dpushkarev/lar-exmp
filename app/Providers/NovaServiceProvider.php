@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Aircraft;
+use App\Models\Airline;
+use App\Models\Airport;
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Reservation;
+use App\Nova\Policies\DictionariesPolicy;
+use App\Nova\Policies\ReservationPolicy;
+use App\Nova\Policies\UserPolicy;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
@@ -17,6 +27,21 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+        Nova::serving(function () {
+            /** Users policy */
+            Gate::policy(User::class, UserPolicy::class);
+
+            /** Dictionaries policy */
+            Gate::policy(Country::class, DictionariesPolicy::class);
+            Gate::policy(City::class, DictionariesPolicy::class);
+            Gate::policy(Airport::class, DictionariesPolicy::class);
+            Gate::policy(Airline::class, DictionariesPolicy::class);
+            Gate::policy(Aircraft::class, DictionariesPolicy::class);
+
+            /** Reservation policy */
+            Gate::policy(Reservation::class, ReservationPolicy::class);
+        });
     }
 
     /**

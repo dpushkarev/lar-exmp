@@ -27,9 +27,8 @@ class Processing extends Command
     protected $paymentService;
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
+     * Processing constructor.
+     * @param MerchantService $merchantService
      */
     public function __construct(MerchantService $merchantService)
     {
