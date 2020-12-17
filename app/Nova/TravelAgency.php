@@ -3,33 +3,26 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Code;
-use Laravel\Nova\Fields\Currency;
-use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 
-class Reservation extends Resource
+class TravelAgency extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Reservation::class;
+    public static $model = \App\Models\TravelAgency::class;
 
     public static $group = 'Business';
-
-    public static $polling = true;
-    public static $showPollingToggle = true;
-    public static $pollingInterval = 60;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -37,7 +30,7 @@ class Reservation extends Resource
      * @var array
      */
     public static $search = [
-        'code',
+        'title',
     ];
 
     /**
@@ -49,11 +42,8 @@ class Reservation extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
-            Text::make('Code', 'code')->readonly(),
-            Currency::make('Price', 'amount')->currency($this->currency_code)->readonly(),
-            Code::make('Request', 'data')->json()->readonly(),
-            DateTime::make('Created', 'created_at')->readonly()
+            ID::make('ID'),
+            Text::make('Title')
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
@@ -9,6 +10,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use App\Models\TravelAgency;
 
 class User extends Resource
 {
@@ -64,12 +66,25 @@ class User extends Resource
                 ->updateRules('nullable', 'string', 'min:8'),
 
             Boolean::make('Active'),
+
             Select::make('Type', 'type')->options([
                 \App\Models\User::GOD_TYPE => 'God',
                 \App\Models\User::ADMIN_TYPE => 'Admin',
                 \App\Models\User::TRAVEL_AGENCY_TYPE => 'Travel agency',
                 \App\Models\User::TRAVEL_AGENT_TYPE => 'Travel agent',
-            ])->onlyOnForms()
+            ])->displayUsingLabels()->rules('required'),
+
+            NovaDependencyContainer::make([
+                Text::make('Travel agency', 'userTravelAgency.travelAgency.title')
+            ])->dependsOn('type', \App\Models\User::TRAVEL_AGENCY_TYPE)->onlyOnDetail(),
+
+            NovaDependencyContainer::make([
+                Select::make('Travel agency', 'userTravelAgency.travel_agency_id')
+                    ->options(TravelAgency::all()->mapWithKeys(function ($item){
+                        return [$item['id'] => $item['title']];
+                    }))
+                    ->displayUsingLabels()
+            ])->dependsOn('type', \App\Models\User::TRAVEL_AGENCY_TYPE)->onlyOnForms()
         ];
     }
 

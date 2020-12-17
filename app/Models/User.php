@@ -35,6 +35,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function userTravelAgency()
+    {
+        return $this->hasOne(UserTravelAgency::class, 'user_id', 'id');
+    }
+
     public function isActive(): bool
     {
         return $this->active === static::ACTIVE;
