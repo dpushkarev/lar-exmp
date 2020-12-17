@@ -309,9 +309,9 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(6, 'flights.search.results.groupsData.prices.P3.segmentInfo')
             ->assertJsonCount(4, 'flights.search.results.groupsData.prices.P1.passengerFares.0.tariffs')
             ->assertJsonCount(6, 'flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs')
-            ->assertJsonPath('flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs.0.segNum', 4)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs.1.segNum', 5)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs.4.segNum', 8)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs.0.segNum', 0)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs.1.segNum', 0)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P3.passengerFares.0.tariffs.4.segNum', 0)
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [

@@ -87,6 +87,8 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'cc' => env('MAIL_CC_ADDRESS', 'info@ekarte.rs'),
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings

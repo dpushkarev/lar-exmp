@@ -18,6 +18,7 @@ class PaymentAlert
 
         Mail::send($template, ['payment' => $payment->toArray(), 'reservation' => $reservation], function ($message) use($payment){
             $message->to($payment->getEmail(), 'Receiver')->subject('eKarte - informacija o transakciji');
+            $message->cc(config('mail.cc'));
         });
     }
 }
