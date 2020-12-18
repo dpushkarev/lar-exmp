@@ -57,7 +57,7 @@ return [
     /*
      * Frontend url
      */
-    'ff_url' => 'http://v2.ekarte.rs',
+    'fe_url' => env('FE_URL', 'https://ekarte.rs'),
 
     'asset_url' => env('ASSET_URL', null),
 
