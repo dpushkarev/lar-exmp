@@ -2,9 +2,9 @@
 
 namespace App\Nova\Policies;
 
-use App\Nova\Policies\Types\GodPolicy;
+use App\Nova\Policies\Types\TravelAgencyPolicy;
 
-class UserPolicy extends GodPolicy
+class UserPolicy extends TravelAgencyPolicy
 {
 
 }

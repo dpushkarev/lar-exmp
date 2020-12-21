@@ -11,6 +11,8 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use App\Models\TravelAgency;
+use App\Models\User as UserModel;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class User extends Resource
 {
@@ -19,7 +21,7 @@ class User extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\User::class;
+    public static $model = UserModel::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -40,7 +42,7 @@ class User extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
@@ -67,31 +69,44 @@ class User extends Resource
 
             Boolean::make('Active'),
 
-            Select::make('Type', 'type')->options([
-                \App\Models\User::GOD_TYPE => 'God',
-                \App\Models\User::ADMIN_TYPE => 'Admin',
-                \App\Models\User::TRAVEL_AGENCY_TYPE => 'Travel agency',
-                \App\Models\User::TRAVEL_AGENT_TYPE => 'Travel agent',
-            ])->displayUsingLabels()->rules('required'),
-
-            NovaDependencyContainer::make([
-                Text::make('Travel agency', 'userTravelAgency.travelAgency.title')
-            ])->dependsOn('type', \App\Models\User::TRAVEL_AGENCY_TYPE)->onlyOnDetail(),
+            Select::make('Role', 'type')->options([
+                UserModel::GOD_TYPE => 'God',
+//                UserModel::ADMIN_TYPE => 'Admin',
+                UserModel::TRAVEL_AGENCY_TYPE => 'Travel agency',
+                UserModel::TRAVEL_AGENT_TYPE => 'Travel agent',
+            ])->displayUsingLabels()->rules('required')
+                ->readonly(function ($request) {
+                    return !$request->user()->isGod();
+                })
+                ->default(UserModel::TRAVEL_AGENT_TYPE)
+            ->rules('required', function($attribute, $value, $fail) use ($request) {
+                if (!$request->user()->isGod() &&
+                    $value != UserModel::TRAVEL_AGENT_TYPE
+                ) {
+                    return $fail('You can create user with agent role only');
+                }
+            }),
 
             NovaDependencyContainer::make([
                 Select::make('Travel agency', 'userTravelAgency.travel_agency_id')
-                    ->options(TravelAgency::all()->mapWithKeys(function ($item){
+                    ->options(TravelAgency::all()->mapWithKeys(function ($item) {
                         return [$item['id'] => $item['title']];
                     }))
+                    ->readonly(function ($request) {
+                        return !$request->user()->isGod();
+                    })
+                    ->required()
+                    ->default($request->user()->isGod() ? '' : $request->user()->userTravelAgency->travel_agency_id)
                     ->displayUsingLabels()
-            ])->dependsOn('type', \App\Models\User::TRAVEL_AGENCY_TYPE)->onlyOnForms()
+            ])->dependsOn('type', UserModel::TRAVEL_AGENT_TYPE)
+                ->dependsOn('type', UserModel::TRAVEL_AGENCY_TYPE)
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -102,7 +117,7 @@ class User extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -113,7 +128,7 @@ class User extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -124,12 +139,31 @@ class User extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)
     {
         return [];
+    }
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return static::filteredUsers($request, $query);
+    }
+
+    public static function detailQuery(NovaRequest $request, $query)
+    {
+        return static::filteredUsers($request, $query);
+    }
+
+    private static function filteredUsers(NovaRequest $request, $query)
+    {
+        if ($request->user()->isGod()) {
+            return $query;
+        }
+
+        return $query->belongToTravelAgency($request->user()->userTravelAgency->travel_agency_id);
     }
 
 }

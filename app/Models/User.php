@@ -65,4 +65,16 @@ class User extends Authenticatable
         return $this->type === static::TRAVEL_AGENT_TYPE;
     }
 
+    public function belongsToTravelAgency()
+    {
+        return $this->isTravelAgency() || $this->isTravelAgent();
+    }
+
+    public function scopeBelongToTravelAgency($query, $travelAgencyId)
+    {
+        return $query->whereHas('userTravelAgency', function ($q) use ($travelAgencyId) {
+            $q->where('travel_agency_id', $travelAgencyId);
+        });
+    }
+
 }
