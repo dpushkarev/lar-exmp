@@ -70,22 +70,23 @@ class User extends Resource
             Boolean::make('Active'),
 
             Select::make('Role', 'type')->options([
-                UserModel::GOD_TYPE => 'God',
-//                UserModel::ADMIN_TYPE => 'Admin',
-                UserModel::TRAVEL_AGENCY_TYPE => 'Travel agency',
-                UserModel::TRAVEL_AGENT_TYPE => 'Travel agent',
-            ])->displayUsingLabels()->rules('required')
-                ->readonly(function ($request) {
-                    return !$request->user()->isGod();
+//                    UserModel::GOD_TYPE => 'God',
+    //                UserModel::ADMIN_TYPE => 'Admin',
+                    UserModel::TRAVEL_AGENCY_TYPE => 'Travel agency',
+                    UserModel::TRAVEL_AGENT_TYPE => 'Travel agent',
+                ])
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => !$request->user()->isGod()
+                ]])
+                ->rules('required', function($attribute, $value, $fail) use ($request) {
+                    if (!$request->user()->isGod() &&
+                        $value != UserModel::TRAVEL_AGENT_TYPE
+                    ) {
+                        return $fail('You can create user with agent role only');
+                    }
                 })
                 ->default(UserModel::TRAVEL_AGENT_TYPE)
-            ->rules('required', function($attribute, $value, $fail) use ($request) {
-                if (!$request->user()->isGod() &&
-                    $value != UserModel::TRAVEL_AGENT_TYPE
-                ) {
-                    return $fail('You can create user with agent role only');
-                }
-            }),
+                ->displayUsingLabels(),
 
             NovaDependencyContainer::make([
                 Select::make('Travel agency', 'userTravelAgency.travel_agency_id')
