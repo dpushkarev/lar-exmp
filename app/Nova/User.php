@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\UserType;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
@@ -123,7 +124,9 @@ class User extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            UserType::make()
+        ];
     }
 
     /**
