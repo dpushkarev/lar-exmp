@@ -7,10 +7,12 @@ use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\FrontendDomain;
 use App\Models\Reservation;
 use App\Models\TravelAgency;
 use App\Models\UserTravelAgency;
 use App\Nova\Policies\DictionariesPolicy;
+use App\Nova\Policies\FrontendDomainPolicy;
 use App\Nova\Policies\ReservationPolicy;
 use App\Nova\Policies\TravelAgencyPolicy;
 use App\Nova\Policies\UserPolicy;
@@ -46,6 +48,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             /** Business policy */
             Gate::policy(Reservation::class, ReservationPolicy::class);
             Gate::policy(TravelAgency::class, TravelAgencyPolicy::class);
+            Gate::policy(FrontendDomain::class, FrontendDomainPolicy::class);
             Gate::policy(UserTravelAgency::class, UserTravelAgencyPolicy::class);
         });
     }
