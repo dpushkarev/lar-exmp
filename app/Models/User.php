@@ -40,6 +40,11 @@ class User extends Authenticatable
         return $this->hasOne(UserTravelAgency::class, 'user_id', 'id');
     }
 
+    public function userFrontendDomains()
+    {
+        return $this->hasMany(UserFrontendDomain::class, 'user_id', 'id');
+    }
+
     public function isActive(): bool
     {
         return $this->active === static::ACTIVE;
@@ -70,11 +75,26 @@ class User extends Authenticatable
         return $this->isTravelAgency() || $this->isTravelAgent();
     }
 
-    public function scopeBelongToTravelAgency($query, $travelAgencyId)
+    public function hasBindingToTravelAgency(): bool
+    {
+        return !is_null($this->userTravelAgency);
+    }
+
+    public function scopeHasTravelAgency($query, $travelAgencyId)
     {
         return $query->whereHas('userTravelAgency', function ($q) use ($travelAgencyId) {
             $q->where('travel_agency_id', $travelAgencyId);
         });
+    }
+
+    public function scopeCreatedBy($query, $userId)
+    {
+        return $query->where('created_by', $userId);
+    }
+
+    public function scopeNoRows($query)
+    {
+        return $query->where('id', '<', '0');
     }
 
 }

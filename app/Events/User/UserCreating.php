@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserUpdate
+class UserCreating
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

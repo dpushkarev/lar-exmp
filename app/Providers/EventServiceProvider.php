@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use App\Events\User\UserCreate;
-use App\Events\User\UserUpdate;
+use App\Events\User\UserCreated;
+use App\Events\User\UserCreating;
+use App\Events\User\UserUpdated;
 use App\Listeners\Payment\PaymentAlert;
 use App\Listeners\Payment\UpdateReservation;
+use App\Listeners\User\SetCreator;
 use App\Listeners\User\SetTravelAgency;
 use Cubes\Nestpay\Laravel\NestpayPaymentProcessedErrorEvent;
 use Cubes\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent;
@@ -13,7 +15,6 @@ use Cubes\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -34,11 +35,14 @@ class EventServiceProvider extends ServiceProvider
             PaymentAlert::class,
         ],
         NestpayPaymentProcessedErrorEvent::class => [],
-        UserUpdate::class => [
-            SetTravelAgency::class
+        UserUpdated::class => [
+
         ],
-        UserCreate::class => [
-            SetTravelAgency::class
+        UserCreated::class => [
+            SetTravelAgency::class,
+        ],
+        UserCreating::class => [
+            SetCreator::class
         ]
     ];
 

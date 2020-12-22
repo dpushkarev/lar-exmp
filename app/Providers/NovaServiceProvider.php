@@ -9,11 +9,13 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Reservation;
 use App\Models\TravelAgency;
+use App\Models\UserTravelAgency;
 use App\Nova\Policies\DictionariesPolicy;
 use App\Nova\Policies\ReservationPolicy;
 use App\Nova\Policies\TravelAgencyPolicy;
 use App\Nova\Policies\UserPolicy;
 use App\Models\User;
+use App\Nova\Policies\UserTravelAgencyPolicy;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
@@ -44,6 +46,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             /** Business policy */
             Gate::policy(Reservation::class, ReservationPolicy::class);
             Gate::policy(TravelAgency::class, TravelAgencyPolicy::class);
+            Gate::policy(UserTravelAgency::class, UserTravelAgencyPolicy::class);
         });
     }
 

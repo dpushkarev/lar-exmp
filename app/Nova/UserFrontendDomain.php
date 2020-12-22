@@ -3,27 +3,25 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\BelongsTo;
 
-class TravelAgency extends Resource
+class UserFrontendDomain extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\TravelAgency::class;
+    public static $model = \App\Models\UserFrontendDomain::class;
 
-    public static $group = 'Business';
+    public static $displayInNavigation = false;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'FrontendDomain.domain';
 
     /**
      * The columns that should be searched.
@@ -31,7 +29,7 @@ class TravelAgency extends Resource
      * @var array
      */
     public static $search = [
-        'title',
+        'id',
     ];
 
     /**
@@ -43,10 +41,24 @@ class TravelAgency extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make('ID'),
-            Text::make('Title'),
-            HasMany::make('Frontend domains', 'frontendDomains', FrontendDomain::class),
+            BelongsTo::make('Frontend domain', 'FrontendDomain', FrontendDomain::class)->rules('required'),
+            BelongsTo::make('User')->hideFromIndex()->rules('required'),
         ];
+    }
+
+    public static function label()
+    {
+        return 'Bindings user to domain';
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel()
+    {
+        return 'Binding user to domain';
     }
 
     /**

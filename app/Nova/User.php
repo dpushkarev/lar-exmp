@@ -7,13 +7,20 @@ use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use App\Models\TravelAgency;
 use App\Models\User as UserModel;
 use Laravel\Nova\Http\Requests\NovaRequest;
+
+/** @todo
+ *  Добаавить проверку на консистеность при апдейте и добавлении userTravelAgency
+ * Добавить проверку на тип при добавлении и апдейте юзераа
+ * Удалять запись из userFeDomain при смене типа юзера
+ */
 
 class User extends Resource
 {
@@ -71,39 +78,62 @@ class User extends Resource
             Boolean::make('Active'),
 
             Select::make('Role', 'type')->options([
-//                    UserModel::GOD_TYPE => 'God',
-    //                UserModel::ADMIN_TYPE => 'Admin',
                     UserModel::TRAVEL_AGENCY_TYPE => 'Travel agency',
                     UserModel::TRAVEL_AGENT_TYPE => 'Travel agent',
                 ])
                 ->withMeta(['extraAttributes' => [
                     'readonly' => !$request->user()->isGod()
                 ]])
-                ->rules('required', function($attribute, $value, $fail) use ($request) {
-                    if (!$request->user()->isGod() &&
-                        $value != UserModel::TRAVEL_AGENT_TYPE
-                    ) {
-                        return $fail('You can create user with agent role only');
-                    }
-                })
+                ->rules('required')
                 ->default(UserModel::TRAVEL_AGENT_TYPE)
                 ->displayUsingLabels(),
 
-            NovaDependencyContainer::make([
-                Select::make('Travel agency', 'userTravelAgency.travel_agency_id')
-                    ->options(TravelAgency::all()->mapWithKeys(function ($item) {
-                        return [$item['id'] => $item['title']];
-                    }))
-                    ->readonly(function ($request) {
-                        return !$request->user()->isGod();
-                    })
-                    ->required()
-                    ->default($request->user()->isGod() ? '' : $request->user()->userTravelAgency->travel_agency_id)
-                    ->displayUsingLabels()
-            ])->dependsOn('type', UserModel::TRAVEL_AGENT_TYPE)
+             NovaDependencyContainer::make([
+                 Text::make('Travel Agency', 'userTravelAgency.travelAgency.title')
+             ])->dependsOn('type', UserModel::TRAVEL_AGENT_TYPE)
                 ->dependsOn('type', UserModel::TRAVEL_AGENCY_TYPE)
+                 ->exceptOnForms(),
+
+            HasOne::make('Bind to travel agency', 'UserTravelAgency', UserTravelAgency::class)
+                ->canSee(function () {
+                    return $this->belongsToTravelAgency();
+                }),
+
+            HasMany::make('Bind to frontend domains', 'UserFrontendDomains', UserFrontendDomain::class)
+                ->canSee(function () {
+                    return $this->isTravelAgent() && $this->hasBindingToTravelAgency();
+                }),
+//                Select::make('Travel agency', 'userTravelAgency.travel_agency_id')
+//                    ->options(TravelAgency::all()->mapWithKeys(function ($item) {
+//                        return [$item['id'] => $item['title']];
+//                    }))
+//                    ->readonly(function ($request) {
+//                        return !$request->user()->isGod();
+//                    })
+//                    ->required()
+//                    ->default($request->user()->isGod() ? '' : $request->user()->userTravelAgency->travel_agency_id)
+//                    ->displayUsingLabels()
+//            ])->dependsOn('type', UserModel::TRAVEL_AGENT_TYPE)
+//                ->dependsOn('type', UserModel::TRAVEL_AGENCY_TYPE)
         ];
     }
+
+    public static function relatableQuery(NovaRequest $request, $query)
+    {
+        $resource = $request->resource();
+
+        if ($resource == UserFrontendDomain::class) {
+            return $query->where('type', \App\Models\User::TRAVEL_AGENT_TYPE);
+        }
+
+        if ($resource == UserTravelAgency::class) {
+            return $query->where('type', \App\Models\User::TRAVEL_AGENCY_TYPE)
+                ->orWhere('type', \App\Models\User::TRAVEL_AGENT_TYPE);
+        }
+
+        return $query;
+    }
+
 
     /**
      * Get the cards available for the request.
@@ -163,11 +193,18 @@ class User extends Resource
 
     private static function filteredUsers(NovaRequest $request, $query)
     {
-        if ($request->user()->isGod()) {
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        if ($user->isGod()) {
             return $query;
         }
 
-        return $query->belongToTravelAgency($request->user()->userTravelAgency->travel_agency_id);
+        if (is_null($user->userTravelAgency)) {
+            return $query->noRows();
+        }
+
+        return $query->hasTravelAgency($request->user()->userTravelAgency->travel_agency_id);
     }
 
 }

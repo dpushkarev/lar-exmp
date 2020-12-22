@@ -3,18 +3,19 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
-class TravelAgency extends Resource
+class FrontendDomain extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\TravelAgency::class;
+    public static $model = \App\Models\FrontendDomain::class;
 
     public static $group = 'Business';
 
@@ -23,7 +24,7 @@ class TravelAgency extends Resource
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'domain';
 
     /**
      * The columns that should be searched.
@@ -31,7 +32,7 @@ class TravelAgency extends Resource
      * @var array
      */
     public static $search = [
-        'title',
+        'domain',
     ];
 
     /**
@@ -43,10 +44,23 @@ class TravelAgency extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make('ID'),
-            Text::make('Title'),
-            HasMany::make('Frontend domains', 'frontendDomains', FrontendDomain::class),
+            ID::make('id')->sortable(),
+            Text::make('Domain')->rules('required'),
+            Text::make('Description')->hideFromIndex(),
+            BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)->rules('required'),
         ];
+    }
+
+    public static function relatableQuery(NovaRequest $request, $query)
+    {
+        $resource = $request->resource();
+        $parenModel = $request->findParentModel();
+
+        if ($resource == UserFrontendDomain::class && $parenModel instanceof \App\Models\User) {
+            return $query->where('travel_agency_id', $parenModel->userTravelAgency->travel_agency_id);
+        }
+
+        return $query;
     }
 
     /**

@@ -12,5 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TravelAgency extends Model
 {
-
+    public function frontendDomains()
+    {
+        return $this->hasMany(FrontendDomain::class, 'travel_agency_id', 'id');
+    }
 }

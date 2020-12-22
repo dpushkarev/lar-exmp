@@ -7,18 +7,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class UserTravelAgency
+ * Class FrontendDomain
  * @package App\Models
  */
-class UserTravelAgency extends Model
+class FrontendDomain extends Model
 {
     public function travelAgency()
     {
         return $this->belongsTo(TravelAgency::class, 'travel_agency_id', 'id');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
