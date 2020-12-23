@@ -47,7 +47,8 @@ class FrontendDomain extends Resource
             ID::make('id')->sortable(),
             Text::make('Domain')->rules('required'),
             Text::make('Description')->hideFromIndex(),
-            BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)->rules('required'),
+            BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
+                ->rules('required'),
         ];
     }
 
@@ -105,5 +106,31 @@ class FrontendDomain extends Resource
     public function actions(Request $request)
     {
         return [];
+    }
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return static::filteredUsers($request, $query);
+    }
+
+    public static function detailQuery(NovaRequest $request, $query)
+    {
+        return static::filteredUsers($request, $query);
+    }
+
+    private static function filteredUsers(NovaRequest $request, $query)
+    {
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        if ($user->isGod()) {
+            return $query;
+        }
+
+        if (is_null($user->userTravelAgency)) {
+            return $query->noRows();
+        }
+
+        return $query->where('travel_agency_id', $user->userTravelAgency->travel_agency_id);
     }
 }

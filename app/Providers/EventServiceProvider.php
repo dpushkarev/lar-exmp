@@ -7,8 +7,10 @@ use App\Events\User\UserCreating;
 use App\Events\User\UserUpdated;
 use App\Listeners\Payment\PaymentAlert;
 use App\Listeners\Payment\UpdateReservation;
+use App\Listeners\User\DeleteUserFrontendDomain;
 use App\Listeners\User\SetCreator;
 use App\Listeners\User\SetTravelAgency;
+use App\Events\User\UserTravelAgencyUpdated;
 use Cubes\Nestpay\Laravel\NestpayPaymentProcessedErrorEvent;
 use Cubes\Nestpay\Laravel\NestpayPaymentProcessedFailedEvent;
 use Cubes\Nestpay\Laravel\NestpayPaymentProcessedSuccessfullyEvent;
@@ -36,13 +38,16 @@ class EventServiceProvider extends ServiceProvider
         ],
         NestpayPaymentProcessedErrorEvent::class => [],
         UserUpdated::class => [
-
+            DeleteUserFrontendDomain::class
         ],
         UserCreated::class => [
             SetTravelAgency::class,
         ],
         UserCreating::class => [
             SetCreator::class
+        ],
+        UserTravelAgencyUpdated::class => [
+            DeleteUserFrontendDomain::class
         ]
     ];
 

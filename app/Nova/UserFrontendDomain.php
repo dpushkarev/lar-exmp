@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Rules\CheckMatching;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 
@@ -41,14 +42,18 @@ class UserFrontendDomain extends Resource
     public function fields(Request $request)
     {
         return [
-            BelongsTo::make('Frontend domain', 'FrontendDomain', FrontendDomain::class)->rules('required'),
-            BelongsTo::make('User')->hideFromIndex()->rules('required'),
+            BelongsTo::make('Frontend domain', 'FrontendDomain', FrontendDomain::class)
+                ->rules('required', new CheckMatching($request->get('user')))
+                ->creationRules('unique:user_frontend_domains,frontend_domain_id,NULL,id,user_id,' . $request->get('user'))
+                ->updateRules('unique:user_frontend_domains,frontend_domain_id,{{resourceId}},id,user_id,' . $request->get('user')),
+            BelongsTo::make('User')->hideFromIndex()
+                ->rules('required')
         ];
     }
 
     public static function label()
     {
-        return 'Bindings user to domain';
+        return 'Bindings to domain';
     }
 
     /**
@@ -58,7 +63,7 @@ class UserFrontendDomain extends Resource
      */
     public static function singularLabel()
     {
-        return 'Binding user to domain';
+        return 'Binding to domain';
     }
 
     /**

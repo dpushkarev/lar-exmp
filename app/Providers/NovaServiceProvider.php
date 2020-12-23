@@ -10,11 +10,13 @@ use App\Models\Country;
 use App\Models\FrontendDomain;
 use App\Models\Reservation;
 use App\Models\TravelAgency;
+use App\Models\UserFrontendDomain;
 use App\Models\UserTravelAgency;
 use App\Nova\Policies\DictionariesPolicy;
 use App\Nova\Policies\FrontendDomainPolicy;
 use App\Nova\Policies\ReservationPolicy;
 use App\Nova\Policies\TravelAgencyPolicy;
+use App\Nova\Policies\UserFrontendDomainPolicy;
 use App\Nova\Policies\UserPolicy;
 use App\Models\User;
 use App\Nova\Policies\UserTravelAgencyPolicy;
@@ -50,6 +52,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Gate::policy(TravelAgency::class, TravelAgencyPolicy::class);
             Gate::policy(FrontendDomain::class, FrontendDomainPolicy::class);
             Gate::policy(UserTravelAgency::class, UserTravelAgencyPolicy::class);
+            Gate::policy(UserFrontendDomain::class, UserFrontendDomainPolicy::class);
         });
     }
 

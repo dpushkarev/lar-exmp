@@ -16,11 +16,6 @@ use Laravel\Nova\Fields\Text;
 use App\Models\User as UserModel;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-/** @todo
- *  Добаавить проверку на консистеность при апдейте и добавлении userTravelAgency
- * Добавить проверку на тип при добавлении и апдейте юзераа
- * Удалять запись из userFeDomain при смене типа юзера
- */
 
 class User extends Resource
 {
@@ -58,8 +53,6 @@ class User extends Resource
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth(50),
-
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -84,7 +77,13 @@ class User extends Resource
                 ->withMeta(['extraAttributes' => [
                     'readonly' => !$request->user()->isGod()
                 ]])
-                ->rules('required')
+                ->creationRules('required', function($attribute, $value, $fail) use($request) {
+                    if (!$request->user()->isGod() &&
+                        $value != UserModel::TRAVEL_AGENT_TYPE
+                    ) {
+                        return $fail('You can create user with agent role only');
+                    }
+                })
                 ->default(UserModel::TRAVEL_AGENT_TYPE)
                 ->displayUsingLabels(),
 
@@ -103,18 +102,6 @@ class User extends Resource
                 ->canSee(function () {
                     return $this->isTravelAgent() && $this->hasBindingToTravelAgency();
                 }),
-//                Select::make('Travel agency', 'userTravelAgency.travel_agency_id')
-//                    ->options(TravelAgency::all()->mapWithKeys(function ($item) {
-//                        return [$item['id'] => $item['title']];
-//                    }))
-//                    ->readonly(function ($request) {
-//                        return !$request->user()->isGod();
-//                    })
-//                    ->required()
-//                    ->default($request->user()->isGod() ? '' : $request->user()->userTravelAgency->travel_agency_id)
-//                    ->displayUsingLabels()
-//            ])->dependsOn('type', UserModel::TRAVEL_AGENT_TYPE)
-//                ->dependsOn('type', UserModel::TRAVEL_AGENCY_TYPE)
         ];
     }
 

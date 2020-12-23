@@ -2,10 +2,10 @@
 
 namespace App\Nova\Policies;
 
-use App\Models\User;
-use App\Nova\Policies\Types\AdminPolicy;
 
-class UserTravelAgencyPolicy extends AdminPolicy
+use App\Models\User;
+
+class UserFrontendDomainPolicy extends \App\Nova\Policies\Types\TravelAgencyPolicy
 {
     public function update(User $user, $model)
     {

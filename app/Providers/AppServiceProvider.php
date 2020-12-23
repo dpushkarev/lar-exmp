@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Logging\TravelPortLogger;
 use App\Models\FlightsSearchFlightInfo;
 use App\Models\User;
+use App\Models\UserTravelAgency;
 use App\Observers\CheckoutObserver;
 use App\Observers\UserObserver;
+use App\Observers\UserTravelAgencyObserver;
 use FilippoToso\Travelport\TravelportLogger as BaseTravelPortLogger;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
 
         FlightsSearchFlightInfo::observe(CheckoutObserver::class);
         User::observe(UserObserver::class);
+        UserTravelAgency::observe(UserTravelAgencyObserver::class);
     }
 }

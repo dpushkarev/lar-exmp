@@ -42,13 +42,13 @@ class UserTravelAgency extends Resource
     {
         return [
             BelongsTo::make('Travel Agency', 'TravelAgency', TravelAgency::class)->rules('required'),
-            BelongsTo::make('User')->hideFromIndex()->rules('required'),
+            BelongsTo::make('User')->rules('required')
         ];
     }
 
     public static function label()
     {
-        return 'Bindings user to travel agency';
+        return 'Bindings to travel agency';
     }
 
     /**
@@ -58,7 +58,7 @@ class UserTravelAgency extends Resource
      */
     public static function singularLabel()
     {
-        return 'Binding user to travel agency';
+        return 'Binding to travel agency';
     }
 
     /**
