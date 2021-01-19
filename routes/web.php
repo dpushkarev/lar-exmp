@@ -8,4 +8,6 @@
     \Route::post('/fail', [\App\Http\Controllers\PaymentController::class, 'fail'])->name('payment.fail');
 });
 
+Route::get('/', [\App\Http\Controllers\Controller::class, 'index']);
+
 

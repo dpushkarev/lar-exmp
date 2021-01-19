@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Models\CabinClass;
+use App\Models\FrontendDomainRule;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use ValidatesRequests;
+
+    public function index()
+    {
+        $ob = FrontendDomainRule::first();
+        dd($ob->cabinClasses);
+    }
 }
