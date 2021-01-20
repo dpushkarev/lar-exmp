@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 
 class FrontendDomainRule extends Resource
 {
@@ -45,6 +46,7 @@ class FrontendDomainRule extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            BelongsTo::make('Platform', 'frontendDomain', FrontendDomain::class),
             BelongsTo::make('Origin', 'origin', VocabularyName::class)->searchable()->withSubtitles()->nullable(),
             BelongsTo::make('Destination', 'destination', VocabularyName::class)->searchable()->withSubtitles()->nullable(),
             Checkboxes::make('Cabin classes', 'cabin_classes')
@@ -54,6 +56,26 @@ class FrontendDomainRule extends Resource
                     'first' => 'First',
                     'business' => 'Business',
                 ]),
+            Checkboxes::make('Trip types', 'trip_types')
+                ->options([
+                    'one_way' => 'One way',
+                    'return' => 'Return',
+                    'multi' => 'Multi',
+                ]),
+            Checkboxes::make('Passenger types', 'passenger_types')
+                ->options([
+                    'adult' => 'Adult',
+                    'child' => 'Child',
+                    'infant' => 'Infant',
+                ]),
+            Checkboxes::make('Fare types', 'fare_types')
+                ->options([
+                    'public' => 'Public',
+                    'nego' => 'nego',
+                    'private' => 'Private',
+                ]),
+            Number::make('Min. amount' ,'min_amount'),
+            Number::make('Max. amount', 'max_amount'),
             Date::make('From date', 'from_date'),
             Date::make('To date', 'to_date')
         ];

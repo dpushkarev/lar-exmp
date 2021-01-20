@@ -21,7 +21,6 @@ use App\Nova\Policies\UserFrontendDomainPolicy;
 use App\Nova\Policies\UserPolicy;
 use App\Models\User;
 use App\Nova\Policies\UserTravelAgencyPolicy;
-use App\Observers\FrontendDomainRuleObserver;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
@@ -57,7 +56,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Gate::policy(UserFrontendDomain::class, UserFrontendDomainPolicy::class);
 
             /** Observers */
-            FrontendDomainRule::observe(FrontendDomainRuleObserver::class);
         });
     }
 

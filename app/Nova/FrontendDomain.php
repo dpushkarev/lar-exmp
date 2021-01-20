@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -49,19 +50,22 @@ class FrontendDomain extends Resource
             Text::make('Description')->hideFromIndex(),
             BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
                 ->rules('required'),
+            HasMany::make('Rules', 'frontendDomainRules', FrontendDomainRule::class)
         ];
     }
 
     public static function relatableQuery(NovaRequest $request, $query)
     {
-        $resource = $request->resource();
-        $parenModel = $request->findParentModel();
+//        $resource = $request->resource();
+//        $parenModel = $request->findParentModel();
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
 
-        if ($resource == UserFrontendDomain::class && $parenModel instanceof \App\Models\User) {
-            return $query->where('travel_agency_id', $parenModel->userTravelAgency->travel_agency_id);
+        if ($user->isGod()) {
+            return $query;
         }
 
-        return $query;
+        return $query->where('travel_agency_id', auth()->user()->userTravelAgency->travel_agency_id);
     }
 
     /**
