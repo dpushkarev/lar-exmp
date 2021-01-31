@@ -25,7 +25,7 @@ class FrontendDomain extends Resource
      *
      * @var string
      */
-    public static $title = 'domain';
+    public static $title = 'platforms';
 
     /**
      * The columns that should be searched.
@@ -136,5 +136,10 @@ class FrontendDomain extends Resource
         }
 
         return $query->where('travel_agency_id', $user->userTravelAgency->travel_agency_id);
+    }
+
+    public static function label()
+    {
+        return 'Platforms';
     }
 }

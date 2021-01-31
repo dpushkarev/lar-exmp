@@ -63,7 +63,7 @@ class UserFrontendDomain extends Resource
      */
     public static function singularLabel()
     {
-        return 'Binding to domain';
+        return 'Binding to platform';
     }
 
     /**

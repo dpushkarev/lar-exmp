@@ -98,7 +98,7 @@ class User extends Resource
                     return $this->belongsToTravelAgency();
                 }),
 
-            HasMany::make('Bind to frontend domains', 'UserFrontendDomains', UserFrontendDomain::class)
+            HasMany::make('Bind to platform', 'UserFrontendDomains', UserFrontendDomain::class)
                 ->canSee(function () {
                     return $this->isTravelAgent() && $this->hasBindingToTravelAgency();
                 }),

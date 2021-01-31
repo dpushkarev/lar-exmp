@@ -25,7 +25,7 @@ class FrontendDomainRule extends Resource
      *
      * @var string
      */
-    public static $title = 'title';
+    public static $title = 'Platform rules';
 
     /**
      * The columns that should be searched.
@@ -127,7 +127,7 @@ class FrontendDomainRule extends Resource
 
     public static function label()
     {
-        return 'Rules';
+        return 'Platform rules';
     }
 
 }
