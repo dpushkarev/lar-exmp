@@ -7,6 +7,7 @@ use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\FlightsSearchFlightInfo;
 use App\Models\FrontendDomain;
 use App\Models\FrontendDomainRule;
 use App\Models\Reservation;
@@ -21,6 +22,10 @@ use App\Nova\Policies\UserFrontendDomainPolicy;
 use App\Nova\Policies\UserPolicy;
 use App\Models\User;
 use App\Nova\Policies\UserTravelAgencyPolicy;
+use App\Observers\CheckoutObserver;
+use App\Observers\FrontendDomainObserver;
+use App\Observers\UserObserver;
+use App\Observers\UserTravelAgencyObserver;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use Laravel\Nova\Nova;
@@ -56,6 +61,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             Gate::policy(UserFrontendDomain::class, UserFrontendDomainPolicy::class);
 
             /** Observers */
+            User::observe(UserObserver::class);
+            UserTravelAgency::observe(UserTravelAgencyObserver::class);
+            FrontendDomain::observe(FrontendDomainObserver::class);
         });
     }
 

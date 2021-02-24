@@ -1,3 +1,27 @@
+GET http://127.0.0.1:8081/api/flights/search/results/4
+
+<> 2021-02-12T062616.200.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/results/4
+
+<> 2021-02-12T062550.403.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/results/4
+
+<> 2021-02-12T062442.500.json
+
+###
+
+GET http://127.0.0.1:8081/api/flights/search/results/4
+
+<> 2021-02-12T062417.200.json
+
+###
+
 POST http://127.0.0.1:8081/api/flights/search/results/4
 
 <> 2020-11-26T084125.200.json
@@ -259,26 +283,6 @@ POST http://127.0.0.1:8081/api/flights/search/results/2
 POST http://127.0.0.1:8081/api/flights/search/results/2
 
 <> 2020-11-22T102017.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-22T101934.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-22T101817.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
 
 ###
 

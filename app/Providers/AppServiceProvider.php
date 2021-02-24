@@ -34,7 +34,5 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BaseTravelPortLogger::class, TravelPortLogger::class);
 
         FlightsSearchFlightInfo::observe(CheckoutObserver::class);
-        User::observe(UserObserver::class);
-        UserTravelAgency::observe(UserTravelAgencyObserver::class);
     }
 }

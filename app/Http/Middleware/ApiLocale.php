@@ -23,6 +23,6 @@ class ApiLocale
         }
         App::setLocale($locale);
 
-        return  $next($request);
+        return $next($request);
     }
 }

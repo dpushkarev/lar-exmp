@@ -25,7 +25,7 @@ class FrontendDomain extends Resource
      *
      * @var string
      */
-    public static $title = 'platforms';
+    public static $title = 'domain';
 
     /**
      * The columns that should be searched.
@@ -39,14 +39,17 @@ class FrontendDomain extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function fields(Request $request)
     {
         return [
             ID::make('id')->sortable(),
-            Text::make('Domain')->rules('required'),
+            Text::make('Domain')->rules('required')->withMeta(['extraAttributes' => [
+                'placeholder' => 'Without http://, https://',
+            ]]),
+            Text::make('Token', 'token')->readonly()->hideWhenCreating(),
             Text::make('Description')->hideFromIndex(),
             BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
                 ->rules('required'),
@@ -54,24 +57,22 @@ class FrontendDomain extends Resource
         ];
     }
 
-    public static function relatableQuery(NovaRequest $request, $query)
-    {
-//        $resource = $request->resource();
-//        $parenModel = $request->findParentModel();
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
-
-        if ($user->isGod()) {
-            return $query;
-        }
-
-        return $query->where('travel_agency_id', auth()->user()->userTravelAgency->travel_agency_id);
-    }
+//    public static function relatableQuery(NovaRequest $request, $query)
+//    {
+//        /** @var \App\Models\User $user */
+//        $user = auth()->user();
+//
+//        if ($user->isGod()) {
+//            return $query;
+//        }
+//
+//        return $query->where('travel_agency_id', auth()->user()->userTravelAgency->travel_agency_id);
+//    }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function cards(Request $request)
@@ -82,7 +83,7 @@ class FrontendDomain extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function filters(Request $request)
@@ -93,7 +94,7 @@ class FrontendDomain extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function lenses(Request $request)
@@ -104,7 +105,7 @@ class FrontendDomain extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array
      */
     public function actions(Request $request)

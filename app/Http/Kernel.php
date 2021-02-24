@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\ApiLocale;
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\NemoWidgetCache;
+use App\Http\Middleware\VerifyPlatformToken;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,6 +44,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
+            'platform.verify',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'api.locale',
             'cors'
@@ -57,6 +59,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'platform.verify' => VerifyPlatformToken::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
