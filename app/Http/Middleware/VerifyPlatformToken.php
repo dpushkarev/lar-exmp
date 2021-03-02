@@ -19,7 +19,7 @@ class VerifyPlatformToken
      * @var array
      */
     protected $except = [
-        '127.0.0.1'
+//        '127.0.0.1'
     ];
 
     /**
@@ -106,9 +106,11 @@ class VerifyPlatformToken
     {
         $platform = FrontendDomain::where('domain', $host)
             ->where('token', $token)
-            ->firts();
+            ->first();
 
-        Container::getInstance()->bind('platform', $platform);
+        Container::getInstance()->bind('platform', function($app) use($platform) {
+            return $platform;
+        });
 
         return (bool) $platform;
     }

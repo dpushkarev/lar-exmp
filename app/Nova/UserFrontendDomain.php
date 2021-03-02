@@ -22,7 +22,7 @@ class UserFrontendDomain extends Resource
      *
      * @var string
      */
-    public static $title = 'FrontendDomain.domain';
+    public static $title = 'Platform.domain';
 
     /**
      * The columns that should be searched.
@@ -42,7 +42,7 @@ class UserFrontendDomain extends Resource
     public function fields(Request $request)
     {
         return [
-            BelongsTo::make('Frontend domain', 'FrontendDomain', FrontendDomain::class)
+            BelongsTo::make('Platform', 'FrontendDomain', Platform::class)
                 ->rules('required', new CheckMatching($request->get('user')))
                 ->creationRules('unique:user_frontend_domains,frontend_domain_id,NULL,id,user_id,' . $request->get('user'))
                 ->updateRules('unique:user_frontend_domains,frontend_domain_id,{{resourceId}},id,user_id,' . $request->get('user')),

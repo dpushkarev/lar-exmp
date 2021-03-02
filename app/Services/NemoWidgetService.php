@@ -19,6 +19,7 @@ use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
 use App\Models\VocabularyName;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use App\Services\PlatformRule\ApplyRulesService;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
@@ -32,6 +33,7 @@ use FilippoToso\Travelport\Air\Option;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
 class NemoWidgetService
@@ -41,13 +43,15 @@ class NemoWidgetService
     protected $xmlAdapter;
     protected $logger;
     protected $moneyService;
+    protected $applyRulesService;
 
     public function __construct(
         FtObjectAdapter $ftObjectAdapter,
         ModelAdapter $modelAdapter,
         XmlAdapter $xmlAdapter,
         TravelportLogger $logger,
-        MoneyService $moneyService
+        MoneyService $moneyService,
+        ApplyRulesService $applyRulesService
     )
     {
         $this->ftObjectAdapter = $ftObjectAdapter;
@@ -55,6 +59,7 @@ class NemoWidgetService
         $this->xmlAdapter = $xmlAdapter;
         $this->logger = $logger;
         $this->moneyService = $moneyService;
+        $this->applyRulesService = $applyRulesService;
     }
 
     public function autocomplete($q, $iataCode = null)
@@ -130,6 +135,8 @@ class NemoWidgetService
             $LowFareSearchAdapt->put('request', $request);
 
             $request->transaction_id = $lowFareSearchRsp->getTransactionId();
+
+            $this->applyRulesService->coverLowFareSearch(App::make('platform'), $LowFareSearchAdapt);
 
             return $LowFareSearchAdapt;
         } catch (TravelPortException $travelPortException) {

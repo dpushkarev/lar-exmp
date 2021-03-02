@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class FrontendDomain extends Resource
+class Platform extends Resource
 {
     /**
      * The model the resource corresponds to.
@@ -51,23 +52,26 @@ class FrontendDomain extends Resource
             ]]),
             Text::make('Token', 'token')->readonly()->hideWhenCreating(),
             Text::make('Description')->hideFromIndex(),
+            Select::make('Currency', 'currency_code')->options([
+                'RSD' => 'RSD'
+            ])->rules('required'),
             BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
                 ->rules('required'),
-            HasMany::make('Rules', 'frontendDomainRules', FrontendDomainRule::class)
+            HasMany::make('Rules', 'frontendDomainRules', PlatformRule::class)
         ];
     }
 
-//    public static function relatableQuery(NovaRequest $request, $query)
-//    {
-//        /** @var \App\Models\User $user */
-//        $user = auth()->user();
-//
-//        if ($user->isGod()) {
-//            return $query;
-//        }
-//
-//        return $query->where('travel_agency_id', auth()->user()->userTravelAgency->travel_agency_id);
-//    }
+    public static function relatableQuery(NovaRequest $request, $query)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        if ($user->isGod()) {
+            return $query;
+        }
+
+        return $query->where('travel_agency_id', auth()->user()->userTravelAgency->travel_agency_id);
+    }
 
     /**
      * Get the cards available for the request.

@@ -45,7 +45,7 @@ class TravelAgency extends Resource
         return [
             ID::make('ID'),
             Text::make('Title'),
-            HasMany::make('Platforms', 'frontendDomains', FrontendDomain::class),
+            HasMany::make('Platforms', 'frontendDomains', Platform::class),
         ];
     }
 

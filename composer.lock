@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba715885f807c5af79d08b6a90966ed3",
+    "content-hash": "9af2c69e58696e63e080fd7b0e064e33",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -210,12 +210,12 @@
             "version": "v1.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/clue/php-stream-filter.git",
+                "url": "https://github.com/clue/stream-filter.git",
                 "reference": "aeb7d8ea49c7963d3b581378955dbf5bc49aa320"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clue/php-stream-filter/zipball/aeb7d8ea49c7963d3b581378955dbf5bc49aa320",
+                "url": "https://api.github.com/repos/clue/stream-filter/zipball/aeb7d8ea49c7963d3b581378955dbf5bc49aa320",
                 "reference": "aeb7d8ea49c7963d3b581378955dbf5bc49aa320",
                 "shasum": ""
             },
@@ -372,6 +372,90 @@
                 "php"
             ],
             "time": "2020-05-04T12:08:33+00:00"
+        },
+        {
+            "name": "dillingham/nova-grouped-field",
+            "version": "0.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dillingham/nova-grouped-field.git",
+                "reference": "a24c0810d7618db3814e504ba6bbdeb6834a39cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dillingham/nova-grouped-field/zipball/a24c0810d7618db3814e504ba6bbdeb6834a39cb",
+                "reference": "a24c0810d7618db3814e504ba6bbdeb6834a39cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dillingham\\NovaGroupedField\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dillingham\\NovaGroupedField\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Combine Nova fields into one output",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2020-01-12T02:33:24+00:00"
+        },
+        {
+            "name": "dkulyk/nova-tabs",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dkulyk/nova-tabs.git",
+                "reference": "53f6bd51c1b64d72179aca5f41d9f2b139e8abf5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dkulyk/nova-tabs/zipball/53f6bd51c1b64d72179aca5f41d9f2b139e8abf5",
+                "reference": "53f6bd51c1b64d72179aca5f41d9f2b139e8abf5",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "DKulyk\\Nova\\TabsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DKulyk\\Nova\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmytro Kulyk",
+                    "email": "lnkvisitor.ts@gmail.com"
+                }
+            ],
+            "description": "Another Laravel Nova Tabs Package",
+            "time": "2020-11-19T18:04:29+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2448,6 +2532,47 @@
                 "serialize"
             ],
             "time": "2020-11-07T02:01:34+00:00"
+        },
+        {
+            "name": "owenmelbz/nova-radio-field",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OwenMelbz/nova-radio-field.git",
+                "reference": "fa103657c3fc0fdbb3297b20da452215c89acfe9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OwenMelbz/nova-radio-field/zipball/fa103657c3fc0fdbb3297b20da452215c89acfe9",
+                "reference": "fa103657c3fc0fdbb3297b20da452215c89acfe9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "OwenMelbz\\RadioField\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "OwenMelbz\\RadioField\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova radio button field type with the ability to toggle other field visibility.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "time": "2020-07-20T07:48:26+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -8069,12 +8194,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },

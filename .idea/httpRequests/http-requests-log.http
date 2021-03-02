@@ -1,288 +1,342 @@
-GET http://127.0.0.1:8081/api/flights/search/results/4
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2021-02-12T062616.200.json
-
-###
-
-GET http://127.0.0.1:8081/api/flights/search/results/4
-
-<> 2021-02-12T062550.403.json
+<> 2021-03-02T063045.200.html
 
 ###
 
-GET http://127.0.0.1:8081/api/flights/search/results/4
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2021-02-12T062442.500.json
-
-###
-
-GET http://127.0.0.1:8081/api/flights/search/results/4
-
-<> 2021-02-12T062417.200.json
+<> 2021-03-02T061834.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/4
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T084125.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/4?user_language_get_change=sr
-
-<> 2020-11-26T084018.200.json
+<> 2021-03-02T061823.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/4?user_language_get_change=sr
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T083958.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/4?user_language_get_change=sr
-
-<> 2020-11-26T083913.500.json
+<> 2021-03-02T061355.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/4?user_language_get_change=sr
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T083344.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/4?user_language_get_change=sr
-
-<> 2020-11-26T083322.500.json
+<> 2021-03-02T061327.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/4
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T083235.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/4
-
-<> 2020-11-26T083117.200.json
+<> 2021-03-02T061216.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/4
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T083017.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"TIV","isCity":true},"departureDate":"2020-12-12T00:00:00"},{"departure":{"IATA":"TIV","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-12-21T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-11-26T083007.200.json
+<> 2021-03-02T061030.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/3
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T082911.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"SIN","isCity":true},"departureDate":"2020-12-12T00:00:00"},{"departure":{"IATA":"SIN","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-12-20T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-11-26T082859.200.json
+<> 2021-03-02T060950.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-26T082714.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-24T055417.200.json
+<> 2021-03-02T054205.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/2
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T055331.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-24T053607.200.json
+<> 2021-03-02T054057.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"TIV","isCity":true},"departureDate":"2020-12-11T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T053554.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
-
-<> 2020-11-24T053129.200.json
+<> 2021-03-02T054028.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T053121.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
-
-<> 2020-11-24T052910.200.html
+<> 2021-03-02T053912.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T053844.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T053836.500.json
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T053641.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T052320.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
+<> 2021-03-02T053627.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T051919.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
-
-<> 2020-11-24T051405.200.json
+<> 2021-03-02T053537.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T043455.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
-
-<> 2020-11-24T043121.500.json
+<> 2021-03-02T053344.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T052724.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T041526.200.html
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
+<> 2021-03-02T052713.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/1
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T040925.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/1
-
-<> 2020-11-24T040444.200.json
+<> 2021-03-02T052658.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":false},"arrival":{"IATA":"TIV","isCity":true},"departureDate":"2020-12-12T00:00:00"},{"departure":{"IATA":"TIV","isCity":true},"arrival":{"IATA":"BEG","isCity":false},"departureDate":"2020-12-21T00:00:00"}],"passengers":[{"type":"ADT","count":1}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-24T040436.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-12-24T00:00:00"}],"passengers":[{"type":"ADT","count":3}, {"type":"CLD","count":2},{"type":"INF","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-11-23T101125.200.json
+<> 2021-03-02T052657.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/3
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-22T110146.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/request?request={"segments":[{"departure":{"IATA":"BEG","isCity":true},"arrival":{"IATA":"TIV","isCity":false},"departureDate":"2020-12-24T00:00:00"}],"passengers":[{"type":"ADT","count":3}, {"type":"CLD","count":2},{"type":"INF","count":2}],"parameters":{"direct":false,"aroundDates":0,"serviceClass":"Economy","flightNumbers":null,"airlines":[],"delayed":true}}
-
-<> 2020-11-22T110136.200.json
+<> 2021-03-02T052656.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/2
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-22T105604.200.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-22T105558.500.json
+<> 2021-03-02T052630.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/2
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-22T105458.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-22T105303.500.json
+<> 2021-03-02T052629.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/2
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-22T104707.500.json
-
-###
-
-POST http://127.0.0.1:8081/api/flights/search/results/2
-
-<> 2020-11-22T102243.200.json
+<> 2021-03-02T052612.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/2
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-22T102210.200.html
+<> 2021-03-02T052611.200.html
 
 ###
 
-POST http://127.0.0.1:8081/api/flights/search/results/2
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
-<> 2020-11-22T102017.200.html
+<> 2021-03-02T052549.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T052036-1.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T052036.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T051907.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T051902.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T050956.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T050936.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-03-02T050445.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T092505.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T092446.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T092418.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T092315.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T091824.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T091649.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T090222.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T090204.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T085951.200.html
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T084021.500.json
+
+###
+
+POST http://127.0.0.1:8081/api/flights/search/results/5
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
+<> 2021-02-28T083644.200.html
 
 ###
 

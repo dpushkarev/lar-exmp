@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Resources\NemoWidget\FlightsSearchRequest as FlightsSearchRequestResource;
 use App\Models\FlightsSearchRequest as FlightsSearchRequestModel;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 

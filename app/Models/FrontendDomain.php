@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FrontendDomain extends Model
 {
+    protected $table = 'platforms';
+
     public function travelAgency()
     {
         return $this->belongsTo(TravelAgency::class, 'travel_agency_id', 'id');
