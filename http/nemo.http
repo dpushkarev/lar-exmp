@@ -14,7 +14,7 @@ POST http://127.0.0.1:8081/api/flights/search/results/5
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/results/4
+GET http://127.0.0.1:8081/api/flights/search/results/5
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 

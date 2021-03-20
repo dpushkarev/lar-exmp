@@ -17,14 +17,8 @@ class TripTypeCheckHandler extends AbstractHandler
             2 => FrontendDomainRule::RETURN_TYPE,
         ][count($segments)] ?? FrontendDomainRule::MULTI_TYPE;
 
-        if (!empty($this->rule->trip_types[0])) {
-            $checked = false;
-
-            foreach ($this->rule->trip_types as $type) {
-                if ($usedType == $type) $checked = true;
-            }
-
-            if (!$checked) return false;
+        if ($usedType != $this->rule->trip_type) {
+            return false;
         }
 
         echo __CLASS__ . PHP_EOL;

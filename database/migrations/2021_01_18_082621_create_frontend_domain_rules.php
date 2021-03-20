@@ -18,9 +18,9 @@ class CreateFrontendDomainRules extends Migration
             $table->unsignedBigInteger('frontend_domain_id');
             $table->unsignedInteger('origin_id')->nullable();
             $table->unsignedInteger('destination_id')->nullable();
-            $table->set('cabin_classes', ['economy', 'business', 'first', 'premium_economy'])->nullable();
+            $table->set('cabin_classes', ['Economy', 'Business'])->nullable();
             $table->set('trip_types', ['one_way', 'return', 'multi'])->nullable();
-            $table->set('passenger_types', ['adult', 'child', 'infant'])->nullable();
+            $table->set('passenger_types', ['ADT', 'CLD', 'INF'])->nullable();
             $table->set('fare_types', ['public', 'nego', 'private'])->nullable();
             $table->decimal('min_amount', 15,2)->unsigned()->nullable();
             $table->decimal('max_amount', 15,2)->unsigned()->nullable();

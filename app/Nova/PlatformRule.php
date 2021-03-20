@@ -17,6 +17,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use OwenMelbz\RadioField\RadioButton;
+use phpDocumentor\Reflection\Types\Static_;
 
 class PlatformRule extends Resource
 {
@@ -75,23 +76,27 @@ class PlatformRule extends Resource
                         ->hideFromIndex(),
 
                     NovaDependencyContainer::make([
-                        BelongsTo::make('Origin', 'origin', VocabularyName::class)->searchable()->nullable()->hideFromIndex(),
-                        BelongsTo::make('Destination', 'destination', VocabularyName::class)->searchable()->nullable()->hideFromIndex(),
+                        BelongsTo::make('Origin', 'origin', VocabularyName::class)
+                            ->searchable()
+                            ->nullable()
+                            ->hideFromIndex(),
+                        BelongsTo::make('Destination', 'destination', VocabularyName::class)
+                            ->searchable()
+                            ->nullable()
+                            ->hideFromIndex(),
                     ])->dependsOn('trip_type', FrontendDomainRule::ONE_WAY_TYPE)
                         ->dependsOn('trip_type', FrontendDomainRule::RETURN_TYPE),
 
                     Checkboxes::make('Cabin classes', 'cabin_classes')
                         ->options([
-                            'economy' => 'Economy',
-                            'premium_economy' => 'Premium Economy',
-                            'first' => 'First',
-                            'business' => 'Business',
+                            'Economy' => 'Economy',
+                            'Business' => 'Business',
                         ])->hideFromIndex(),
                     Checkboxes::make('Passenger types', 'passenger_types')
                         ->options([
-                            'adult' => 'Adult',
-                            'child' => 'Child',
-                            'infant' => 'Infant',
+                            'ADT' => 'Adult',
+                            'CLD' => 'Child',
+                            'INF' => 'Infant',
                         ])->hideFromIndex()->rules([$this->checkboxRule()]),
                     Checkboxes::make('Fare types', 'fare_types')
                         ->options([
@@ -99,8 +104,14 @@ class PlatformRule extends Resource
                             'nego' => 'Nego',
                             'private' => 'Private',
                         ])->hideFromIndex(),
-                    Currency::make('Min. amount' ,'min_amount')->currency('RSD')->hideFromIndex(),
-                    Currency::make('Max. amount', 'max_amount')->currency('RSD')->hideFromIndex(),
+                    Number::make('Min. amount' ,'min_amount')->onlyOnForms(),
+                    Text::make('Min. amount', function ($model) {
+                        return static::getFormatFee($model->min_amount, 'fix', $model->platform);
+                    })->exceptOnForms(),
+                    Number::make('Max. amount', 'max_amount')->onlyOnForms(),
+                    Text::make('Max. amount', function ($model) {
+                        return static::getFormatFee($model->max_amount, 'fix', $model->platform);
+                    })->exceptOnForms(),
                     Date::make('From date', 'from_date')->hideFromIndex(),
                     Date::make('To date', 'to_date')->hideFromIndex(),
                 ],

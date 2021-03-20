@@ -19,8 +19,8 @@ class FrontendDomain extends Model
         return $this->belongsTo(TravelAgency::class, 'travel_agency_id', 'id');
     }
 
-    public function frontendDomainRules()
+    public function rules()
     {
-        return $this->hasMany(FrontendDomainRule::class);
+        return $this->hasMany(FrontendDomainRule::class, 'platform_id', 'id');
     }
 }

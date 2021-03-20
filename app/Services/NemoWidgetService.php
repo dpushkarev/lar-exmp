@@ -136,7 +136,7 @@ class NemoWidgetService
 
             $request->transaction_id = $lowFareSearchRsp->getTransactionId();
 
-            $this->applyRulesService->coverLowFareSearch(App::make('platform'), $LowFareSearchAdapt);
+//            $this->applyRulesService->coverLowFareSearch(App::make('platform'), $LowFareSearchAdapt);
 
             return $LowFareSearchAdapt;
         } catch (TravelPortException $travelPortException) {

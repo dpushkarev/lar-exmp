@@ -57,7 +57,7 @@ class Platform extends Resource
             ])->rules('required'),
             BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
                 ->rules('required'),
-            HasMany::make('Rules', 'frontendDomainRules', PlatformRule::class)
+            HasMany::make('Rules', 'rules', PlatformRule::class)
         ];
     }
 

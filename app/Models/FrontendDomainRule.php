@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Libs\Money;
 
 /**
  * Class FrontendDomainRule
@@ -74,6 +75,20 @@ class FrontendDomainRule extends Model
             'fix' => 'RSD',
             'percent' => '%'
         ][$type];
+    }
+
+    public function getMinPriceAttribute()
+    {
+        if (is_null($this->min_amount)) return null;
+
+        return Money::of($this->min_amount, $this->platform->currency_code);
+    }
+
+    public function getMaxPriceAttribute()
+    {
+        if (is_null($this->max_amount)) return null;
+
+        return Money::of($this->max_amount, $this->platform->currency_code);
     }
 
 }

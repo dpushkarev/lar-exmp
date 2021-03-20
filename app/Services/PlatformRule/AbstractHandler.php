@@ -46,4 +46,5 @@ abstract class AbstractHandler
 
         return $this->next->check($collection);
     }
+
 }

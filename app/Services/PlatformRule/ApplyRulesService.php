@@ -5,12 +5,23 @@ namespace App\Services\PlatformRule;
 
 
 use App\Models\FrontendDomain;
+use App\Models\FrontendDomainRule;
 
 class ApplyRulesService
 {
-    private function applyRule(AbstractHandler $handler, $collection)
+    private function applyRule(AbstractHandler $commonHandler, AbstractHandler $resultHandler, $collection, FrontendDomainRule $rule)
     {
-        if ($handler->check($collection)) {
+        if ($commonHandler->check($collection)) {
+            echo '<pre>';
+
+            $prices = $collection->get('results')->get('groupsData')->get('prices');
+
+            foreach ($prices as $price) {
+                if ($resultHandler->check($price)) {
+
+                }
+            }
+
             return true;
         }
 
@@ -19,23 +30,32 @@ class ApplyRulesService
 
     public function coverLowFareSearch(FrontendDomain $platform, $LowFareSearchResponse)
     {
-        $rules = $platform->frontendDomainRules;
+        $rules = $platform->rules;
 
         if ($rules->isEmpty()) {
             return true;
         }
 
         foreach ($rules as $rule) {
-            $handler = new DateCheckHandler($rule);
+            $commonHandler = new DateCheckHandler($rule);
 
-            $handler->with(new TripTypeCheckHandler($rule))
+            $commonHandler->with(new TripTypeCheckHandler($rule))
                 ->with(new PassengerTypeCheckHandler($rule))
-                ->with(new AmountCheckHandler($rule))
-                ->with(new RouteCheckHandler($rule))
-                ->with(new CabinClassCheckHandler($rule));
+                ->with(new RouteCheckHandler($rule));
 
-            if ($this->applyRule($handler, $LowFareSearchResponse)) {
-                echo 'Rule is fit';
+            $resultHandler = new AmountCheckHandler($rule);
+            $resultHandler->with(new CabinClassCheckHandler($rule));
+
+            if ($commonHandler->check($LowFareSearchResponse)) {
+                echo '<pre>';
+
+                $prices = $LowFareSearchResponse->get('results')->get('groupsData')->get('prices');
+
+                foreach ($prices as $price) {
+                    if ($resultHandler->check($price)) {
+
+                    }
+                }
             }
 
             die();
