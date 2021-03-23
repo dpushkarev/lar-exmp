@@ -466,25 +466,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 $airPricePointData['passengerFares'][] = $passengerFares;
             }
 
-            $agencyChargeAll = $this->moneyService->getAgencyChargeForAllPassengers($countOfPassengers);
-
-            $airPricePointData['agencyCharge'] = [
-                'amount' => $agencyChargeAll->getAmountAsFloat(),
-                'currency' => $agencyChargeAll->getCurrency()->getCurrencyCode(),
-                'regular' => [
-                    static::PASSENGER_TYPE_ADULT => MoneyService::AGENCY_CHARGE_AMOUNT,
-                    static::PASSENGER_TYPE_CHILD => MoneyService::AGENCY_CHARGE_AMOUNT,
-                    static::PASSENGER_TYPE_INFANT => MoneyService::AGENCY_CHARGE_AMOUNT,
-                ],
-                'brand' => [
-                    static::PASSENGER_TYPE_ADULT => MoneyService::BRAND_CHARGE_AMOUNT,
-                    static::PASSENGER_TYPE_CHILD => MoneyService::BRAND_CHARGE_AMOUNT,
-                    static::PASSENGER_TYPE_INFANT => MoneyService::BRAND_CHARGE_AMOUNT,
-                ]
-
-            ];
-
-            $totalPrice = $this->moneyService->getMoneyByString($airPricePoint->getTotalPrice())->plus($agencyChargeAll);
+            $totalPrice = $this->moneyService->getMoneyByString($airPricePoint->getTotalPrice());
             $airPricePointData['totalPrice'] = [
                 'amount' => $totalPrice->getAmountAsFloat(),
                 'currency' => $totalPrice->getCurrency()->getCurrencyCode()

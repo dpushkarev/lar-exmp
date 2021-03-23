@@ -89,10 +89,9 @@ class VerifyPlatformToken
     }
 
     /**
-     * Determine if the session and input CSRF tokens match.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * @param $request
      * @return bool
+     * @throws TokenMismatchException
      */
     protected function checkPlatform($request)
     {
@@ -102,13 +101,23 @@ class VerifyPlatformToken
             $this->checkToken($token, $request->getHost());
     }
 
+    /**
+     * @param $token
+     * @param $host
+     * @return bool
+     * @throws TokenMismatchException
+     */
     protected function checkToken($token, $host): bool
     {
         $platform = FrontendDomain::where('domain', $host)
             ->where('token', $token)
             ->first();
 
-        Container::getInstance()->bind('platform', function($app) use($platform) {
+        if (is_null($platform)) {
+            throw new TokenMismatchException('Platform token is incorrect.');
+        };
+
+        Container::getInstance()->bind('platform', function() use($platform) {
             return $platform;
         });
 

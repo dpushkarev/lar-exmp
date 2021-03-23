@@ -19,6 +19,14 @@ class FrontendDomainRule extends Model
     const RETURN_TYPE = 'return';
     const MULTI_TYPE = 'multi';
 
+    const TYPE_FIX = 'fix';
+    const TYPE_PERCENT = 'percent';
+
+    const TYPE_ADT = 'ADT';
+    const TYPE_CLD = 'CLD';
+    const TYPE_CLD_ALTER = 'CNN';
+    const TYPE_INF = 'INF';
+
     protected $casts = [
         'from_date' => 'date',
         'to_date' => 'date',
@@ -69,14 +77,6 @@ class FrontendDomainRule extends Model
         return explode(',', $value);
     }
 
-    public static function getTypeIcon($type)
-    {
-        return [
-            'fix' => 'RSD',
-            'percent' => '%'
-        ][$type];
-    }
-
     public function getMinPriceAttribute()
     {
         if (is_null($this->min_amount)) return null;
@@ -89,6 +89,21 @@ class FrontendDomainRule extends Model
         if (is_null($this->max_amount)) return null;
 
         return Money::of($this->max_amount, $this->platform->currency_code);
+    }
+
+    public function isAgencyFeeFix(): bool
+    {
+        return ($this->agency_fee_type == static::TYPE_FIX);
+    }
+
+    public function getAgencyFee(Money $money)
+    {
+        if ($this->isAgencyFeeFix()) {
+            return Money::of($this->agency_fee, $this->platform->currency_code);
+        }
+
+        return $money->quotient($this->agency_fee);
+
     }
 
 }

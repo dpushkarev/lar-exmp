@@ -8,14 +8,10 @@ class PassengerTypeCheckHandler extends AbstractHandler
 {
     public function check($collection): bool
     {
-        $passengersRequest = array_column($collection->get('request')->data['passengers'], 'type');
-        $passengerRule = $this->rule->passenger_types;
-
-        if (empty(array_intersect($passengerRule, $passengersRequest))) {
+        if (!in_array($collection, $this->rule->passenger_types)) {
             return false;
         }
 
-        echo __CLASS__ . PHP_EOL;
-        return parent::check($collection);
+        return true;
     }
 }

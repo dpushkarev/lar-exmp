@@ -119,7 +119,7 @@ class PlatformRule extends Resource
                     Number::make('Agency fee', 'agency_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
                     RadioButton::make('Agency fee type', 'agency_fee_type')
                         ->options([
-                            'fix' => ['Fix' => 'RSD'],
+                            'fix' => ['Fixed' => 'In platform\'s currency'],
                             'percent' => 'Percent'
                         ])->default('fix')->marginBetween()->onlyOnForms(),
 
@@ -130,7 +130,7 @@ class PlatformRule extends Resource
                     Number::make('Brand fee', 'brand_fee')->rules('required')->min(0)->step(.1)->onlyOnForms(),
                     RadioButton::make('Brand fee type', 'brand_fee_type')
                         ->options([
-                            'fix' => ['Fix' => 'RSD'],
+                            'fix' => ['Fixed' => 'In platform\'s currency'],
                             'percent' => 'Percent'
                         ])->default('fix')->marginBetween()->onlyOnForms(),
 
@@ -141,7 +141,7 @@ class PlatformRule extends Resource
                     Number::make('Cash fee', 'cash_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
                     RadioButton::make('Cash fee type', 'cash_fee_type')
                         ->options([
-                            'fix' => ['Fix' => 'RSD'],
+                            'fix' => ['Fixed' => 'In platform\'s currency'],
                             'percent' => 'Percent'
                         ])->default('fix')->marginBetween()->onlyOnForms(),
 
@@ -152,7 +152,7 @@ class PlatformRule extends Resource
                     Number::make('Intesa fee', 'intesa_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
                     RadioButton::make('Intesa fee type', 'intesa_fee_type')
                         ->options([
-                            'fix' => ['Fix' => 'RSD'],
+                            'fix' => ['Fixed' => 'In platform\'s currency'],
                             'percent' => 'Percent'
                         ])->default('fix')->marginBetween()->onlyOnForms(),
 

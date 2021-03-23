@@ -22,7 +22,6 @@ class AmountCheckHandler extends AbstractHandler
             return false;
         }
 
-        echo __CLASS__ . ' ' . $collection['totalPrice']['amount'] . PHP_EOL;
         return parent::check($collection);
     }
 }

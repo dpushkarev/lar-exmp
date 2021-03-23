@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -47,14 +48,14 @@ class Platform extends Resource
     {
         return [
             ID::make('id')->sortable(),
-            Text::make('Domain')->rules('required')->withMeta(['extraAttributes' => [
-                'placeholder' => 'Without http://, https://',
-            ]]),
-            Text::make('Token', 'token')->readonly()->hideWhenCreating(),
+            Text::make('Domain')->rules('required')->help('Without http://, https://'),
+            Text::make('Token', 'token')->readonly()->hideWhenCreating()->help('Uses within http requests'),
             Text::make('Description')->hideFromIndex(),
             Select::make('Currency', 'currency_code')->options([
-                'RSD' => 'RSD'
-            ])->rules('required'),
+                'RSD' => 'RSD',
+                'EUR' => 'EUR'
+            ])->rules('required')->help('Applies to all rules'),
+            Number::make('Agency fee', 'agency_fee_default')->required()->help('In platform\'s currency. Applied if no one rule is fit'),
             BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
                 ->rules('required'),
             HasMany::make('Rules', 'rules', PlatformRule::class)

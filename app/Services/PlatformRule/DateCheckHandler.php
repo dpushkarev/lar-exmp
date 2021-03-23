@@ -22,7 +22,6 @@ class DateCheckHandler extends AbstractHandler
             }
         }
 
-        echo __CLASS__ . PHP_EOL;
         return parent::check($collection);
     }
 }

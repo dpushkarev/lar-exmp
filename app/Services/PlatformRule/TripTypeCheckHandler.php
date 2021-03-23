@@ -21,7 +21,6 @@ class TripTypeCheckHandler extends AbstractHandler
             return false;
         }
 
-        echo __CLASS__ . PHP_EOL;
         return parent::check($collection);
     }
 }

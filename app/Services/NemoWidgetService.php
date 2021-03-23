@@ -125,7 +125,7 @@ class NemoWidgetService
         );
 
         try {
-            $lowFareSearchRsp = Cache::remember('lowFareSearchReq'. $request->id, 3600 * 3, function () use ($requestDto) {
+            $lowFareSearchRsp = Cache::remember('lowFareSearchReq' . $request->id, 3600 * 3, function () use ($requestDto) {
                 return TP::LowFareSearchReq($requestDto);
             });
 
@@ -136,7 +136,7 @@ class NemoWidgetService
 
             $request->transaction_id = $lowFareSearchRsp->getTransactionId();
 
-//            $this->applyRulesService->coverLowFareSearch(App::make('platform'), $LowFareSearchAdapt);
+            $LowFareSearchAdapt = $this->applyRulesService->coverLowFareSearch(App::make('platform'), $LowFareSearchAdapt);
 
             return $LowFareSearchAdapt;
         } catch (TravelPortException $travelPortException) {

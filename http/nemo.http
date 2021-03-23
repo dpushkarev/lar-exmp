@@ -14,7 +14,7 @@ POST http://127.0.0.1:8081/api/flights/search/results/5
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/results/5
+GET http://127.0.0.1:8081/api/flights/search/results/7
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 
@@ -38,7 +38,9 @@ POST http://127.0.0.1:8081/api/system/logger/error?user_language_get_change=en&
 GET http://127.0.0.1:8081/api/flights/search/history
 
 ###
-GET http://127.0.0.1:8081/api/flights/search/flightInfo/1
+GET http://127.0.0.1:8081/api/flights/search/flightInfo/633
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
+
 
 ###
 POST http://127.0.0.1:8081/api/flights/utils/rules/4

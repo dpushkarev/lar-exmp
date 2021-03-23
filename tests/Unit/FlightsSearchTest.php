@@ -22,12 +22,13 @@ class FlightsSearchTest extends TestCase
         $this->useTable('flights_search_requests');
         $this->useTable('flights_search_results');
         $this->useTable('flights_search_flight_infos');
+        $this->useTable('platform_rules');
         $this->useTableWithData('aircrafts');
 
     }
 
     /**
-     * @throws \Brick\Money\Exception\MoneyMismatchException
+     * @throws \Throwable
      */
     public function testFlightsSearchDirect()
     {

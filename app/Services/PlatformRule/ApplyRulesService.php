@@ -6,6 +6,7 @@ namespace App\Services\PlatformRule;
 
 use App\Models\FrontendDomain;
 use App\Models\FrontendDomainRule;
+use Libs\Money;
 
 class ApplyRulesService
 {
@@ -31,35 +32,75 @@ class ApplyRulesService
     public function coverLowFareSearch(FrontendDomain $platform, $LowFareSearchResponse)
     {
         $rules = $platform->rules;
+        $LowFareSearchResponse->get('results')->get('groupsData')->get('prices')->transform(function ($item) use (
+            $LowFareSearchResponse,
+            $platform,
+            $rules
+        ) {
+            $fee = Money::zero($platform->currency_code);
+            $totalPrice = Money::of($item['totalPrice']['amount'], $item['totalPrice']['currency']);
+            $agencyFeeAmounts = [];
 
-        if ($rules->isEmpty()) {
-            return true;
-        }
+            foreach ($item['passengerFares'] as $passengerFare) {
+                $agencyFee = Money::zero($platform->currency_code);
 
-        foreach ($rules as $rule) {
-            $commonHandler = new DateCheckHandler($rule);
+                if ($rules->isNotEmpty()) {
+                    /** @var FrontendDomainRule $rule */
+                    foreach ($rules as $rule) {
+                        $commonHandler = new DateCheckHandler($rule);
+                        $commonHandler->with(new TripTypeCheckHandler($rule))
+                            ->with(new RouteCheckHandler($rule));
 
-            $commonHandler->with(new TripTypeCheckHandler($rule))
-                ->with(new PassengerTypeCheckHandler($rule))
-                ->with(new RouteCheckHandler($rule));
+                        $resultHandler = new AmountCheckHandler($rule);
+                        $resultHandler->with(new CabinClassCheckHandler($rule));
 
-            $resultHandler = new AmountCheckHandler($rule);
-            $resultHandler->with(new CabinClassCheckHandler($rule));
+                        $passengerHandler = new PassengerTypeCheckHandler($rule);
 
-            if ($commonHandler->check($LowFareSearchResponse)) {
-                echo '<pre>';
+                        $commonHandlerChecked = $commonHandler->check($LowFareSearchResponse);
 
-                $prices = $LowFareSearchResponse->get('results')->get('groupsData')->get('prices');
-
-                foreach ($prices as $price) {
-                    if ($resultHandler->check($price)) {
-
+                        if ($commonHandlerChecked &&
+                            $resultHandler->check($item) &&
+                            $passengerHandler->check($passengerFare['type'])
+                        ) {
+                            $agencyFee = $rule->getAgencyFee($totalPrice);
+                            break;
+                        }
                     }
                 }
+
+                if ($agencyFee->isZero()) {
+                    $agencyFee = $platform->getAgencyFee();
+                }
+
+                $agencyFeeAmounts[$passengerFare['type']] = $agencyFee->getAmountAsFloat();
+                $fee = $fee->plus($agencyFee->multipliedBy($passengerFare['count']));
+
             }
 
-            die();
-        }
+            $item['agencyCharge'] = [
+                'amount' => $fee->getAmountAsFloat(),
+                'currency' => $fee->getCurrency()->getCurrencyCode(),
+                'regular' => [
+                    FrontendDomainRule::TYPE_ADT => $agencyFeeAmounts[FrontendDomainRule::TYPE_ADT],
+                    FrontendDomainRule::TYPE_CLD => $agencyFeeAmounts[FrontendDomainRule::TYPE_CLD_ALTER] ?? 0,
+                    FrontendDomainRule::TYPE_INF => $agencyFeeAmounts[FrontendDomainRule::TYPE_INF] ?? 0,
+                ],
+                'brand' => [
+                    FrontendDomainRule::TYPE_ADT => $agencyFeeAmounts[FrontendDomainRule::TYPE_ADT],
+                    FrontendDomainRule::TYPE_CLD => $agencyFeeAmounts[FrontendDomainRule::TYPE_CLD_ALTER] ?? 0,
+                    FrontendDomainRule::TYPE_INF => $agencyFeeAmounts[FrontendDomainRule::TYPE_INF] ?? 0,
+                ]
+            ];
+
+            $item['totalPrice'] = [
+                'amount' => $totalPrice->plus($fee)->getAmountAsFloat(),
+                'currency' => $totalPrice->getCurrency()->getCurrencyCode(),
+            ];
+
+            return $item;
+        });
+
+        return $LowFareSearchResponse;
     }
 
 

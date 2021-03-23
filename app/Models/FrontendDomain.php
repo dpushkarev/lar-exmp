@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Libs\Money;
 
 /**
  * Class FrontendDomain
@@ -22,5 +23,10 @@ class FrontendDomain extends Model
     public function rules()
     {
         return $this->hasMany(FrontendDomainRule::class, 'platform_id', 'id');
+    }
+
+    public function getAgencyFee()
+    {
+        return Money::of($this->agency_fee_default, $this->currency_code);
     }
 }
