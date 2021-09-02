@@ -16,12 +16,12 @@ class AlterRuleTable extends Migration
         Schema::rename('frontend_domains', 'platforms');
         Schema::rename('frontend_domain_rules', 'platform_rules');
         Schema::table('platform_rules', function (Blueprint $table) {
-            $table->dropColumn('trip_type');
+            $table->dropColumn('trip_types');
             $table->renameColumn('frontend_domain_id', 'platform_id');
         });
 
         Schema::table('platform_rules', function (Blueprint $table) {
-            $table->enum('trip_type', ['one_way', 'return', 'multi'])->default('return')->after('platform_id');
+            $table->enum('trip_types', ['one_way', 'return', 'multi'])->default('return')->after('platform_id');
         });
     }
 
