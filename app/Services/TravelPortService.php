@@ -38,6 +38,7 @@ class TravelPortService
 
     private $travelPort;
     private $traceId;
+    private $platform;
 
     /**
      * TravelPortService constructor.
@@ -47,6 +48,7 @@ class TravelPortService
     {
         $this->travelPort = $travelPort;
         $this->traceId = sha1('my-unique-token');
+        $this->platform = resolve('platform');
     }
 
     /**
@@ -280,7 +282,7 @@ class TravelPortService
     {
         return (new Air\AirPricingModifiers())
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
-            ->setReturnFareAttributes(false)
+            ->setReturnFareAttributes($this->platform->currency_code)
             ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
     }
 
