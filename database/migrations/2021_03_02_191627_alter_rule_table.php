@@ -23,7 +23,7 @@ class AlterRuleTable extends Migration
         });
 
         Schema::table('platform_rules', function (Blueprint $table) {
-            $table->enum('trip_types', ['one_way', 'return', 'multi'])->default('return')->after('platform_id');
+            $table->enum('trip_type', ['one_way', 'return', 'multi'])->default('return')->after('platform_id');
         });
     }
 
