@@ -282,7 +282,8 @@ class TravelPortService
     {
         return (new Air\AirPricingModifiers())
             ->setFaresIndicator(Air\typeFaresIndicator::AllFares)
-            ->setReturnFareAttributes($this->platform->currency_code)
+            ->setReturnFareAttributes(false)
+            ->setCurrencyType($this->platform->currency_code)
             ->setExemptTaxes((new Air\ExemptTaxes())->setAllTaxes(false));
     }
 
