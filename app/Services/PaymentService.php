@@ -80,7 +80,7 @@ class PaymentService
         $firstPassenger = $reservation->data['passengers'][0];
 
         return [
-            \Cubes\Nestpay\Payment::PROP_AMOUNT => $reservation->amount,
+            \Cubes\Nestpay\Payment::PROP_AMOUNT => $reservation->total_price,
             \Cubes\Nestpay\Payment::PROP_CURRENCY => $reservation->currency_code,
             \Cubes\Nestpay\Payment::PROP_TRANTYPE => \Cubes\Nestpay\Payment::TRAN_TYPE_PREAUTH,
             \Cubes\Nestpay\Payment::PROP_LANG => app()->getLocale(),

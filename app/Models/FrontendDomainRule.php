@@ -96,14 +96,41 @@ class FrontendDomainRule extends Model
         return ($this->agency_fee_type == static::TYPE_FIX);
     }
 
+    public function isIntesaFix(): bool
+    {
+        return ($this->intesa_fee_type == static::TYPE_FIX);
+    }
+
+    public function isACashFix(): bool
+    {
+        return ($this->cash_fee_type == static::TYPE_FIX);
+    }
+
     public function getAgencyFee(Money $money)
     {
         if ($this->isAgencyFeeFix()) {
             return Money::of($this->agency_fee, $this->platform->currency_code);
         }
 
-        return $money->quotient($this->agency_fee);
+        return $money->dividedBy(100)->multipliedBy($this->agency_fee);
+    }
 
+    public function getIntesaFee(Money $money)
+    {
+        if ($this->isIntesaFix()) {
+            return Money::of($this->intesa_fee, $this->platform->currency_code);
+        }
+
+        return $money->dividedBy(100)->multipliedBy($this->intesa_fee);
+    }
+
+    public function getCashFee(Money $money)
+    {
+        if ($this->isACashFix()) {
+            return Money::of($this->cash_fee, $this->platform->currency_code);
+        }
+
+        return $money->dividedBy(100)->multipliedBy($this->cash_fee);
     }
 
 }

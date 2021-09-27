@@ -19,4 +19,9 @@ class FlightsSearchResult extends Model
         return $this->belongsTo(FlightsSearchRequest::class, 'flight_search_request_id', 'id');
     }
 
+    public function rule()
+    {
+        return $this->hasOne(FrontendDomainRule::class, 'id', 'rule_id');
+    }
+
 }

@@ -14,12 +14,14 @@ use App\Models\FlightsSearchFlightInfo;
 use App\Models\Reservation;
 use App\Services\CheckoutService;
 use App\Services\MoneyService;
+use App\Services\PlatformRule\ApplyRulesService;
 use Carbon\Carbon;
 use FilippoToso\Travelport\Air\AirPricePoint;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\LowFareSearchRsp;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class Checkout extends Controller
 {
@@ -28,10 +30,11 @@ class Checkout extends Controller
      * @param $flightInfoCode
      * @param FtObjectAdapter $adapter
      * @param MoneyService $moneyService
+     * @param ApplyRulesService $applyRulesService
      * @return FinishedOrder|FlightsSearchResults
      * @throws ApiException
      */
-    public function getData($flightInfoCode, FtObjectAdapter $adapter, MoneyService $moneyService)
+    public function getData($flightInfoCode, FtObjectAdapter $adapter, MoneyService $moneyService, ApplyRulesService $applyRulesService)
     {
         /** @var FlightsSearchFlightInfo $flightInfo */
         $flightInfo = FlightsSearchFlightInfo::whereCode($flightInfoCode)->with('result.request')->first();
@@ -65,6 +68,8 @@ class Checkout extends Controller
 
             $airPriceResult = $adapter->AirPriceAdaptCheckout(unserialize($logAp), $oldTotalPrice);
             $airPriceResult->put('request', $flightInfo->result->request);
+
+            $applyRulesService->coverCheckout($airPriceResult, $flightInfo->result->rule_id);
 
             return new FlightsSearchResults($airPriceResult);
         } catch (TravelPortLoggerException $exception) {

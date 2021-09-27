@@ -8,6 +8,7 @@ use App\Dto\AirReservationRequestDto;
 use App\Exceptions\ApiException;
 use App\Facades\TP;
 use App\Models\Reservation;
+use App\Services\PlatformRule\ApplyRulesService;
 use FilippoToso\Travelport\Air\AirPriceResult;
 use FilippoToso\Travelport\Air\AirPriceRsp;
 use FilippoToso\Travelport\Air\AirPricingInfo;
@@ -18,17 +19,18 @@ use FilippoToso\Travelport\Air\FareInfo;
 use FilippoToso\Travelport\Air\typeBaseAirSegment;
 use FilippoToso\Travelport\TravelportLogger;
 use FilippoToso\Travelport\UniversalRecord\AirCreateReservationRsp;
-use Illuminate\Support\Facades\Cache;
 
 class CheckoutService
 {
     protected $logger;
     protected $adapter;
+    protected $applyRulesService;
 
-    public function __construct(TravelportLogger $logger, FtObjectAdapter $adapter)
+    public function __construct(TravelportLogger $logger, FtObjectAdapter $adapter, ApplyRulesService $applyRulesService)
     {
         $this->logger = $logger;
         $this->adapter = $adapter;
+        $this->applyRulesService = $applyRulesService;
     }
 
     /**
@@ -100,6 +102,8 @@ class CheckoutService
             throw ApiException::getInstance('Count of passenger is not matched');
         }
 
+        $result = $this->applyRulesService->coverReservation($dto);
+
         /** @var typeBaseAirSegment $airSegment */
         foreach ($airPriceRsp->getAirItinerary()->getAirSegment() as $airSegment) {
             if ($segmentKeys->contains($airSegment->getKey())) {
@@ -125,7 +129,9 @@ class CheckoutService
             'flights_search_flight_info_id' => $dto->getOrder()->id,
             'code' => $dto->getOrder()->code,
             'data' => $dto->getRequest(),
-            'amount' => $responseCollection->get('totalPrice')['amount'],
+            'amount' => $result['_totalPrice']->getAmountAsFloat(),
+            'fee' => $result['agencyCharge']['totalPrice']->getAmountAsFloat(),
+            'total_price' => $responseCollection->get('totalPrice')['amount'],
             'currency_code' => $responseCollection->get('totalPrice')['currency'],
             'access_code' => $responseCollection->get('accessCode')
         ]);

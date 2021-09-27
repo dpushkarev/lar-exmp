@@ -720,4 +720,9 @@ class Money extends AbstractMoney
         $value = (string) $this->getAmount();
         return (float) $value;
     }
+
+    public function getConcatValue()
+    {
+        return $this->getCurrency()->getCurrencyCode() . $this->getAmountAsFloat();
+    }
 }

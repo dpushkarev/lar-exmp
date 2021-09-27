@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Adapters\FtObjectAdapter;
 use App\Dto\AirPriceRequestDto;
 use App\Dto\AirReservationRequestDto;
 use App\Dto\FlightsSearchRequestDto;
@@ -24,9 +25,6 @@ class TravelPortService
 {
     const GALILEO_PROVIDER_ID = '1G';
     const APPLICATION = 'UAPI';
-    const PASSENGERS_MAP = [
-        'CLD' => 'CNN'
-    ];
     const CHILDREN_AGE = 11;
     const FORM_OF_PAYMENT_ROUTING_NUMBER = 456;
     const FORM_OF_PAYMENT_ACCOUNT_NUMBER = 789;
@@ -179,7 +177,7 @@ class TravelPortService
                 )
                 ->setDOB($passenger['dob'] ?? null)
                 ->setKey($passenger['key'])
-                ->setTravelerType(static::PASSENGERS_MAP[$passenger['travelerType']] ?? $passenger['travelerType'])
+                ->setTravelerType(FtObjectAdapter::PASSENGERS_MAP[$passenger['travelerType']] ?? $passenger['travelerType'])
                 ->setAddress((new Air\typeStructuredAddress())
                     ->setAddressName($address['street'])
                     ->setStreet([$address['street']])
@@ -365,7 +363,7 @@ class TravelPortService
             for ($i = 0; $i < $passenger['count']; $i++) {
                 $searchPassengers[] = (new Air\SearchPassenger)
                     ->setAge($passenger['type'] === 'CLD' ? static::CHILDREN_AGE : null)
-                    ->setCode(static::PASSENGERS_MAP[$passenger['type']] ?? $passenger['type'])
+                    ->setCode(FtObjectAdapter::PASSENGERS_MAP[$passenger['type']] ?? $passenger['type'])
                     ->setBookingTravelerRef(base64_encode(rand(10000000, 20000000)))
                     ->setKey(base64_encode(rand(10000000, 20000000)));
             }

@@ -4,46 +4,121 @@
 namespace App\Services\PlatformRule;
 
 
+use App\Dto\AirReservationRequestDto;
+use App\Models\FlightsSearchResult;
 use App\Models\FrontendDomain;
 use App\Models\FrontendDomainRule;
+use App\Services\MoneyService;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Libs\Money;
 
 class ApplyRulesService
 {
-    private function applyRule(AbstractHandler $commonHandler, AbstractHandler $resultHandler, $collection, FrontendDomainRule $rule)
+    private $moneyService;
+
+    public function __construct(MoneyService $moneyService)
     {
-        if ($commonHandler->check($collection)) {
-            echo '<pre>';
-
-            $prices = $collection->get('results')->get('groupsData')->get('prices');
-
-            foreach ($prices as $price) {
-                if ($resultHandler->check($price)) {
-
-                }
-            }
-
-            return true;
-        }
-
-        return false;
+        $this->moneyService = $moneyService;
     }
 
-    public function coverLowFareSearch(FrontendDomain $platform, $LowFareSearchResponse)
+    /**
+     * @param Money $totalPrice
+     * @param array $passengers
+     * @param int|null $ruleId
+     * @return array['totalPrice' => Money[]]
+     * @throws \Brick\Money\Exception\MoneyMismatchException
+     */
+    private function coverTotalPrice(Money $totalPrice, array $passengers, ?int $ruleId): array
     {
+        /** @var FrontendDomain $platform */
+        $platform = App::make('platform');
+        $fee = Money::zero($platform->currency_code);
+        $cashFee = Money::zero($platform->currency_code);
+        $intesaFee = Money::zero($platform->currency_code);
+        $payPalFee = Money::zero($platform->currency_code);
+
+        $agencyFeeAmounts = [
+            FrontendDomainRule::TYPE_ADT => Money::zero($platform->currency_code),
+            FrontendDomainRule::TYPE_CLD => Money::zero($platform->currency_code),
+            FrontendDomainRule::TYPE_INF => Money::zero($platform->currency_code)
+        ];
+
+        if ($ruleId) {
+            /** @var FrontendDomainRule $rule */
+            $rule = FrontendDomainRule::find($ruleId);
+            $agencyFee = $rule->getAgencyFee($totalPrice);
+            $cashFee = $rule->getCashFee($totalPrice);
+            $intesaFee = $rule->getIntesaFee($totalPrice);
+        } else {
+            $agencyFee = $platform->getAgencyFee();
+        }
+
+        foreach ($passengers as $passenger) {
+            $agencyFeeAmounts[$passenger['type']] = $agencyFee;
+            $fee = $fee->plus($agencyFee->multipliedBy($passenger['count']));
+        }
+
+        if ($ruleId) {
+            $fee = $fee->plus($rule->getIntesaFee($totalPrice))->plus($rule->getCashFee($totalPrice));
+        }
+
+        $return = [
+            '_totalPrice' => $totalPrice,
+            'totalPrice' => $totalPrice->plus($fee),
+            'agencyCharge' => [
+                'totalPrice' => $fee,
+                'byPassenger' => $agencyFeeAmounts,
+            ],
+            'paymentOptionCharge' => [
+                'cash' => $cashFee,
+                'intesa' => $intesaFee,
+                'paypal' => $payPalFee,
+            ]
+        ];
+
+        return $return;
+
+    }
+
+    /**
+     * @param Collection $aiePriceRsp
+     * @param FlightsSearchResult $result
+     * @throws \Brick\Money\Exception\MoneyMismatchException
+     */
+    public function covertFlightInfo(Collection $aiePriceRsp, FlightsSearchResult $result)
+    {
+        $oldPrice = Money::of($aiePriceRsp->get('priceStatus')['oldValue']['amount'], $aiePriceRsp->get('priceStatus')['oldValue']['currency']);
+        $newPrice = Money::of($aiePriceRsp->get('priceStatus')['newValue']['amount'], $aiePriceRsp->get('priceStatus')['newValue']['currency']);
+
+        $resultOld = $this->coverTotalPrice($oldPrice, $result->request->data['passengers'], $result->rule_id);
+        $resultNew = $this->coverTotalPrice($newPrice, $result->request->data['passengers'], $result->rule_id);
+
+        $aiePriceRsp->put('priceStatus', [
+            'oldValue' => [
+                'amount' => $resultOld['totalPrice']->getAmountAsFloat(),
+                'currency' => $resultOld['totalPrice']->getCurrency()->getCurrencyCode()
+            ],
+            'newValue' => [
+                'amount' => $resultNew['totalPrice']->getAmountAsFloat(),
+                'currency' => $resultNew['totalPrice']->getCurrency()->getCurrencyCode()
+            ],
+        ]);
+
+    }
+
+    public function coverLowFareSearch($LowFareSearchResponse)
+    {
+        $platform = App::make('platform');
         $rules = $platform->rules;
-        $LowFareSearchResponse->get('results')->get('groupsData')->get('prices')->transform(function ($item) use (
+        $LowFareSearchResponse->get('results')->get('groupsData')->get('prices')->transform(function ($item, $key) use (
             $LowFareSearchResponse,
             $platform,
             $rules
         ) {
-            $fee = Money::zero($platform->currency_code);
+            $suitableRuleId = null;
             $totalPrice = Money::of($item['totalPrice']['amount'], $item['totalPrice']['currency']);
-            $agencyFeeAmounts = [];
-
             foreach ($item['passengerFares'] as $passengerFare) {
-                $agencyFee = Money::zero($platform->currency_code);
-
                 if ($rules->isNotEmpty()) {
                     /** @var FrontendDomainRule $rule */
                     foreach ($rules as $rule) {
@@ -62,45 +137,93 @@ class ApplyRulesService
                             $resultHandler->check($item) &&
                             $passengerHandler->check($passengerFare['type'])
                         ) {
-                            $agencyFee = $rule->getAgencyFee($totalPrice);
-                            break;
+                            $suitableRuleId = $rule->id;
+                            FlightsSearchResult::whereIn('id', $LowFareSearchResponse->get('mapPriceToIdes')[$key])->update(['rule_id' => $rule->id]);
+                            break 2;
                         }
                     }
                 }
-
-                if ($agencyFee->isZero()) {
-                    $agencyFee = $platform->getAgencyFee();
-                }
-
-                $agencyFeeAmounts[$passengerFare['type']] = $agencyFee->getAmountAsFloat();
-                $fee = $fee->plus($agencyFee->multipliedBy($passengerFare['count']));
-
             }
 
-            $item['agencyCharge'] = [
-                'amount' => $fee->getAmountAsFloat(),
-                'currency' => $fee->getCurrency()->getCurrencyCode(),
-                'regular' => [
-                    FrontendDomainRule::TYPE_ADT => $agencyFeeAmounts[FrontendDomainRule::TYPE_ADT],
-                    FrontendDomainRule::TYPE_CLD => $agencyFeeAmounts[FrontendDomainRule::TYPE_CLD_ALTER] ?? 0,
-                    FrontendDomainRule::TYPE_INF => $agencyFeeAmounts[FrontendDomainRule::TYPE_INF] ?? 0,
-                ],
-                'brand' => [
-                    FrontendDomainRule::TYPE_ADT => $agencyFeeAmounts[FrontendDomainRule::TYPE_ADT],
-                    FrontendDomainRule::TYPE_CLD => $agencyFeeAmounts[FrontendDomainRule::TYPE_CLD_ALTER] ?? 0,
-                    FrontendDomainRule::TYPE_INF => $agencyFeeAmounts[FrontendDomainRule::TYPE_INF] ?? 0,
-                ]
-            ];
+            $result = $this->coverTotalPrice($totalPrice, $item['passengerFares'], $suitableRuleId);
 
+            $item['agencyCharge'] = [
+                'amount' => $result['agencyCharge']['totalPrice']->getAmountAsFloat(),
+                'currency' => $result['agencyCharge']['totalPrice']->getCurrency()->getCurrencyCode(),
+                'regular' => array_map(function (Money $value) {
+                    return $value->getAmountAsFloat();
+                }, $result['agencyCharge']['byPassenger']),
+                'brand' => array_map(function (Money $value) {
+                    return $value->getAmountAsFloat();
+                }, $result['agencyCharge']['byPassenger']),
+            ];
             $item['totalPrice'] = [
-                'amount' => $totalPrice->plus($fee)->getAmountAsFloat(),
-                'currency' => $totalPrice->getCurrency()->getCurrencyCode(),
+                'amount' => $result['totalPrice']->getAmountAsFloat(),
+                'currency' => $result['totalPrice']->getCurrency()->getCurrencyCode()
             ];
 
             return $item;
         });
+    }
 
-        return $LowFareSearchResponse;
+    public function coverCheckout(Collection $airPriceResult, ?int $ruleId)
+    {
+        /** @var FrontendDomain $platform */
+        foreach ($airPriceResult->get('results')->get('groupsData')->get('prices') as $key1 => $prices) {
+            foreach ($prices['airSolution'] as $key2 => $airSolution) {
+                $totalPrice = Money::of($airSolution['totalPrice']['amount'], $airSolution['totalPrice']['currency']);
+
+                $result = $this->coverTotalPrice($totalPrice, $airSolution['airPricingInfo'], $ruleId);
+
+                $airSolution['agencyCharge'] = [
+                    'amount' => $result['agencyCharge']['totalPrice']->getAmountAsFloat(),
+                    'currency' => $result['agencyCharge']['totalPrice']->getCurrency()->getCurrencyCode(),
+                    'regular' => array_map(function (Money $value) {
+                        return $value->getAmountAsFloat();
+                    }, $result['agencyCharge']['byPassenger']),
+                    'brand' => array_map(function (Money $value) {
+                        return $value->getAmountAsFloat();
+                    }, $result['agencyCharge']['byPassenger']),
+                ];
+                $airSolution['totalPrice'] = [
+                    'amount' => $result['totalPrice']->getAmountAsFloat(),
+                    'currency' => $result['totalPrice']->getCurrency()->getCurrencyCode()
+                ];
+                $airSolution['paymentOptionCharge'] = [
+                    'cash' => [
+                        'amount' => $result['paymentOptionCharge']['cash']->getAmountAsFloat(),
+                        'currency' => $result['paymentOptionCharge']['cash']->getCurrency()->getCurrencyCode()
+                    ],
+                    'intesa' => [
+                        'amount' => $result['paymentOptionCharge']['intesa']->getAmountAsFloat(),
+                        'currency' => $result['paymentOptionCharge']['intesa']->getCurrency()->getCurrencyCode()
+                    ],
+                    'paypal' => [
+                        'amount' => $result['paymentOptionCharge']['paypal']->getAmountAsFloat(),
+                        'currency' => $result['paymentOptionCharge']['paypal']->getCurrency()->getCurrencyCode()
+                    ]
+                ];
+
+                $prices['airSolution'][$key2] = $airSolution;
+            }
+
+            $airPriceResult->get('results')->get('groupsData')->get('prices')[$key1] = $prices;
+        }
+    }
+
+    public function coverReservation(AirReservationRequestDto $dto)
+    {
+        $airSolution = $dto->getAirSolution();
+        $result = $dto->getOrder()->result;
+        $totalPrice = $this->moneyService->getMoneyByString($airSolution->getTotalPrice());
+        $approximateTotalPrice = $this->moneyService->getMoneyByString($airSolution->getApproximateTotalPrice());
+
+        $newTotalPrice = $this->coverTotalPrice($totalPrice, $result->request->data['passengers'], $result->rule_id);
+        $newApproximateTotalPrice = $this->coverTotalPrice($approximateTotalPrice, $result->request->data['passengers'], $result->rule_id);
+        $airSolution->setTotalPrice($newTotalPrice['totalPrice']->getConcatValue());
+        $airSolution->setApproximateTotalPrice($newApproximateTotalPrice['totalPrice']->getConcatValue());
+
+        return $totalPrice;
     }
 
 

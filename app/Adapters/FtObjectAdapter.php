@@ -70,6 +70,10 @@ use Libs\Money;
 
 class FtObjectAdapter extends NemoWidgetAbstractAdapter
 {
+    const PASSENGERS_MAP = [
+        'CLD' => 'CNN'
+    ];
+
     protected $FareAttributes = [
         1 => [
             'code' => 'baggage',
@@ -294,7 +298,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     }
                 }
                 $passengerFares['count'] = count($airPricingInfo->getPassengerType());
-                $passengerFares['type'] = $airPricingInfo->getPassengerType()[0]->Code;
+                $passengerFares['type'] = array_flip(FtObjectAdapter::PASSENGERS_MAP)[$airPricingInfo->getPassengerType()[0]->Code] ?? $airPricingInfo->getPassengerType()[0]->Code;
                 $countOfPassengers += $passengerFares['count'];
 
                 $baseFare = $this->moneyService->getMoneyByString($airPricingInfo->getBasePrice());
@@ -484,7 +488,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         $value = $fareInfo->getBaggageAllowance()->getNumberOfPieces() ?? $fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ?? null;
 
                         $freeBaggage = [
-                            'passtype' => $passengerFare['type'],
+                            'passtype' => array_flip(FtObjectAdapter::PASSENGERS_MAP)[$passengerFare['type']] ?? $passengerFare['type'],
                             "value" => $value,
                             'measurement' => $fareInfo->getBaggageAllowance()->getNumberOfPieces() ? 'pc' : ($fareInfo->getBaggageAllowance()->getMaxWeight()->getValue() ? 'kg' : 'pc'),
                         ];
@@ -512,6 +516,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
         }
 
+        $mapPriceToIdesCollection = [];
         foreach ($flightGroupsCollection as $p => $groups) {
             foreach ($groups as $key => $group) {
                 $segmentsCollection = collect();
@@ -524,14 +529,20 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     'price' => $p,
                     'segments' => $segmentsCollection->toArray(),
                 ]);
+
                 $flightGroups->add($flightsSearchResult);
+                $mapPriceToIdesCollection[$p][] = $flightsSearchResult->id;
+
             }
 
         }
 
         $groupsData->put('segments', $airSegmentCollection);
         $groupsData->put('prices', $airPriceCollection);
-        $results = collect(['groupsData' => $groupsData, 'flightGroups' => $flightGroups]);
+        $results = collect([
+            'groupsData' => $groupsData,
+            'flightGroups' => $flightGroups,
+        ]);
 
         foreach ($airports as $airport) {
             $countries = $countries->add($airport->country);
@@ -544,7 +555,8 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'aircrafts' => $aircrafts,
             'cities' => $cities,
             'countries' => $countries,
-            'results' => $results
+            'results' => $results,
+            'mapPriceToIdes' => $mapPriceToIdesCollection
         ]);
     }
 
@@ -673,7 +685,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                 foreach ($airSolution->getAirPricingInfo() as $airPricingInfo) {
                     $airPricingInfoData = [
                         'count' => count($airPricingInfo->getPassengerType()),
-                        'type' => $airPricingInfo->getPassengerType()[0]->Code,
+                        'type' => array_flip(FtObjectAdapter::PASSENGERS_MAP)[$airPricingInfo->getPassengerType()[0]->Code] ?? $airPricingInfo->getPassengerType()[0]->Code,
                         'fareCalc' => $airPricingInfo->getFareCalc(),
                     ];
                     $countOfPassengers += $airPricingInfoData['count'];
@@ -961,7 +973,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         }
 
                         $airPricingInfoData['baggageAllowances']['baggageAllowanceInfo'][] = [
-                            'travelType' => $baggageAllowanceInfo->getTravelerType(),
+                            'travelType' => array_flip(static::PASSENGERS_MAP)[$baggageAllowanceInfo->getTravelerType()] ?? $baggageAllowanceInfo->getTravelerType(),
                             'origin' => $baggageAllowanceInfo->getOrigin(),
                             'destination' => $baggageAllowanceInfo->getDestination(),
                             'carrier' => $baggageAllowanceInfo->getCarrier(),
@@ -1065,47 +1077,11 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     $airSolutionData['airPricingInfo'][] = $airPricingInfoData;
                 }
 
-                $agencyChargeAll = $this->moneyService->getAgencyChargeForAllPassengers($countOfPassengers);
-
-                $airSolutionData['agencyCharge'] = [
-                    'amount' => $agencyChargeAll->getAmountAsFloat(),
-                    'currency' => $agencyChargeAll->getCurrency()->getCurrencyCode(),
-                    'regular' => [
-                        static::PASSENGER_TYPE_ADULT => MoneyService::AGENCY_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_CHILD => MoneyService::AGENCY_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_INFANT => MoneyService::AGENCY_CHARGE_AMOUNT,
-                    ],
-                    'brand' => [
-                        static::PASSENGER_TYPE_ADULT => MoneyService::BRAND_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_CHILD => MoneyService::BRAND_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_INFANT => MoneyService::BRAND_CHARGE_AMOUNT,
-                    ]
-                ];
-
                 $airSolutionPrice = $this->moneyService->getMoneyByString($airSolution->getTotalPrice());
-                $totalPrice = $airSolutionPrice->plus($agencyChargeAll);
+
                 $airSolutionData['totalPrice'] = [
-                    'amount' => $totalPrice->getAmountAsFloat(),
-                    'currency' => $totalPrice->getCurrency()->getCurrencyCode()
-                ];
-
-                $intesaPrice = $this->moneyService->calculateIntesaPrice($totalPrice);
-                $cashPrice = $this->moneyService->calculateCashPrice($countOfPassengers);
-                $payPalPrice = $this->moneyService->calculatePayPalPrice($totalPrice);
-
-                $airSolutionData['paymentOptionCharge'] = [
-                    'cache' => [
-                        'amount' => $cashPrice->getAmountAsFloat(),
-                        'currency' => $cashPrice->getCurrency()->getCurrencyCode()
-                    ],
-                    'intesa' => [
-                        'amount' => $intesaPrice->getAmountAsFloat(),
-                        'currency' => $intesaPrice->getCurrency()->getCurrencyCode()
-                    ],
-                    'paypal' => [
-                        'amount' => $payPalPrice->getAmountAsFloat(),
-                        'currency' => $payPalPrice->getCurrency()->getCurrencyCode()
-                    ]
+                    'amount' => $airSolutionPrice->getAmountAsFloat(),
+                    'currency' => $airSolutionPrice->getCurrency()->getCurrencyCode()
                 ];
 
                 if ($airSolution->getFareNote()) {

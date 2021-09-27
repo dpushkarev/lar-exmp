@@ -135,8 +135,7 @@ class NemoWidgetService
             $LowFareSearchAdapt->put('request', $request);
 
             $request->transaction_id = $lowFareSearchRsp->getTransactionId();
-
-            $LowFareSearchAdapt = $this->applyRulesService->coverLowFareSearch(App::make('platform'), $LowFareSearchAdapt);
+            $this->applyRulesService->coverLowFareSearch($LowFareSearchAdapt);
 
             return $LowFareSearchAdapt;
         } catch (TravelPortException $travelPortException) {
@@ -232,6 +231,8 @@ class NemoWidgetService
         ]);
 
         $aiePriceRsp = $this->ftObjectAdapter->AirPriceAdapt($airPriceRsp, $oldTotalPrice);
+        $this->applyRulesService->covertFlightInfo($aiePriceRsp, $resultModel);
+
         $aiePriceRsp->put('createOrderLink', sprintf('/reservation/%s', $order->code));
 
         return $aiePriceRsp;
