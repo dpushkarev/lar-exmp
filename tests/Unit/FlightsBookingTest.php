@@ -2,7 +2,6 @@
 
 namespace Tests\Unit;
 
-use App\Adapters\FtObjectAdapter;
 use App\Facades\TP;
 use App\Models\FlightsSearchFlightInfo;
 use App\Models\FlightsSearchRequest;
@@ -12,9 +11,6 @@ use Tests\TestCase;
 
 class FlightsBookingTestTest extends TestCase
 {
-    protected $agencyChargeAmount = FtObjectAdapter::AGENCY_CHARGE_AMOUNT;
-    protected $agencyChargeCurrency = FtObjectAdapter::AGENCY_CHARGE_CURRENCY;
-
     public function setUp(): void
     {
         parent::setUp();

@@ -8,6 +8,7 @@ use App\Models\Aircraft;
 use App\Models\Airline;
 use App\Models\Airport;
 use App\Models\FlightsSearchResult;
+use App\Models\FrontendDomainRule;
 use App\Services\MoneyService;
 use App\Services\TravelPortService;
 use Carbon\Carbon;
@@ -71,7 +72,7 @@ use Libs\Money;
 class FtObjectAdapter extends NemoWidgetAbstractAdapter
 {
     const PASSENGERS_MAP = [
-        'CLD' => 'CNN'
+        FrontendDomainRule::TYPE_CLD => FrontendDomainRule::TYPE_CLD_ALTER
     ];
 
     protected $FareAttributes = [
@@ -112,20 +113,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
     ];
 
     protected $moneyService;
-
-    const AGENCY_CHARGE_AMOUNT = 495;
-    const AGENCY_CHARGE_CURRENCY = 'RSD';
-
-    const CASH_AMOUNT = 795;
-    const CASH_CURRENCY = 'RSD';
-
-    const INTESA_COMMISSION = 0;
-    const PAYPAL_COMMISSION = 2.9;
-    const PAYPAL_COMMISSION_FIX = 30;
-
-    const PASSENGER_TYPE_ADULT = 'ADT';
-    const PASSENGER_TYPE_INFANT = 'INF';
-    const PASSENGER_TYPE_CHILD = 'CNN';
 
     public function __construct(MoneyService $moneyService)
     {
@@ -494,7 +481,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                         ];
                         $segmentInfo['freeBaggage'][] = $freeBaggage;
 
-                        if ($passengerFare['type'] === static::PASSENGER_TYPE_ADULT) {
+                        if ($passengerFare['type'] === FrontendDomainRule::TYPE_ADT) {
                             $segmentInfo["minBaggage"] = [
                                 'value' => $freeBaggage['value'],
                                 'measurement' => $freeBaggage['measurement']
@@ -692,7 +679,7 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                     $infoData->put($airPricingInfoData['type'], [
                         'nationality' => false,
-                        'dateOfBirth' => in_array($airPricingInfoData['type'], [static::PASSENGER_TYPE_INFANT, static::PASSENGER_TYPE_CHILD]),
+                        'dateOfBirth' => in_array($airPricingInfoData['type'], [FrontendDomainRule::TYPE_INF, FrontendDomainRule::TYPE_CLD]),
                         'passportNo' => false,
                         'passportCountry' => false,
                         'passportExpiration' => false
@@ -2019,9 +2006,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
                     'text' => trim(strstr($fareRuleLong->get_(), "\n")),
                     'code' => $fareRuleLong->getCategory(),
                     'segmentNumber' => $key,
-                    'passengerTypes' => [static::PASSENGER_TYPE_ADULT],
+                    'passengerTypes' => [FrontendDomainRule::TYPE_ADT],
                     'isURL' => false,
-                    'tariffCode' => static::PASSENGER_TYPE_ADULT
+                    'tariffCode' => FrontendDomainRule::TYPE_ADT
                 ];
             }
         }

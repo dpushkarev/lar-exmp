@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Facades\TP;
 use App\Models\FlightsSearchResult;
+use App\Models\FrontendDomainRule;
 use App\Services\MoneyService;
 use Tests\TestCase;
 
@@ -116,7 +117,7 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P1.passengerFares')
             ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.amount', 3)
-            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.currency', MoneyService::AGENCY_CHARGE_CURRENCY)
+            ->assertJsonPath('flights.search.results.groupsData.prices.P1.agencyCharge.currency', 'RSD')
             ->assertJsonPath('flights.search.results.groupsData.prices.P1.flightPrice.amount', 41739)
             ->assertJsonPath('flights.search.results.groupsData.prices.P1.totalPrice.amount', 41742)
             ->assertJsonPath('flights.search.results.groupsData.prices.P2.flightPrice.amount', 58371)
