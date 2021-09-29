@@ -111,12 +111,13 @@ class Checkout extends Controller
 
     /**
      * @param FtObjectAdapter $adapter
+     * @param ApplyRulesService $applyRulesService
      * @param Request $request
      * @param $reservationCode
      * @return AirReservation
      * @throws ApiException
      */
-    public function getReservation(FtObjectAdapter $adapter, Request $request, $reservationCode)
+    public function getReservation(FtObjectAdapter $adapter, ApplyRulesService $applyRulesService, Request $request, $reservationCode)
     {
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'access_code' => 'required',
@@ -126,8 +127,8 @@ class Checkout extends Controller
             throw ApiException::getInstanceValidate($validator->errors()->first(), 666);
         }
 
-        /** @var FlightsSearchFlightInfo $order */
-        $reservation = Reservation::where('code', $reservationCode)->first();
+        /** @var Reservation $reservation */
+        $reservation = Reservation::where('code', $reservationCode)->with('flightInfo.result')->first();
 
         if (is_null($reservation)) {
             throw ApiException::getInstanceInvalidCode($reservationCode);
@@ -142,6 +143,8 @@ class Checkout extends Controller
                 ->getLog(AirCreateReservationRsp::class, $reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
             $response = $adapter->AirReservationAdapt(unserialize($log));
+            $applyRulesService->coverReservationResponse($response, $reservation->getAmountPrice(), $reservation->flightInfo->result->rule_id);
+
             $response->put('paymentOption', $reservation->data['paymentOption']);
 
             return new AirReservation($response);

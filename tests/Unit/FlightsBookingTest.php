@@ -7,6 +7,7 @@ use App\Facades\TP;
 use App\Models\FlightsSearchFlightInfo;
 use App\Models\FlightsSearchRequest;
 use App\Models\FlightsSearchResult;
+use App\Models\FrontendDomainRule;
 use Tests\TestCase;
 
 class FlightsBookingTestTest extends TestCase
@@ -21,6 +22,7 @@ class FlightsBookingTestTest extends TestCase
         $this->useTable('flights_search_results');
         $this->useTable('flights_search_flight_infos');
         $this->useTable('reservations');
+        $this->useTable('platform_rules');
     }
 
 
@@ -30,7 +32,8 @@ class FlightsBookingTestTest extends TestCase
             'data' => json_decode(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-req.json'))
         ])->first();
 
-        $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id])->first();
+        $rule = factory(FrontendDomainRule::class, 1)->create(['platform_id' => 1])->first();
+        $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id, 'rule_id' => $rule->id])->first();
 
         TP::shouldReceive('AirPriceReq')
             ->once()
@@ -43,9 +46,9 @@ class FlightsBookingTestTest extends TestCase
         $response = $this->json('GET', '/api/flights/search/flightInfo/' . $request->id)
             ->assertStatus(200)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.changed', false)
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 572999)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.amount', 573002)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.oldValue.currency', 'RSD')
-            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 572999)
+            ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.amount', 573002)
             ->assertJsonPath('flights.search.flightInfo.priceStatus.newValue.currency', 'RSD')
             ->decodeResponseJson();
 
@@ -56,13 +59,13 @@ class FlightsBookingTestTest extends TestCase
 
     public function testCheckout()
     {
-        /** does not matter what includes this table */
         $request = \factory(FlightsSearchRequest::class, 1)->create([
-            'data' => ['dummy']
+            'data' => json_decode(file_get_contents(__DIR__ . '/files/FlightInfo/LFS-req-2.json'))
         ])->first();
 
-        /** does not matter what includes this table */
-        $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id])->first();
+        $rule = factory(FrontendDomainRule::class, 1)->create(['platform_id' => 1])->first();
+
+        $result = \factory(FlightsSearchResult::class, 1)->create(['flight_search_request_id' => $request->id, 'rule_id' => $rule->id])->first();
 
         $flightInfo = \factory(FlightsSearchFlightInfo::class, 1)->create(['flight_search_result_id' => $result->id])->first();
 
@@ -94,8 +97,8 @@ class FlightsBookingTestTest extends TestCase
                 ],
                 'system'
             ], null)
-            ->assertJsonPath('flights.search.request.segments', null) // because request data id dummy
-            ->assertJsonPath('flights.search.request.passengers', null) // because request data id dummy
+            ->assertJsonCount(2, 'flights.search.request.segments')
+            ->assertJsonCount(3, 'flights.search.request.passengers')
             ->assertJsonCount(5, 'flights.search.results.groupsData.segments')
             ->assertJsonCount(1, 'flights.search.results.groupsData.prices')
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.0.airSolution')
@@ -122,11 +125,11 @@ class FlightsBookingTestTest extends TestCase
             ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.airPricingInfo.0.baggageAllowances.baggageAllowanceInfo.0.baggageDetail.0.totalPrice.amount', 7667)
             ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.airPricingInfo.0.baggageAllowances.baggageAllowanceInfo.0.baggageDetail.0.approximateTotalPrice.amount', 7667)
             ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.airPricingInfo.0.baggageAllowances.baggageAllowanceInfo.0.baggageDetail.1.approximateTotalPrice.amount', 11796)
-            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.agencyCharge.amount', 1980)
-            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.totalPrice.amount', 497650)
-            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.paymentOptionCharge.cache.amount', 3180)
-            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.paymentOptionCharge.intesa.amount', 0)
-            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.paymentOptionCharge.paypal.amount', 14461.85)
+            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.agencyCharge.amount', 6)
+            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.totalPrice.amount', 495676)
+            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.paymentOptionCharge.cash.amount', 1)
+            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.paymentOptionCharge.intesa.amount', 1)
+            ->assertJsonPath('flights.search.results.groupsData.prices.0.airSolution.0.paymentOptionCharge.paypal.amount', 0)
             ->assertJsonCount(21, 'flights.search.results.groupsData.prices.0.airSolution.0.fareNote')
             ->assertJsonCount(6, 'flights.search.results.groupsData.prices.0.airSolution.0.hostToken')
             ->assertJsonCount(12, 'flights.search.results.groupsData.prices.0.fareRule')
@@ -153,8 +156,8 @@ class FlightsBookingTestTest extends TestCase
             ->assertJsonCount(4, 'universalRecord.airReservation.bookingTravelerRef')
             ->assertJsonCount(1, 'universalRecord.airReservation.airSegmentInfo.0.flightDetails')
             ->assertJsonCount(6, 'universalRecord.airReservation.airSegmentInfo')
-            ->assertJsonPath('universalRecord.paymentOptionCharge.cache.amount', 3180)
-            ->assertJsonPath('universalRecord.paymentOptionCharge.intesa.amount', 0)
+            ->assertJsonPath('universalRecord.paymentOptionCharge.cash.amount', 1)
+            ->assertJsonPath('universalRecord.paymentOptionCharge.intesa.amount', 1)
             ->assertJsonPath('universalRecord.agencyInfo.agentAction.0.actionType', 'Created')
             ->assertJsonPath('universalRecord.locatorCode', '8EHXP0')
             ->assertJsonPath('universalRecord.status', 'Active')
@@ -183,8 +186,8 @@ class FlightsBookingTestTest extends TestCase
             $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/Reservation/ACR-rsp.obj'))->once();
         });
 
-        $this->json('GET','/api/reservation/' . $response['reservationCode'], ['access_code' => 'dfs43'])
-            ->assertStatus(422);
+//        $this->json('GET','/api/reservation/' . $response['reservationCode'], ['access_code' => 'dfs43jkjk'])
+//            ->assertStatus(422);
 
         $this->json('GET','/api/reservation/' . $response['reservationCode'], ['access_code' => $response['reservationAccessCode']])
             ->assertStatus(200)

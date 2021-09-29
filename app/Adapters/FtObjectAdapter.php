@@ -1165,7 +1165,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
         $aircrafts = collect();
         $countOfPassengers = 0;
         $countOfPassengersMap = collect();
-        $totalPrice = Money::zero(MoneyService::AGENCY_CHARGE_CURRENCY);
         $accessCode = null;
 
         /** @var BookingTraveler $bookingTraveler */
@@ -1646,8 +1645,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
 
                         $code = (string)$passengerTpe->getCode();
                         $countOfPassengersMap->put($code, $countOfPassengersMap->get($code, 0) + 1);
-                        $totalPrice = $this->moneyService->addAgencyChargeByPassengerType($totalPrice, $code);
-                        $totalPrice = $totalPrice->plus($airPricingInfoPrice);
                     }
 
                     $bookingTravelerRefData = [];
@@ -1986,43 +1983,9 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             $cities = $cities->add($airport->city);
         }
 
-        $agencyChargeAll = $this->moneyService->getAgencyChargeForAllPassengers($countOfPassengers);
-        $intesaPrice = $this->moneyService->calculateIntesaPrice($totalPrice);
-        $cashPrice = $this->moneyService->calculateCashPrice($countOfPassengers);
-        $payPalPrice = $this->moneyService->calculatePayPalPrice($totalPrice);
-        $totalPrice = $totalPrice->plus($intesaPrice)->plus($cashPrice);
-
         return collect([
             'universalRecord' => [
                 'bookingTraveler' => $bookingTravelerCollection,
-                'agencyCharge' => [
-                    'amount' => $agencyChargeAll->getAmountAsFloat(),
-                    'currency' => $agencyChargeAll->getCurrency()->getCurrencyCode(),
-                    'regular' => [
-                        static::PASSENGER_TYPE_ADULT => MoneyService::AGENCY_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_CHILD => MoneyService::AGENCY_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_INFANT => MoneyService::AGENCY_CHARGE_AMOUNT,
-                    ],
-                    'brand' => [
-                        static::PASSENGER_TYPE_ADULT => MoneyService::BRAND_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_CHILD => MoneyService::BRAND_CHARGE_AMOUNT,
-                        static::PASSENGER_TYPE_INFANT => MoneyService::BRAND_CHARGE_AMOUNT,
-                    ]
-                ],
-                'paymentOptionCharge' => [
-                    'cache' => [
-                        'amount' => $cashPrice->getAmountAsFloat(),
-                        'currency' => $cashPrice->getCurrency()->getCurrencyCode()
-                    ],
-                    'intesa' => [
-                        'amount' => $intesaPrice->getAmountAsFloat(),
-                        'currency' => $intesaPrice->getCurrency()->getCurrencyCode()
-                    ],
-                    'paypal' => [
-                        'amount' => $payPalPrice->getAmountAsFloat(),
-                        'currency' => $payPalPrice->getCurrency()->getCurrencyCode()
-                    ]
-                ],
                 'actionStatus' => $actionStatusCollection,
                 'providerReservationInfo' => $providerReservationCollection,
                 'airReservation' => $airReservationData,
@@ -2041,10 +2004,6 @@ class FtObjectAdapter extends NemoWidgetAbstractAdapter
             'cities' => $cities,
             'countries' => $countries,
             'passengersCount' => $countOfPassengersMap,
-            'totalPrice' => [
-                'amount' => $totalPrice->getAmountAsFloat(),
-                'currency' => $totalPrice->getCurrency()->getCurrencyCode(),
-            ]
         ]);
     }
 

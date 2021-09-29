@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Libs\Money;
 
 /**
  * Class Reservation
@@ -28,5 +29,10 @@ class Reservation extends Model
     public function getUrl()
     {
         return config('app.fe_url') . '/reservation/' . $this->code;
+    }
+
+    public function getAmountPrice()
+    {
+        return Money::of($this->amount, $this->currency_code);
     }
 }

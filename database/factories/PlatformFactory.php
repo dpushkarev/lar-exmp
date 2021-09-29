@@ -21,8 +21,18 @@ $factory->define(\App\Models\FrontendDomain::class, function (Faker $faker) {
         'domain' => $faker->domainName,
         'travel_agency_id' => $faker->randomNumber(),
         'currency_code' => 'RSD',
-        'agency_fee_default' => 495,
+        'agency_fee_default' => 1,
         'token' => '06e7140bbbbad363108b45c889e89099'
     ];
 });
+
+$factory->define(\App\Models\FrontendDomainRule::class, function (Faker $faker, $params) {
+    return [
+        'platform_id' => $params['platform_id'],
+        'agency_fee' => 1,
+        'cash_fee' => 1,
+        'intesa_fee' => 1,
+    ];
+});
+
 

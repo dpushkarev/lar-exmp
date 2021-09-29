@@ -1,10 +1,10 @@
-GET http://127.0.0.1:8081/api/checkout/43094745a8
+GET http://127.0.0.1:8081/api/checkout/f6f7bc1217
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 ###
 
-POST http://127.0.0.1:8081/api/reservation/43094745a8?
- request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Den","last":"Push","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"CLD","prefix":"MR","first":"Slavk","last":"Push","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"CLD","prefix":"MR","first":"Boris","last":"Elecen","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"aaeALv%2BpWDKADuuaLAAAAA==","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"%2B381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
+POST http://127.0.0.1:8081/api/reservation/f6f7bc1217?
+ request={"passengers":[{"travelerType":"ADT","prefix":"MR","first":"Den","last":"Push","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"CLD","prefix":"MR","first":"Slavk","last":"Push","gender":"m","nationality":"RS","issuingCountry":"RS"}, {"travelerType":"CLD","prefix":"MR","first":"Boris","last":"Elecen","gender":"m","nationality":"RS","issuingCountry":"RS"}],"address":{"street":"LIne","postalCode":"45333","city":"Grad","country":"RS"},"airSolutionKey":"ct%2B55vVynDKAClz2RYAAAA%3D%3D","email":"slavko.tepavcevic@gmail.com","paymentOption":"card","phoneNumber":"%2B381 631234567","g-recaptcha-response":"03AGdBq27W69F29lQyQD5v4un_GZtjELWSGOrkyWRuiO8KdZqmZ8dVe832BOWGt6WgzgHWcTwgD8qmG7aWDAdBqgM2BlMXuKpSOqkeqzGQIHr7mtNc2rgi9v-FSm5BUp75eZwUjHF8RE3uufcDzyD4Op8oVpS-YSMqlkJUY0e15Ns20TjqVzfo3agduzetJQCATg-VzfC3r57TRAanjxAWrEDUGfds2Tj2PU9bK2lnSUIpq94ZTwVX-SsVKKJkW6cW6JY-66IJ3F5WVtkdUKxh-DzBKfZIRwHmA_W5MlnbbzALbhipZhqFb3z8XCoOnBwXKXIcCTUm2EdcL6xXLDFAU2pF8W8sf2gYzYvQUbnPG2smlSq4apbk37kQ_QQrQoD5NdVtsglCVcCsLZoQsXeajFGmdNS-50Gnhv6beOejwVxzV9Gao2MpVZ0"}
 # request={"passengers":[{"travelerType":"ADT", "first":"Pushakrev","last":"Pushkarev","prefix":"Mr"},{"travelerType":"ADT", "first":"Pushakreva","last":"Pushkareva","prefix":"Mrs"}, {"travelerType":"CLD", "first":"Pushakrevchik","last":"Pushakrevchik","prefix":"Mr", "birth":"2015-02-04"}, {"travelerType":"INF", "first":"Ivanov","last":"Ivanov","prefix":"Mr", "dob":"2015-02-04"}],"address":{"street":"Pobeda striie","postalCode":32,"city":"Grad","country":"RS"},"airSolutionKey":"WtFYpPgYlDKAeNthODAAAA==","email":"psuk@bk.ru","phoneNumber":"381637796918"}
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
@@ -13,7 +13,8 @@ X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 GET http://127.0.0.1:8081/api/order/1
 
 ###
-GET http://127.0.0.1:8081/api/reservation/bccb10b096?access_code=NRDFJ7
+GET http://127.0.0.1:8081/api/reservation/f6f7bc1217?access_code=08VJBQ
+X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 ###
 
