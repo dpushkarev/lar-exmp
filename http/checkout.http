@@ -1,4 +1,4 @@
-GET http://127.0.0.1:8081/api/checkout/f6f7bc1217
+GET http://127.0.0.1:8081/api/checkout/1a95fd137a
 X-PLATFORM-TOKEN: 06e7140bbbbad363108b45c889e89099
 
 ###

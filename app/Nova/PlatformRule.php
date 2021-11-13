@@ -137,28 +137,6 @@ class PlatformRule extends Resource
                     Text::make('Brand fee', function ($model) {
                         return static::getFormatFee($model->brand_fee, $model->brand_fee_type, $model->platform);
                     })->exceptOnForms(),
-
-                    Number::make('Cash fee', 'cash_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
-                    RadioButton::make('Cash fee type', 'cash_fee_type')
-                        ->options([
-                            'fix' => ['Fixed' => 'In platform\'s currency'],
-                            'percent' => 'Percent'
-                        ])->default('fix')->marginBetween()->onlyOnForms(),
-
-                    Text::make('Cash fee', function ($model) {
-                        return static::getFormatFee($model->cash_fee, $model->cash_fee_type, $model->platform);
-                    })->exceptOnForms(),
-
-                    Number::make('Intesa fee', 'intesa_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
-                    RadioButton::make('Intesa fee type', 'intesa_fee_type')
-                        ->options([
-                            'fix' => ['Fixed' => 'In platform\'s currency'],
-                            'percent' => 'Percent'
-                        ])->default('fix')->marginBetween()->onlyOnForms(),
-
-                    Text::make('Intesa fee', function ($model) {
-                        return static::getFormatFee($model->intesa_fee, $model->intesa_fee_type, $model->platform);
-                    })->exceptOnForms(),
                 ]
             ])
         ];

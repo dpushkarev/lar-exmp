@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use OwenMelbz\RadioField\RadioButton;
 
 class Platform extends Resource
 {
@@ -56,6 +57,27 @@ class Platform extends Resource
                 'EUR' => 'EUR'
             ])->rules('required')->help('Applies to all rules'),
             Number::make('Agency fee', 'agency_fee_default')->required()->help('In platform\'s currency. Applied if no one rule is fit'),
+            Number::make('Cash fee', 'cash_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
+            RadioButton::make('Cash fee type', 'cash_fee_type')
+                ->options([
+                    'fix' => ['Fixed' => 'In platform\'s currency'],
+                    'percent' => 'Percent'
+                ])->default('fix')->marginBetween()->onlyOnForms(),
+
+            Text::make('Cash fee', function ($model) {
+                return static::getFormatFee($model->cash_fee, $model->cash_fee_type, $model->currency_code);
+            })->exceptOnForms(),
+
+            Number::make('Intesa fee', 'intesa_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
+            RadioButton::make('Intesa fee type', 'intesa_fee_type')
+                ->options([
+                    'fix' => ['Fixed' => 'In platform\'s currency'],
+                    'percent' => 'Percent'
+                ])->default('fix')->marginBetween()->onlyOnForms(),
+
+            Text::make('Intesa fee', function ($model) {
+                return static::getFormatFee($model->intesa_fee, $model->intesa_fee_type, $model->currency_code);
+            })->exceptOnForms(),
             BelongsTo::make('Travel agency', 'travelAgency', TravelAgency::class)
                 ->rules('required'),
             HasMany::make('Rules', 'rules', PlatformRule::class)
@@ -126,6 +148,15 @@ class Platform extends Resource
     public static function detailQuery(NovaRequest $request, $query)
     {
         return static::filteredUsers($request, $query);
+    }
+
+    public static function getFormatFee($amount, $type, $currency_code)
+    {
+        if ($type == 'fix') {
+            return sprintf('%s %s', $currency_code, $amount);
+        }
+
+        return sprintf('%s %s', $amount, '%');
     }
 
     private static function filteredUsers(NovaRequest $request, $query)

@@ -34,8 +34,8 @@ class ApplyRulesService
         /** @var FrontendDomain $platform */
         $platform = App::make('platform');
         $fee = Money::zero($platform->currency_code);
-        $cashFee = Money::zero($platform->currency_code);
-        $intesaFee = Money::zero($platform->currency_code);
+        $cashFee = $platform->getCashFee($totalPrice);
+        $intesaFee = $platform->getIntesaFee($totalPrice);
         $payPalFee = Money::zero($platform->currency_code);
 
         $agencyFeeAmounts = [
@@ -48,8 +48,6 @@ class ApplyRulesService
             /** @var FrontendDomainRule $rule */
             $rule = FrontendDomainRule::find($ruleId);
             $agencyFee = $rule->getAgencyFee($totalPrice);
-            $cashFee = $rule->getCashFee($totalPrice);
-            $intesaFee = $rule->getIntesaFee($totalPrice);
         } else {
             $agencyFee = $platform->getAgencyFee();
         }
@@ -59,12 +57,13 @@ class ApplyRulesService
             $fee = $fee->plus($agencyFee->multipliedBy($passenger['count']));
         }
 
-        if ($ruleId) {
-            $fee = $fee->plus($rule->getIntesaFee($totalPrice))->plus($rule->getCashFee($totalPrice));
-        }
+        $fee = $fee->plus($intesaFee)->plus($cashFee);
 
         $return = [
-            '_totalPrice' => $totalPrice,
+            '_meta' => [
+                'originPrice' => $totalPrice->getConcatValue(),
+                'ruleId' => $ruleId,
+            ],
             'totalPrice' => $totalPrice->plus($fee),
             'agencyCharge' => [
                 'totalPrice' => $fee,
@@ -104,6 +103,7 @@ class ApplyRulesService
                 'amount' => $resultNew['totalPrice']->getAmountAsFloat(),
                 'currency' => $resultNew['totalPrice']->getCurrency()->getCurrencyCode()
             ],
+            '_meta' => $resultNew['_meta']
         ]);
 
     }
@@ -167,6 +167,8 @@ class ApplyRulesService
                 'currency' => $result['_totalPrice']->getCurrency()->getCurrencyCode()
             ];
 
+            $item['_meta'] = $result['_meta'];
+
             return $item;
         });
     }
@@ -208,6 +210,7 @@ class ApplyRulesService
                         'currency' => $result['paymentOptionCharge']['paypal']->getCurrency()->getCurrencyCode()
                     ]
                 ];
+                $airSolution['_meta'] = $result['_meta'];
 
                 $prices['airSolution'][$key2] = $airSolution;
             }
@@ -291,6 +294,8 @@ class ApplyRulesService
             'amount' => $result['totalPrice']->getAmountAsFloat(),
             'currency' => $result['totalPrice']->getCurrency()->getCurrencyCode()
         ]);
+
+        $reservation->put('_meta', $result['_meta']);
     }
 
 
