@@ -61,7 +61,7 @@ class ApplyRulesService
 
         $return = [
             '_meta' => [
-                'originPrice' => $totalPrice->getConcatValue(),
+                'originPrice' => $totalPrice,
                 'ruleId' => $ruleId,
             ],
             'totalPrice' => $totalPrice->plus($fee),
@@ -161,10 +161,6 @@ class ApplyRulesService
             $item['totalPrice'] = [
                 'amount' => $result['totalPrice']->getAmountAsFloat(),
                 'currency' => $result['totalPrice']->getCurrency()->getCurrencyCode()
-            ];
-            $item['_totalPrice'] = [
-                'amount' => $result['_totalPrice']->getAmountAsFloat(),
-                'currency' => $result['_totalPrice']->getCurrency()->getCurrencyCode()
             ];
 
             $item['_meta'] = $result['_meta'];

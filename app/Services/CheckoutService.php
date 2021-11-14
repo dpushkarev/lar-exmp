@@ -125,14 +125,14 @@ class CheckoutService
         $response = TP::AirCreateReservationReq($dto);
         $responseCollection = $this->adapter->AirReservationAdapt($response);
 
-        $this->applyRulesService->coverReservationResponse($responseCollection, $result['_totalPrice'], $dto->getOrder()->result->rule_id);
+        $this->applyRulesService->coverReservationResponse($responseCollection, $result['_meta']['originPrice'], $dto->getOrder()->result->rule_id);
 
         $reservation = Reservation::forceCreate([
             'transaction_id' => $response->getTransactionId(),
             'flights_search_flight_info_id' => $dto->getOrder()->id,
             'code' => $dto->getOrder()->code,
             'data' => $dto->getRequest(),
-            'amount' => $result['_totalPrice']->getAmountAsFloat(), // old price
+            'amount' => $result['_meta']['originPrice']->getAmountAsFloat(), // old price
             'fee' => $result['agencyCharge']['totalPrice']->getAmountAsFloat(), // commission
             'total_price' => $responseCollection->get('totalPrice')['amount'], // old price + commission
             'currency_code' => $responseCollection->get('totalPrice')['currency'],

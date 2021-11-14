@@ -23,7 +23,9 @@ $factory->define(\App\Models\FrontendDomain::class, function (Faker $faker) {
         'currency_code' => 'RSD',
         'agency_fee_default' => 1,
         'cash_fee' => 1,
+        'cash_fee_type' => 'fix',
         'intesa_fee' => 1,
+        'intesa_fee_type' => 'fix',
         'token' => '06e7140bbbbad363108b45c889e89099'
     ];
 });
