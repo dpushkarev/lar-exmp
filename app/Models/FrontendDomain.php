@@ -15,6 +15,9 @@ class FrontendDomain extends Model
 {
     protected $table = 'platforms';
 
+    const CASH_FEE_CALCULATION_BOOK = 'book';
+    const CASH_FEE_CALCULATION_PAX = 'pax';
+
     const TYPE_FIX = 'fix';
     const TYPE_PERCENT = 'percent';
 

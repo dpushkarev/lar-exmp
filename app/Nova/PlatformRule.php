@@ -127,7 +127,7 @@ class PlatformRule extends Resource
                         return static::getFormatFee($model->agency_fee, $model->agency_fee_type, $model->platform);
                     })->exceptOnForms(),
 
-                    Number::make('Brand fee', 'brand_fee')->rules('required')->min(0)->step(.1)->onlyOnForms(),
+                    Number::make('Brand fee', 'brand_fee')->rules('required')->min(0.0)->step(.1)->onlyOnForms(),
                     RadioButton::make('Brand fee type', 'brand_fee_type')
                         ->options([
                             'fix' => ['Fixed' => 'In platform\'s currency'],

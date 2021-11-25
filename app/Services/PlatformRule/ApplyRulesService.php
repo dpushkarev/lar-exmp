@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Libs\Money;
 
-class ApplyRulesService
+final class ApplyRulesService
 {
     private $moneyService;
 
@@ -52,12 +52,16 @@ class ApplyRulesService
             $agencyFee = $platform->getAgencyFee();
         }
 
+        $passengerCount = 0;
         foreach ($passengers as $passenger) {
             $agencyFeeAmounts[$passenger['type']] = $agencyFee;
             $fee = $fee->plus($agencyFee->multipliedBy($passenger['count']));
+            $passengerCount += $passenger['count'];
         }
 
-        $fee = $fee->plus($intesaFee)->plus($cashFee);
+        if ($platform->cash_fee_calculation == FrontendDomain::CASH_FEE_CALCULATION_PAX) {
+            $cashFee = $cashFee->multipliedBy($passengerCount);
+        }
 
         $return = [
             '_meta' => [

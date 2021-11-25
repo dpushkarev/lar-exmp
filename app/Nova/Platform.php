@@ -57,7 +57,7 @@ class Platform extends Resource
                 'EUR' => 'EUR'
             ])->rules('required')->help('Applies to all rules'),
             Number::make('Agency fee', 'agency_fee_default')->required()->help('In platform\'s currency. Applied if no one rule is fit'),
-            Number::make('Cash fee', 'cash_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
+            Number::make('Cash fee', 'cash_fee')->min(0.0)->step(.1)->onlyOnForms(),
             RadioButton::make('Cash fee type', 'cash_fee_type')
                 ->options([
                     'fix' => ['Fixed' => 'In platform\'s currency'],
@@ -68,7 +68,17 @@ class Platform extends Resource
                 return static::getFormatFee($model->cash_fee, $model->cash_fee_type, $model->currency_code);
             })->exceptOnForms(),
 
-            Number::make('Intesa fee', 'intesa_fee')->rules('required')->min(0.1)->step(.1)->onlyOnForms(),
+            RadioButton::make('Cash fee calculation', 'cash_fee_calculation')
+                ->options([
+                    'book' => 'Book',
+                    'pax' => 'Pax'
+                ])->default('book')->marginBetween()->onlyOnForms(),
+
+            Text::make('Cash fee calculation', function ($model) {
+                return $model->cash_fee_calculation;
+            })->exceptOnForms(),
+
+            Number::make('Intesa fee', 'intesa_fee')->min(0.0)->step(.1)->onlyOnForms(),
             RadioButton::make('Intesa fee type', 'intesa_fee_type')
                 ->options([
                     'fix' => ['Fixed' => 'In platform\'s currency'],
