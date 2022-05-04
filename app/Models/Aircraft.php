@@ -20,5 +20,4 @@ class Aircraft extends Model
     protected $table = 'aircrafts';
 
     use CacheTrait;
-
 }

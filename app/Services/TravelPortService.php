@@ -94,7 +94,7 @@ class TravelPortService
         return $this->execute($request);
     }
 
-    protected  function  getAirFareRulesRequest($fareRulesKeys)
+    protected function getAirFareRulesRequest($fareRulesKeys)
     {
         /** @var Air\AirFareRulesReq $airFareRulesRequest */
         $airFareRulesRequest = app()->make(Air\AirFareRulesReq::class);
@@ -139,10 +139,11 @@ class TravelPortService
         return (new FormOfPayment())
             ->setType(static::FORM_OF_PAYMENT_TYPE)
             ->setKey(static::FORM_OF_PAYMENT_CHECK_KEY)
-            ->setCheck((new Air\Check())
-                ->setRoutingNumber(static::FORM_OF_PAYMENT_ROUTING_NUMBER)
-                ->setAccountNumber(static::FORM_OF_PAYMENT_ACCOUNT_NUMBER)
-                ->setCheckNumber(static::FORM_OF_PAYMENT_CHECK_NUMBER)
+            ->setCheck(
+                (new Air\Check())
+                    ->setRoutingNumber(static::FORM_OF_PAYMENT_ROUTING_NUMBER)
+                    ->setAccountNumber(static::FORM_OF_PAYMENT_ACCOUNT_NUMBER)
+                    ->setCheckNumber(static::FORM_OF_PAYMENT_CHECK_NUMBER)
             );
     }
 
@@ -154,36 +155,44 @@ class TravelPortService
 
         foreach ($dto->getPassengers() as $passenger) {
             $bookingTraveler[] = (new Air\BookingTraveler())
-                ->setBookingTravelerName((new Air\BookingTravelerName(
-                    $passenger['prefix'],
-                    $passenger['first'],
-                    $passenger['middle'] ?? null,
-                    $passenger['last'],
-                    $passenger['suffix'] ?? null
-                )))
-                ->setPhoneNumber((new Air\PhoneNumber())
-                    ->setCountryCode($phoneNumber['country'])
-                    ->setAreaCode($phoneNumber['area'])
-                    ->setNumber($phoneNumber['number'])
+                ->setBookingTravelerName(
+                    (new Air\BookingTravelerName(
+                        $passenger['prefix'],
+                        $passenger['first'],
+                        $passenger['middle'] ?? null,
+                        $passenger['last'],
+                        $passenger['suffix'] ?? null
+                    ))
+                )
+                ->setPhoneNumber(
+                    (new Air\PhoneNumber())
+                        ->setCountryCode($phoneNumber['country'])
+                        ->setAreaCode($phoneNumber['area'])
+                        ->setNumber($phoneNumber['number'])
                 )
                 ->setEmail((new Air\Email())->setEmailID($dto->getEmail()))
-                ->setDeliveryInfo((new Air\DeliveryInfo())
-                    ->setShippingAddress((new Air\ShippingAddress())
+                ->setDeliveryInfo(
+                    (new Air\DeliveryInfo())
+                        ->setShippingAddress(
+                            (new Air\ShippingAddress())
+                                ->setStreet([$address['street']])
+                                ->setCity($address['city'])
+                                ->setPostalCode($address['postalCode'])
+                                ->setCountry($address['country'])
+                        )
+                )
+                ->setDOB($passenger['dob'] ?? null)
+                ->setKey($passenger['key'])
+                ->setTravelerType(
+                    FtObjectAdapter::PASSENGERS_MAP[$passenger['travelerType']] ?? $passenger['travelerType']
+                )
+                ->setAddress(
+                    (new Air\typeStructuredAddress())
+                        ->setAddressName($address['street'])
                         ->setStreet([$address['street']])
                         ->setCity($address['city'])
                         ->setPostalCode($address['postalCode'])
                         ->setCountry($address['country'])
-                    )
-                )
-                ->setDOB($passenger['dob'] ?? null)
-                ->setKey($passenger['key'])
-                ->setTravelerType(FtObjectAdapter::PASSENGERS_MAP[$passenger['travelerType']] ?? $passenger['travelerType'])
-                ->setAddress((new Air\typeStructuredAddress())
-                    ->setAddressName($address['street'])
-                    ->setStreet([$address['street']])
-                    ->setCity($address['city'])
-                    ->setPostalCode($address['postalCode'])
-                    ->setCountry($address['country'])
                 );
         }
 
@@ -273,7 +282,6 @@ class TravelPortService
             ->setSearchPassenger($searchPassengers)
             ->setAirPricingModifiers($airPricingModifiers)
             ->setTraceId($this->traceId);
-
     }
 
     protected function getAirPricingModifiers()
@@ -298,7 +306,6 @@ class TravelPortService
             ->setAirSearchModifiers($searchModifiers)
             ->setSearchPassenger($searchPassengers)
             ->setTraceId($this->traceId);
-
     }
 
     /**
@@ -346,7 +353,6 @@ class TravelPortService
                     new Air\PreferredCarriers($carriers)
                 );
             }
-
         }
 
         return $searchModifiers;
@@ -385,28 +391,33 @@ class TravelPortService
             if (isset($segment['departure'])) {
                 if ($segment['departure']['isCity']) {
                     $searchAirLeg->setSearchOrigin([
-                        (new Air\typeSearchLocation)->setCityOrAirport((new Air\CityOrAirport())->setCode($segment['departure']['IATA'])),
+                        (new Air\typeSearchLocation)->setCityOrAirport(
+                            (new Air\CityOrAirport())->setCode($segment['departure']['IATA'])
+                        ),
                     ]);
                 } else {
                     $searchAirLeg->setSearchOrigin([
-                        (new Air\typeSearchLocation)->setAirport((new Air\Airport())->setCode($segment['departure']['IATA'])),
+                        (new Air\typeSearchLocation)->setAirport(
+                            (new Air\Airport())->setCode($segment['departure']['IATA'])
+                        ),
                     ]);
                 }
-
-
             }
 
             if (isset($segment['arrival'])) {
                 if ($segment['arrival']['isCity']) {
                     $searchAirLeg->setSearchDestination([
-                        (new Air\typeSearchLocation)->setCityOrAirport((new Air\CityOrAirport())->setCode($segment['arrival']['IATA'])),
+                        (new Air\typeSearchLocation)->setCityOrAirport(
+                            (new Air\CityOrAirport())->setCode($segment['arrival']['IATA'])
+                        ),
                     ]);
                 } else {
                     $searchAirLeg->setSearchDestination([
-                        (new Air\typeSearchLocation)->setAirport((new Air\Airport())->setCode($segment['arrival']['IATA'])),
+                        (new Air\typeSearchLocation)->setAirport(
+                            (new Air\Airport())->setCode($segment['arrival']['IATA'])
+                        ),
                     ]);
                 }
-
             }
 
             if (isset($segment['departureDate'])) {

@@ -38,7 +38,7 @@ class NemoWidgetCache
         list($getMethod, $setMethod) = $this->getMethods($routeName);
         $cache = null;
 
-        if(method_exists($this, $getMethod)) {
+        if (method_exists($this, $getMethod)) {
             $cache = $this->{$getMethod}($request);
         }
 
@@ -51,7 +51,7 @@ class NemoWidgetCache
 
         $response = $next($request);
 
-        if(method_exists($this, $setMethod) && $response->getStatusCode() === Response::HTTP_OK) {
+        if (method_exists($this, $setMethod) && $response->getStatusCode() === Response::HTTP_OK) {
             $this->{$setMethod}($request, $response);
         }
 

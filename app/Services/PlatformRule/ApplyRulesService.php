@@ -81,7 +81,6 @@ final class ApplyRulesService
         ];
 
         return $return;
-
     }
 
     /**
@@ -91,8 +90,14 @@ final class ApplyRulesService
      */
     public function covertFlightInfo(Collection $aiePriceRsp, FlightsSearchResult $result)
     {
-        $oldPrice = Money::of($aiePriceRsp->get('priceStatus')['oldValue']['amount'], $aiePriceRsp->get('priceStatus')['oldValue']['currency']);
-        $newPrice = Money::of($aiePriceRsp->get('priceStatus')['newValue']['amount'], $aiePriceRsp->get('priceStatus')['newValue']['currency']);
+        $oldPrice = Money::of(
+            $aiePriceRsp->get('priceStatus')['oldValue']['amount'],
+            $aiePriceRsp->get('priceStatus')['oldValue']['currency']
+        );
+        $newPrice = Money::of(
+            $aiePriceRsp->get('priceStatus')['newValue']['amount'],
+            $aiePriceRsp->get('priceStatus')['newValue']['currency']
+        );
 
         $resultOld = $this->coverTotalPrice($oldPrice, $result->request->data['passengers'], $result->rule_id);
         $resultNew = $this->coverTotalPrice($newPrice, $result->request->data['passengers'], $result->rule_id);
@@ -109,7 +114,6 @@ final class ApplyRulesService
             ],
             '_meta' => $resultNew['_meta']
         ]);
-
     }
 
     public function coverLowFareSearch($LowFareSearchResponse)
@@ -143,7 +147,10 @@ final class ApplyRulesService
                             $passengerHandler->check($passengerFare['type'])
                         ) {
                             $suitableRuleId = $rule->id;
-                            FlightsSearchResult::whereIn('id', $LowFareSearchResponse->get('mapPriceToIdes')[$key])->update(['rule_id' => $rule->id]);
+                            FlightsSearchResult::whereIn(
+                                'id',
+                                $LowFareSearchResponse->get('mapPriceToIdes')[$key]
+                            )->update(['rule_id' => $rule->id]);
                             break 2;
                         }
                     }
@@ -227,7 +234,11 @@ final class ApplyRulesService
         $approximateTotalPrice = $this->moneyService->getMoneyByString($airSolution->getApproximateTotalPrice());
 
         $newTotalPrice = $this->coverTotalPrice($totalPrice, $result->request->data['passengers'], $result->rule_id);
-        $newApproximateTotalPrice = $this->coverTotalPrice($approximateTotalPrice, $result->request->data['passengers'], $result->rule_id);
+        $newApproximateTotalPrice = $this->coverTotalPrice(
+            $approximateTotalPrice,
+            $result->request->data['passengers'],
+            $result->rule_id
+        );
         $airSolution->setTotalPrice($newTotalPrice['totalPrice']->getConcatValue());
         $airSolution->setApproximateTotalPrice($newApproximateTotalPrice['totalPrice']->getConcatValue());
 
@@ -256,39 +267,42 @@ final class ApplyRulesService
             }, $result['agencyCharge']['byPassenger']),
         ];
 
-        $reservation->put('universalRecord', array_merge(
-            [
-                'agencyCharge' => [
-                    'cash' => [
-                        'amount' => $result['paymentOptionCharge']['cash']->getAmountAsFloat(),
-                        'currency' => $result['paymentOptionCharge']['cash']->getCurrency()->getCurrencyCode()
+        $reservation->put(
+            'universalRecord',
+            array_merge(
+                [
+                    'agencyCharge' => [
+                        'cash' => [
+                            'amount' => $result['paymentOptionCharge']['cash']->getAmountAsFloat(),
+                            'currency' => $result['paymentOptionCharge']['cash']->getCurrency()->getCurrencyCode()
+                        ],
+                        'intesa' => [
+                            'amount' => $result['paymentOptionCharge']['intesa']->getAmountAsFloat(),
+                            'currency' => $result['paymentOptionCharge']['intesa']->getCurrency()->getCurrencyCode()
+                        ],
+                        'paypal' => [
+                            'amount' => $result['paymentOptionCharge']['paypal']->getAmountAsFloat(),
+                            'currency' => $result['paymentOptionCharge']['paypal']->getCurrency()->getCurrencyCode()
+                        ]
                     ],
-                    'intesa' => [
-                        'amount' => $result['paymentOptionCharge']['intesa']->getAmountAsFloat(),
-                        'currency' => $result['paymentOptionCharge']['intesa']->getCurrency()->getCurrencyCode()
-                    ],
-                    'paypal' => [
-                        'amount' => $result['paymentOptionCharge']['paypal']->getAmountAsFloat(),
-                        'currency' => $result['paymentOptionCharge']['paypal']->getCurrency()->getCurrencyCode()
+                    'paymentOptionCharge' => [
+                        'cash' => [
+                            'amount' => $result['paymentOptionCharge']['cash']->getAmountAsFloat(),
+                            'currency' => $result['paymentOptionCharge']['cash']->getCurrency()->getCurrencyCode()
+                        ],
+                        'intesa' => [
+                            'amount' => $result['paymentOptionCharge']['intesa']->getAmountAsFloat(),
+                            'currency' => $result['paymentOptionCharge']['intesa']->getCurrency()->getCurrencyCode()
+                        ],
+                        'paypal' => [
+                            'amount' => $result['paymentOptionCharge']['paypal']->getAmountAsFloat(),
+                            'currency' => $result['paymentOptionCharge']['paypal']->getCurrency()->getCurrencyCode()
+                        ]
                     ]
                 ],
-                'paymentOptionCharge' => [
-                    'cash' => [
-                        'amount' => $result['paymentOptionCharge']['cash']->getAmountAsFloat(),
-                        'currency' => $result['paymentOptionCharge']['cash']->getCurrency()->getCurrencyCode()
-                    ],
-                    'intesa' => [
-                        'amount' => $result['paymentOptionCharge']['intesa']->getAmountAsFloat(),
-                        'currency' => $result['paymentOptionCharge']['intesa']->getCurrency()->getCurrencyCode()
-                    ],
-                    'paypal' => [
-                        'amount' => $result['paymentOptionCharge']['paypal']->getAmountAsFloat(),
-                        'currency' => $result['paymentOptionCharge']['paypal']->getCurrency()->getCurrencyCode()
-                    ]
-                ]
-            ],
-            $reservation->get('universalRecord')
-        ));
+                $reservation->get('universalRecord')
+            )
+        );
 
         $reservation->put('totalPrice', [
             'amount' => $result['totalPrice']->getAmountAsFloat(),

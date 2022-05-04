@@ -24,7 +24,7 @@ abstract class TestCase extends BaseTestCase
         $this->useTableWithData('aircrafts');
 
 
-        Container::getInstance()->bind('platform', function() {
+        Container::getInstance()->bind('platform', function () {
             return factory(FrontendDomain::class, 1)->create()->first();
         });
     }

@@ -34,8 +34,12 @@ class Checkout extends Controller
      * @return FinishedOrder|FlightsSearchResults
      * @throws ApiException
      */
-    public function getData($flightInfoCode, FtObjectAdapter $adapter, MoneyService $moneyService, ApplyRulesService $applyRulesService)
-    {
+    public function getData(
+        $flightInfoCode,
+        FtObjectAdapter $adapter,
+        MoneyService $moneyService,
+        ApplyRulesService $applyRulesService
+    ) {
         /** @var FlightsSearchFlightInfo $flightInfo */
         $flightInfo = FlightsSearchFlightInfo::whereCode($flightInfoCode)->with('result.request')->first();
 
@@ -53,7 +57,11 @@ class Checkout extends Controller
 
         try {
             $logLfs = resolve(\FilippoToso\Travelport\TravelportLogger::class)
-                ->getLog(LowFareSearchRsp::class, $flightInfo->result->request->transaction_id, TravelPortLogger::OBJECT_TYPE);
+                ->getLog(
+                    LowFareSearchRsp::class,
+                    $flightInfo->result->request->transaction_id,
+                    TravelPortLogger::OBJECT_TYPE
+                );
 
             /** @var  $lowFareSearchRsp  LowFareSearchRsp */
             $lowFareSearchRsp = unserialize($logLfs);
@@ -117,8 +125,12 @@ class Checkout extends Controller
      * @return AirReservation
      * @throws ApiException
      */
-    public function getReservation(FtObjectAdapter $adapter, ApplyRulesService $applyRulesService, Request $request, $reservationCode)
-    {
+    public function getReservation(
+        FtObjectAdapter $adapter,
+        ApplyRulesService $applyRulesService,
+        Request $request,
+        $reservationCode
+    ) {
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'access_code' => 'required',
         ]);
@@ -143,7 +155,11 @@ class Checkout extends Controller
                 ->getLog(AirCreateReservationRsp::class, $reservation->transaction_id, TravelPortLogger::OBJECT_TYPE);
 
             $response = $adapter->AirReservationAdapt(unserialize($log));
-            $applyRulesService->coverReservationResponse($response, $reservation->getAmountPrice(), $reservation->flightInfo->result->rule_id);
+            $applyRulesService->coverReservationResponse(
+                $response,
+                $reservation->getAmountPrice(),
+                $reservation->flightInfo->result->rule_id
+            );
 
             $response->put('paymentOption', $reservation->data['paymentOption']);
 

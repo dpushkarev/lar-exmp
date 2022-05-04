@@ -21,7 +21,7 @@ class TravelPort extends BaseController
      */
     public function search(FlightsSearchRequest $request)
     {
-        try{
+        try {
             $result = TP::LowFareSearchReq($request->getFlightsSearchRequestDto());
             return new TravelPortResource($result);
         } catch (TravelPortException $exception) {

@@ -25,7 +25,6 @@ class FlightsSearchTest extends TestCase
         $this->useTable('flights_search_flight_infos');
         $this->useTable('platform_rules');
         $this->useTableWithData('aircrafts');
-
     }
 
     /**
@@ -45,7 +44,9 @@ class FlightsSearchTest extends TestCase
             ->andReturn(unserialize(file_get_contents(__DIR__ . '/files/FlightsSearch/AFR-rsp.obj')));
 
         $this->mock(\FilippoToso\Travelport\TravelportLogger::class, function ($mock) {
-            $mock->shouldReceive('getLog')->andReturn(file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.obj'))->once();
+            $mock->shouldReceive('getLog')->andReturn(
+                file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-rsp.obj')
+            )->once();
         });
 
         $body = file_get_contents(__DIR__ . '/files/FlightsSearch/LFS-req.json');
@@ -57,16 +58,20 @@ class FlightsSearchTest extends TestCase
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [
-                        'formData', 'request', 'results'
+                        'formData',
+                        'request',
+                        'results'
                     ],
                 ],
                 'guide' => [
                     'airports' => [
-                        'BEG', 'FCO'
+                        'BEG',
+                        'FCO'
                     ],
                     'cities',
                     'countries' => [
-                        'RS', 'IT'
+                        'RS',
+                        'IT'
                     ]
                 ],
                 'system'
@@ -89,16 +94,21 @@ class FlightsSearchTest extends TestCase
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [
-                        'formData', 'request', 'results', 'resultData'
+                        'formData',
+                        'request',
+                        'results',
+                        'resultData'
                     ],
                 ],
                 'guide' => [
                     'airports' => [
-                        'BEG', 'FCO'
+                        'BEG',
+                        'FCO'
                     ],
                     'cities',
                     'countries' => [
-                        'RS', 'IT'
+                        'RS',
+                        'IT'
                     ],
                     'aircrafts'
                 ],
@@ -124,9 +134,18 @@ class FlightsSearchTest extends TestCase
             ->assertJsonPath('flights.search.results.groupsData.prices.P2.totalPrice.amount', 58376)
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P2.passengerFares');
 
-        $this->assertDatabaseHas('flights_search_requests', ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S2"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S3","S2"]']);
+        $this->assertDatabaseHas(
+            'flights_search_requests',
+            ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S2"]']
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S3","S2"]']
+        );
 
         $this->assertEquals(2, FlightsSearchResult::all()->count());
 
@@ -162,16 +181,20 @@ class FlightsSearchTest extends TestCase
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [
-                        'formData', 'request', 'results'
+                        'formData',
+                        'request',
+                        'results'
                     ],
                 ],
                 'guide' => [
                     'airports' => [
-                        'BEG', 'TIV',
+                        'BEG',
+                        'TIV',
                     ],
                     'cities',
                     'countries' => [
-                        'RS', 'ME'
+                        'RS',
+                        'ME'
                     ]
                 ],
                 'system'
@@ -194,16 +217,24 @@ class FlightsSearchTest extends TestCase
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [
-                        'formData', 'request', 'results', 'resultData'
+                        'formData',
+                        'request',
+                        'results',
+                        'resultData'
                     ],
                 ],
                 'guide' => [
                     'airports' => [
-                        'BEG', 'TIV', 'LGW', 'LHR'
+                        'BEG',
+                        'TIV',
+                        'LGW',
+                        'LHR'
                     ],
                     'cities',
                     'countries' => [
-                        'RS', 'ME', 'GB'
+                        'RS',
+                        'ME',
+                        'GB'
                     ],
                     'aircrafts'
                 ],
@@ -231,13 +262,34 @@ class FlightsSearchTest extends TestCase
             ->assertJsonCount(2, 'flights.search.results.groupsData.prices.P2.passengerFares')
             ->assertJsonCount(4, 'flights.search.results.groupsData.prices.P4.segmentInfo');
 
-        $this->assertDatabaseHas('flights_search_requests', ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S3"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S4"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S5","S7","S8"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P3', 'segments' => '["S2","S4"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P4', 'segments' => '["S5","S7","S8"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P4', 'segments' => '["S6","S7","S8"]']);
+        $this->assertDatabaseHas(
+            'flights_search_requests',
+            ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S3"]']
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S4"]']
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S5","S7","S8"]']
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P3', 'segments' => '["S2","S4"]']
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P4', 'segments' => '["S5","S7","S8"]']
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            ['flight_search_request_id' => $search['request']['id'], 'price' => 'P4', 'segments' => '["S6","S7","S8"]']
+        );
 
         $this->assertEquals(12, FlightsSearchResult::all()->count());
 
@@ -275,16 +327,27 @@ class FlightsSearchTest extends TestCase
             ->assertJsonStructure([
                 'flights' => [
                     'search' => [
-                        'formData', 'request', 'results', 'resultData'
+                        'formData',
+                        'request',
+                        'results',
+                        'resultData'
                     ],
                 ],
                 'guide' => [
                     'airports' => [
-                        'BEG', 'AUH', 'SIN', 'AMS', 'CDG'
+                        'BEG',
+                        'AUH',
+                        'SIN',
+                        'AMS',
+                        'CDG'
                     ],
                     'cities',
                     'countries' => [
-                        'RS', 'AE', 'SG', 'NL', 'FR'
+                        'RS',
+                        'AE',
+                        'SG',
+                        'NL',
+                        'FR'
                     ],
                     'aircrafts'
                 ],
@@ -325,8 +388,11 @@ class FlightsSearchTest extends TestCase
                                             0 => [
                                                 'tariffs' => [
                                                     0 => [
-                                                        'code', 'segNum', 'features' => [
-                                                            'baggage', 'refunds'
+                                                        'code',
+                                                        'segNum',
+                                                        'features' => [
+                                                            'baggage',
+                                                            'refunds'
                                                         ]
                                                     ]
                                                 ]
@@ -340,11 +406,42 @@ class FlightsSearchTest extends TestCase
                 ],
             ], null);
 
-        $this->assertDatabaseHas('flights_search_requests', ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P1', 'segments' => '["S1","S2","S3","S4"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S5","S6","S7","S9","S10"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P2', 'segments' => '["S5","S8","S7","S9","S10"]']);
-        $this->assertDatabaseHas('flights_search_results', ['flight_search_request_id' => $search['request']['id'], 'price' => 'P3', 'segments' => '["S5","S8","S7","S9","S10"]']);
+        $this->assertDatabaseHas(
+            'flights_search_requests',
+            ['id' => $search['request']['id'], 'transaction_id' => $transaction_id]
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            [
+                'flight_search_request_id' => $search['request']['id'],
+                'price' => 'P1',
+                'segments' => '["S1","S2","S3","S4"]'
+            ]
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            [
+                'flight_search_request_id' => $search['request']['id'],
+                'price' => 'P2',
+                'segments' => '["S5","S6","S7","S9","S10"]'
+            ]
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            [
+                'flight_search_request_id' => $search['request']['id'],
+                'price' => 'P2',
+                'segments' => '["S5","S8","S7","S9","S10"]'
+            ]
+        );
+        $this->assertDatabaseHas(
+            'flights_search_results',
+            [
+                'flight_search_request_id' => $search['request']['id'],
+                'price' => 'P3',
+                'segments' => '["S5","S8","S7","S9","S10"]'
+            ]
+        );
 
         $this->assertEquals(5, FlightsSearchResult::all()->count());
 

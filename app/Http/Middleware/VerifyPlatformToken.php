@@ -32,7 +32,7 @@ class VerifyPlatformToken
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param \Illuminate\Contracts\Foundation\Application $app
      * @return void
      */
     public function __construct(Application $app)
@@ -43,8 +43,8 @@ class VerifyPlatformToken
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      *
      * @throws \Illuminate\Session\TokenMismatchException
@@ -73,13 +73,12 @@ class VerifyPlatformToken
     }
 
     /**
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     protected function inExceptArray($request)
     {
         foreach ($this->except as $except) {
-
             if ($request->getHost() == $except) {
                 return true;
             }
@@ -117,17 +116,17 @@ class VerifyPlatformToken
             throw new TokenMismatchException('Platform token is incorrect.');
         };
 
-        Container::getInstance()->bind('platform', function() use($platform) {
+        Container::getInstance()->bind('platform', function () use ($platform) {
             return $platform;
         });
 
-        return (bool) $platform;
+        return (bool)$platform;
     }
 
     /**
      * Get the CSRF token from the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return string
      */
     protected function getTokenFromRequest($request)

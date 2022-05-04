@@ -46,7 +46,6 @@ class PaymentService
              */
 
             $payment = $this->nestpayService->paymentProcess3DGateResponse($request->all(), $fail);
-
         } catch (\Cubes\Nestpay\PaymentAlreadyProcessedException $paymentAlreadyProcessedException) {
             /**
              * the payment has been already processed
@@ -89,7 +88,11 @@ class PaymentService
             \Cubes\Nestpay\Payment::PROP_COMMENTS => false,
             \Cubes\Nestpay\Payment::PROP_EMAIL => $reservation->data['email'],
             \Cubes\Nestpay\Payment::PROP_TEL => implode('', $reservation->data['phoneNumber']),
-            \Cubes\Nestpay\Payment::PROP_BILLTONAME => sprintf('%s %s', $firstPassenger['first'], $firstPassenger['last']),
+            \Cubes\Nestpay\Payment::PROP_BILLTONAME => sprintf(
+                '%s %s',
+                $firstPassenger['first'],
+                $firstPassenger['last']
+            ),
             \Cubes\Nestpay\Payment::PROP_BILLTOSTREET1 => $reservation->data['address']['street'],
             \Cubes\Nestpay\Payment::PROP_BILLTOCITY => $reservation->data['address']['city'],
             \Cubes\Nestpay\Payment::PROP_BILLTOPOSTALCODE => $reservation->data['address']['postalCode'],

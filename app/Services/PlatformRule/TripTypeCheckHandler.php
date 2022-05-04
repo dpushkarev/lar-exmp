@@ -13,9 +13,9 @@ class TripTypeCheckHandler extends AbstractHandler
         $segments = $collection->get('request')->data['segments'];
 
         $usedType = [
-            1 => FrontendDomainRule::ONE_WAY_TYPE,
-            2 => FrontendDomainRule::RETURN_TYPE,
-        ][count($segments)] ?? FrontendDomainRule::MULTI_TYPE;
+                1 => FrontendDomainRule::ONE_WAY_TYPE,
+                2 => FrontendDomainRule::RETURN_TYPE,
+            ][count($segments)] ?? FrontendDomainRule::MULTI_TYPE;
 
         if ($usedType != $this->rule->trip_type) {
             return false;

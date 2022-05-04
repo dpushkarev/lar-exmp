@@ -52,8 +52,7 @@ class NemoWidgetService
         TravelportLogger $logger,
         MoneyService $moneyService,
         ApplyRulesService $applyRulesService
-    )
-    {
+    ) {
         $this->ftObjectAdapter = $ftObjectAdapter;
         $this->modelAdapter = $modelAdapter;
         $this->xmlAdapter = $xmlAdapter;
@@ -125,9 +124,13 @@ class NemoWidgetService
         );
 
         try {
-            $lowFareSearchRsp = Cache::remember('lowFareSearchReq' . $request->id, 3600 * 3, function () use ($requestDto) {
-                return TP::LowFareSearchReq($requestDto);
-            });
+            $lowFareSearchRsp = Cache::remember(
+                'lowFareSearchReq' . $request->id,
+                3600 * 3,
+                function () use ($requestDto) {
+                    return TP::LowFareSearchReq($requestDto);
+                }
+            );
 
 //            $lowFareSearchRsp = TP::LowFareSearchReq($requestDto);
 
@@ -141,12 +144,15 @@ class NemoWidgetService
         } catch (TravelPortException $travelPortException) {
             $request->transaction_id = $travelPortException->getTransactionId();
             $flightsSearchRequestAdapt = $this->modelAdapter->flightsSearchRequestAdapt($request);
-            $flightsSearchRequestAdapt->put('results', collect([
-                'info' => collect([
-                    'errorCode' => $travelPortException->getCode(),
-                    'errorMessageEng' => $travelPortException->getMessage()
+            $flightsSearchRequestAdapt->put(
+                'results',
+                collect([
+                    'info' => collect([
+                        'errorCode' => $travelPortException->getCode(),
+                        'errorMessageEng' => $travelPortException->getMessage()
+                    ])
                 ])
-            ]));
+            );
 
             return $flightsSearchRequestAdapt;
         } finally {
@@ -162,7 +168,11 @@ class NemoWidgetService
      */
     public function getFlightInfo(FlightsSearchResult $resultModel)
     {
-        $log = $this->logger->getLog(LowFareSearchRsp::class, $resultModel->request->transaction_id, \App\Logging\TravelPortLogger::OBJECT_TYPE);
+        $log = $this->logger->getLog(
+            LowFareSearchRsp::class,
+            $resultModel->request->transaction_id,
+            \App\Logging\TravelPortLogger::OBJECT_TYPE
+        );
 
         if (null === $log) {
             throw NemoWidgetServiceException::getInstance('Log of result was not found');
@@ -221,9 +231,13 @@ class NemoWidgetService
         );
 
         /** @var  $airPriceRsp AirPriceRsp */
-        $airPriceRsp = Cache::remember('airPriceReq'. $resultModel->id, 3600 * 3, function () use ($airPriceRequestDto) {
-            return TP::AirPriceReq($airPriceRequestDto);
-        });
+        $airPriceRsp = Cache::remember(
+            'airPriceReq' . $resultModel->id,
+            3600 * 3,
+            function () use ($airPriceRequestDto) {
+                return TP::AirPriceReq($airPriceRequestDto);
+            }
+        );
 
         $order = FlightsSearchFlightInfo::forceCreate([
             'transaction_id' => $airPriceRsp->getTransactionId(),
@@ -240,7 +254,11 @@ class NemoWidgetService
 
     public function getFareRule(FlightsSearchResult $resultModel)
     {
-        $log = $this->logger->getLog(LowFareSearchRsp::class, $resultModel->request->transaction_id, \App\Logging\TravelPortLogger::OBJECT_TYPE);
+        $log = $this->logger->getLog(
+            LowFareSearchRsp::class,
+            $resultModel->request->transaction_id,
+            \App\Logging\TravelPortLogger::OBJECT_TYPE
+        );
 
         if (null === $log) {
             throw NemoWidgetServiceException::getInstance('Log of result was not found');

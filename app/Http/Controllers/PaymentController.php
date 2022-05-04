@@ -38,7 +38,6 @@ class PaymentController extends Controller
             'paymentData' => $this->paymentService->getPaymentData($reservation),
             'reservation' => $reservation
         ]);
-
     }
 
     /**
@@ -70,7 +69,7 @@ class PaymentController extends Controller
      */
     public function success(Request $request)
     {
-       $payment = $this->paymentService->processCallback($request);
+        $payment = $this->paymentService->processCallback($request);
 
         return view('web.sections.payment.success', [
             'payment' => $payment,

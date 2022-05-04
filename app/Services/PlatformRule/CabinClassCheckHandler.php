@@ -8,7 +8,6 @@ class CabinClassCheckHandler extends AbstractHandler
 {
     public function check($collection): bool
     {
-
         $serviceClasses = array_unique(array_column($collection['segmentInfo'], 'serviceClass'));
         $cabinClasses = $this->rule->cabin_classes;
 

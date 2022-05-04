@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Airport extends Model
 {
-    const AUTOCOMPLETE_TYPES = [1,2,9];
+    const AUTOCOMPLETE_TYPES = [1, 2, 9];
 
     /**
      * @param $builder

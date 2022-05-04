@@ -13,6 +13,7 @@ class SearchTest extends TestCase
         parent::setUp();
         $this->useTableWithData('vocabulary_names');
     }
+
     /**
      * A basic unit test example.
      *
@@ -58,7 +59,8 @@ class SearchTest extends TestCase
                     'guide' => [
                         "airlines",
                         "countries"
-                    ]]
+                    ]
+                ]
             );
 
         /** check cache */
